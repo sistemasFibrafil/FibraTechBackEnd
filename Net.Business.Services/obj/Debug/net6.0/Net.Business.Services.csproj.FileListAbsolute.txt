@@ -1343,3 +1343,4 @@ D:\Fil\Web\BackEnd\Net.Business.Services\obj\Debug\net6.0\rjimswa.dswa.cache.jso
 D:\Fil\Web\BackEnd\Net.Business.Services\obj\Debug\net6.0\rjsmrazor.dswa.cache.json
 D:\Fil\Web\BackEnd\Net.Business.Services\obj\Debug\net6.0\rjsmcshtml.dswa.cache.json
 D:\Fil\Web\BackEnd\Net.Business.Services\obj\Debug\net6.0\staticwebassets.build.json.cache
+D:\Fil\Web\BackEnd\Net.Business.Services\obj\Debug\net6.0\Net.Business.Services.sourcelink.json

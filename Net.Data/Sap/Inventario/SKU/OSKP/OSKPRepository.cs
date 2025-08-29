@@ -37,24 +37,44 @@ namespace Net.Data.Sap
             _am = am;
         }
 
+        private void SetGeneralDataProperties(GeneralData oGeneralData, OSKPEntity value)
+        {
+            oGeneralData.SetProperty("U_Number", value.U_Number);
+            oGeneralData.SetProperty("U_PrdStrDate", value.U_PrdStrDate);
+            oGeneralData.SetProperty("U_PrdEndDate", value.U_PrdEndDate);
+            oGeneralData.SetProperty("U_PrdEndHour", value.U_PrdEndHour);
+            oGeneralData.SetProperty("U_RollWeight", Convert.ToDouble(Math.Round(value.U_RollWeight, 6)));
+            if (value.U_PrdForDetail != null) oGeneralData.SetProperty("U_CosStrDate", value.U_PrdForDetail);
+            if (value.U_PrdPresBale != null) oGeneralData.SetProperty("U_CosStrDate", value.U_PrdPresBale);
+            if (value.U_PrdFeaYes != null) oGeneralData.SetProperty("U_CosStrDate", value.U_PrdFeaYes);
+            if (value.U_PrdFeaNo != null) oGeneralData.SetProperty("U_CosStrDate", value.U_PrdFeaNo);
+            if (value.U_PrdFeaObs != null) oGeneralData.SetProperty("U_CosStrDate", value.U_PrdFeaObs);
+            if (value.U_FeaQuaInd != null) oGeneralData.SetProperty("U_CosStrDate", value.U_FeaQuaInd);
+            if (value.U_FeaQuaJus != null) oGeneralData.SetProperty("U_CosStrDate", value.U_FeaQuaJus);
+            if (value.U_CosStrDate != null) oGeneralData.SetProperty("U_CosStrDate", value.U_CosStrDate);
+            if (value.U_CosStrDate != null) oGeneralData.SetProperty("U_CosStrDate", value.U_CosStrDate);
+            if (value.U_CosEndDate != null) oGeneralData.SetProperty("U_CosEndDate", value.U_CosEndDate);
+            if (value.U_CosEndHour != null) oGeneralData.SetProperty("U_CosEndHour", Convert.ToDateTime(value.U_CosEndHour).ToString("yyyy-MM-ddTHH:mm:ss"));
+            if (value.U_CosDetail != null) oGeneralData.SetProperty("U_CosDetail", value.U_CosDetail);
+            if (value.U_ValExcMar != null) oGeneralData.SetProperty("U_ValExcMar", value.U_ValExcMar);
+            if (value.U_AprByExc != null) oGeneralData.SetProperty("U_AprByExc", value.U_AprByExc);
+            if (value.U_Observations != null) oGeneralData.SetProperty("U_Observations", value.U_Observations);
+            if (value.U_ItemCode != null) oGeneralData.SetProperty("U_ItemCode", value.U_ItemCode);
+        }
+
         public Task<ResultadoTransaccionEntity<OSKPEntity>> SetCreate(OSKPEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OSKPEntity>();
+            var resultTransaccion = new ResultadoTransaccionEntity<OSKPEntity>
+            {
+                NombreMetodo = nameof(SetCreate),
+                NombreAplicacion = _aplicacionName
+            };
 
-            _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
-
-            resultTransaccion.NombreMetodo = _metodoName;
-            resultTransaccion.NombreAplicacion = _aplicacionName;
-
-            SAPbobsCOM.GeneralData oGeneralData = null;
-            SAPbobsCOM.CompanyService oCompService = null;
-            SAPbobsCOM.GeneralService oGeneralService = null;
-
-            SAPbobsCOM.GeneralDataCollection oGeneralDataCollection1 = null;
-            SAPbobsCOM.GeneralDataCollection oGeneralDataCollection2 = null;
-
-            SAPbobsCOM.GeneralData oGeneralDataLine = null;
-
+            GeneralData oGeneralData = null;
+            CompanyService oCompService = null;
+            GeneralService oGeneralService = null;
+            GeneralDataCollection oGeneralDataCollection = null;
+            GeneralData oGeneralDataLine = null;
             SAPbobsCOM.Items oItem = null;
 
             try
@@ -72,45 +92,14 @@ namespace Net.Data.Sap
                     }
 
                     oCompService = RepositoryBaseSap.oCompany.GetCompanyService();
-
                     oGeneralService = oCompService.GetGeneralService("FIB_OSKP");
-                    oGeneralData = (SAPbobsCOM.GeneralData)oGeneralService.GetDataInterface(SAPbobsCOM.GeneralServiceDataInterfaces.gsGeneralData);
-
-                    oGeneralData.SetProperty("U_Number", value.U_Number);
-                    oGeneralData.SetProperty("U_PrdStrDate", value.U_PrdStrDate);
-                    oGeneralData.SetProperty("U_PrdEndDate", value.U_PrdEndDate);
-                    oGeneralData.SetProperty("U_PrdEndHour", value.U_PrdEndHour);
-                    oGeneralData.SetProperty("U_RollWeight", Convert.ToDouble(Math.Round(value.U_RollWeight, 6)));
-                    oGeneralData.SetProperty("U_PrdForDetail", value.U_PrdForDetail);
-                    oGeneralData.SetProperty("U_PrdPresBale", value.U_PrdPresBale);
-                    oGeneralData.SetProperty("U_PrdFeaYes", value.U_PrdFeaYes);
-                    oGeneralData.SetProperty("U_PrdFeaNo", value.U_PrdFeaNo);
-                    oGeneralData.SetProperty("U_PrdFeaObs", value.U_PrdFeaObs);
-                    oGeneralData.SetProperty("U_FeaQuaInd", value.U_FeaQuaInd);
-                    oGeneralData.SetProperty("U_FeaQuaJus", value.U_FeaQuaJus);
-                    if (value.U_CosStrDate != null)
-                    {
-                        oGeneralData.SetProperty("U_CosStrDate", value.U_CosStrDate);
-                    }
-                    if (value.U_CosEndDate != null)
-                    {
-                        oGeneralData.SetProperty("U_CosEndDate", value.U_CosEndDate);
-                    }
-                    if(value.U_CosEndHour != null)
-                    {
-                        oGeneralData.SetProperty("U_CosEndHour", Convert.ToDateTime(value.U_CosEndHour).ToString("yyyy-MM-ddTHH:mm:ss"));
-                    }
-                    oGeneralData.SetProperty("U_CosDetail", value.U_CosDetail);
-                    oGeneralData.SetProperty("U_ValExcMar", value.U_ValExcMar);
-                    oGeneralData.SetProperty("U_AprByExc", value.U_AprByExc);
-                    oGeneralData.SetProperty("U_Observations", value.U_Observations);
-                    oGeneralData.SetProperty("U_ItemCode", value.U_ItemCode);
-
-                    oGeneralDataCollection1 = (SAPbobsCOM.GeneralDataCollection)oGeneralData.Child("FIB_SKP1");
+                    oGeneralData = (GeneralData)oGeneralService.GetDataInterface(GeneralServiceDataInterfaces.gsGeneralData);
+                    SetGeneralDataProperties(oGeneralData, value);
+                    oGeneralDataCollection = oGeneralData.Child("FIB_SKP1");
                                         
                     foreach (var line in value.Line)
                     {
-                        oGeneralDataLine = oGeneralDataCollection1.Add();
+                        oGeneralDataLine = oGeneralDataCollection.Add();
                         oGeneralDataLine.SetProperty("U_ProcessCode", line.U_ProcessCode);
                         oGeneralDataLine.SetProperty("U_Percentage1", Convert.ToDouble(Math.Round(line.U_Percentage1, 2)));
                         oGeneralDataLine.SetProperty("U_ItemCode", line.U_ItemCode);
@@ -198,8 +187,7 @@ namespace Net.Data.Sap
                 if (oGeneralData != null) Marshal.ReleaseComObject(oGeneralData);
                 if (oCompService != null) Marshal.ReleaseComObject(oCompService);
                 if (oGeneralService != null) Marshal.ReleaseComObject(oGeneralService);
-                if (oGeneralDataCollection1 != null) Marshal.ReleaseComObject(oGeneralDataCollection1);
-                if (oGeneralDataCollection2 != null) Marshal.ReleaseComObject(oGeneralDataCollection2);
+                if (oGeneralDataCollection != null) Marshal.ReleaseComObject(oGeneralDataCollection);
                 if (oGeneralDataLine != null) Marshal.ReleaseComObject(oGeneralDataLine);
                 if (oItem != null) Marshal.ReleaseComObject(oItem);
                 if (RepositoryBaseSap.oCompany is not null)
@@ -219,20 +207,17 @@ namespace Net.Data.Sap
 
         public Task<ResultadoTransaccionEntity<OSKPEntity>> SetUpdate(OSKPEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OSKPEntity>();
+            var resultTransaccion = new ResultadoTransaccionEntity<OSKPEntity>
+            {
+                NombreMetodo = nameof(SetUpdate),
+                NombreAplicacion = _aplicacionName
+            };
 
-            _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
-
-            resultTransaccion.NombreMetodo = _metodoName;
-            resultTransaccion.NombreAplicacion = _aplicacionName;
-
-            SAPbobsCOM.GeneralData oGeneralData = null;
-            SAPbobsCOM.CompanyService oCompService = null;
-            SAPbobsCOM.GeneralService oGeneralService = null;
-            SAPbobsCOM.GeneralDataParams oGeneralDataParams = null;
-
-            SAPbobsCOM.GeneralDataCollection oGeneralDataCollection = null;
-
+            GeneralData oGeneralData = null;
+            CompanyService oCompService = null;
+            GeneralService oGeneralService = null;
+            GeneralDataParams oGeneralDataParams = null;
+            GeneralDataCollection oGeneralDataCollection = null;
 
             try
             {
@@ -241,50 +226,17 @@ namespace Net.Data.Sap
                 if (rpta == "0")
                 {
                     oCompService = RepositoryBaseSap.oCompany.GetCompanyService();
-
                     oGeneralService = oCompService.GetGeneralService("FIB_OSKP");
-
-                    oGeneralDataParams = (SAPbobsCOM.GeneralDataParams)oGeneralService.GetDataInterface(SAPbobsCOM.GeneralServiceDataInterfaces.gsGeneralDataParams);
+                    oGeneralDataParams = (GeneralDataParams)oGeneralService.GetDataInterface(GeneralServiceDataInterfaces.gsGeneralDataParams);
 
                     oGeneralDataParams.SetProperty("DocEntry", value.DocEntry);
-
                     oGeneralData = oGeneralService.GetByParams(oGeneralDataParams);
-
-                    oGeneralData.SetProperty("U_Number", value.U_Number);
-                    oGeneralData.SetProperty("U_PrdStrDate", value.U_PrdStrDate);
-                    oGeneralData.SetProperty("U_PrdEndDate", value.U_PrdEndDate);
-                    oGeneralData.SetProperty("U_PrdEndHour", value.U_PrdEndHour);
-                    oGeneralData.SetProperty("U_RollWeight", Convert.ToDouble(Math.Round(value.U_RollWeight, 6)));
-                    oGeneralData.SetProperty("U_PrdForDetail", value.U_PrdForDetail);
-                    oGeneralData.SetProperty("U_PrdPresBale", value.U_PrdPresBale);
-                    oGeneralData.SetProperty("U_PrdFeaYes", value.U_PrdFeaYes);
-                    oGeneralData.SetProperty("U_PrdFeaNo", value.U_PrdFeaNo);
-                    oGeneralData.SetProperty("U_PrdFeaObs", value.U_PrdFeaObs);
-                    oGeneralData.SetProperty("U_FeaQuaInd", value.U_FeaQuaInd);
-                    oGeneralData.SetProperty("U_FeaQuaJus", value.U_FeaQuaJus);
-                    if (value.U_CosStrDate != null)
-                    {
-                        oGeneralData.SetProperty("U_CosStrDate", value.U_CosStrDate);
-                    }
-                    if (value.U_CosEndDate != null)
-                    {
-                        oGeneralData.SetProperty("U_CosEndDate", value.U_CosEndDate);
-                    }
-                    if (value.U_CosEndHour != null)
-                    {
-                        oGeneralData.SetProperty("U_CosEndHour", Convert.ToDateTime(value.U_CosEndHour).ToString("yyyy-MM-ddTHH:mm:ss"));
-                    }
-                    oGeneralData.SetProperty("U_CosDetail", value.U_CosDetail);
-                    oGeneralData.SetProperty("U_ValExcMar", value.U_ValExcMar);
-                    oGeneralData.SetProperty("U_AprByExc", value.U_AprByExc);
-                    oGeneralData.SetProperty("U_Observations", value.U_Observations);
-                    oGeneralData.SetProperty("U_ItemCode", value.U_ItemCode);
-
-                    oGeneralDataCollection = (SAPbobsCOM.GeneralDataCollection)oGeneralData.Child("FIB_SKP1");
+                    SetGeneralDataProperties(oGeneralData, value);
+                    oGeneralDataCollection = oGeneralData.Child("FIB_SKP1");
 
                     foreach (var line in value.Line)
                     {
-                        var indice = oGeneralDataCollection.Cast<SAPbobsCOM.GeneralData>().ToList().FindIndex(x => (int)x.GetProperty("LineId") == line.LineId);
+                        var indice = oGeneralDataCollection.Cast<GeneralData>().ToList().FindIndex(x => (int)x.GetProperty("LineId") == line.LineId);
 
                         var oGeneralDataLine = oGeneralDataCollection.Item(indice);
                         oGeneralDataLine.SetProperty("U_ProcessCode", line.U_ProcessCode);
@@ -344,16 +296,15 @@ namespace Net.Data.Sap
 
         public Task<ResultadoTransaccionEntity<OSKPEntity>> SetDelete(OSKPEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OSKPEntity>();
+            var resultTransaccion = new ResultadoTransaccionEntity<OSKPEntity>
+            {
+                NombreMetodo = nameof(SetUpdate),
+                NombreAplicacion = _aplicacionName
+            };
 
-            _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
-
-            resultTransaccion.NombreMetodo = _metodoName;
-            resultTransaccion.NombreAplicacion = _aplicacionName;
-
-            SAPbobsCOM.CompanyService oCompService = null;
-            SAPbobsCOM.GeneralService oGeneralService = null;
-            SAPbobsCOM.GeneralDataParams oGeneralParams = null;
+            CompanyService oCompService = null;
+            GeneralService oGeneralService = null;
+            GeneralDataParams oGeneralParams = null;
 
             try
             {
@@ -417,7 +368,11 @@ namespace Net.Data.Sap
 
         public async Task<ResultadoTransaccionEntity<OSKPEntity>> GetListByFiltro(OSKPEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OSKPEntity>();
+            var resultTransaccion = new ResultadoTransaccionEntity<OSKPEntity>
+            {
+                NombreMetodo = nameof(GetListByFiltro),
+                NombreAplicacion = _aplicacionName
+            };
 
             try
             {
@@ -442,7 +397,11 @@ namespace Net.Data.Sap
 
         public async Task<ResultadoTransaccionEntity<OSKPEntity>> GetByDocEntry(OSKPEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OSKPEntity>();
+            var resultTransaccion = new ResultadoTransaccionEntity<OSKPEntity>
+            {
+                NombreMetodo = nameof(GetByDocEntry),
+                NombreAplicacion = _aplicacionName
+            };
 
             try
             {

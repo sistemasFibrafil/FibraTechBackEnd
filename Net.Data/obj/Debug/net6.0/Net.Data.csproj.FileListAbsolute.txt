@@ -139,3 +139,4 @@ D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\Net.Data.pdb
 D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\ref\Net.Data.dll
 D:\Fil\Web\BackEnd\Net.Data\bin\Debug\net6.0\Net.Data.runtimeconfig.json
 D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\Net.Data.genruntimeconfig.cache
+D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\Net.Data.sourcelink.json
