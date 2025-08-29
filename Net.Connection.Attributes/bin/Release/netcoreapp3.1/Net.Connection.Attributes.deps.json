@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Net.Connection.Attributes/1.0.0": {
+        "runtime": {
+          "Net.Connection.Attributes.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Net.Connection.Attributes/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

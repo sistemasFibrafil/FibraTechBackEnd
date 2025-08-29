@@ -1,0 +1,122 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Fil\\Web\\BackEnd\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6E1C3E8D-3EE2-4BBD-B168-A95B8B0B785F}|Net.Business.DTO\\Net.Business.DTO.csproj|d:\\fil\\web\\backend\\net.business.dto\\sap\\inventario\\sku\\oskp\\oskpupdaterequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E1C3E8D-3EE2-4BBD-B168-A95B8B0B785F}|Net.Business.DTO\\Net.Business.DTO.csproj|solutionrelative:net.business.dto\\sap\\inventario\\sku\\oskp\\oskpupdaterequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|d:\\fil\\web\\backend\\net.data\\sap\\inventario\\sku\\oskp\\oskprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|solutionrelative:net.data\\sap\\inventario\\sku\\oskp\\oskprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B4A2102-0841-40F8-9D89-7362ADF64AC5}|Net.Business.Entities\\Net.Business.Entities.csproj|d:\\fil\\web\\backend\\net.business.entities\\sap\\inventario\\sku\\oskpentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B4A2102-0841-40F8-9D89-7362ADF64AC5}|Net.Business.Entities\\Net.Business.Entities.csproj|solutionrelative:net.business.entities\\sap\\inventario\\sku\\oskpentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|d:\\fil\\web\\backend\\net.data\\sap\\inventario\\articulo\\articulosaprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|solutionrelative:net.data\\sap\\inventario\\articulo\\articulosaprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|d:\\fil\\web\\backend\\net.data\\appcontext\\datacontextfil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|solutionrelative:net.data\\appcontext\\datacontextfil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E1C3E8D-3EE2-4BBD-B168-A95B8B0B785F}|Net.Business.DTO\\Net.Business.DTO.csproj|d:\\fil\\web\\backend\\net.business.dto\\sap\\inventario\\sku\\oskp\\oskpcreaterequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E1C3E8D-3EE2-4BBD-B168-A95B8B0B785F}|Net.Business.DTO\\Net.Business.DTO.csproj|solutionrelative:net.business.dto\\sap\\inventario\\sku\\oskp\\oskpcreaterequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ArticuloSapRepository.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Sap\\Inventario\\Articulo\\ArticuloSapRepository.cs",
+              "RelativeDocumentMoniker": "Net.Data\\Sap\\Inventario\\Articulo\\ArticuloSapRepository.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Sap\\Inventario\\Articulo\\ArticuloSapRepository.cs",
+              "RelativeToolTip": "Net.Data\\Sap\\Inventario\\Articulo\\ArticuloSapRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-29T15:52:11.969Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DataContextFil.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Data\\AppContext\\DataContextFil.cs",
+              "RelativeDocumentMoniker": "Net.Data\\AppContext\\DataContextFil.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Data\\AppContext\\DataContextFil.cs",
+              "RelativeToolTip": "Net.Data\\AppContext\\DataContextFil.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAhwDAAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-29T14:51:53.141Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OSKPUpdateRequestDto.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\Sap\\Inventario\\SKU\\OSKP\\OSKPUpdateRequestDto.cs",
+              "RelativeDocumentMoniker": "Net.Business.DTO\\Sap\\Inventario\\SKU\\OSKP\\OSKPUpdateRequestDto.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\Sap\\Inventario\\SKU\\OSKP\\OSKPUpdateRequestDto.cs",
+              "RelativeToolTip": "Net.Business.DTO\\Sap\\Inventario\\SKU\\OSKP\\OSKPUpdateRequestDto.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAswEUAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-29T14:49:42.228Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "OSKPCreateRequestDto.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\Sap\\Inventario\\SKU\\OSKP\\OSKPCreateRequestDto.cs",
+              "RelativeDocumentMoniker": "Net.Business.DTO\\Sap\\Inventario\\SKU\\OSKP\\OSKPCreateRequestDto.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\Sap\\Inventario\\SKU\\OSKP\\OSKPCreateRequestDto.cs",
+              "RelativeToolTip": "Net.Business.DTO\\Sap\\Inventario\\SKU\\OSKP\\OSKPCreateRequestDto.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAEEAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-29T14:48:00.75Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OSKPEntity.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Sap\\Inventario\\SKU\\OSKPEntity.cs",
+              "RelativeDocumentMoniker": "Net.Business.Entities\\Sap\\Inventario\\SKU\\OSKPEntity.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Sap\\Inventario\\SKU\\OSKPEntity.cs",
+              "RelativeToolTip": "Net.Business.Entities\\Sap\\Inventario\\SKU\\OSKPEntity.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAA5wCQAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-29T14:32:47.729Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "OSKPRepository.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Sap\\Inventario\\SKU\\OSKP\\OSKPRepository.cs",
+              "RelativeDocumentMoniker": "Net.Data\\Sap\\Inventario\\SKU\\OSKP\\OSKPRepository.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Sap\\Inventario\\SKU\\OSKP\\OSKPRepository.cs",
+              "RelativeToolTip": "Net.Data\\Sap\\Inventario\\SKU\\OSKP\\OSKPRepository.cs",
+              "ViewState": "AgIAANAAAAAAAAAAAAAmwN0AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-29T14:29:32.44Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,344 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiFibrafil</name>
+    </assembly>
+    <members>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.AutenticarController.RecuperarPassword(Net.Business.DTO.Web.UsuarioRecuperarClaveDto)">
+            <summary>
+            Actualizar un registro existente
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+            <response code="204">Actualizado Satisfactoriamente</response>
+            <response code="404">Si el objeto enviado es nulo o invalido</response>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.DataBaseController.GetAll">
+            <summary>
+            Obtener lista de registros
+            </summary>
+            <returns>Lista del maestro de Calidad registrado</returns>
+            <response code="200">Devuelve el listado completo </response>
+            <response code="404">Si no existen datos</response>   
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.MenuController.GetAll">
+            <summary>
+            Obtener lista de registros
+            </summary>
+            <returns>Lista del maestro de Calidad registrado</returns>
+            <response code="200">Devuelve el listado completo </response>
+            <response code="404">Si no existen datos</response>   
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.MenuController.Create(Net.Business.DTO.Web.MenuInsertarRequestDto)">
+            <summary>
+            Crear una nueva registro
+            </summary>
+            <param name="value"></param>
+            <returns>Id del registro creado</returns>
+            <response code="201">Devuelve el elemento recién creado</response>
+            <response code="400">Si el objeto enviado es nulo o invalido</response>  
+            <response code="500">Algo salio mal guardando el registro</response>  
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.MenuController.Update(Net.Business.DTO.Web.MenuActualizarRequestDto)">
+            <summary>
+            Actualizar un registro existente
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+            <response code="204">Actualizado Satisfactoriamente</response>
+            <response code="404">Si el objeto enviado es nulo o invalido</response>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.MenuController.Delete(Net.Business.DTO.Web.MenuEliminarRequestDto)">
+             <summary>
+             Eliminar un registro existente
+             </summary>
+             <param name="value"></param>
+             <returns></returns>
+            <response code="204">Eliminado Satisfactoriamente</response>
+            <response code="400">Si el objeto enviado es nulo o invalido</response>
+            <response code="409">Si ocurrio un conflicto</response>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.OpcionController.GetAll(Net.Business.DTO.Web.OpcionFindRequestDto)">
+            <summary>
+            Obtener lista de registros
+            </summary>
+            <param name="value">Este es el cuerpo para enviar los parametros</param>
+            <returns>Lista del maestro de Calidad registrado</returns>
+            <response code="200">Devuelve el listado completo </response>
+            <response code="404">Si no existen datos</response>   
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.OpcionController.GetbyIdOpcion(System.Int32)">
+            <summary>
+            Obtener un registro individual segun el ID
+            </summary>
+            <param name="id">Id de Usuarii</param>
+            <returns>Devuelve un solo registro</returns>
+            <response code="200">Devuelve el listado completo </response>
+            <response code="404">Si no existen datos</response>  
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.OpcionController.Create(Net.Business.DTO.Web.OpcionInsertarRequestDto)">
+            <summary>
+            Crear una nueva registro
+            </summary>
+            <param name="value"></param>
+            <returns>Id del registro creado</returns>
+            <response code="201">Devuelve el elemento recién creado</response>
+            <response code="400">Si el objeto enviado es nulo o invalido</response>  
+            <response code="500">Algo salio mal guardando el registro</response>  
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.OpcionController.Update(Net.Business.DTO.Web.OpcionActualizarRequestDto)">
+            <summary>
+            Actualizar un registro existente
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+            <response code="204">Actualizado Satisfactoriamente</response>
+            <response code="404">Si el objeto enviado es nulo o invalido</response>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.OpcionController.Delete(Net.Business.DTO.Web.OpcionEliminarRequestDto)">
+             <summary>
+             Eliminar un registro existente
+             </summary>
+             <param name="value"></param>
+             <returns></returns>
+            <response code="204">Eliminado Satisfactoriamente</response>
+            <response code="400">Si el objeto enviado es nulo o invalido</response>
+            <response code="409">Si ocurrio un conflicto</response>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.OpcionPorPerfilController.GetAllSeleccionado(Net.Business.DTO.Web.OpcionPorPerfilFindRequestDto)">
+            <summary>
+            Obtener lista de registros
+            </summary>
+            <param name="value">Este es el cuerpo para enviar los parametros</param>
+            <returns>Lista del maestro de Calidad registrado</returns>
+            <response code="200">Devuelve el listado completo </response>
+            <response code="404">Si no existen datos</response>   
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.OpcionPorPerfilController.GetAllPorSeleccionar(Net.Business.DTO.Web.OpcionPorPerfilFindRequestDto)">
+            <summary>
+            Obtener lista de registros
+            </summary>
+            <param name="value">Este es el cuerpo para enviar los parametros</param>
+            <returns>Lista del maestro de Calidad registrado</returns>
+            <response code="200">Devuelve el listado completo </response>
+            <response code="404">Si no existen datos</response>   
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.OpcionPorPerfilController.Create(System.Collections.Generic.List{Net.Business.DTO.Web.OpcionPorPerfilInsertarRequestDto})">
+            <summary>
+            Crear una nueva registro
+            </summary>
+            <param name="value"></param>
+            <returns>Id del registro creado</returns>
+            <response code="201">Devuelve el elemento recién creado</response>
+            <response code="400">Si el objeto enviado es nulo o invalido</response>  
+            <response code="500">Algo salio mal guardando el registro</response>  
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.OpcionPorPerfilController.Delete(System.Collections.Generic.List{Net.Business.DTO.Web.OpcionPorPerfilEliminarRequestDto})">
+             <summary>
+             Eliminar un registro existente
+             </summary>
+             <param name="value"></param>
+             <returns></returns>
+            <response code="204">Eliminado Satisfactoriamente</response>
+            <response code="400">Si el objeto enviado es nulo o invalido</response>
+            <response code="409">Si ocurrio un conflicto</response>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.ParametroConexionController.GetbyIdParametroConexion(System.Int32)">
+            <summary>
+            Obtener un registro individual segun el ID
+            </summary>
+            <param name="id">Id de Usuarii</param>
+            <returns>Devuelve un solo registro</returns>
+            <response code="200">Devuelve el listado completo </response>
+            <response code="404">Si no existen datos</response>  
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.ParametroConexionController.Create(Net.Business.DTO.Web.ParametroConexionInsertarRequestDto)">
+            <summary>
+            Crear una nueva registro
+            </summary>
+            <param name="value"></param>
+            <returns>Id del registro creado</returns>
+            <response code="201">Devuelve el elemento recién creado</response>
+            <response code="400">Si el objeto enviado es nulo o invalido</response>  
+            <response code="500">Algo salio mal guardando el registro</response>  
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.ParametroConexionController.Update(Net.Business.DTO.Web.ParametroConexionActualizarRequestDto)">
+            <summary>
+            Actualizar un registro existente
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+            <response code="204">Actualizado Satisfactoriamente</response>
+            <response code="404">Si el objeto enviado es nulo o invalido</response>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.ParametroConexionController.Delete(Net.Business.DTO.Web.ParametroConexionDeleteRequestDto)">
+             <summary>
+             Eliminar un registro existente
+             </summary>
+             <param name="value"></param>
+             <returns></returns>
+            <response code="204">Eliminado Satisfactoriamente</response>
+            <response code="400">Si el objeto enviado es nulo o invalido</response>
+            <response code="409">Si ocurrio un conflicto</response>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.ParametroSistemaController.GetbyIdParametroSistema(System.Int32)">
+            <summary>
+            Obtener un registro individual segun el ID
+            </summary>
+            <param name="id">Id de Usuarii</param>
+            <returns>Devuelve un solo registro</returns>
+            <response code="200">Devuelve el listado completo </response>
+            <response code="404">Si no existen datos</response>  
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.ParametroSistemaController.Create(Net.Business.DTO.Web.ParametroSistemaInsertarRequestDto)">
+            <summary>
+            Crear una nueva registro
+            </summary>
+            <param name="value"></param>
+            <returns>Id del registro creado</returns>
+            <response code="201">Devuelve el elemento recién creado</response>
+            <response code="400">Si el objeto enviado es nulo o invalido</response>  
+            <response code="500">Algo salio mal guardando el registro</response>  
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.ParametroSistemaController.Update(Net.Business.DTO.Web.ParametroSistemaUpdateRequestDto)">
+            <summary>
+            Actualizar un registro existente
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+            <response code="204">Actualizado Satisfactoriamente</response>
+            <response code="404">Si el objeto enviado es nulo o invalido</response>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.ParametroSistemaController.Delete(Net.Business.DTO.Web.ParametroSistemaDeleteRequestDto)">
+             <summary>
+             Eliminar un registro existente
+             </summary>
+             <param name="value"></param>
+             <returns></returns>
+            <response code="204">Eliminado Satisfactoriamente</response>
+            <response code="400">Si el objeto enviado es nulo o invalido</response>
+            <response code="409">Si ocurrio un conflicto</response>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PerfilController.GetAll(Net.Business.DTO.Web.PerfilFindRequestDto)">
+            <summary>
+            Obtener lista de registros
+            </summary>
+            <param name="value">Este es el cuerpo para enviar los parametros</param>
+            <returns>Lista del maestro de Calidad registrado</returns>
+            <response code="200">Devuelve el listado completo </response>
+            <response code="404">Si no existen datos</response>   
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PerfilController.GetbyIdPerfil(System.Int32)">
+            <summary>
+            Obtener un registro individual segun el ID
+            </summary>
+            <param name="id">Id de Usuarii</param>
+            <returns>Devuelve un solo registro</returns>
+            <response code="200">Devuelve el listado completo </response>
+            <response code="404">Si no existen datos</response>  
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PerfilController.Create(Net.Business.DTO.Web.PerfilInsertarRequestDto)">
+            <summary>
+            Crear una nueva registro
+            </summary>
+            <param name="value"></param>
+            <returns>Id del registro creado</returns>
+            <response code="201">Devuelve el elemento recién creado</response>
+            <response code="400">Si el objeto enviado es nulo o invalido</response>  
+            <response code="500">Algo salio mal guardando el registro</response>  
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PerfilController.Update(Net.Business.DTO.Web.PerfilUpdateRequestDto)">
+            <summary>
+            Actualizar un registro existente
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+            <response code="204">Actualizado Satisfactoriamente</response>
+            <response code="404">Si el objeto enviado es nulo o invalido</response>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PerfilController.Delete(Net.Business.DTO.Web.PerfilDeleteRequestDto)">
+             <summary>
+             Eliminar un registro existente
+             </summary>
+             <param name="value"></param>
+             <returns></returns>
+            <response code="204">Eliminado Satisfactoriamente</response>
+            <response code="400">Si el objeto enviado es nulo o invalido</response>
+            <response code="409">Si ocurrio un conflicto</response>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PersonaController.GetAll(Net.Business.DTO.Web.PersonaFindRequestDto)">
+            <summary>
+            Obtener lista de registros
+            </summary>
+            <param name="value">Este es el cuerpo para enviar los parametros</param>
+            <returns>Lista del maestro de Calidad registrado</returns>
+            <response code="200">Devuelve el listado completo </response>
+            <response code="404">Si no existen datos</response>   
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PersonaController.GetbyIdPersona(System.Int32)">
+            <summary>
+            Obtener un registro individual segun el ID
+            </summary>
+            <param name="id">Id de Usuarii</param>
+            <returns>Devuelve un solo registro</returns>
+            <response code="200">Devuelve el listado completo </response>
+            <response code="404">Si no existen datos</response>  
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PersonaController.Create(Net.Business.DTO.Web.PersonaInsertarRequestDto)">
+            <summary>
+            Crear una nueva registro
+            </summary>
+            <param name="value"></param>
+            <returns>Id del registro creado</returns>
+            <response code="201">Devuelve el elemento recién creado</response>
+            <response code="400">Si el objeto enviado es nulo o invalido</response>  
+            <response code="500">Algo salio mal guardando el registro</response>  
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PersonaController.Update(Net.Business.DTO.Web.PersonaUpdateRequestDto)">
+            <summary>
+            Actualizar un registro existente
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+            <response code="204">Actualizado Satisfactoriamente</response>
+            <response code="404">Si el objeto enviado es nulo o invalido</response>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PersonaController.Delete(Net.Business.DTO.Web.PersonaDeleteRequestDto)">
+             <summary>
+             Eliminar un registro existente
+             </summary>
+             <param name="value"></param>
+             <returns></returns>
+            <response code="204">Eliminado Satisfactoriamente</response>
+            <response code="400">Si el objeto enviado es nulo o invalido</response>
+            <response code="409">Si ocurrio un conflicto</response>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.UsuarioController.GetAll(Net.Business.DTO.Web.UsuarioFindRequestDto)">
+            <summary>
+            Obtener lista de calidad
+            </summary>
+            <param name="value">Este es el cuerpo para enviar los parametros</param>
+            <returns>Lista del maestro de Calidad registrado</returns>
+            <response code="200">Devuelve el listado completo </response>
+            <response code="404">Si no existen datos</response>   
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.UsuarioController.GetbyIdUsuario(System.Int32)">
+            <summary>
+            Obtener un registro individual segun el ID
+            </summary>
+            <param name="id">Id de Usuarii</param>
+            <returns>Devuelve un solo registro</returns>
+            <response code="200">Devuelve el listado completo </response>
+            <response code="404">Si no existen datos</response>  
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.UsuarioController.UpdatePassword(Net.Business.DTO.Web.UsuarioUpdatePasswordDto)">
+            <summary>
+            Actualizar un registro existente
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+            <response code="204">Actualizado Satisfactoriamente</response>
+            <response code="404">Si el objeto enviado es nulo o invalido</response>
+        </member>
+    </members>
+</doc>
