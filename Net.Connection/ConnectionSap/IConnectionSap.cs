@@ -5,5 +5,6 @@ namespace Net.Connection
     {
         string ConnectToCompany(ConnectionSapEntity value);
         void DisConnectToCompany();
+        void LiberarObjetosCOM(params object[] comObjects);
     }
 }

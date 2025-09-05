@@ -1,6 +1,7 @@
 ﻿using System;
-using SAPbobsCOM;
+using System.Runtime.InteropServices;
 using Net.Business.Entities;
+using SAPbobsCOM;
 namespace Net.Connection
 {
     public class ConnectionSap : IConnectionSap
@@ -74,6 +75,23 @@ namespace Net.Connection
             catch (Exception)
             {
             }
+        }
+
+        /// <summary>
+        /// Libera de forma segura una lista de objetos COM.
+        /// </summary>
+        /// <param name="comObjects">Array de objetos COM para liberar.</param>
+        public void LiberarObjetosCOM(params object[] comObjects)
+        {
+            #pragma warning disable CA1416
+            foreach (var obj in comObjects)
+            {
+                if (obj != null)
+                {
+                    Marshal.ReleaseComObject(obj);
+                }
+            }
+            #pragma warning restore CA1416
         }
     }
 }

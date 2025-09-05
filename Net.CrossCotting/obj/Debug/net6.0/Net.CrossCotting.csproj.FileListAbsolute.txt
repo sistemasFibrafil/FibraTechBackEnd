@@ -95,3 +95,4 @@ D:\Fil\Web\BackEnd\Net.CrossCotting\obj\Debug\net6.0\Net.CrossCotting.dll
 D:\Fil\Web\BackEnd\Net.CrossCotting\obj\Debug\net6.0\refint\Net.CrossCotting.dll
 D:\Fil\Web\BackEnd\Net.CrossCotting\obj\Debug\net6.0\Net.CrossCotting.pdb
 D:\Fil\Web\BackEnd\Net.CrossCotting\obj\Debug\net6.0\ref\Net.CrossCotting.dll
+D:\Fil\Web\BackEnd\Net.CrossCotting\obj\Debug\net6.0\Net.CrossCotting.sourcelink.json

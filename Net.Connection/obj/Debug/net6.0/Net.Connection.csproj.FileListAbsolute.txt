@@ -121,3 +121,4 @@ D:\Fil\Web\BackEnd\Net.Connection\obj\Debug\net6.0\Net.Connection.dll
 D:\Fil\Web\BackEnd\Net.Connection\obj\Debug\net6.0\refint\Net.Connection.dll
 D:\Fil\Web\BackEnd\Net.Connection\obj\Debug\net6.0\Net.Connection.pdb
 D:\Fil\Web\BackEnd\Net.Connection\obj\Debug\net6.0\ref\Net.Connection.dll
+D:\Fil\Web\BackEnd\Net.Connection\obj\Debug\net6.0\Net.Connection.sourcelink.json

@@ -1,9 +1,10 @@
-﻿using Net.Data;
-using Net.Business.DTO.Sap;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Net.Business.DTO.Sap;
+using Net.Data;
+using System.Threading.Tasks;
+
 namespace Net.Business.Services.Controllers.Sap.Inventario.SKU
 {
     [Route("api/[controller]/[action]")]
@@ -11,60 +12,40 @@ namespace Net.Business.Services.Controllers.Sap.Inventario.SKU
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ApiExplorerSettings(GroupName = "ApiFibrafil")]
     [Authorize(AuthenticationSchemes = "Bearer")]
-    public class OSKPController : Controller
+    public class OSKPController : ControllerBase
     {
-        readonly IRepositoryWrapper _repository;
+        private readonly IRepositoryWrapper _repository;
+
         public OSKPController(IRepositoryWrapper repository)
         {
             _repository = repository;
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> SetCreate([FromBody] OSKPCreateRequestDto value)
         {
-            if (value == null)
-            {
-                return BadRequest("No hay registros a crear ..!");
-            }
+            var result = await _repository.OSKP.SetCreate(value.ReturnValue());
 
-            if (!ModelState.IsValid)
+            if (result.ResultadoCodigo == -1)
             {
-                return BadRequest("Modelo no válido ..!");
-            }
-
-            var objectNew = await _repository.OSKP.SetCreate(value.ReturnValue());
-
-            if (objectNew.ResultadoCodigo == -1)
-            {
-                return BadRequest(objectNew);
+                return BadRequest(result);
             }
 
             return NoContent();
         }
 
         [HttpPut]
-        [ProducesResponseType(204)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> SetUpdate([FromBody] OSKPUpdateRequestDto value)
         {
-            if (value == null)
-            {
-                return BadRequest("No hay registros a crear ..!");
-            }
+            var result = await _repository.OSKP.SetUpdate(value.ReturnValue());
 
-            if (!ModelState.IsValid)
+            if (result.ResultadoCodigo == -1)
             {
-                return BadRequest("Modelo no válido ..!");
-            }
-
-            var objectNew = await _repository.OSKP.SetUpdate(value.ReturnValue());
-
-            if (objectNew.ResultadoCodigo == -1)
-            {
-                return BadRequest(objectNew);
+                return BadRequest(result);
             }
 
             return NoContent();
@@ -72,23 +53,16 @@ namespace Net.Business.Services.Controllers.Sap.Inventario.SKU
 
         [HttpPatch]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<IActionResult> SetDelete([FromBody] OSKPDeleteRequestDto value)
         {
-            if (value == null)
+            var result = await _repository.OSKP.SetDelete(value.ReturnValue());
+
+            if (result.ResultadoCodigo == -1)
             {
-                return BadRequest("No hay registro a eliminar ..!");
+                return BadRequest(result);
             }
 
-            var response = await _repository.OSKP.SetDelete(value.ReturnValue());
-
-            if (response.ResultadoCodigo == -1)
-            {
-                return BadRequest(response);
-            }
-
-            return Ok();
+            return NoContent();
         }
 
         [HttpGet]
@@ -96,14 +70,14 @@ namespace Net.Business.Services.Controllers.Sap.Inventario.SKU
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetListByFiltro([FromQuery] OSKPFindByFiltroRequestDto value)
         {
-            var objectGetList = await _repository.OSKP.GetListByFiltro(value.ReturnValue());
+            var result = await _repository.OSKP.GetListByFiltro(value.ReturnValue());
 
-            if (objectGetList == null)
+            if (result.ResultadoCodigo == -1)
             {
-                return NotFound();
+                return NotFound(result);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(result.dataList);
         }
 
         [HttpGet]
@@ -111,14 +85,14 @@ namespace Net.Business.Services.Controllers.Sap.Inventario.SKU
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByDocEntry([FromQuery] OSKPFindByDocEntryRequestDto value)
         {
-            var objectGetList = await _repository.OSKP.GetByDocEntry(value.ReturnValue());
+            var result = await _repository.OSKP.GetByDocEntry(value.ReturnValue());
 
-            if (objectGetList == null)
+            if (result.ResultadoCodigo == -1)
             {
-                return NotFound();
+                return NotFound(result);
             }
 
-            return Ok(objectGetList.data);
+            return Ok(result.data);
         }
     }
 }

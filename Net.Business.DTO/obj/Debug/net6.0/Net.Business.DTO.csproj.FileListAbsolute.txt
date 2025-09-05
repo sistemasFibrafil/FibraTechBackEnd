@@ -105,3 +105,4 @@ D:\Fil\Web\BackEnd\Net.Business.DTO\obj\Debug\net6.0\Net.Business.DTO.dll
 D:\Fil\Web\BackEnd\Net.Business.DTO\obj\Debug\net6.0\refint\Net.Business.DTO.dll
 D:\Fil\Web\BackEnd\Net.Business.DTO\obj\Debug\net6.0\Net.Business.DTO.pdb
 D:\Fil\Web\BackEnd\Net.Business.DTO\obj\Debug\net6.0\ref\Net.Business.DTO.dll
+D:\Fil\Web\BackEnd\Net.Business.DTO\obj\Debug\net6.0\Net.Business.DTO.sourcelink.json

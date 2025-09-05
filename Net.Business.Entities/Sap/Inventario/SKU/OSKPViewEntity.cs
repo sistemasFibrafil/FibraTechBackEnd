@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace Net.Business.Entities.Sap
 {
     public class OSKPViewEntity
@@ -27,5 +28,7 @@ namespace Net.Business.Entities.Sap
         public string U_ValExcMar { get; set; } = null;
         public string U_AprByExc { get; set; } = null;
         public string U_Observations { get; set; } = null;
+
+        public List<SKP1Entity> Line { get; set; } = new List<SKP1Entity>();
     }
 }

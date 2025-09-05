@@ -1,43 +1,64 @@
-﻿using System;
-using System.IO;
 using AutoMapper;
-using System.Data;
-using System.Linq;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Net.Business.Entities;
+using Net.Business.Entities.Sap;
 using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
-using System.Threading.Tasks;
-using DocumentFormat.OpenXml;
-using Net.Business.Entities.Sap;
+using SAPbobsCOM;
+using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using System.Runtime.InteropServices;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Spreadsheet;
-using Microsoft.Extensions.Configuration;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace Net.Data.Sap
 {
+    /// <summary>
+    /// Repositorio para interactuar con la tabla de usuario @FIB_OSKC de SAP.
+    /// </summary>
     public class OSKCRepository : RepositoryBase<OSKCEntity>, IOSKCRepository
     {
-        private readonly IMapper _am;
-        private readonly DataContextFil _db;
         private readonly string _aplicacionName;
+        private readonly Regex regex = new Regex(@"<(\w+)>.*");
+
+        private readonly IMapper _am;
+        private readonly DataContextFil _dc;
         private readonly IConnectionSap _conSap;
-        private readonly ConnectionSapEntity _cnDIAPI;
+        private readonly ConnectionSapEntity _conSapDiApi;
+
+        // --- Constantes para evitar "magic strings" ---
+        private const string SapGeneralServiceName = "FIB_OSKC";
+        private const string SapDiApiConnectionConfig = "EntornoConnectionDiApiSap:Entorno";
 
         public OSKCRepository(IConnectionSQL context, IConfiguration configuration, DataContextFil db, IMapper am)
             : base(context)
         {
             _am = am;
-            _db = db;
+            _dc = db;
             _conSap = new ConnectionSap();
             _aplicacionName = GetType().Name;
-            _cnDIAPI = Utilidades.GetConDiApiSap(configuration, "EntornoConnectionDiApiSap:Entorno");
+            _conSapDiApi = Utilidades.GetConDiApiSap(configuration, SapDiApiConnectionConfig);
         }
 
-        private void SetGeneralDataProperties(SAPbobsCOM.GeneralData oGeneralData, OSKCEntity value)
+        private bool ConectarSAP(ResultadoTransaccionEntity<OSKCEntity> resultTransaccion)
+        {
+            var rpta = _conSap.ConnectToCompany(_conSapDiApi);
+            if (rpta == "0") return true;
+
+            resultTransaccion.IdRegistro = -1;
+            resultTransaccion.ResultadoCodigo = -1;
+            resultTransaccion.ResultadoDescripcion = rpta;
+            return false;
+        }
+
+        private void SetGeneralDataProperties(GeneralData oGeneralData, OSKCEntity value)
         {
             oGeneralData.SetProperty("Name", value.U_Number);
             oGeneralData.SetProperty("U_Number", value.U_Number);
@@ -58,17 +79,11 @@ namespace Net.Data.Sap
             oGeneralData.SetProperty("U_ItemWeight", Convert.ToDouble(Math.Round(value.U_ItemWeight, 6)));
             oGeneralData.SetProperty("U_ColorCode", value.U_ColorCode);
             oGeneralData.SetProperty("U_Laminate", value.U_Laminate);
-            if(!string.IsNullOrEmpty(value.U_LamTypCode))
-            {
-                oGeneralData.SetProperty("U_LamTypCode", value.U_LamTypCode);
-            }
+            if (value.U_LamTypCode != null) oGeneralData.SetProperty("U_LamTypCode", value.U_LamTypCode);
             oGeneralData.SetProperty("U_Linner", value.U_Linner);
             oGeneralData.SetProperty("U_LinnWeight", Convert.ToDouble(Math.Round(value.U_LinnWeight, 6)));
             oGeneralData.SetProperty("U_Print", value.U_Print);
-            if (!string.IsNullOrEmpty(value.U_PrintColCode))
-            {
-                oGeneralData.SetProperty("U_PrintColCode", value.U_PrintColCode);
-            }
+            if (value.U_PrintColCode != null) oGeneralData.SetProperty("U_PrintColCode", value.U_PrintColCode);
             oGeneralData.SetProperty("U_Fuelle", value.U_Fuelle);
             oGeneralData.SetProperty("U_UvByMonCode", value.U_UvByMonCode);
             oGeneralData.SetProperty("U_PrjMonVol", Convert.ToDouble(Math.Round(value.U_PrjMonVol, 6)));
@@ -76,42 +91,35 @@ namespace Net.Data.Sap
             oGeneralData.SetProperty("U_Observations", value.U_Observations);
         }
 
+        /// <summary>
+        /// Crea un nuevo registro de configuración de SKU (@FIB_OSKC).
+        /// </summary>
         public Task<ResultadoTransaccionEntity<OSKCEntity>> SetCreate(OSKCEntity value)
         {
             var resultTransaccion = new ResultadoTransaccionEntity<OSKCEntity>
             {
-                NombreMetodo = nameof(SetCreate),
+                NombreMetodo = MethodBase.GetCurrentMethod().Name,
                 NombreAplicacion = _aplicacionName
             };
 
-            SAPbobsCOM.GeneralData oGeneralData = null;
-            SAPbobsCOM.CompanyService oCompService = null;
-            SAPbobsCOM.GeneralService oGeneralService = null;
+            CompanyService oCompService = null;
+            GeneralService oGeneralService = null;
+            GeneralData oGeneralData = null;
 
             try
             {
-                var rpta = _conSap.ConnectToCompany(_cnDIAPI);
+                if (!ConectarSAP(resultTransaccion)) return Task.FromResult(resultTransaccion);
 
-                if (rpta == "0")
-                {
-                    oCompService = RepositoryBaseSap.oCompany.GetCompanyService();
-                    oGeneralService = oCompService.GetGeneralService("FIB_OSKC");
-                    oGeneralData = (SAPbobsCOM.GeneralData)oGeneralService.GetDataInterface(SAPbobsCOM.GeneralServiceDataInterfaces.gsGeneralData);
+                oCompService = RepositoryBaseSap.oCompany.GetCompanyService();
+                oGeneralService = oCompService.GetGeneralService(SapGeneralServiceName);
+                oGeneralData = (GeneralData)oGeneralService.GetDataInterface(GeneralServiceDataInterfaces.gsGeneralData);
+                oGeneralData.SetProperty("Code", value.U_Number);
+                SetGeneralDataProperties(oGeneralData, value);
+                oGeneralService.Add(oGeneralData);
 
-                    oGeneralData.SetProperty("Code", value.U_Number);
-                    SetGeneralDataProperties(oGeneralData, value);
-                    oGeneralService.Add(oGeneralData);
-
-                    resultTransaccion.IdRegistro = 0;
-                    resultTransaccion.ResultadoCodigo = 0;
-                    resultTransaccion.ResultadoDescripcion = "Registro procesado con éxito ..!";
-                }
-                else
-                {
-                    resultTransaccion.IdRegistro = -1;
-                    resultTransaccion.ResultadoCodigo = -1;
-                    resultTransaccion.ResultadoDescripcion = rpta;
-                }
+                resultTransaccion.IdRegistro = 0;
+                resultTransaccion.ResultadoCodigo = 0;
+                resultTransaccion.ResultadoDescripcion = "Registro procesado con éxito.";
             }
             catch (Exception ex)
             {
@@ -121,58 +129,48 @@ namespace Net.Data.Sap
             }
             finally
             {
-                #pragma warning disable CA1416
-                if (oGeneralData != null) Marshal.ReleaseComObject(oGeneralData);
-                if (oCompService != null) Marshal.ReleaseComObject(oCompService);
-                if (oGeneralService != null) Marshal.ReleaseComObject(oGeneralService);
-                if (RepositoryBaseSap.oCompany is not null && RepositoryBaseSap.oCompany.Connected)
+                _conSap.LiberarObjetosCOM(oGeneralData, oGeneralService, oCompService);
+                if (RepositoryBaseSap.oCompany != null && RepositoryBaseSap.oCompany.Connected)
                 {
                     _conSap.DisConnectToCompany();
-                    Marshal.ReleaseComObject(RepositoryBaseSap.oCompany);
-                    RepositoryBaseSap.oCompany = null;
                 }
-                #pragma warning restore CA1416
             }
 
             return Task.FromResult(resultTransaccion);
         }
 
+        /// <summary>
+        /// Actualiza un registro de configuración de SKU (@FIB_OSKC).
+        /// </summary>
         public Task<ResultadoTransaccionEntity<OSKCEntity>> SetUpdate(OSKCEntity value)
         {
             var resultTransaccion = new ResultadoTransaccionEntity<OSKCEntity>
             {
-                NombreMetodo = nameof(SetUpdate),
+                NombreMetodo = MethodBase.GetCurrentMethod().Name,
                 NombreAplicacion = _aplicacionName
             };
 
-            SAPbobsCOM.CompanyService oCompService = null;
-            SAPbobsCOM.GeneralService oGeneralService = null;
-            SAPbobsCOM.GeneralData oGeneralData = null;
+            CompanyService oCompService = null;
+            GeneralService oGeneralService = null;
+            GeneralData oGeneralData = null;
+            GeneralDataParams oGeneralDataParams = null;
 
             try
             {
-                var rpta = _conSap.ConnectToCompany(_cnDIAPI);
+                if (!ConectarSAP(resultTransaccion)) return Task.FromResult(resultTransaccion);
 
-                if (rpta == "0")
-                {
-                    oCompService = RepositoryBaseSap.oCompany.GetCompanyService();
-                    oGeneralService = oCompService.GetGeneralService("FIB_OSKC");
-                    oGeneralData = (SAPbobsCOM.GeneralData)oGeneralService.GetDataInterface(SAPbobsCOM.GeneralServiceDataInterfaces.gsGeneralData);
+                oCompService = RepositoryBaseSap.oCompany.GetCompanyService();
+                oGeneralService = oCompService.GetGeneralService(SapGeneralServiceName);
+                oGeneralDataParams = (GeneralDataParams)oGeneralService.GetDataInterface(GeneralServiceDataInterfaces.gsGeneralDataParams);
+                oGeneralDataParams.SetProperty("Code", value.Code);
+                oGeneralData = oGeneralService.GetByParams(oGeneralDataParams);
 
-                    oGeneralData.SetProperty("Code", value.Code);
-                    SetGeneralDataProperties(oGeneralData, value);
-                    oGeneralService.Update(oGeneralData);
+                SetGeneralDataProperties(oGeneralData, value);
+                oGeneralService.Update(oGeneralData);
 
-                    resultTransaccion.IdRegistro = 0;
-                    resultTransaccion.ResultadoCodigo = 0;
-                    resultTransaccion.ResultadoDescripcion = "Registro procesado con éxito ..!";
-                }
-                else
-                {
-                    resultTransaccion.IdRegistro = -1;
-                    resultTransaccion.ResultadoCodigo = -1;
-                    resultTransaccion.ResultadoDescripcion = rpta;
-                }
+                resultTransaccion.IdRegistro = 0;
+                resultTransaccion.ResultadoCodigo = 0;
+                resultTransaccion.ResultadoDescripcion = "Registro actualizado con éxito.";
             }
             catch (Exception ex)
             {
@@ -182,57 +180,44 @@ namespace Net.Data.Sap
             }
             finally
             {
-                #pragma warning disable CA1416
-                if (oGeneralData != null) Marshal.ReleaseComObject(oGeneralData);
-                if (oCompService != null) Marshal.ReleaseComObject(oCompService);
-                if (oGeneralService != null) Marshal.ReleaseComObject(oGeneralService);
-                if (RepositoryBaseSap.oCompany is not null && RepositoryBaseSap.oCompany.Connected)
+                _conSap.LiberarObjetosCOM(oGeneralData, oGeneralDataParams, oGeneralService, oCompService);
+                if (RepositoryBaseSap.oCompany != null && RepositoryBaseSap.oCompany.Connected)
                 {
                     _conSap.DisConnectToCompany();
-                    Marshal.ReleaseComObject(RepositoryBaseSap.oCompany);
-                    RepositoryBaseSap.oCompany = null;
                 }
-                #pragma warning restore CA1416
             }
 
             return Task.FromResult(resultTransaccion);
         }
 
+        /// <summary>
+        /// Elimina un registro de configuración de SKU (@FIB_OSKC).
+        /// </summary>
         public Task<ResultadoTransaccionEntity<OSKCEntity>> SetDelete(OSKCEntity value)
         {
             var resultTransaccion = new ResultadoTransaccionEntity<OSKCEntity>
             {
-                NombreMetodo = nameof(SetDelete),
+                NombreMetodo = MethodBase.GetCurrentMethod().Name,
                 NombreAplicacion = _aplicacionName
             };
 
-            SAPbobsCOM.CompanyService oCompService = null;
-            SAPbobsCOM.GeneralService oGeneralService = null;
-            SAPbobsCOM.GeneralDataParams oGeneralParams = null;
+            CompanyService oCompService = null;
+            GeneralService oGeneralService = null;
+            GeneralDataParams oGeneralParams = null;
 
             try
             {
-                var rpta = _conSap.ConnectToCompany(_cnDIAPI);
+                if (!ConectarSAP(resultTransaccion)) return Task.FromResult(resultTransaccion);
 
-                if (rpta == "0")
-                {
-                    oCompService = RepositoryBaseSap.oCompany.GetCompanyService();
-                    oGeneralService = oCompService.GetGeneralService("FIB_OSKC");
-                    oGeneralParams = oGeneralService.GetDataInterface(SAPbobsCOM.GeneralServiceDataInterfaces.gsGeneralDataParams);
+                oCompService = RepositoryBaseSap.oCompany.GetCompanyService();
+                oGeneralService = oCompService.GetGeneralService(SapGeneralServiceName);
+                oGeneralParams = (GeneralDataParams)oGeneralService.GetDataInterface(GeneralServiceDataInterfaces.gsGeneralDataParams);
+                oGeneralParams.SetProperty("Code", value.Code);
+                oGeneralService.Delete(oGeneralParams);
 
-                    oGeneralParams.SetProperty("Code", value.Code);
-                    oGeneralService.Delete(oGeneralParams);
-
-                    resultTransaccion.IdRegistro = 0;
-                    resultTransaccion.ResultadoCodigo = 0;
-                    resultTransaccion.ResultadoDescripcion = "Registro eliminado con éxito ..!";
-                }
-                else
-                {
-                    resultTransaccion.IdRegistro = -1;
-                    resultTransaccion.ResultadoCodigo = -1;
-                    resultTransaccion.ResultadoDescripcion = rpta;
-                }
+                resultTransaccion.IdRegistro = 0;
+                resultTransaccion.ResultadoCodigo = 0;
+                resultTransaccion.ResultadoDescripcion = "Registro eliminado con éxito.";
             }
             catch (Exception ex)
             {
@@ -242,17 +227,11 @@ namespace Net.Data.Sap
             }
             finally
             {
-                #pragma warning disable CA1416
-                if (oGeneralParams != null) Marshal.ReleaseComObject(oGeneralParams);
-                if (oCompService != null) Marshal.ReleaseComObject(oCompService);
-                if (oGeneralService != null) Marshal.ReleaseComObject(oGeneralService);
-                if (RepositoryBaseSap.oCompany is not null && RepositoryBaseSap.oCompany.Connected)
+                _conSap.LiberarObjetosCOM(oGeneralParams, oGeneralService, oCompService);
+                if (RepositoryBaseSap.oCompany != null && RepositoryBaseSap.oCompany.Connected)
                 {
                     _conSap.DisConnectToCompany();
-                    Marshal.ReleaseComObject(RepositoryBaseSap.oCompany);
-                    RepositoryBaseSap.oCompany = null;
                 }
-                #pragma warning restore CA1416
             }
 
             return Task.FromResult(resultTransaccion);
@@ -262,19 +241,27 @@ namespace Net.Data.Sap
         {
             var resultTransaccion = new ResultadoTransaccionEntity<OSKCEntity>
             {
-                NombreMetodo = nameof(SetUpdate),
+                NombreMetodo = regex.Match(MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
             };
 
             try
             {
-                var lista = await _db.OSKCView.Where(x => x.U_DocDate >= value.StrDate && x.U_DocDate <= value.EndDate).ToListAsync();
-                var response = _am.Map<List<OSKCEntity>>(lista);
+                var lista = await _dc.OSKCView.Where(x => x.U_DocDate >= value.StrDate && x.U_DocDate <= value.EndDate).ToListAsync();
 
+                if (!lista.Any())
+                {
+                    resultTransaccion.IdRegistro = -1;
+                    resultTransaccion.ResultadoCodigo = -1;
+                    resultTransaccion.ResultadoDescripcion = "No se encontraron registros con el filtro especificado.";
+                    return resultTransaccion;
+                }
+                
+                
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
-                resultTransaccion.ResultadoDescripcion = $"Registros Totales {response.Count}";
-                resultTransaccion.dataList = response;
+                resultTransaccion.ResultadoDescripcion = $"Registros Totales {lista.Count}";
+                resultTransaccion.dataList = _am.Map<List<OSKCEntity>>(lista);
             }
             catch (Exception ex)
             {
@@ -286,23 +273,33 @@ namespace Net.Data.Sap
             return resultTransaccion;
         }
 
+        /// <summary>
+        /// Obtiene una configuración de SKU por su código único.
+        /// </summary>
         public async Task<ResultadoTransaccionEntity<OSKCEntity>> GetByCode(OSKCEntity value)
         {
             var resultTransaccion = new ResultadoTransaccionEntity<OSKCEntity>
             {
-                NombreMetodo = nameof(SetUpdate),
+                NombreMetodo = MethodBase.GetCurrentMethod().Name,
                 NombreAplicacion = _aplicacionName
             };
 
             try
             {
-                var data = await _db.OSKCView.Where(x => x.Code == value.Code).FirstOrDefaultAsync();
-                var response = _am.Map<OSKCEntity>(data);
+                var data = await _dc.OSKCView.FirstOrDefaultAsync(x => x.Code == value.Code);
+
+                if (data == null)
+                {
+                    resultTransaccion.IdRegistro = -1;
+                    resultTransaccion.ResultadoCodigo = -1;
+                    resultTransaccion.ResultadoDescripcion = "No se encontró un registro con el código proporcionado.";
+                    return resultTransaccion;
+                }
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = response;
+                resultTransaccion.data = _am.Map<OSKCEntity>(data);
             }
             catch (Exception ex)
             {
@@ -314,24 +311,34 @@ namespace Net.Data.Sap
             return resultTransaccion;
         }
 
+        /// <summary>
+        /// Obtiene una lista de configuraciones de SKU según un filtro de texto.
+        /// </summary>
         public async Task<ResultadoTransaccionEntity<OSKCEntity>> GetListByFiltro(OSKCEntity value)
         {
             var resultTransaccion = new ResultadoTransaccionEntity<OSKCEntity>
             {
-                NombreMetodo = nameof(SetUpdate),
+                NombreMetodo = MethodBase.GetCurrentMethod().Name,
                 NombreAplicacion = _aplicacionName
             };
 
             try
             {
-                var filtro = value.Filtro == null ? "" : value.Filtro.Trim();
-                var lista = await _db.OSKCView.Where(x => x.U_Number.Contains(filtro) || x.U_ItemName.Contains(filtro) || x.U_CardName.Contains(filtro)).ToListAsync();
-                var response = _am.Map<List<OSKCEntity>>(lista);
+                var filtro = value.Filtro ?? "";
+                var lista = await _dc.OSKCView.Where(x => x.U_Number.Contains(filtro) || x.U_ItemName.Contains(filtro) || x.U_CardName.Contains(filtro)).ToListAsync();
+
+                if (!lista.Any())
+                {
+                    resultTransaccion.IdRegistro = -1;
+                    resultTransaccion.ResultadoCodigo = -1;
+                    resultTransaccion.ResultadoDescripcion = "No se encontraron registros con el filtro especificado.";
+                    return resultTransaccion;
+                }
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
-                resultTransaccion.ResultadoDescripcion = $"Registros Totales {response.Count}";
-                resultTransaccion.dataList = response;
+                resultTransaccion.ResultadoDescripcion = $"Registros Totales {lista.Count}";
+                resultTransaccion.dataList = _am.Map<List<OSKCEntity>>(lista);
             }
             catch (Exception ex)
             {
@@ -348,12 +355,23 @@ namespace Net.Data.Sap
             var ms = new MemoryStream();
             var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>
             {
-                NombreMetodo = nameof(GetOSKCExcel),
+                NombreMetodo = regex.Match(MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
             };
 
             try
             {
+                var result = (await GetListByDateRange(value));
+                if (result.ResultadoCodigo == -1)
+                {
+                    resultTransaccion.IdRegistro = -1;
+                    resultTransaccion.ResultadoCodigo = -1;
+                    resultTransaccion.ResultadoDescripcion = "No se encontraron registros para generar el reporte";
+                    return resultTransaccion;
+                }
+
+                var lista = result.dataList.ToList();
+
                 using (var document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook, true))
                 {
                     WorkbookPart workbookPart = document.AddWorkbookPart();
@@ -434,8 +452,6 @@ namespace Net.Data.Sap
                     );
                     sheetData.Append(row);
 
-                    var lista = (await GetListByDateRange(value)).dataList.ToList();
-
                     for (int i = 0; i < lista.Count(); i++)
                     {
                         row = new Row { RowIndex = Convert.ToUInt32(i + 2) };
@@ -490,4 +506,3 @@ namespace Net.Data.Sap
         }
     }
 }
-

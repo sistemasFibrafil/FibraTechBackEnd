@@ -93,3 +93,4 @@ D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Debug\net6.0\Net.Business.Entities.
 D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Debug\net6.0\refint\Net.Business.Entities.dll
 D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Debug\net6.0\Net.Business.Entities.pdb
 D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Debug\net6.0\ref\Net.Business.Entities.dll
+D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Debug\net6.0\Net.Business.Entities.sourcelink.json

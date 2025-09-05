@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Net.CrossCotting")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a314ff717cf3e12a7bc6b16bb197ef22f6b0bcdc")]
 [assembly: System.Reflection.AssemblyProductAttribute("Net.CrossCotting")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Net.CrossCotting")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

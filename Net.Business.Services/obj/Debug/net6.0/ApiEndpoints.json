@@ -12586,13 +12586,9 @@
         "StatusCode": 200
       },
       {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 500
       }
     ]
   },
@@ -12636,7 +12632,7 @@
     "ContainingType": "Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController",
     "Method": "SetDelete",
     "RelativePath": "api/OSKC/SetDelete",
-    "HttpMethod": "PATCH",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -12660,15 +12656,6 @@
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 409
       }
     ]
   },
@@ -12700,15 +12687,6 @@
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
       }
     ]
   },
@@ -12819,7 +12797,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 201
+        "StatusCode": 204
       },
       {
         "Type": "System.Void",
@@ -12856,15 +12834,6 @@
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 409
       }
     ]
   },

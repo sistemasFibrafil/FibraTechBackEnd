@@ -4,6 +4,60 @@
         <name>ApiFibrafil</name>
     </assembly>
     <members>
+        <member name="T:Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController">
+            <summary>
+            Controlador para la Configuración de SKU de SAP (@FIB_OSKC)
+            </summary>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController.SetCreate(Net.Business.DTO.Sap.OSKCCreateRequestDto)">
+            <summary>
+            Crear una nueva configuración de SKU.
+            </summary>
+            <param name="value">Datos de la nueva configuración.</param>
+            <returns>El resultado de la transacción.</returns>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController.SetUpdate(Net.Business.DTO.Sap.OSKCUpdateRequestDto)">
+            <summary>
+            Actualizar una configuración de SKU existente.
+            </summary>
+            <param name="value">Datos para actualizar.</param>
+            <returns>Sin contenido si la operación es exitosa.</returns>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController.SetDelete(Net.Business.DTO.Sap.OSKCDeleteRequestDto)">
+            <summary>
+            Eliminar una configuración de SKU.
+            </summary>
+            <param name="value">Datos del registro a eliminar.</param>
+            <returns>Sin contenido si la operación es exitosa.</returns>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController.GetListByDateRange(Net.Business.DTO.Sap.OSKCFindByDateRequestDto)">
+            <summary>
+            Obtener lista de configuraciones de SKU por rango de fechas.
+            </summary>
+            <param name="value">DTO con fecha de inicio y fin.</param>
+            <returns>Lista de configuraciones.</returns>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController.GetByCode(Net.Business.DTO.Sap.OSKCFindByCodeRequestDto)">
+            <summary>
+            Obtener una configuración de SKU por su código.
+            </summary>
+            <param name="value">DTO con el código a buscar.</param>
+            <returns>La configuración de SKU encontrada.</returns>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController.GetListByFiltro(Net.Business.DTO.Sap.OSKCFindByFiltroRequestDto)">
+            <summary>
+            Obtener lista de configuraciones de SKU por un filtro de texto.
+            </summary>
+            <param name="value">DTO con el texto de filtro.</param>
+            <returns>Lista de configuraciones.</returns>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController.GetOSKCExcel(Net.Business.DTO.Sap.OSKCFindByDateRequestDto)">
+            <summary>
+            Generar y descargar un reporte de configuraciones de SKU en formato Excel.
+            </summary>
+            <param name="value">DTO con el rango de fechas para el reporte.</param>
+            <returns>Un archivo de Excel.</returns>
+        </member>
         <member name="M:Net.Business.Services.Controllers.Web.Seguridad.AutenticarController.RecuperarPassword(Net.Business.DTO.Web.UsuarioRecuperarClaveDto)">
             <summary>
             Actualizar un registro existente

@@ -20097,7 +20097,9 @@
         "tags": [
           "OSKC"
         ],
+        "summary": "Crear una nueva configuración de SKU.",
         "requestBody": {
+          "description": "Datos de la nueva configuración.",
           "content": {
             "application/json": {
               "schema": {
@@ -20151,7 +20153,9 @@
         "tags": [
           "OSKC"
         ],
+        "summary": "Actualizar una configuración de SKU existente.",
         "requestBody": {
+          "description": "Datos para actualizar.",
           "content": {
             "application/json": {
               "schema": {
@@ -20193,36 +20197,18 @@
           },
           "204": {
             "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
           }
         }
       }
     },
     "/api/OSKC/SetDelete": {
-      "patch": {
+      "delete": {
         "tags": [
           "OSKC"
         ],
+        "summary": "Eliminar una configuración de SKU.",
         "requestBody": {
+          "description": "Datos del registro a eliminar.",
           "content": {
             "application/json": {
               "schema": {
@@ -20264,26 +20250,6 @@
           },
           "204": {
             "description": "Success"
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
           }
         }
       }
@@ -20293,6 +20259,7 @@
         "tags": [
           "OSKC"
         ],
+        "summary": "Obtener lista de configuraciones de SKU por rango de fechas.",
         "parameters": [
           {
             "name": "StrDate",
@@ -20363,6 +20330,7 @@
         "tags": [
           "OSKC"
         ],
+        "summary": "Obtener una configuración de SKU por su código.",
         "parameters": [
           {
             "name": "Code",
@@ -20425,6 +20393,7 @@
         "tags": [
           "OSKC"
         ],
+        "summary": "Obtener lista de configuraciones de SKU por un filtro de texto.",
         "parameters": [
           {
             "name": "Filtro",
@@ -20487,6 +20456,7 @@
         "tags": [
           "OSKC"
         ],
+        "summary": "Generar y descargar un reporte de configuraciones de SKU en formato Excel.",
         "parameters": [
           {
             "name": "StrDate",
@@ -20529,25 +20499,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+          "500": {
+            "description": "Server Error"
           }
         }
       }
@@ -20597,7 +20550,7 @@
               }
             }
           },
-          "201": {
+          "204": {
             "description": "Success"
           },
           "500": {
@@ -20724,26 +20677,6 @@
           },
           "204": {
             "description": "Success"
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
           }
         }
       }

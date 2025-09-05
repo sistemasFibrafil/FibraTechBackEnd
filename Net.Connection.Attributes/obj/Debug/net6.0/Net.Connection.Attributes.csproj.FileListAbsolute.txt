@@ -69,3 +69,4 @@ D:\Fil\Web\BackEnd\Net.Connection.Attributes\obj\Debug\net6.0\Net.Connection.Att
 D:\Fil\Web\BackEnd\Net.Connection.Attributes\obj\Debug\net6.0\refint\Net.Connection.Attributes.dll
 D:\Fil\Web\BackEnd\Net.Connection.Attributes\obj\Debug\net6.0\Net.Connection.Attributes.pdb
 D:\Fil\Web\BackEnd\Net.Connection.Attributes\obj\Debug\net6.0\ref\Net.Connection.Attributes.dll
+D:\Fil\Web\BackEnd\Net.Connection.Attributes\obj\Debug\net6.0\Net.Connection.Attributes.sourcelink.json
