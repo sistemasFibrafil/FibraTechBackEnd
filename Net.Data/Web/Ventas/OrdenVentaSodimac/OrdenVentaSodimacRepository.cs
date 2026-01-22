@@ -875,7 +875,7 @@ namespace Net.Data.Web
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.CommandTimeout = 0;
                             cmd.Parameters.Add(new SqlParameter("@FecInicial", value.Dat1));
-                            cmd.Parameters.Add(new SqlParameter("@FecFinal", value.Dat1));
+                            cmd.Parameters.Add(new SqlParameter("@FecFinal", value.Dat2));
                             cmd.Parameters.Add(new SqlParameter("@Tipo", value.Cod1));
                             cmd.Parameters.Add(new SqlParameter("@Filtro", value.Text1));
 

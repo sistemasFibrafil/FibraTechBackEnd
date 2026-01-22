@@ -1,6 +1,6 @@
 ﻿using System;
-using Microsoft.Extensions.Configuration;
 using Net.Business.Entities;
+using Microsoft.Extensions.Configuration;
 namespace Net.CrossCotting
 {
     public static class Utilidades
@@ -47,7 +47,7 @@ namespace Net.CrossCotting
             return _cnx;
         }
 
-        public static ConnectionSapEntity GetConDiApiSap(IConfiguration configuration, string entorno)
+        public static ConnectionSapEntity GetConSap(IConfiguration configuration, string entorno)
         {
             _entorno = configuration[entorno];
 

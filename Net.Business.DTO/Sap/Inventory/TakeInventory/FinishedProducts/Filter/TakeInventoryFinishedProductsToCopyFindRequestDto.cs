@@ -1,0 +1,27 @@
+﻿using System;
+using Net.Business.Entities.Sap;
+namespace Net.Business.DTO.Sap
+{
+    public class TakeInventoryFinishedProductsToCopyFindRequestDto
+    {
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public string Usuario { get; set; }
+        public string WhsCode { get; set; }
+        public string Item { get; set; }
+        public string ItemCode { get; set; }
+
+        public TakeInventoryFinishedProductsToCopyFindEntity ReturnValue()
+        {
+            return new TakeInventoryFinishedProductsToCopyFindEntity
+            {
+                StartDate = this.StartDate,
+                EndDate = this.EndDate,
+                Usuario = this.Usuario,
+                WhsCode = this.WhsCode,
+                Item = this.Item,
+                ItemCode = this.ItemCode
+            };
+        }
+    }
+}

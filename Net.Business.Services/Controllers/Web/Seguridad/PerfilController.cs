@@ -20,6 +20,26 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
         }
 
         /// <summary>
+        /// Obtener lista de perfiles
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetList()
+        {
+
+            var result = await _repository.Perfil.GetList();
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result.dataList);
+        }
+
+        /// <summary>
         /// Obtener lista de registros
         /// </summary>
         /// <param name="value">Este es el cuerpo para enviar los parametros</param>

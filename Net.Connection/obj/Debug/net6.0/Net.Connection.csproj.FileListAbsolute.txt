@@ -116,9 +116,9 @@ D:\Fil\Web\BackEnd\Net.Connection\obj\Debug\net6.0\Net.Connection.GeneratedMSBui
 D:\Fil\Web\BackEnd\Net.Connection\obj\Debug\net6.0\Net.Connection.AssemblyInfoInputs.cache
 D:\Fil\Web\BackEnd\Net.Connection\obj\Debug\net6.0\Net.Connection.AssemblyInfo.cs
 D:\Fil\Web\BackEnd\Net.Connection\obj\Debug\net6.0\Net.Connection.csproj.CoreCompileInputs.cache
+D:\Fil\Web\BackEnd\Net.Connection\obj\Debug\net6.0\Net.Connection.sourcelink.json
 D:\Fil\Web\BackEnd\Net.Connection\obj\Debug\net6.0\Net.Conn.E12AA173.Up2Date
 D:\Fil\Web\BackEnd\Net.Connection\obj\Debug\net6.0\Net.Connection.dll
 D:\Fil\Web\BackEnd\Net.Connection\obj\Debug\net6.0\refint\Net.Connection.dll
 D:\Fil\Web\BackEnd\Net.Connection\obj\Debug\net6.0\Net.Connection.pdb
 D:\Fil\Web\BackEnd\Net.Connection\obj\Debug\net6.0\ref\Net.Connection.dll
-D:\Fil\Web\BackEnd\Net.Connection\obj\Debug\net6.0\Net.Connection.sourcelink.json

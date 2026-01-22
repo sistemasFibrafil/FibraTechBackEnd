@@ -14,4 +14,9 @@
     <ProjectReference Include="..\Net.Connection.Attributes\Net.Connection.Attributes.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Sap\Administration\Definitions\Purchasing\" />
+    <Folder Include="Sap\Sales\Orders\Find\" />
+  </ItemGroup>
+
 </Project>

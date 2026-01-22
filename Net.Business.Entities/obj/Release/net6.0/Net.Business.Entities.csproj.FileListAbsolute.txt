@@ -40,6 +40,7 @@ D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Release\net6.0\Net.Business.Entitie
 D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Release\net6.0\Net.Business.Entities.AssemblyInfoInputs.cache
 D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Release\net6.0\Net.Business.Entities.AssemblyInfo.cs
 D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Release\net6.0\Net.Business.Entities.csproj.CoreCompileInputs.cache
+D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Release\net6.0\Net.Business.Entities.sourcelink.json
 D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Release\net6.0\Net.Busi.CBE4B0EA.Up2Date
 D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Release\net6.0\Net.Business.Entities.dll
 D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Release\net6.0\refint\Net.Business.Entities.dll

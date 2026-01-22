@@ -10,7 +10,7 @@ namespace Net.Business.Services.Controllers.Web.Gestion.Definiciones.General
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ApiExplorerSettings(GroupName = "ApiFibrafil")]
     [Authorize(AuthenticationSchemes = "Bearer")]
-    public class StatusController : Controller
+    public class StatusController : ControllerBase
     {
         private readonly IRepositoryWrapper _repository;
         public StatusController(IRepositoryWrapper repository)
@@ -23,14 +23,14 @@ namespace Net.Business.Services.Controllers.Web.Gestion.Definiciones.General
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetList()
         {
-            var objectGetAll = await _repository.Status.GetList();
+            var result = await _repository.Status.GetList();
 
-            if (objectGetAll.ResultadoCodigo == -1)
+            if (result.ResultadoCodigo == -1)
             {
-                return BadRequest(objectGetAll);
+                return BadRequest(result);
             }
 
-            return Ok(objectGetAll.dataList);
+            return Ok(result.dataList);
         }
     }
 }

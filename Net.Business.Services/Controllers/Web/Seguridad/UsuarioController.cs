@@ -11,6 +11,7 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ApiExplorerSettings(GroupName = "ApiFibrafil")]
     [Authorize(AuthenticationSchemes = "Bearer")]
+
     public class UsuarioController : ControllerBase
     {
         private readonly IRepositoryWrapper _repository;
@@ -20,7 +21,27 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
         }
 
         /// <summary>
-        /// Obtener lista de calidad
+        /// Obtener lista de usuarios
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetList()
+        {
+
+            var result = await _repository.Usuario.GetList();
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result.dataList);
+        }
+
+        /// <summary>
+        /// Obtener lista de usuarios segun filtros
         /// </summary>
         /// <param name="value">Este es el cuerpo para enviar los parametros</param>
         /// <returns>Lista del maestro de Calidad registrado</returns>
@@ -29,17 +50,17 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAll([FromQuery] UsuarioFindRequestDto value)
+        public async Task<IActionResult> GetListByFilter([FromQuery] UsuarioFilterRequestDto value)
         {
 
-            var objectGetAll = await _repository.Usuario.GetAll(value.UsuarioFind());
+            var result = await _repository.Usuario.GetListByFilter(value.UsuarioFind());
 
-            if (objectGetAll == null)
+            if (result == null)
             {
                 return NotFound();
             }
 
-            return Ok(objectGetAll);
+            return Ok(result.dataList);
         }
 
         /// <summary>
@@ -49,20 +70,54 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
         /// <returns>Devuelve un solo registro</returns>
         /// <response code="200">Devuelve el listado completo </response>
         /// <response code="404">Si no existen datos</response>  
-        [HttpGet("{id}", Name = "GetbyIdUsuario")]
+        [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetbyIdUsuario(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var objectGetById = await _repository.Usuario.GetById(new UsuarioFindRequestDto { IdUsuario = id }.UsuarioFind());
+            var result = await _repository.Usuario.GetById(new UsuarioFindRequestDto { IdUsuario = id }.UsuarioFind());
 
-            if (objectGetById == null)
+            if (result == null)
             {
                 return NotFound();
             }
 
-            return Ok(objectGetById);
+            return Ok(result.data);
+        }
+
+        /// <summary>
+        /// Crear una nueva registro
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Id del registro creado</returns>
+        /// <response code="201">Devuelve el elemento recién creado</response>
+        /// <response code="400">Si el objeto enviado es nulo o invalido</response>  
+        /// <response code="500">Algo salio mal guardando el registro</response>  
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> SetCreate([FromBody] UsuarioInsertarRequestDto value)
+        {
+            if (value == null)
+            {
+                return BadRequest("Master object is null");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid model object");
+            }
+
+            var result = await _repository.Usuario.Create(value.ReturnValue());
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
         }
 
         /// <summary>
@@ -75,7 +130,63 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
         [HttpPut]
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdatePassword([FromBody] UsuarioUpdatePasswordDto value)
+        public async Task<IActionResult> SetUpdate([FromBody] UsuarioUpdateRequestDto value)
+        {
+            if (value == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _repository.Usuario.Update(value.ReturnValue());
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Eliminar un registro existente
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        ///<response code="204">Eliminado Satisfactoriamente</response>
+        ///<response code="400">Si el objeto enviado es nulo o invalido</response>
+        ///<response code="409">Si ocurrio un conflicto</response>
+        [HttpPatch]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        public async Task<IActionResult> SetDelete([FromBody] UsuarioDeleteRequestDto value)
+        {
+            if (value == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _repository.Usuario.Delete(value.ReturnValue());
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Actualizar un registro existente
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <response code="204">Actualizado Satisfactoriamente</response>
+        /// <response code="404">Si el objeto enviado es nulo o invalido</response>
+        [HttpPut]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> SetUpdatePassword([FromBody] UsuarioUpdatePasswordDto value)
         {
             if (value == null)
             {

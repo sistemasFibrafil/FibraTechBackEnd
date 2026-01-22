@@ -31,16 +31,16 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
         }
 
         [HttpPost]
-        public IActionResult ObtienePermisosPorUsuario([FromBody] UsuarioDatosRequestDto request)
+        public async Task<IActionResult> ObtienePermisosPorUsuario([FromBody] UsuarioDatosRequestDto request)
         {
-            var response = repository.Usuario.ObtienePermisosPorUsuario(request.UsuarioDatos());
+            var response = await repository.Usuario.ObtienePermisosPorUsuario(request.UsuarioDatos());
 
             if (response == null)
             {
                 return BadRequest("Credenciales incorrectas");
             }
 
-            return Ok(response.Result.data);
+            return Ok(response.data);
         }
 
         /// <summary>

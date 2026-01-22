@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Runtime.InteropServices;
-using Net.Business.Entities;
 using SAPbobsCOM;
+using Net.Business.Entities;
 namespace Net.Connection
 {
     public class ConnectionSap : IConnectionSap
@@ -30,9 +29,6 @@ namespace Net.Connection
 
                     switch (value.DbServerType)
                     {
-                        case "HANA":
-                            RepositoryBaseSap.oCompany.DbServerType = BoDataServerTypes.dst_HANADB;
-                            break;
                         case "SQL2008":
                             RepositoryBaseSap.oCompany.DbServerType = BoDataServerTypes.dst_MSSQL2008;
                             break;
@@ -75,23 +71,6 @@ namespace Net.Connection
             catch (Exception)
             {
             }
-        }
-
-        /// <summary>
-        /// Libera de forma segura una lista de objetos COM.
-        /// </summary>
-        /// <param name="comObjects">Array de objetos COM para liberar.</param>
-        public void LiberarObjetosCOM(params object[] comObjects)
-        {
-            #pragma warning disable CA1416
-            foreach (var obj in comObjects)
-            {
-                if (obj != null)
-                {
-                    Marshal.ReleaseComObject(obj);
-                }
-            }
-            #pragma warning restore CA1416
         }
     }
 }

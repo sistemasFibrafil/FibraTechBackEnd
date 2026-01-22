@@ -115,6 +115,7 @@ C:\Fibrafil\BackEnd\Net.Data\obj\Debug\net6.0\refint\Net.Data.dll
 C:\Fibrafil\BackEnd\Net.Data\obj\Debug\net6.0\Net.Data.pdb
 C:\Fibrafil\BackEnd\Net.Data\obj\Debug\net6.0\ref\Net.Data.dll
 D:\Fil\Web\BackEnd\Net.Data\bin\Debug\net6.0\Net.Data.deps.json
+D:\Fil\Web\BackEnd\Net.Data\bin\Debug\net6.0\Net.Data.runtimeconfig.json
 D:\Fil\Web\BackEnd\Net.Data\bin\Debug\net6.0\Net.Data.dll
 D:\Fil\Web\BackEnd\Net.Data\bin\Debug\net6.0\Net.Data.pdb
 D:\Fil\Web\BackEnd\Net.Data\bin\Debug\net6.0\Net.Business.Entities.dll
@@ -132,11 +133,10 @@ D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\Net.Data.GeneratedMSBuildEditorConf
 D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\Net.Data.AssemblyInfoInputs.cache
 D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\Net.Data.AssemblyInfo.cs
 D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\Net.Data.csproj.CoreCompileInputs.cache
+D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\Net.Data.sourcelink.json
 D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\Net.Data.csproj.Up2Date
 D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\Net.Data.dll
 D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\refint\Net.Data.dll
 D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\Net.Data.pdb
-D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\ref\Net.Data.dll
-D:\Fil\Web\BackEnd\Net.Data\bin\Debug\net6.0\Net.Data.runtimeconfig.json
 D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\Net.Data.genruntimeconfig.cache
-D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\Net.Data.sourcelink.json
+D:\Fil\Web\BackEnd\Net.Data\obj\Debug\net6.0\ref\Net.Data.dll

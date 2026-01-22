@@ -41,10 +41,6 @@ namespace Net.Connection
             _user = EncriptaHelper.DecryptStringAES(configuration[string.Format("{0}:User", _entorno)]);
             _password = EncriptaHelper.DecryptStringAES(configuration[string.Format("{0}:Password", _entorno)]);
 
-            //var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
-            //var dbName = httpContextAccessor.HttpContext.Request.Headers["s_soci"].First();
-            //_Catalog = string.Format("DB_COTISAP_{0}", dbName);
-
             _cnx = _cnx.Replace("{Source}", _source).Replace("{Catalog}", _catalog).Replace("{User}", _user).Replace("{Password}", _password);
         }
         public string GetConnectionSQL()

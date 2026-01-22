@@ -6,16 +6,14 @@ namespace Net.Business.DTO.Web
     {
         public int IdPerfil { get; set; }
         public string DescripcionPerfil { get; set; }
-        public string CodigoTablaVisualizacion { get; set; }
-        public bool FlgActivo { get; set; }
+        public bool Activo { get; set; }
         public PerilEntity RetornarPeril()
         {
             return new PerilEntity
             {
                 IdPerfil = IdPerfil,
                 DescripcionPerfil = DescripcionPerfil,
-                CodigoTablaVisualizacion = CodigoTablaVisualizacion,
-                FlgActivo = FlgActivo,
+                Activo = Activo,
                 RegUsuario = RegUsuario,
                 RegEstacion = RegEstacion
             };

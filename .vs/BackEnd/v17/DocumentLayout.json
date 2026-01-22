@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "D:\\Fil\\Web\\BackEnd\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|d:\\fil\\web\\backend\\net.data\\sap\\inventario\\sku\\oskp\\oskprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|solutionrelative:net.data\\sap\\inventario\\sku\\oskp\\oskprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|d:\\fil\\web\\backend\\net.data\\sap\\inventory\\inventorytransactions\\solicitudtraslado\\solicitudtrasladorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|solutionrelative:net.data\\sap\\inventory\\inventorytransactions\\solicitudtraslado\\solicitudtrasladorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0B99A372-705B-44E3-8548-E0EB2700DC71}|Net.Business.Services\\Net.Business.Services.csproj|d:\\fil\\web\\backend\\net.business.services\\controllers\\sap\\inventario\\sku\\oskpcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B99A372-705B-44E3-8548-E0EB2700DC71}|Net.Business.Services\\Net.Business.Services.csproj|solutionrelative:net.business.services\\controllers\\sap\\inventario\\sku\\oskpcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|d:\\fil\\web\\backend\\net.data\\sap\\purchasing\\purchaserequest\\purchaserequestrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|solutionrelative:net.data\\sap\\purchasing\\purchaserequest\\purchaserequestrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|d:\\fil\\web\\backend\\net.data\\sap\\inventario\\sku\\oskc\\oskcrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|solutionrelative:net.data\\sap\\inventario\\sku\\oskc\\oskcrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|d:\\fil\\web\\backend\\net.data\\appcontext\\datacontextsap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|solutionrelative:net.data\\appcontext\\datacontextsap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|d:\\fil\\web\\backend\\net.data\\sap\\inventario\\sku\\oskc\\ioskcrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|solutionrelative:net.data\\sap\\inventario\\sku\\oskc\\ioskcrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|d:\\fil\\web\\backend\\net.data\\sap\\sales\\orders\\ordersrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|solutionrelative:net.data\\sap\\sales\\orders\\ordersrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,60 +26,78 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IOSKCRepository.cs",
-              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Sap\\Inventario\\SKU\\OSKC\\IOSKCRepository.cs",
-              "RelativeDocumentMoniker": "Net.Data\\Sap\\Inventario\\SKU\\OSKC\\IOSKCRepository.cs",
-              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Sap\\Inventario\\SKU\\OSKC\\IOSKCRepository.cs",
-              "RelativeToolTip": "Net.Data\\Sap\\Inventario\\SKU\\OSKC\\IOSKCRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-03T01:31:48.263Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "OSKPRepository.cs",
-              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Sap\\Inventario\\SKU\\OSKP\\OSKPRepository.cs",
-              "RelativeDocumentMoniker": "Net.Data\\Sap\\Inventario\\SKU\\OSKP\\OSKPRepository.cs",
-              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Sap\\Inventario\\SKU\\OSKP\\OSKPRepository.cs",
-              "RelativeToolTip": "Net.Data\\Sap\\Inventario\\SKU\\OSKP\\OSKPRepository.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAACMAAABTAAAAAAAAAA==",
+              "Title": "SolicitudTrasladoRepository.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Sap\\Inventory\\InventoryTransactions\\SolicitudTraslado\\SolicitudTrasladoRepository.cs",
+              "RelativeDocumentMoniker": "Net.Data\\Sap\\Inventory\\InventoryTransactions\\SolicitudTraslado\\SolicitudTrasladoRepository.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Sap\\Inventory\\InventoryTransactions\\SolicitudTraslado\\SolicitudTrasladoRepository.cs",
+              "RelativeToolTip": "Net.Data\\Sap\\Inventory\\InventoryTransactions\\SolicitudTraslado\\SolicitudTrasladoRepository.cs",
+              "ViewState": "AgIAAAICAAAAAAAAAADwvxgCAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-31T16:12:01.741Z",
+              "WhenOpened": "2026-01-22T20:13:01.851Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PurchaseRequestRepository.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Sap\\Purchasing\\PurchaseRequest\\PurchaseRequestRepository.cs",
+              "RelativeDocumentMoniker": "Net.Data\\Sap\\Purchasing\\PurchaseRequest\\PurchaseRequestRepository.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Sap\\Purchasing\\PurchaseRequest\\PurchaseRequestRepository.cs",
+              "RelativeToolTip": "Net.Data\\Sap\\Purchasing\\PurchaseRequest\\PurchaseRequestRepository.cs",
+              "ViewState": "AgIAAC0BAAAAAAAAAAAowEgBAABpAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-22T16:56:41.276Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "OSKCRepository.cs",
-              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Sap\\Inventario\\SKU\\OSKC\\OSKCRepository.cs",
-              "RelativeDocumentMoniker": "Net.Data\\Sap\\Inventario\\SKU\\OSKC\\OSKCRepository.cs",
-              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Sap\\Inventario\\SKU\\OSKC\\OSKCRepository.cs",
-              "RelativeToolTip": "Net.Data\\Sap\\Inventario\\SKU\\OSKC\\OSKCRepository.cs",
-              "ViewState": "AgIAADABAAAAAAAAAADwv0cBAAAQAAAAAAAAAA==",
+              "Title": "DataContextSap.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Data\\AppContext\\DataContextSap.cs",
+              "RelativeDocumentMoniker": "Net.Data\\AppContext\\DataContextSap.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Data\\AppContext\\DataContextSap.cs",
+              "RelativeToolTip": "Net.Data\\AppContext\\DataContextSap.cs",
+              "ViewState": "AgIAALkAAAAAAAAAAAAAwMMAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-03T01:31:48.948Z"
+              "WhenOpened": "2026-01-22T14:47:25.844Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "OSKPController.cs",
-              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\Controllers\\Sap\\Inventario\\SKU\\OSKPController.cs",
-              "RelativeDocumentMoniker": "Net.Business.Services\\Controllers\\Sap\\Inventario\\SKU\\OSKPController.cs",
-              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\Controllers\\Sap\\Inventario\\SKU\\OSKPController.cs",
-              "RelativeToolTip": "Net.Business.Services\\Controllers\\Sap\\Inventario\\SKU\\OSKPController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAABSAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "OrdersRepository.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Sap\\Sales\\Orders\\OrdersRepository.cs",
+              "RelativeDocumentMoniker": "Net.Data\\Sap\\Sales\\Orders\\OrdersRepository.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Sap\\Sales\\Orders\\OrdersRepository.cs",
+              "RelativeToolTip": "Net.Data\\Sap\\Sales\\Orders\\OrdersRepository.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAQwIsAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-31T16:22:36.793Z",
+              "WhenOpened": "2026-01-22T13:38:05.021Z",
               "EditorCaption": ""
             }
           ]

@@ -63,6 +63,7 @@ D:\Fil\Web\BackEnd\Net.Data\obj\Release\net6.0\Net.Data.GeneratedMSBuildEditorCo
 D:\Fil\Web\BackEnd\Net.Data\obj\Release\net6.0\Net.Data.AssemblyInfoInputs.cache
 D:\Fil\Web\BackEnd\Net.Data\obj\Release\net6.0\Net.Data.AssemblyInfo.cs
 D:\Fil\Web\BackEnd\Net.Data\obj\Release\net6.0\Net.Data.csproj.CoreCompileInputs.cache
+D:\Fil\Web\BackEnd\Net.Data\obj\Release\net6.0\Net.Data.sourcelink.json
 D:\Fil\Web\BackEnd\Net.Data\obj\Release\net6.0\Net.Data.csproj.Up2Date
 D:\Fil\Web\BackEnd\Net.Data\obj\Release\net6.0\Net.Data.dll
 D:\Fil\Web\BackEnd\Net.Data\obj\Release\net6.0\refint\Net.Data.dll

@@ -5,16 +5,14 @@ namespace Net.Business.DTO.Web
     public class UsuarioUpdatePasswordDto : BaseEntity
     {
         public int IdUsuario { get; set; }
-        public string ClaveOrigen { get; set; }
+        public string Clave { get; set; }
 
-        public UsuarioEntity RetornaUsuario()
+        public UsuarioUpdatePasswordEntity RetornaUsuario()
         {
-            return new UsuarioEntity
+            return new UsuarioUpdatePasswordEntity
             {
                 IdUsuario = IdUsuario,
-                ClaveOrigen = ClaveOrigen,
-                RegUsuario = RegUsuario,
-                RegEstacion = RegEstacion
+                Clave = Clave
             };
         }
     }

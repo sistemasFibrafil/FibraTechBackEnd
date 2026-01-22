@@ -2,18 +2,21 @@
 using Net.Business.Entities;
 using System.Threading.Tasks;
 using Net.Business.Entities.Web;
-using System.Collections.Generic;
 namespace Net.Data.Web
 {
     public interface IUsuarioRepository : IRepositoryBase<UsuarioEntity>
     {
-        Task<IEnumerable<UsuarioEntity>> GetAll(UsuarioEntity entidad);
-        Task<UsuarioEntity> GetById(UsuarioEntity entidad);
+        Task<ResultadoTransaccionEntity<UsuarioQueryEntity>> GetList();
+        Task<ResultadoTransaccionEntity<UsuarioQueryEntity>> GetListByFilter(UsuarioFilterEntity value);
+        Task<ResultadoTransaccionEntity<UsuarioEntity>> GetById(UsuarioEntity value);
+        Task<ResultadoTransaccionEntity<UsuarioEntity>> Create(UsuarioCreateEntity value);
+        Task<ResultadoTransaccionEntity<UsuarioEntity>> Update(UsuarioUpdateEntity value);
+        Task<ResultadoTransaccionEntity<UsuarioEntity>> Delete(UsuarioEntity value);
         Task<ResultadoTransaccionEntity<UsuarioAutenticarEntity>> Autenticar(UsuarioAutenticarEntity entidad);
         Task<ResultadoTransaccionEntity<UsuarioDatosEntity>> ObtienePermisosPorUsuario(UsuarioDatosEntity entidad);
-        UsuarioEntity VerificarLogin(UsuarioEntity entidad);
+        
         Task RecuperarPassword(UsuarioRecuperarPasswordEntity entidad);
         Task<ResultadoTransaccionEntity<UsuarioTokenEntity>> ValidarToken(UsuarioTokenEntity value);
-        Task UpdatePassword(UsuarioEntity entidad);
+        Task<ResultadoTransaccionEntity<UsuarioEntity>> UpdatePassword(UsuarioUpdatePasswordEntity value);
     }
 }

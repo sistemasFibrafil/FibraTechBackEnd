@@ -2,6 +2,7 @@ using System;
 using Net.Data;
 using System.IO;
 using System.Text;
+using Net.Connection;
 using Net.CrossCotting;
 using System.Reflection;
 using Net.Data.AppContext;
@@ -117,9 +118,41 @@ namespace Net.Business.Services
             services.AddControllers();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            var connectionString = Utilidades.GetCon(Configuration, "EntornoConnectionSap:Entorno");
 
-            services.AddDbContext<DataContextFil>(options => options.UseSqlServer(connectionString));
+
+            /*
+             *===================================================
+             * INICIO: CONFIGURACIÓN DE DATACONTEXT
+             * *=================================================
+            */
+
+            //DB SAP: Configuracion de DBContext de EntityFramework
+            var connectionStringSeg = Utilidades.GetCon(Configuration, "EntornoConnection:Entorno");
+            services.AddDbContext<DataContextSeg>(options => options.UseSqlServer(connectionStringSeg));
+
+
+            //DB SAP: Configuracion de DBContext de EntityFramework
+            var connectionStringFil = Utilidades.GetCon(Configuration, "EntornoConnectionSap:Entorno");
+            services.AddDbContext<DataContextSap>(options => options.UseSqlServer(connectionStringFil));
+
+
+            // Configuración de SAP DI API Singleton
+            var connectionSap = Utilidades.GetConSap(Configuration, "EntornoConnectionSapDiApi:Entorno");
+            services.AddSingleton<IConnectionSap, ConnectionSap>();
+            services.AddSingleton(provider =>
+                new CompanyProviderSap(provider.GetRequiredService<IConnectionSap>(),connectionSap)
+            );
+
+
+            //DB PROFIL: Configuracion de DBContext de EntityFramework
+            var connectionStringProfil = Utilidades.GetCon(Configuration, "EntornoConnectionProfil:Entorno");
+            services.AddDbContext<DataContextProfil>(options => options.UseSqlServer(connectionStringProfil));
+
+            /*
+             *===================================================
+             * FIN: CONFIGURACIÓN DE DATACONTEXT
+             * *=================================================
+            */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

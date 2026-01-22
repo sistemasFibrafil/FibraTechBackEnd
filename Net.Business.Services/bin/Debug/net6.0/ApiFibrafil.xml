@@ -4,54 +4,54 @@
         <name>ApiFibrafil</name>
     </assembly>
     <members>
-        <member name="T:Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController">
+        <member name="T:Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController">
             <summary>
             Controlador para la Configuración de SKU de SAP (@FIB_OSKC)
             </summary>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController.SetCreate(Net.Business.DTO.Sap.OSKCCreateRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController.SetCreate(Net.Business.DTO.Sap.OSKCCreateRequestDto)">
             <summary>
             Crear una nueva configuración de SKU.
             </summary>
             <param name="value">Datos de la nueva configuración.</param>
             <returns>El resultado de la transacción.</returns>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController.SetUpdate(Net.Business.DTO.Sap.OSKCUpdateRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController.SetUpdate(Net.Business.DTO.Sap.OSKCUpdateRequestDto)">
             <summary>
             Actualizar una configuración de SKU existente.
             </summary>
             <param name="value">Datos para actualizar.</param>
             <returns>Sin contenido si la operación es exitosa.</returns>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController.SetDelete(Net.Business.DTO.Sap.OSKCDeleteRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController.SetDelete(Net.Business.DTO.Sap.OSKCDeleteRequestDto)">
             <summary>
             Eliminar una configuración de SKU.
             </summary>
             <param name="value">Datos del registro a eliminar.</param>
             <returns>Sin contenido si la operación es exitosa.</returns>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController.GetListByDateRange(Net.Business.DTO.Sap.OSKCFindByDateRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController.GetListByDateRange(Net.Business.DTO.Sap.OSKCFindByDateRequestDto)">
             <summary>
             Obtener lista de configuraciones de SKU por rango de fechas.
             </summary>
             <param name="value">DTO con fecha de inicio y fin.</param>
             <returns>Lista de configuraciones.</returns>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController.GetByCode(Net.Business.DTO.Sap.OSKCFindByCodeRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController.GetByCode(Net.Business.DTO.Sap.OSKCFindByCodeRequestDto)">
             <summary>
             Obtener una configuración de SKU por su código.
             </summary>
             <param name="value">DTO con el código a buscar.</param>
             <returns>La configuración de SKU encontrada.</returns>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController.GetListByFiltro(Net.Business.DTO.Sap.OSKCFindByFiltroRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController.GetListByFiltro(Net.Business.DTO.Sap.OSKCFindByFiltroRequestDto)">
             <summary>
             Obtener lista de configuraciones de SKU por un filtro de texto.
             </summary>
             <param name="value">DTO con el texto de filtro.</param>
             <returns>Lista de configuraciones.</returns>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Sap.Inventario.SKU.OSKCController.GetOSKCExcel(Net.Business.DTO.Sap.OSKCFindByDateRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController.GetOSKCExcel(Net.Business.DTO.Sap.OSKCFindByDateRequestDto)">
             <summary>
             Generar y descargar un reporte de configuraciones de SKU en formato Excel.
             </summary>
@@ -273,6 +273,12 @@
             <response code="400">Si el objeto enviado es nulo o invalido</response>
             <response code="409">Si ocurrio un conflicto</response>
         </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PerfilController.GetList">
+            <summary>
+            Obtener lista de perfiles
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PerfilController.GetAll(Net.Business.DTO.Web.PerfilFindRequestDto)">
             <summary>
             Obtener lista de registros
@@ -320,16 +326,22 @@
             <response code="400">Si el objeto enviado es nulo o invalido</response>
             <response code="409">Si ocurrio un conflicto</response>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PersonaController.GetAll(Net.Business.DTO.Web.PersonaFindRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.UsuarioController.GetList">
             <summary>
-            Obtener lista de registros
+            Obtener lista de usuarios
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.UsuarioController.GetListByFilter(Net.Business.DTO.Web.UsuarioFilterRequestDto)">
+            <summary>
+            Obtener lista de usuarios segun filtros
             </summary>
             <param name="value">Este es el cuerpo para enviar los parametros</param>
             <returns>Lista del maestro de Calidad registrado</returns>
             <response code="200">Devuelve el listado completo </response>
             <response code="404">Si no existen datos</response>   
         </member>
-        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PersonaController.GetbyIdPersona(System.Int32)">
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.UsuarioController.GetById(System.Int32)">
             <summary>
             Obtener un registro individual segun el ID
             </summary>
@@ -338,7 +350,7 @@
             <response code="200">Devuelve el listado completo </response>
             <response code="404">Si no existen datos</response>  
         </member>
-        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PersonaController.Create(Net.Business.DTO.Web.PersonaInsertarRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.UsuarioController.SetCreate(Net.Business.DTO.Web.UsuarioInsertarRequestDto)">
             <summary>
             Crear una nueva registro
             </summary>
@@ -348,7 +360,7 @@
             <response code="400">Si el objeto enviado es nulo o invalido</response>  
             <response code="500">Algo salio mal guardando el registro</response>  
         </member>
-        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PersonaController.Update(Net.Business.DTO.Web.PersonaUpdateRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.UsuarioController.SetUpdate(Net.Business.DTO.Web.UsuarioUpdateRequestDto)">
             <summary>
             Actualizar un registro existente
             </summary>
@@ -357,7 +369,7 @@
             <response code="204">Actualizado Satisfactoriamente</response>
             <response code="404">Si el objeto enviado es nulo o invalido</response>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.PersonaController.Delete(Net.Business.DTO.Web.PersonaDeleteRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.UsuarioController.SetDelete(Net.Business.DTO.Web.UsuarioDeleteRequestDto)">
              <summary>
              Eliminar un registro existente
              </summary>
@@ -367,25 +379,7 @@
             <response code="400">Si el objeto enviado es nulo o invalido</response>
             <response code="409">Si ocurrio un conflicto</response>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.UsuarioController.GetAll(Net.Business.DTO.Web.UsuarioFindRequestDto)">
-            <summary>
-            Obtener lista de calidad
-            </summary>
-            <param name="value">Este es el cuerpo para enviar los parametros</param>
-            <returns>Lista del maestro de Calidad registrado</returns>
-            <response code="200">Devuelve el listado completo </response>
-            <response code="404">Si no existen datos</response>   
-        </member>
-        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.UsuarioController.GetbyIdUsuario(System.Int32)">
-            <summary>
-            Obtener un registro individual segun el ID
-            </summary>
-            <param name="id">Id de Usuarii</param>
-            <returns>Devuelve un solo registro</returns>
-            <response code="200">Devuelve el listado completo </response>
-            <response code="404">Si no existen datos</response>  
-        </member>
-        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.UsuarioController.UpdatePassword(Net.Business.DTO.Web.UsuarioUpdatePasswordDto)">
+        <member name="M:Net.Business.Services.Controllers.Web.Seguridad.UsuarioController.SetUpdatePassword(Net.Business.DTO.Web.UsuarioUpdatePasswordDto)">
             <summary>
             Actualizar un registro existente
             </summary>

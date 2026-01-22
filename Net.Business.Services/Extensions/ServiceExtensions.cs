@@ -13,7 +13,7 @@ namespace Net.Business.Services
         {
             services.AddCors(opt =>
             {
-                opt.AddPolicy("CorsPolicy", builder => builder.WithOrigins("http://192.168.1.7:8080", "http://192.168.20.10", "http://192.168.1.13", "http://localhost:80", "http://localhost:4200").AllowAnyHeader().WithMethods("PUT", "PATCH", "GET"));
+                opt.AddPolicy("CorsPolicy", builder => builder.WithOrigins("http://192.168.20.8:8080", "http://192.168.1.7:8080", "http://localhost:80", "http://localhost:4200").AllowAnyHeader().WithMethods("PUT", "PATCH", "GET"));
             });
         }
 

@@ -90,9 +90,9 @@ D:\Fil\Web\BackEnd\Net.CrossCotting\obj\Debug\net6.0\Net.CrossCotting.GeneratedM
 D:\Fil\Web\BackEnd\Net.CrossCotting\obj\Debug\net6.0\Net.CrossCotting.AssemblyInfoInputs.cache
 D:\Fil\Web\BackEnd\Net.CrossCotting\obj\Debug\net6.0\Net.CrossCotting.AssemblyInfo.cs
 D:\Fil\Web\BackEnd\Net.CrossCotting\obj\Debug\net6.0\Net.CrossCotting.csproj.CoreCompileInputs.cache
+D:\Fil\Web\BackEnd\Net.CrossCotting\obj\Debug\net6.0\Net.CrossCotting.sourcelink.json
 D:\Fil\Web\BackEnd\Net.CrossCotting\obj\Debug\net6.0\Net.Cros.BB73CBDE.Up2Date
 D:\Fil\Web\BackEnd\Net.CrossCotting\obj\Debug\net6.0\Net.CrossCotting.dll
 D:\Fil\Web\BackEnd\Net.CrossCotting\obj\Debug\net6.0\refint\Net.CrossCotting.dll
 D:\Fil\Web\BackEnd\Net.CrossCotting\obj\Debug\net6.0\Net.CrossCotting.pdb
 D:\Fil\Web\BackEnd\Net.CrossCotting\obj\Debug\net6.0\ref\Net.CrossCotting.dll
-D:\Fil\Web\BackEnd\Net.CrossCotting\obj\Debug\net6.0\Net.CrossCotting.sourcelink.json

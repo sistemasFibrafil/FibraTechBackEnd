@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Sap\Gestion\**" />
+    <Compile Remove="Sap\Produccion\**" />
+    <EmbeddedResource Remove="Sap\Gestion\**" />
+    <EmbeddedResource Remove="Sap\Produccion\**" />
+    <None Remove="Sap\Gestion\**" />
+    <None Remove="Sap\Produccion\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.32" />
   </ItemGroup>
 
@@ -15,8 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Sap\Inventario\OperacionesStock\TransferenciaStock\" />
-    <Folder Include="Sap\Produccion\OrdenFabricacion\" />
+    <Folder Include="Sap\Production\" />
+    <Folder Include="Web\Seguridad\LogisticUser\Filter\" />
   </ItemGroup>
 
 </Project>

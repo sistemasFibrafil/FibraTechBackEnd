@@ -28,7 +28,7 @@ namespace Net.Data.Web
         {
             return Task.Run(() => FindById(entidad, SP_GET_ID));
         }
-        public Task<IEnumerable<MenuEntity>> GetAllPorIdUsuario(int? idUsuario)
+        public Task<IEnumerable<MenuEntity>> GetAllPorIdUsuario(int idUsuario)
         {
             return Task.Run(() =>
             {

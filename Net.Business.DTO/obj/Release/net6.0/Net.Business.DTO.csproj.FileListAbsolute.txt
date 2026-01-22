@@ -46,6 +46,7 @@ D:\Fil\Web\BackEnd\Net.Business.DTO\obj\Release\net6.0\Net.Business.DTO.Generate
 D:\Fil\Web\BackEnd\Net.Business.DTO\obj\Release\net6.0\Net.Business.DTO.AssemblyInfoInputs.cache
 D:\Fil\Web\BackEnd\Net.Business.DTO\obj\Release\net6.0\Net.Business.DTO.AssemblyInfo.cs
 D:\Fil\Web\BackEnd\Net.Business.DTO\obj\Release\net6.0\Net.Business.DTO.csproj.CoreCompileInputs.cache
+D:\Fil\Web\BackEnd\Net.Business.DTO\obj\Release\net6.0\Net.Business.DTO.sourcelink.json
 D:\Fil\Web\BackEnd\Net.Business.DTO\obj\Release\net6.0\Net.Busi.31ECDFC6.Up2Date
 D:\Fil\Web\BackEnd\Net.Business.DTO\obj\Release\net6.0\Net.Business.DTO.dll
 D:\Fil\Web\BackEnd\Net.Business.DTO\obj\Release\net6.0\refint\Net.Business.DTO.dll

@@ -684,6 +684,7 @@ D:\Fil\Web\BackEnd\Net.Business.Services\obj\Release\net6.0\Net.Business.Service
 D:\Fil\Web\BackEnd\Net.Business.Services\obj\Release\net6.0\Net.Business.Services.csproj.CoreCompileInputs.cache
 D:\Fil\Web\BackEnd\Net.Business.Services\obj\Release\net6.0\ApiFibrafil.MvcApplicationPartsAssemblyInfo.cs
 D:\Fil\Web\BackEnd\Net.Business.Services\obj\Release\net6.0\ApiFibrafil.MvcApplicationPartsAssemblyInfo.cache
+D:\Fil\Web\BackEnd\Net.Business.Services\obj\Release\net6.0\Net.Business.Services.sourcelink.json
 D:\Fil\Web\BackEnd\Net.Business.Services\obj\Release\net6.0\rjimswa.dswa.cache.json
 D:\Fil\Web\BackEnd\Net.Business.Services\obj\Release\net6.0\rjsmrazor.dswa.cache.json
 D:\Fil\Web\BackEnd\Net.Business.Services\obj\Release\net6.0\rjsmcshtml.dswa.cache.json

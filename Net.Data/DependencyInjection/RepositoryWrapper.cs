@@ -1,25 +1,25 @@
-﻿using System.Net.Http;
-using AutoMapper;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using Net.Connection;
-using Net.CrossCotting;
-using Net.Data.AppContext;
+﻿using AutoMapper;
 using Net.Data.Sap;
 using Net.Data.Web;
+using Net.Connection;
+using System.Net.Http;
+using Net.CrossCotting;
+using Net.Data.AppContext;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
 namespace Net.Data
 {
-    public class RepositoryWrapper: IRepositoryWrapper
+    public class RepositoryWrapper : IRepositoryWrapper
     {
-        private readonly IMapper _am;
-        private readonly DataContextFil _dc;
+        private readonly IMapper _mapper;
+        private readonly DataContextSeg _dbSeg;
+        private readonly DataContextSap _dbSap;
+        private readonly DataContextProfil _dbProfil;
         private readonly IConnectionSQL _repoContext;
         private readonly IConfiguration _configuration;
         private readonly IHttpClientFactory _clientFactory;
+        private readonly CompanyProviderSap _companyProviderSap;
         private readonly IOptions<ParametrosTokenConfig> _tokenConfig;
-
-
-
 
 
         // =================================================================
@@ -35,39 +35,29 @@ namespace Net.Data
         private IOpcionRepository _opcion;
         private IPerfilRepository _perfil;
         private IUsuarioRepository _usuario;
-        private IPersonaRepository _persona;
         private IDataBaseRepository _dataBase;
         private IAuditoriaRepository _auditoria;
+        private ILogisticUserRepository _logisticUser;
         private IOpcionxPerfilRepository _opcionxPerfil;
         private IParametroSistemaRepository _parametroSistema;
         private IParametroConexionRepository _parametroConexion;
 
+
         /// <summary>
         /// GESTION
         /// </summary>
-        private ISedeRepository _sede;
         private IStatusRepository _status;
         private ITiempoRepository _tiempo;
-        private IFormularioRepository _formulario;
-        private ITipoDocumentoRepository _tipoDocumento;
-        private ISerieNumeracionRepository _serieNumeracion;
 
-        /// <summary>
-        /// INVENTARIO
-        /// </summary>
-        private ILecturaRepository _lectura;
-        private IDocumentoLecturaRepository _documentoLectura;
-        private ISolicitudTrasladoRepository _solicitudTraslado;
-        private ITransferenciaStockRepositoy _transferenciaStock;
 
         /// <summary>
         /// VENTAS
         /// </summary>
         private ISopRepository _sop;
-        private IPickingListRepository _pickingList;
-        private IOrdenVentaSodimacRepository _ordenVentaSodimac;
         private IOSKCRepository _OSKC;
         private IOSKPRepository _OSKP;
+        private IPickingListRepository _pickingList;
+        private IOrdenVentaSodimacRepository _ordenVentaSodimac;
 
 
 
@@ -82,81 +72,115 @@ namespace Net.Data
         /// <summary>
         /// GESTION
         /// </summary>
+        private IUsersRepository _users;
         private IProcesoRepository _proceso;
-        private ISedeSapRepository _sedeSap;
-        private IMonedaSapRepository _monedaSap;
-        private IAlmacenSapRepository _almacenSap;
+        private ILocationRepository _location;
+        private IBranchesRepository _branches;
+        private ITaxGroupsRepository _taxGroups;
+        private IVehiculoSapRepository _vehiculo;
+        private IWarehousesRepository _warehouses;
         private ITiempoVidaRepository _tiempoVida;
-        private IImpuestoSapRepository _impuestoSap;
-        private IVehiculoSapRepository _vehiculoSap;
-        private IConductorSapRepository _conductorSap;
+        private IItemGroupsRepository _itemGroups;
+        private IConductorSapRepository _conductor;
+        private IDepartmentsRepository _departments;
         private IUnidadMedidaRepository _unidadMedida;
         private ITipoLaminadoRepository _tipoLaminado;
+        private ISalesPersonsRepository _SalesPersons;
+        private ICurrencyCodesRepository _currencyCodes;
+        private IExchangeRatesRepository _exchangeRates;
         private ILongitudAnchoRepository _longitudAncho;
-        private ITipoCambioSapRepository _tipoCambioSap;
         private IColorImpresionRepository _colorImpresion;
-        private IEmpleadoVentaSapRepository _empleadoVentaSap;
-        private IGrupoArticuloSapRepository _grupoArticuloSap;
-        private ITipoOperacionSapRepository _tipoOperacionSap;
-        private ICampoDefinidoUsuarioRepository _camposUsuario;
-        private ICondidcionPagoSapRepository _condidcionPagoSap;
-        private ISerieNumeracionSapRepository _serieNumeracionSap;
-        private ISubGrupoArticuloSapRepository _subGrupoArticuloSap;
-        private ISubGrupoArticulo2SapRepository _subGrupoArticulo2Sap;
-        private IGrupoSocioNegocioSapRepository _grupoSocioNegocioSap;
-        private ISectorSocioNegocioSapRepository _sectorSocioNegocioSap;
-        private ITablaDefinidaUsuarioSapRepository _tablaDefinidaUsuarioSap;
+        private ITipoOperacionRepository _tipoOperacion;
+        private IUserDefinedFieldsRepository _userDefinedFields;
+        private IPaymentTermsTypesRepository _paymentTermsTypes;
+        private ISubGrupoArticuloSapRepository _subGrupoArticulo;
+        private ITipoDocumentoSunatRepository _tipoDocumentoSunat;
+        private ISubGrupoArticulo2SapRepository _subGrupoArticulo2;
+        private INumeracionDocumentoRepository _numeracionDocumento;
+        private IBusinessPartnerGroupsRepository _businessPartnerGroups;
+        private IBusinessPartnerSectorsRepository _businessPartnerSectors;
+        private INumeracionDocumentoSunatRepository _numeracionDocumentoSunat;
+
 
         /// <summary>
-        /// INVENTARIO
+        /// FINZAS
         /// </summary>
-        private IArticuloSapRepository _articuloSap;
-        private IDocumentoLecturaSapRepository _documentoLecturaSap;
-        private ISolicitudTrasladoSapRepository _solicitudTrasladoSap;
-        private ITransferenciaStockSapRepository _transferenciaStockSap;
+        private ICostCentersRepository _costCenters;
+        private IChartOfAccountsRepository _chartOfAccounts;
+
+
+        /// <summary>
+        /// COMPRAS
+        /// </summary>
+        private IPurchaseRequestRepository _purchaseRequest;
+
 
         /// <summary>
         /// SOCIOS DE NEGOCIOS
         /// </summary>
-        private IDireccionSapRepository _direccionSap;
-        private ISocioNegocioSapRepository _socioNegocioSap;
-        private IPersonaContactoSapRepository _personaContactoSap;
+        private IDireccionRepository _direccion;
+        private IBusinessPartnersRepository _socioNegocio;
+        private IPersonaContactoSapRepository _personaContacto;
+
 
         /// <summary>
         /// VENTAS
         /// </summary>
-        private IEntregaSapRepository _entregaSap;
-        private IOrdenVentaSapRepository _ordenVentaSap;
-        private IFacturaVentaSapRepository _facturaVentaSap;
+        private IOrdersRepository _orders;
+        private IEntregaSapRepository _entrega;
+        private IFacturaVentaSapRepository _facturaVenta;
+
 
         /// <summary>
         /// FACTURACIÓN ELECTRÓNICA
         /// </summary>
-        IGuiaElectronicaSapRepository _guiaElectronicaSap;
-        IFacturacionElectronicaSapRepositoy _facturacionElectronicaSap;
+        IGuiaElectronicaSapRepository _guiaElectronica;
+        IFacturacionElectronicaSapRepositoy _facturacionElectronica;
+
+
+        /// <summary>
+        /// INVENTARIO
+        /// </summary>
+        private IPickingRepository _picking;
+        private IItemsRepository _articulo;
+        private ICargaSaldoInicialRepository _cargaSaldoInicial;
+        private ISolicitudTrasladoRepository _solicitudTraslado;
+        private ITransferenciaStockRepository _transferenciaStock;
+        private ITakeInventorySparePartsRepository _takeInventorySpareParts;
+        private ITakeInventoryFinishedProductsRepository _takeInventoryFinishedProducts;
+
 
         /// <summary>
         /// GESTION DE BANCOS
         /// </summary>
-        private IPagoRecibidoSapRepository _pagoRecibidoSap;
+        private IPagoRecibidoRepository _pagoRecibido;
+
 
         /// <summary>
         /// PRODUCCION
         /// </summary>
-        private IOrdenFabricacionSapRepository _ordenFabricacionSap;
+        private IOrdenFabricacionSapRepository _ordenFabricacion;
 
 
 
+        /// <summary>
+        /// RECURSOS HUMANOS
+        /// </summary>
+        private IEmployeesInfoRepository _employeesInfo;
 
 
-        public RepositoryWrapper(IConnectionSQL repoContext, IOptions<ParametrosTokenConfig> tokenConfig, IConfiguration configuration, IHttpClientFactory clientFactory, DataContextFil dc, IMapper am)
+
+        public RepositoryWrapper(IConnectionSQL repoContext, IOptions<ParametrosTokenConfig> tokenConfig, IConfiguration configuration, IHttpClientFactory clientFactory, DataContextSeg dbSeg, DataContextSap dbSap, DataContextProfil dbProfil, IMapper mapper, CompanyProviderSap companyProviderSap)
         {
-            _am = am;
-            _dc = dc;
+            _mapper = mapper;
+            _dbSeg = dbSeg;
+            _dbSap = dbSap;
+            _dbProfil = dbProfil;
             _repoContext = repoContext;
             _tokenConfig = tokenConfig;
             _configuration = configuration;
             _clientFactory = clientFactory;
+            _companyProviderSap = companyProviderSap;
         }
 
 
@@ -200,7 +224,7 @@ namespace Net.Data
             {
                 if (_perfil == null)
                 {
-                    _perfil = new PerfilRepository(_repoContext);
+                    _perfil = new PerfilRepository(_repoContext, _dbSeg);
                 }
                 return _perfil;
             }
@@ -211,20 +235,9 @@ namespace Net.Data
             {
                 if (_usuario == null)
                 {
-                    _usuario = new UsuarioRepository(_repoContext, _configuration, _tokenConfig);
+                    _usuario = new UsuarioRepository(_repoContext, _configuration, _tokenConfig, _dbSap, _dbSeg, _companyProviderSap);
                 }
                 return _usuario;
-            }
-        }
-        public IPersonaRepository Persona
-        {
-            get
-            {
-                if (_persona == null)
-                {
-                    _persona = new PersonaRepository(_repoContext);
-                }
-                return _persona;
             }
         }
         public IDataBaseRepository DataBase
@@ -247,6 +260,17 @@ namespace Net.Data
                     _auditoria = new AuditoriaRepository(_repoContext);
                 }
                 return _auditoria;
+            }
+        }
+        public ILogisticUserRepository LogisticUser
+        {
+            get
+            {
+                if (_logisticUser == null)
+                {
+                    _logisticUser = new LogisticUserRepository(_repoContext, _dbSeg, _mapper);
+                }
+                return _logisticUser;
             }
         }
         public IOpcionxPerfilRepository OpcionxPerfil
@@ -286,17 +310,6 @@ namespace Net.Data
         /// <summary>
         /// GESTIÓN
         /// </summary>
-        public ISedeRepository Sede
-        {
-            get
-            {
-                if (_sede == null)
-                {
-                    _sede = new SedeRepository(_repoContext);
-                }
-                return _sede;
-            }
-        }
         public IStatusRepository Status
         {
             get
@@ -319,88 +332,21 @@ namespace Net.Data
                 return _tiempo;
             }
         }
-        public IFormularioRepository Formulario
-        {
-            get
-            {
-                if (_formulario == null)
-                {
-                    _formulario = new FormularioRepository(_repoContext);
-                }
-                return _formulario;
-            }
-        }
-        public ITipoDocumentoRepository TipoDocumento
-        {
-            get
-            {
-                if (_tipoDocumento == null)
-                {
-                    _tipoDocumento = new TipoDocumentoRepository(_repoContext);
-                }
-                return _tipoDocumento;
-            }
-        }
-        public ISerieNumeracionRepository SerieNumeracion
-        {
-            get
-            {
-                if (_serieNumeracion == null)
-                {
-                    _serieNumeracion = new SerieNumeracionRepository(_repoContext);
-                }
-                return _serieNumeracion;
-            }
-        }
 
         /// <summary>
         /// INVENTARIO
         /// </summary>
-        public ILecturaRepository Lectura
-        {
-            get
-            {
-                if (_lectura == null)
-                {
-                    _lectura = new LecturaRepository(_repoContext);
-                }
-                return _lectura;
-            }
-        }
-        public IDocumentoLecturaRepository DocumentoLectura
-        {
-            get
-            {
-                if (_documentoLectura == null)
-                {
-                    _documentoLectura = new DocumentoLecturaRepository(_repoContext);
-                }
-                return _documentoLectura;
-            }
-        }
         public ISolicitudTrasladoRepository SolicitudTraslado
         {
             get
             {
                 if (_solicitudTraslado == null)
                 {
-                    _solicitudTraslado = new SolicitudTrasladoRepository(_repoContext, _configuration);
+                    _solicitudTraslado = new SolicitudTrasladoRepository(_repoContext, _configuration, _dbSap, _companyProviderSap);
                 }
                 return _solicitudTraslado;
             }
         }
-        public ITransferenciaStockRepositoy TransferenciaStock
-        {
-            get
-            {
-                if (_transferenciaStock == null)
-                {
-                    _transferenciaStock = new TransferenciaStockRepositoy(_repoContext, _configuration);
-                }
-                return _transferenciaStock;
-            }
-        }
-
         /// <summary>
         /// VENTAS
         /// </summary>
@@ -451,37 +397,59 @@ namespace Net.Data
         /// <summary>
         /// GESTION
         /// </summary>
-        public ISedeSapRepository SedeSap
+        public IUsersRepository Users
         {
             get
             {
-                if (_sedeSap == null)
+                if (_users == null)
                 {
-                    _sedeSap = new SedeSapRepository(_repoContext, _configuration);
+                    _users = new UsersRepository(_repoContext, _dbSap);
                 }
-                return _sedeSap;
+                return _users;
             }
         }
-        public IMonedaSapRepository MonedaSap
+        public IProcesoRepository Proceso
         {
             get
             {
-                if (_monedaSap == null)
+                if (_proceso == null)
                 {
-                    _monedaSap = new MonedaSapRepository(_repoContext, _configuration);
+                    _proceso = new ProcesoRepository(_repoContext, _dbSap);
                 }
-                return _monedaSap;
+                return _proceso;
             }
         }
-        public IAlmacenSapRepository AlmacenSap
+        public ILocationRepository Location
         {
             get
             {
-                if (_almacenSap == null)
+                if (_location == null)
                 {
-                    _almacenSap = new AlmacenSapRepository(_repoContext, _configuration);
+                    _location = new LocationRepository(_repoContext, _dbSap);
                 }
-                return _almacenSap;
+                return _location;
+            }
+        }
+        public IBranchesRepository Branches
+        {
+            get
+            {
+                if (_branches == null)
+                {
+                    _branches = new BranchesRepository(_repoContext, _dbSap);
+                }
+                return _branches;
+            }
+        }
+        public IItemGroupsRepository ItemGroups
+        {
+            get
+            {
+                if (_itemGroups == null)
+                {
+                    _itemGroups = new ItemGroupsRepository(_repoContext, _dbSap);
+                }
+                return _itemGroups;
             }
         }
         public ITiempoVidaRepository TiempoVida
@@ -490,42 +458,64 @@ namespace Net.Data
             {
                 if (_tiempoVida == null)
                 {
-                    _tiempoVida = new TiempoVidaRepository(_repoContext, _dc);
+                    _tiempoVida = new TiempoVidaRepository(_repoContext, _dbSap);
                 }
                 return _tiempoVida;
             }
         }
-        public IImpuestoSapRepository ImpuestoSap
+        public ITaxGroupsRepository TaxGroups
         {
             get
             {
-                if (_impuestoSap == null)
+                if (_taxGroups == null)
                 {
-                    _impuestoSap = new ImpuestoSapRepository(_repoContext, _dc);
+                    _taxGroups = new TaxGroupsRepository(_repoContext, _dbSap);
                 }
-                return _impuestoSap;
+                return _taxGroups;
             }
         }
-        public IVehiculoSapRepository VehiculoSap
+        public IVehiculoSapRepository Vehiculo
         {
             get
             {
-                if (_vehiculoSap == null)
+                if (_vehiculo == null)
                 {
-                    _vehiculoSap = new VehiculoSapRepository(_repoContext, _configuration);
+                    _vehiculo = new VehiculoSapRepository(_repoContext, _configuration);
                 }
-                return _vehiculoSap;
+                return _vehiculo;
             }
         }
-        public IConductorSapRepository ConductorSap
+        public IWarehousesRepository Warehouses
         {
             get
             {
-                if (_conductorSap == null)
+                if (_warehouses == null)
                 {
-                    _conductorSap = new ConductorSapRepository(_repoContext, _configuration);
+                    _warehouses = new WarehousesRepository(_repoContext, _dbSap);
                 }
-                return _conductorSap;
+                return _warehouses;
+            }
+        }
+        public IConductorSapRepository Conductor
+        {
+            get
+            {
+                if (_conductor == null)
+                {
+                    _conductor = new ConductorSapRepository(_repoContext, _configuration);
+                }
+                return _conductor;
+            }
+        }
+        public IDepartmentsRepository Departments
+        {
+            get
+            {
+                if (_departments == null)
+                {
+                    _departments = new DepartmentsRepository(_repoContext, _dbSap);
+                }
+                return _departments;
             }
         }
         public IUnidadMedidaRepository UnidadMedida
@@ -534,7 +524,7 @@ namespace Net.Data
             {
                 if (_unidadMedida == null)
                 {
-                    _unidadMedida = new UnidadMedidaRepository(_repoContext, _dc);
+                    _unidadMedida = new UnidadMedidaRepository(_repoContext, _dbSap);
                 }
                 return _unidadMedida;
             }
@@ -545,9 +535,31 @@ namespace Net.Data
             {
                 if (_tipoLaminado == null)
                 {
-                    _tipoLaminado = new TipoLaminadoRepository(_repoContext, _dc);
+                    _tipoLaminado = new TipoLaminadoRepository(_repoContext, _dbSap);
                 }
                 return _tipoLaminado;
+            }
+        }
+        public ICurrencyCodesRepository CurrencyCodes
+        {
+            get
+            {
+                if (_currencyCodes == null)
+                {
+                    _currencyCodes = new CurrencyCodesRepository(_repoContext, _dbSap);
+                }
+                return _currencyCodes;
+            }
+        }
+        public IExchangeRatesRepository ExchangeRates
+        {
+            get
+            {
+                if (_exchangeRates == null)
+                {
+                    _exchangeRates = new ExchangeRatesRepository(_repoContext, _dbSap);
+                }
+                return _exchangeRates;
             }
         }
         public ILongitudAnchoRepository LongitudAncho
@@ -556,20 +568,20 @@ namespace Net.Data
             {
                 if (_longitudAncho == null)
                 {
-                    _longitudAncho = new LongitudAnchoRepository(_repoContext, _dc);
+                    _longitudAncho = new LongitudAnchoRepository(_repoContext, _dbSap);
                 }
                 return _longitudAncho;
             }
         }
-        public ITipoCambioSapRepository TipoCambioSap
+        public ISalesPersonsRepository SalesPersons
         {
             get
             {
-                if (_tipoCambioSap == null)
+                if (_SalesPersons == null)
                 {
-                    _tipoCambioSap = new TipoCambioSapRepository(_repoContext, _dc);
+                    _SalesPersons = new SalesPersonsRepository(_repoContext, _dbSap);
                 }
-                return _tipoCambioSap;
+                return _SalesPersons;
             }
         }
         public IColorImpresionRepository ColorImpresion
@@ -578,263 +590,243 @@ namespace Net.Data
             {
                 if (_colorImpresion == null)
                 {
-                    _colorImpresion = new ColorImpresionRepository(_repoContext, _dc);
+                    _colorImpresion = new ColorImpresionRepository(_repoContext, _dbSap);
                 }
                 return _colorImpresion;
             }
         }
-        public IEmpleadoVentaSapRepository EmpleadoVentaSap
+        public ITipoOperacionRepository TipoOperacion
         {
             get
             {
-                if (_empleadoVentaSap == null)
+                if (_tipoOperacion == null)
                 {
-                    _empleadoVentaSap = new EmpleadoVentaSapRepository(_repoContext, _dc);
+                    _tipoOperacion = new TipoOperacionRepository(_repoContext, _dbSap);
                 }
-                return _empleadoVentaSap;
+                return _tipoOperacion;
             }
         }
-        public IGrupoArticuloSapRepository GrupoArticuloSap
+        public IUserDefinedFieldsRepository UserDefinedFields
         {
             get
             {
-                if (_grupoArticuloSap == null)
+                if (_userDefinedFields == null)
                 {
-                    _grupoArticuloSap = new GrupoArticuloSapRepository(_repoContext, _dc);
+                    _userDefinedFields = new UserDefinedFieldsRepository(_repoContext, _dbSap);
                 }
-                return _grupoArticuloSap;
+                return _userDefinedFields;
             }
         }
-        public ITipoOperacionSapRepository TipoOperacionSap
+        public IPaymentTermsTypesRepository PaymentTermsTypes
         {
             get
             {
-                if (_tipoOperacionSap == null)
+                if (_paymentTermsTypes == null)
                 {
-                    _tipoOperacionSap = new TipoOperacionSapRepository(_repoContext, _dc);
+                    _paymentTermsTypes = new PaymentTermsTypesRepository(_repoContext, _dbSap);
                 }
-                return _tipoOperacionSap;
+                return _paymentTermsTypes;
             }
         }
-        public ICampoDefinidoUsuarioRepository CampoDefinidoUsuario
+        public ISubGrupoArticuloSapRepository SubGrupoArticulo
         {
             get
             {
-                if (_camposUsuario == null)
+                if (_subGrupoArticulo == null)
                 {
-                    _camposUsuario = new CampoDefinidoUsuarioRepository(_repoContext, _dc);
+                    _subGrupoArticulo = new SubGrupoArticuloSapRepository(_repoContext, _dbSap);
                 }
-                return _camposUsuario;
+                return _subGrupoArticulo;
             }
         }
-        public ICondidcionPagoSapRepository CondidcionPagoSap
+        public ITipoDocumentoSunatRepository TipoDocumentoSunat
         {
             get
             {
-                if (_condidcionPagoSap == null)
+                if (_tipoDocumentoSunat == null)
                 {
-                    _condidcionPagoSap = new CondidcionPagoSapRepository(_repoContext, _configuration);
+                    _tipoDocumentoSunat = new TipoDocumentoSunatRepository(_repoContext, _dbSap);
                 }
-                return _condidcionPagoSap;
+                return _tipoDocumentoSunat;
             }
         }
-        public ISerieNumeracionSapRepository SerieNumeracionSap
+        public ISubGrupoArticulo2SapRepository SubGrupoArticulo2
         {
             get
             {
-                if (_serieNumeracionSap == null)
+                if (_subGrupoArticulo2 == null)
                 {
-                    _serieNumeracionSap = new SerieNumeracionSapRepository(_repoContext, _configuration);
+                    _subGrupoArticulo2 = new SubGrupoArticulo2SapRepository(_repoContext, _dbSap);
                 }
-                return _serieNumeracionSap;
+                return _subGrupoArticulo2;
             }
         }
-        public ISubGrupoArticuloSapRepository SubGrupoArticuloSap
+        public INumeracionDocumentoRepository NumeracionDocumento
         {
             get
             {
-                if (_subGrupoArticuloSap == null)
+                if (_numeracionDocumento == null)
                 {
-                    _subGrupoArticuloSap = new SubGrupoArticuloSapRepository(_repoContext, _dc);
+                    _numeracionDocumento = new NumeracionDocumentoRepository(_repoContext, _dbSap, _mapper);
                 }
-                return _subGrupoArticuloSap;
+                return _numeracionDocumento;
             }
         }
-        public ISubGrupoArticulo2SapRepository SubGrupoArticulo2Sap
+        public IBusinessPartnerGroupsRepository BusinessPartnerGroups
         {
             get
             {
-                if (_subGrupoArticulo2Sap == null)
+                if (_businessPartnerGroups == null)
                 {
-                    _subGrupoArticulo2Sap = new SubGrupoArticulo2SapRepository(_repoContext, _dc);
+                    _businessPartnerGroups = new BusinessPartnerGroupsRepository(_repoContext, _dbSap);
                 }
-                return _subGrupoArticulo2Sap;
+                return _businessPartnerGroups;
             }
         }
-        public IGrupoSocioNegocioSapRepository GrupoSocioNegocioSap
+        public IBusinessPartnerSectorsRepository BusinessPartnerSectors
         {
             get
             {
-                if (_grupoSocioNegocioSap == null)
+                if (_businessPartnerSectors == null)
                 {
-                    _grupoSocioNegocioSap = new GrupoSocioNegocioSapRepository(_repoContext, _configuration);
+                    _businessPartnerSectors = new BusinessPartnerSectorsRepository(_repoContext, _configuration);
                 }
-                return _grupoSocioNegocioSap;
+                return _businessPartnerSectors;
             }
         }
-        public ISectorSocioNegocioSapRepository SectorSocioNegocioSap
+        public INumeracionDocumentoSunatRepository NumeracionDocumentoSunat
         {
             get
             {
-                if (_sectorSocioNegocioSap == null)
+                if (_numeracionDocumentoSunat == null)
                 {
-                    _sectorSocioNegocioSap = new SectorSocioNegocioSapRepository(_repoContext, _configuration);
+                    _numeracionDocumentoSunat = new NumeracionDocumentoSunatRepository(_repoContext, _dbSap);
                 }
-                return _sectorSocioNegocioSap;
-            }
-        }
-        public ITablaDefinidaUsuarioSapRepository TablaDefinidaUsuarioSap        {
-            get
-            {
-                if (_tablaDefinidaUsuarioSap == null)
-                {
-                    _tablaDefinidaUsuarioSap = new TablaDefinidaUsuarioSapRepository(_repoContext, _configuration);
-                }
-                return _tablaDefinidaUsuarioSap;
-            }
-        }
-        public IProcesoRepository Proceso
-        {
-            get
-            {
-                if (_proceso == null)
-                {
-                    _proceso = new ProcesoRepository(_repoContext, _dc);
-                }
-                return _proceso;
+                return _numeracionDocumentoSunat;
             }
         }
 
+
+
         /// <summary>
-        /// INVENTARIO
+        /// FINANZAS
         /// </summary>
-        public IArticuloSapRepository ArticuloSap
+        public ICostCentersRepository CostCenters
         {
             get
             {
-                if (_articuloSap == null)
+                if (_costCenters == null)
                 {
-                    _articuloSap = new ArticuloSapRepository(_repoContext, _configuration);
+                    _costCenters = new CostCentersRepository(_repoContext, _dbSap);
                 }
-                return _articuloSap;
+                return _costCenters;
             }
         }
-        public IDocumentoLecturaSapRepository DocumentoLecturaSap
+        public IChartOfAccountsRepository ChartOfAccounts
         {
             get
             {
-                if (_documentoLecturaSap == null)
+                if (_chartOfAccounts == null)
                 {
-                    _documentoLecturaSap = new DocumentoLecturaSapRepository(_repoContext, _configuration);
+                    _chartOfAccounts = new ChartOfAccountsRepository(_repoContext, _dbSap);
                 }
-                return _documentoLecturaSap;
+                return _chartOfAccounts;
             }
         }
-        public ISolicitudTrasladoSapRepository SolicitudTrasladoSap
-        {
-            get
-            {
-                if (_solicitudTrasladoSap == null)
-                {
-                    _solicitudTrasladoSap = new SolicitudTrasladoSapRepository(_repoContext, _configuration);
-                }
-                return _solicitudTrasladoSap;
-            }
-        }
-        public ITransferenciaStockSapRepository TransferenciaStockSap
-        {
-            get
-            {
-                if (_transferenciaStockSap == null)
-                {
-                    _transferenciaStockSap = new TransferenciaStockSapRepository(_repoContext, _configuration);
-                }
-                return _transferenciaStockSap;
-            }
-        }
+
+
 
         /// <summary>
         /// SOCIOS DE NEGOCIOS
         /// </summary>
-        public IDireccionSapRepository DireccionSap
+        public IPurchaseRequestRepository PurchaseRequest
         {
             get
             {
-                if (_direccionSap == null)
+                if (_purchaseRequest == null)
                 {
-                    _direccionSap = new DireccionSapRepository(_repoContext, _configuration);
+                    _purchaseRequest = new PurchaseRequestRepository(_repoContext, _dbSap, _companyProviderSap);
                 }
-                return _direccionSap;
+                return _purchaseRequest;
             }
         }
-        public ISocioNegocioSapRepository SocioNegocioSap
+
+
+        /// <summary>
+        /// SOCIOS DE NEGOCIOS
+        /// </summary>
+        public IDireccionRepository Direccion
         {
             get
             {
-                if (_socioNegocioSap == null)
+                if (_direccion == null)
                 {
-                    _socioNegocioSap = new SocioNegocioSapRepository(_repoContext, _configuration);
+                    _direccion = new DireccionRepository(_repoContext, _dbSap);
                 }
-                return _socioNegocioSap;
+                return _direccion;
             }
         }
-        public IPersonaContactoSapRepository PersonaContactoSap
+        public IBusinessPartnersRepository SocioNegocio
         {
             get
             {
-                if (_personaContactoSap == null)
+                if (_socioNegocio == null)
                 {
-                    _personaContactoSap = new PersonaContactoSapRepository(_repoContext, _configuration);
+                    _socioNegocio = new BusinessPartnersRepository(_repoContext, _configuration, _dbSap);
                 }
-                return _personaContactoSap;
+                return _socioNegocio;
             }
         }
+        public IPersonaContactoSapRepository PersonaContacto
+        {
+            get
+            {
+                if (_personaContacto == null)
+                {
+                    _personaContacto = new PersonaContactoSapRepository(_repoContext, _configuration);
+                }
+                return _personaContacto;
+            }
+        }
+
+
 
         /// <summary>
         /// VENTAS
         /// </summary>
+
+        public IOrdersRepository Orders
+        {
+            get
+            {
+                if (_orders == null)
+                {
+                    _orders = new OrdersRepository(_repoContext, _configuration, _dbSap, _companyProviderSap);
+                }
+                return _orders;
+            }
+        }
+        public IEntregaSapRepository Entrega
+        {
+            get
+            {
+                if (_entrega == null)
+                {
+                    _entrega = new EntregaSapRepository(_repoContext, _configuration);
+                }
+                return _entrega;
+            }
+        }
         
-        public IEntregaSapRepository EntregaSap
+        public IFacturaVentaSapRepository FacturaVenta
         {
             get
             {
-                if (_entregaSap == null)
+                if (_facturaVenta == null)
                 {
-                    _entregaSap = new EntregaSapRepository(_repoContext, _configuration);
+                    _facturaVenta = new FacturaVentaSapRepository(_repoContext, _configuration);
                 }
-                return _entregaSap;
-            }
-        }
-        public IOrdenVentaSapRepository OrdenVentaSap
-        {
-            get
-            {
-                if (_ordenVentaSap == null)
-                {
-                    _ordenVentaSap = new OrdenVentaSapRepository(_repoContext, _configuration);
-                }
-                return _ordenVentaSap;
-            }
-        }
-        public IFacturaVentaSapRepository FacturaVentaSap
-        {
-            get
-            {
-                if (_facturaVentaSap == null)
-                {
-                    _facturaVentaSap = new FacturaVentaSapRepository(_repoContext, _configuration);
-                }
-                return _facturaVentaSap;
+                return _facturaVenta;
             }
         }
         public IOSKCRepository OSKC
@@ -843,7 +835,7 @@ namespace Net.Data
             {
                 if (_OSKC == null)
                 {
-                    _OSKC = new OSKCRepository(_repoContext, _configuration, _dc, _am);
+                    _OSKC = new OSKCRepository(_repoContext, _configuration, _dbSap, _mapper, _companyProviderSap);
                 }
                 return _OSKC;
             }
@@ -854,65 +846,161 @@ namespace Net.Data
             {
                 if (_OSKP == null)
                 {
-                    _OSKP = new OSKPRepository(_repoContext, _configuration, _dc, _am);
+                    _OSKP = new OSKPRepository(_repoContext, _configuration, _dbSap, _mapper, _companyProviderSap);
                 }
                 return _OSKP;
             }
         }
 
+
+
         /// <summary>
         /// FACTURACIÓN ELECTRÓNICA
         /// </summary>
-        public IFacturacionElectronicaSapRepositoy FacturacionElectronicaSap
+        public IFacturacionElectronicaSapRepositoy FacturacionElectronica
         {
             get
             {
-                if (_facturacionElectronicaSap == null)
+                if (_facturacionElectronica == null)
                 {
-                    _facturacionElectronicaSap = new FacturacionElectronicaSapRepositoy(_repoContext, _configuration);
+                    _facturacionElectronica = new FacturacionElectronicaSapRepositoy(_repoContext, _configuration);
                 }
-                return _facturacionElectronicaSap;
+                return _facturacionElectronica;
             }
         }
-        public IGuiaElectronicaSapRepository GuiaElectronicaSap
+        public IGuiaElectronicaSapRepository GuiaElectronica
         {
             get
             {
-                if (_guiaElectronicaSap == null)
+                if (_guiaElectronica == null)
                 {
-                    _guiaElectronicaSap = new GuiaElectronicaSapRepository(_repoContext, _configuration);
+                    _guiaElectronica = new GuiaElectronicaSapRepository(_repoContext, _configuration);
                 }
-                return _guiaElectronicaSap;
+                return _guiaElectronica;
             }
         }
+
+
+
+        /// <summary>
+        /// INVENTARIO
+        /// </summary>
+        public IPickingRepository Picking
+        {
+            get
+            {
+                if (_picking == null)
+                {
+                    _picking = new PickingRepository(_repoContext, _configuration, _dbSap, _dbProfil, _companyProviderSap);
+                }
+                return _picking;
+            }
+        }
+        public IItemsRepository Articulo
+        {
+            get
+            {
+                if (_articulo == null)
+                {
+                    _articulo = new ItemsRepository(_repoContext, _configuration, _dbSap, _companyProviderSap);
+                }
+                return _articulo;
+            }
+        }
+        public ICargaSaldoInicialRepository CargaSaldoInicial
+        {
+            get
+            {
+                if (_cargaSaldoInicial == null)
+                {
+                    _cargaSaldoInicial = new CargaSaldoInicialRepository(_repoContext, _configuration, _dbSap, _mapper);
+                }
+                return _cargaSaldoInicial;
+            }
+        }
+        public ITransferenciaStockRepository TransferenciaStock
+        {
+            get
+            {
+                if (_transferenciaStock == null)
+                {
+                    _transferenciaStock = new TransferenciaStockRepository(_repoContext, _configuration, _dbSap, _mapper, _companyProviderSap);
+                }
+                return _transferenciaStock;
+            }
+        }
+        public ITakeInventorySparePartsRepository TakeInventorySpareParts
+        {
+            get
+            {
+                if (_takeInventorySpareParts == null)
+                {
+                    _takeInventorySpareParts = new TakeInventorySparePartsRepository(_repoContext, _configuration, _dbSeg, _dbSap, _companyProviderSap);
+                }
+                return _takeInventorySpareParts;
+            }
+        }
+        public ITakeInventoryFinishedProductsRepository TakeInventoryFinishedProducts
+        {
+            get
+            {
+                if (_takeInventoryFinishedProducts == null)
+                {
+                    _takeInventoryFinishedProducts = new TakeInventoryFinishedProductsRepository(_repoContext, _configuration, _dbSeg, _dbSap, _companyProviderSap);
+                }
+                return _takeInventoryFinishedProducts;
+            }
+        }
+
+
 
         /// <summary>
         /// GESTION DE BANCOS
         /// </summary>
-        public IPagoRecibidoSapRepository PagoRecibidoSap
+        public IPagoRecibidoRepository PagoRecibido
         {
             get
             {
-                if (_pagoRecibidoSap == null)
+                if (_pagoRecibido == null)
                 {
-                    _pagoRecibidoSap = new PagoRecibidoRepository(_repoContext, _configuration);
+                    _pagoRecibido = new PagoRecibidoRepository(_repoContext, _configuration);
                 }
-                return _pagoRecibidoSap;
+                return _pagoRecibido;
             }
         }
+
+
 
         /// <summary>
         /// PRODUCCION
         /// </summary>
-        public IOrdenFabricacionSapRepository OrdenFabricacionSap
+        public IOrdenFabricacionSapRepository OrdenFabricacion
         {
             get
             {
-                if (_ordenFabricacionSap == null)
+                if (_ordenFabricacion == null)
                 {
-                    _ordenFabricacionSap = new OrdenFabricacionSapRepository(_repoContext, _configuration);
+                    _ordenFabricacion = new OrdenFabricacionSapRepository(_repoContext, _configuration);
                 }
-                return _ordenFabricacionSap;
+                return _ordenFabricacion;
+            }
+        }
+
+
+
+
+        /// <summary>
+        /// PRODUCCION
+        /// </summary>
+        public IEmployeesInfoRepository EmployeesInfo
+        {
+            get
+            {
+                if (_employeesInfo == null)
+                {
+                    _employeesInfo = new EmployeesInfoRepository(_repoContext, _dbSap);
+                }
+                return _employeesInfo;
             }
         }
     }

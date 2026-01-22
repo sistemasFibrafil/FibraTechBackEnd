@@ -17,9 +17,9 @@ namespace Net.Data
         IOpcionRepository Opcion { get; }
         IPerfilRepository Perfil { get; }
         IUsuarioRepository Usuario { get; }
-        IPersonaRepository Persona { get; }
         IDataBaseRepository DataBase { get; }
         IAuditoriaRepository Auditoria { get; }
+        ILogisticUserRepository LogisticUser { get; }
         IOpcionxPerfilRepository OpcionxPerfil { get; }
         IParametroSistemaRepository ParametroSistema { get; }
         IParametroConexionRepository ParametroConexion { get; }
@@ -27,21 +27,9 @@ namespace Net.Data
         /// <summary>
         /// GESTION
         /// </summary>
-        ISedeRepository Sede { get; }
         IStatusRepository Status { get; }
         ITiempoRepository Tiempo { get; }
-        IFormularioRepository Formulario { get; }
-        ITipoDocumentoRepository TipoDocumento { get; }
-        ISerieNumeracionRepository SerieNumeracion { get; }
-
-        /// <summary>
-        /// INVENTARIO
-        /// </summary>
-        ILecturaRepository Lectura { get; }
-        IDocumentoLecturaRepository DocumentoLectura { get; }
-        ISolicitudTrasladoRepository SolicitudTraslado { get; }
-        ITransferenciaStockRepositoy TransferenciaStock { get; }
-
+        
         /// <summary>
         /// VENTAS
         /// </summary>
@@ -62,71 +50,109 @@ namespace Net.Data
         /// <summary>
         /// GESTION
         /// </summary>
+        IUsersRepository Users { get; }
         IProcesoRepository Proceso { get; }
-        ISedeSapRepository SedeSap { get; }
-        IMonedaSapRepository MonedaSap { get; }
+        ILocationRepository Location { get; }
+        IBranchesRepository Branches { get; }
+        ITaxGroupsRepository TaxGroups { get; }
+        IVehiculoSapRepository Vehiculo { get; }
+        IWarehousesRepository Warehouses { get; }
         ITiempoVidaRepository TiempoVida { get; }
-        IAlmacenSapRepository AlmacenSap { get; }
-        IImpuestoSapRepository ImpuestoSap { get; }
-        IVehiculoSapRepository VehiculoSap { get; }
+        IItemGroupsRepository ItemGroups { get; }
+        IConductorSapRepository Conductor { get; }
+        IDepartmentsRepository Departments { get; }
         IUnidadMedidaRepository UnidadMedida { get; }
-        IConductorSapRepository ConductorSap { get; }
         ITipoLaminadoRepository TipoLaminado { get; }
+        ISalesPersonsRepository SalesPersons { get; }
+        ICurrencyCodesRepository CurrencyCodes { get; }
+        IExchangeRatesRepository ExchangeRates { get; }
         ILongitudAnchoRepository LongitudAncho { get; }
-        ITipoCambioSapRepository TipoCambioSap { get; }
         IColorImpresionRepository ColorImpresion { get; }
-        IEmpleadoVentaSapRepository EmpleadoVentaSap { get; }
-        IGrupoArticuloSapRepository GrupoArticuloSap { get; }
-        ITipoOperacionSapRepository TipoOperacionSap { get; }
-        ICondidcionPagoSapRepository CondidcionPagoSap { get; }
-        ISerieNumeracionSapRepository SerieNumeracionSap { get; }
-        ISubGrupoArticuloSapRepository SubGrupoArticuloSap { get; }
-        ISubGrupoArticulo2SapRepository SubGrupoArticulo2Sap { get; }
-        IGrupoSocioNegocioSapRepository GrupoSocioNegocioSap { get; }
-        ISectorSocioNegocioSapRepository SectorSocioNegocioSap { get; }
-        ITablaDefinidaUsuarioSapRepository TablaDefinidaUsuarioSap { get; }
-        ICampoDefinidoUsuarioRepository CampoDefinidoUsuario { get; }
-        
+        ITipoOperacionRepository TipoOperacion { get; }
+        IUserDefinedFieldsRepository UserDefinedFields { get; }
+        IPaymentTermsTypesRepository PaymentTermsTypes { get; }
+        ISubGrupoArticuloSapRepository SubGrupoArticulo { get; }
+        ITipoDocumentoSunatRepository TipoDocumentoSunat { get; }
+        ISubGrupoArticulo2SapRepository SubGrupoArticulo2 { get; }
+        INumeracionDocumentoRepository NumeracionDocumento { get; }
+        IBusinessPartnerGroupsRepository BusinessPartnerGroups { get; }
+        IBusinessPartnerSectorsRepository BusinessPartnerSectors { get; }
+        INumeracionDocumentoSunatRepository NumeracionDocumentoSunat { get; }
+
+
 
         /// <summary>
-        /// INVENTARIO
+        /// FINZAS
         /// </summary>
-        IArticuloSapRepository ArticuloSap { get; }
-        IDocumentoLecturaSapRepository DocumentoLecturaSap { get; }
-        ISolicitudTrasladoSapRepository SolicitudTrasladoSap { get; }
-        ITransferenciaStockSapRepository TransferenciaStockSap { get; }
+        ICostCentersRepository CostCenters { get; }
+        IChartOfAccountsRepository ChartOfAccounts { get; }
+
+
+
+        /// <summary>
+        /// COMPRAS
+        /// </summary>
+        IPurchaseRequestRepository PurchaseRequest { get; }
+
+
 
         /// <summary>
         /// SOCIOS DE NEGOCIOS
         /// </summary>
-        IDireccionSapRepository DireccionSap { get; }
-        ISocioNegocioSapRepository SocioNegocioSap { get; }
-        IPersonaContactoSapRepository PersonaContactoSap { get; }
+        IDireccionRepository Direccion { get; }
+        IBusinessPartnersRepository SocioNegocio { get; }
+        IPersonaContactoSapRepository PersonaContacto { get; }
+
 
         /// <summary>
         /// VENTAS
         /// </summary>
-        IEntregaSapRepository EntregaSap { get; }
-        IOrdenVentaSapRepository OrdenVentaSap { get; }
-        IFacturaVentaSapRepository FacturaVentaSap { get; }
+        IOrdersRepository Orders { get; }
+        IEntregaSapRepository Entrega { get; }
+        IFacturaVentaSapRepository FacturaVenta { get; }
         IOSKCRepository OSKC { get; }
         IOSKPRepository OSKP { get; }
+
 
 
         /// <summary>
         /// FACTURACIÓN ELECTRÓNICA
         /// </summary>
-        IGuiaElectronicaSapRepository GuiaElectronicaSap { get; }
-        IFacturacionElectronicaSapRepositoy FacturacionElectronicaSap { get; }
+        IGuiaElectronicaSapRepository GuiaElectronica { get; }
+        IFacturacionElectronicaSapRepositoy FacturacionElectronica { get; }
+
+
+
+        /// <summary>
+        /// INVENTARIO
+        /// </summary>
+        IPickingRepository Picking { get; }
+        IItemsRepository Articulo { get; }
+        ICargaSaldoInicialRepository CargaSaldoInicial { get; }
+        ISolicitudTrasladoRepository SolicitudTraslado { get; }
+        ITransferenciaStockRepository TransferenciaStock { get; }
+        ITakeInventorySparePartsRepository TakeInventorySpareParts { get; }
+        ITakeInventoryFinishedProductsRepository TakeInventoryFinishedProducts { get; }
+        
+
 
         /// <summary>
         /// GESTION DE BANCOS
         /// </summary>
-        IPagoRecibidoSapRepository PagoRecibidoSap { get; }
+        IPagoRecibidoRepository PagoRecibido { get; }
+
+
 
         /// <summary>
         /// PRODUCCION
         /// </summary>
-        IOrdenFabricacionSapRepository OrdenFabricacionSap { get; }
+        IOrdenFabricacionSapRepository OrdenFabricacion { get; }
+
+
+
+        /// <summary>
+        /// RECURSOS HUMANOS
+        /// </summary>
+        IEmployeesInfoRepository EmployeesInfo { get; }
     }
 }

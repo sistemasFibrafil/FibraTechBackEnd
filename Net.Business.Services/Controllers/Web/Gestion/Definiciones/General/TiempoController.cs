@@ -11,7 +11,7 @@ namespace Net.Business.Services.Controllers.Web.Gestion.Definiciones.General
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ApiExplorerSettings(GroupName = "ApiFibrafil")]
     [Authorize(AuthenticationSchemes = "Bearer")]
-    public class TiempoController : Controller
+    public class TiempoController : ControllerBase
     {
         private readonly IRepositoryWrapper _repository;
         public TiempoController(IRepositoryWrapper repository)
