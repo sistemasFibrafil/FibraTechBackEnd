@@ -15,7 +15,7 @@ namespace Net.Data.Web
         private readonly string _aplicacionName;
         private readonly Regex regex = new Regex(@"<(\w+)>.*");
 
-        private readonly DataContextSeg _dbSeg;
+        private readonly DataContextSeguridad _dbSeg;
 
         const string DB_ESQUEMA = "";
         const string SP_GET = DB_ESQUEMA + "SEG_GetPerfilAll";
@@ -24,7 +24,7 @@ namespace Net.Data.Web
         const string SP_DELETE = DB_ESQUEMA + "SEG_SetPerfilDelete";
         const string SP_UPDATE = DB_ESQUEMA + "SEG_SetPerfilUpdate";
 
-        public PerfilRepository(IConnectionSQL context, DataContextSeg dbSeg)
+        public PerfilRepository(IConnectionSQL context, DataContextSeguridad dbSeg)
             : base(context)
         {
             _dbSeg = dbSeg;

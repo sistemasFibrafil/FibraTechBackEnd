@@ -1,6 +1,8 @@
 ﻿using System;
-using Net.Business.Entities;
+using System.Globalization;
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
+using Net.Business.Entities;
 namespace Net.CrossCotting
 {
     public static class Utilidades
@@ -158,6 +160,46 @@ namespace Net.CrossCotting
             }
 
             return newDescripcion;
+        }
+
+
+        public static string ToSapCase(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return text;
+
+            var culture = new CultureInfo("es-PE");
+
+            // separar líneas
+            var lines = text.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
+
+            if (lines.Length > 0)
+            {
+                // SAP solo formatea la primera línea
+                string firstLine = lines[0].ToLower(culture);
+                firstLine = culture.TextInfo.ToTitleCase(firstLine);
+
+                // convertir A.H. -> A.h.
+                firstLine = Regex.Replace(firstLine, @"\b([A-Z])\.([A-Z])\.",
+                    m => $"{m.Groups[1].Value}.{m.Groups[2].Value.ToLower()}.");
+
+                lines[0] = firstLine;
+            }
+
+            return string.Join(Environment.NewLine, lines);
+        }
+
+
+        public static string QuitarSaltosLinea(string texto)
+        {
+            if (string.IsNullOrEmpty(texto))
+                return texto;
+
+            return texto
+                .Replace("\r\n", " ") // Windows
+                .Replace("\n", " ")   // Linux/Unix
+                .Replace("\r", " ")   // Mac antiguo
+                .Trim();
         }
     }
 }

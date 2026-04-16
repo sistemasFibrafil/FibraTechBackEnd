@@ -7,7 +7,7 @@ namespace Net.Data.AppContext
         public AutoMapperProfileSeg()
         {
             CreateMap<LogisticUserEntity, LogisticUserCreateEntity>().ReverseMap();
-            CreateMap<LogisticUserEntity, LogisticUserEntity>().ReverseMap();
+            CreateMap<LogisticUserCreateEntity, LogisticUserEntity>().ReverseMap();
 
             CreateMap<LogisticUserPermissionEntity, LogisticUserPermissionCreateEntity>().ReverseMap();
             CreateMap<LogisticUserPermissionCreateEntity, LogisticUserPermissionEntity>().ReverseMap();

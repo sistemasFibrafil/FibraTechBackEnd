@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Net.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb87a3ebb3323beda1f33b4bb925a0247f574e7f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b186f47f311b3de253e8765aa54fd90c2302ce30")]
 [assembly: System.Reflection.AssemblyProductAttribute("Net.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Net.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

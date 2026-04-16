@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <PlatformTarget>x86</PlatformTarget>
+	  <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,8 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Sap\Administration\Definitions\Purchasing\" />
-    <Folder Include="Sap\Sales\Orders\Find\" />
+    <Folder Include="SAPBusinessOne\Administration\Definitions\Purchasing\" />
   </ItemGroup>
 
 </Project>

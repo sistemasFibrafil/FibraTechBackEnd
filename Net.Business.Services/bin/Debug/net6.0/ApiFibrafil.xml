@@ -4,54 +4,54 @@
         <name>ApiFibrafil</name>
     </assembly>
     <members>
-        <member name="T:Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController">
+        <member name="T:Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKCController">
             <summary>
             Controlador para la Configuración de SKU de SAP (@FIB_OSKC)
             </summary>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController.SetCreate(Net.Business.DTO.Sap.OSKCCreateRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKCController.SetCreate(Net.Business.DTO.SAPBusinessOne.OSKCCreateRequestDto)">
             <summary>
             Crear una nueva configuración de SKU.
             </summary>
             <param name="value">Datos de la nueva configuración.</param>
             <returns>El resultado de la transacción.</returns>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController.SetUpdate(Net.Business.DTO.Sap.OSKCUpdateRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKCController.SetUpdate(Net.Business.DTO.SAPBusinessOne.OSKCUpdateRequestDto)">
             <summary>
             Actualizar una configuración de SKU existente.
             </summary>
             <param name="value">Datos para actualizar.</param>
             <returns>Sin contenido si la operación es exitosa.</returns>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController.SetDelete(Net.Business.DTO.Sap.OSKCDeleteRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKCController.SetDelete(Net.Business.DTO.SAPBusinessOne.OSKCDeleteRequestDto)">
             <summary>
             Eliminar una configuración de SKU.
             </summary>
             <param name="value">Datos del registro a eliminar.</param>
             <returns>Sin contenido si la operación es exitosa.</returns>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController.GetListByDateRange(Net.Business.DTO.Sap.OSKCFindByDateRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKCController.GetListByDateRange(Net.Business.DTO.SAPBusinessOne.OSKCFindByDateRequestDto)">
             <summary>
             Obtener lista de configuraciones de SKU por rango de fechas.
             </summary>
             <param name="value">DTO con fecha de inicio y fin.</param>
             <returns>Lista de configuraciones.</returns>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController.GetByCode(Net.Business.DTO.Sap.OSKCFindByCodeRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKCController.GetByCode(Net.Business.DTO.SAPBusinessOne.OSKCFindByCodeRequestDto)">
             <summary>
             Obtener una configuración de SKU por su código.
             </summary>
             <param name="value">DTO con el código a buscar.</param>
             <returns>La configuración de SKU encontrada.</returns>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController.GetListByFiltro(Net.Business.DTO.Sap.OSKCFindByFiltroRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKCController.GetListByFiltro(Net.Business.DTO.SAPBusinessOne.OSKCFindByFiltroRequestDto)">
             <summary>
             Obtener lista de configuraciones de SKU por un filtro de texto.
             </summary>
             <param name="value">DTO con el texto de filtro.</param>
             <returns>Lista de configuraciones.</returns>
         </member>
-        <member name="M:Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController.GetOSKCExcel(Net.Business.DTO.Sap.OSKCFindByDateRequestDto)">
+        <member name="M:Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKCController.GetOSKCExcel(Net.Business.DTO.SAPBusinessOne.OSKCFindByDateRequestDto)">
             <summary>
             Generar y descargar un reporte de configuraciones de SKU en formato Excel.
             </summary>

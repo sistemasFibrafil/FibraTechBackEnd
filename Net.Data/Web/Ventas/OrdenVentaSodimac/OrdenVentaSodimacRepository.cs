@@ -101,7 +101,7 @@ namespace Net.Data.Web
 
                                 value.Id = (int)cmd.Parameters["@Id"].Value;
 
-                                foreach (var item in value.Item)
+                                foreach (var item in value.Lines)
                                 {
                                     item.Id = value.Id;
                                 }
@@ -112,7 +112,7 @@ namespace Net.Data.Web
                                 cmd.CommandType = CommandType.StoredProcedure;
                                 cmd.CommandTimeout = 0;
 
-                                foreach (var item in value.Item)
+                                foreach (var item in value.Lines)
                                 {
                                     cmd.Parameters.Clear();
                                     cmd.Parameters.Add(new SqlParameter("@Id", item.Id));
@@ -191,7 +191,7 @@ namespace Net.Data.Web
                                 cmd.CommandType = CommandType.StoredProcedure;
                                 cmd.CommandTimeout = 0;
 
-                                foreach (var item in value.Item)
+                                foreach (var item in value.Lines)
                                 {
                                     cmd.Parameters.Clear();
                                     cmd.Parameters.Add(new SqlParameter("@Id", item.Id));
@@ -227,10 +227,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimacByFiltroEntity>> GetListOrdenVentaSodimacByFiltro(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimacQueryEntity>> GetListOrdenVentaSodimacByFiltro(FilterRequestEntity value)
         {
-            var response = new List<OrdenVentaSodimacByFiltroEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimacByFiltroEntity>();
+            var response = new List<OrdenVentaSodimacQueryEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimacQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -254,7 +254,7 @@ namespace Net.Data.Web
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            response = (List<OrdenVentaSodimacByFiltroEntity>)context.ConvertTo<OrdenVentaSodimacByFiltroEntity>(reader);
+                            response = (List<OrdenVentaSodimacQueryEntity>)context.ConvertTo<OrdenVentaSodimacQueryEntity>(reader);
                         }
                     }
 
@@ -309,7 +309,7 @@ namespace Net.Data.Web
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            response.Item = (List<OrdenVentaDetalleSodimacEntity>)context.ConvertTo<OrdenVentaDetalleSodimacEntity>(reader);
+                            response.Lines = (List<OrdenVentaSodimacLinesEntity>)context.ConvertTo<OrdenVentaSodimacLinesEntity>(reader);
                         }
                     }
 
@@ -328,10 +328,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimaConsultaFiltroEntity>> GetListOrdenVentaSodimacPendienteLpnByFiltro(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacPendienteLpnByFiltro(FilterRequestEntity value)
         {
-            var response = new List<OrdenVentaSodimaConsultaFiltroEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimaConsultaFiltroEntity>();
+            var response = new List<OrdenVentaSodimaGeneralQueryEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -352,7 +352,7 @@ namespace Net.Data.Web
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            response = (List<OrdenVentaSodimaConsultaFiltroEntity>)context.ConvertTo<OrdenVentaSodimaConsultaFiltroEntity>(reader);
+                            response = (List<OrdenVentaSodimaGeneralQueryEntity>)context.ConvertTo<OrdenVentaSodimaGeneralQueryEntity>(reader);
                         }
                     }
 
@@ -371,10 +371,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimaConsultaFiltroEntity>> GetListOrdenVentaSodimacDetallePendienteLpnByIdAndFiltro(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacDetallePendienteLpnByIdAndFiltro(FilterRequestEntity value)
         {
-            var response = new List<OrdenVentaSodimaConsultaFiltroEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimaConsultaFiltroEntity>();
+            var response = new List<OrdenVentaSodimaGeneralQueryEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -396,7 +396,7 @@ namespace Net.Data.Web
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            response = (List<OrdenVentaSodimaConsultaFiltroEntity>)context.ConvertTo<OrdenVentaSodimaConsultaFiltroEntity>(reader);
+                            response = (List<OrdenVentaSodimaGeneralQueryEntity>)context.ConvertTo<OrdenVentaSodimaGeneralQueryEntity>(reader);
                         }
                     }
 
@@ -415,10 +415,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimaConsultaFiltroEntity>> GetListOrdenVentaSodimacLpnByFiltro(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacLpnByFiltro(FilterRequestEntity value)
         {
-            var response = new List<OrdenVentaSodimaConsultaFiltroEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimaConsultaFiltroEntity>();
+            var response = new List<OrdenVentaSodimaGeneralQueryEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -441,7 +441,7 @@ namespace Net.Data.Web
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            response = (List<OrdenVentaSodimaConsultaFiltroEntity>)context.ConvertTo<OrdenVentaSodimaConsultaFiltroEntity>(reader);
+                            response = (List<OrdenVentaSodimaGeneralQueryEntity>)context.ConvertTo<OrdenVentaSodimaGeneralQueryEntity>(reader);
                         }
                     }
 
@@ -463,7 +463,7 @@ namespace Net.Data.Web
         public async Task<ResultadoTransaccionEntity<OrdenVentaSodimacEntity>> SetLpnUpdate(OrdenVentaSodimacEntity value)
         {
             var response = new OrdenVentaSodimacEntity();
-            var responseItem = new OrdenVentaDetalleSodimacEntity();
+            var responseItem = new OrdenVentaSodimacLinesEntity();
             var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimacEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
@@ -489,7 +489,7 @@ namespace Net.Data.Web
 
                                 using (var reader = await cmd.ExecuteReaderAsync())
                                 {
-                                    responseItem = context.Convert<OrdenVentaDetalleSodimacEntity>(reader);
+                                    responseItem = context.Convert<OrdenVentaSodimacLinesEntity>(reader);
                                 }
                             }
 
@@ -498,7 +498,7 @@ namespace Net.Data.Web
                                 cmdItem.CommandType = CommandType.StoredProcedure;
                                 cmdItem.CommandTimeout = 0;
 
-                                foreach (var item in value.Item)
+                                foreach (var item in value.Lines)
                                 {
                                     cmdItem.Parameters.Clear();
                                     cmdItem.Parameters.Add(new SqlParameter("@Id", item.Id));
@@ -536,10 +536,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimaConsultaFiltroEntity>> GetListOrdenVentaSodimacDetalleById(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacDetalleById(FilterRequestEntity value)
         {
-            var response = new List<OrdenVentaSodimaConsultaFiltroEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimaConsultaFiltroEntity>();
+            var response = new List<OrdenVentaSodimaGeneralQueryEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -560,7 +560,7 @@ namespace Net.Data.Web
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            response = (List<OrdenVentaSodimaConsultaFiltroEntity>)context.ConvertTo<OrdenVentaSodimaConsultaFiltroEntity>(reader);
+                            response = (List<OrdenVentaSodimaGeneralQueryEntity>)context.ConvertTo<OrdenVentaSodimaGeneralQueryEntity>(reader);
                         }
                     }
 
@@ -581,7 +581,7 @@ namespace Net.Data.Web
         }
         public async Task<ResultadoTransaccionEntity<MemoryStream>> GetBarcodeLpnPdfById(int id)
         {
-            var response = new List<OrdenVentaSodimaConsultaFiltroEntity>();
+            var response = new List<OrdenVentaSodimaGeneralQueryEntity>();
             var resultadoTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
 
             try
@@ -598,7 +598,7 @@ namespace Net.Data.Web
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            response = (List<OrdenVentaSodimaConsultaFiltroEntity>)context.ConvertTo<OrdenVentaSodimaConsultaFiltroEntity>(reader);
+                            response = (List<OrdenVentaSodimaGeneralQueryEntity>)context.ConvertTo<OrdenVentaSodimaGeneralQueryEntity>(reader);
                         }
                     }
                 }
@@ -680,7 +680,7 @@ namespace Net.Data.Web
         }
         public async Task<ResultadoTransaccionEntity<MemoryStream>> GetListBarcodeEanPdfByEan(string ean)
         {
-            var response = new List<OrdenVentaSodimaConsultaFiltroEntity>();
+            var response = new List<OrdenVentaSodimaGeneralQueryEntity>();
             var resultadoTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
 
             try
@@ -697,7 +697,7 @@ namespace Net.Data.Web
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            response = (List<OrdenVentaSodimaConsultaFiltroEntity>)context.ConvertTo<OrdenVentaSodimaConsultaFiltroEntity>(reader);
+                            response = (List<OrdenVentaSodimaGeneralQueryEntity>)context.ConvertTo<OrdenVentaSodimaGeneralQueryEntity>(reader);
                         }
                     }
                 }
@@ -775,10 +775,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimaConsultaFiltroEntity>> GetListOrdenVentaSodimacByFechaNumero(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacByFechaNumero(OrdenVentaSodimacFilterEntity value)
         {
-            var response = new List<OrdenVentaSodimaConsultaFiltroEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimaConsultaFiltroEntity>();
+            var response = new List<OrdenVentaSodimaGeneralQueryEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -795,14 +795,14 @@ namespace Net.Data.Web
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 0;
-                        cmd.Parameters.Add(new SqlParameter("@FecInicial", value.Dat1));
-                        cmd.Parameters.Add(new SqlParameter("@FecFinal", value.Dat2));
-                        cmd.Parameters.Add(new SqlParameter("@Tipo", value.Cod1));
-                        cmd.Parameters.Add(new SqlParameter("@Filtro", value.Text1));
+                        cmd.Parameters.Add(new SqlParameter("@FecInicial", value.StartDate));
+                        cmd.Parameters.Add(new SqlParameter("@FecFinal", value.EndDate));
+                        cmd.Parameters.Add(new SqlParameter("@Tipo", value.Tipo));
+                        cmd.Parameters.Add(new SqlParameter("@Filtro", value.SearchText));
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            response = (List<OrdenVentaSodimaConsultaFiltroEntity>)context.ConvertTo<OrdenVentaSodimaConsultaFiltroEntity>(reader);
+                            response = (List<OrdenVentaSodimaGeneralQueryEntity>)context.ConvertTo<OrdenVentaSodimaGeneralQueryEntity>(reader);
                         }
                     }
 
@@ -821,10 +821,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetListOrdenVentaSodimacExcelByFechaNumero(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetListOrdenVentaSodimacExcelByFechaNumero(OrdenVentaSodimacFilterEntity value)
         {
             var ms = new MemoryStream();
-            var response = new List<OrdenVentaSodimaConsultaFiltroEntity>();
+            var response = new List<OrdenVentaSodimaGeneralQueryEntity>();
             var resultadoTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -874,14 +874,14 @@ namespace Net.Data.Web
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.CommandTimeout = 0;
-                            cmd.Parameters.Add(new SqlParameter("@FecInicial", value.Dat1));
-                            cmd.Parameters.Add(new SqlParameter("@FecFinal", value.Dat2));
-                            cmd.Parameters.Add(new SqlParameter("@Tipo", value.Cod1));
-                            cmd.Parameters.Add(new SqlParameter("@Filtro", value.Text1));
+                            cmd.Parameters.Add(new SqlParameter("@FecInicial", value.StartDate));
+                            cmd.Parameters.Add(new SqlParameter("@FecFinal", value.EndDate));
+                            cmd.Parameters.Add(new SqlParameter("@Tipo", value.Tipo));
+                            cmd.Parameters.Add(new SqlParameter("@Filtro", value.SearchText));
 
                             using (var reader = await cmd.ExecuteReaderAsync())
                             {
-                                response = (List<OrdenVentaSodimaConsultaFiltroEntity>)context.ConvertTo<OrdenVentaSodimaConsultaFiltroEntity>(reader);
+                                response = (List<OrdenVentaSodimaGeneralQueryEntity>)context.ConvertTo<OrdenVentaSodimaGeneralQueryEntity>(reader);
                             }
                         }
                     }
@@ -924,10 +924,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimacSelvaByFechaNumeroEntity>> GetListOrdenVentaSodimacSelvaFechaNumero(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimacSelvaQueryEntity>> GetListOrdenVentaSodimacSelvaFechaNumero(OrdenVentaSodimacSelvaFilterEntity value)
         {
-            var response = new List<OrdenVentaSodimacSelvaByFechaNumeroEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimacSelvaByFechaNumeroEntity>();
+            var response = new List<OrdenVentaSodimacSelvaQueryEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimacSelvaQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -944,13 +944,13 @@ namespace Net.Data.Web
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.Add(new SqlParameter("@FecInicial", value.Dat1));
-                        cmd.Parameters.Add(new SqlParameter("@FecFinal", value.Dat2));
-                        cmd.Parameters.Add(new SqlParameter("@Filtro", value.Text1));
+                        cmd.Parameters.Add(new SqlParameter("@FecInicial", value.StartDate));
+                        cmd.Parameters.Add(new SqlParameter("@FecFinal", value.EndDate));
+                        cmd.Parameters.Add(new SqlParameter("@Filtro", value.SearchText));
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            response = (List<OrdenVentaSodimacSelvaByFechaNumeroEntity>)context.ConvertTo<OrdenVentaSodimacSelvaByFechaNumeroEntity>(reader);
+                            response = (List<OrdenVentaSodimacSelvaQueryEntity>)context.ConvertTo<OrdenVentaSodimacSelvaQueryEntity>(reader);
                         }
                     }
 
@@ -969,9 +969,9 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetListOrdenVentaSodimacSelvaPdfByFechaNumero(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetListOrdenVentaSodimacSelvaPdfByFechaNumero(OrdenVentaSodimacSelvaFilterEntity value)
         {
-            var response = new List<OrdenVentaSodimacSelvaByFechaNumeroEntity>();
+            var response = new List<OrdenVentaSodimacSelvaQueryEntity>();
             var resultadoTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
@@ -989,13 +989,13 @@ namespace Net.Data.Web
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.Add(new SqlParameter("@FecInicial", value.Dat1));
-                        cmd.Parameters.Add(new SqlParameter("@FecFinal", value.Dat2));
-                        cmd.Parameters.Add(new SqlParameter("@Filtro", value.Text1));
+                        cmd.Parameters.Add(new SqlParameter("@FecInicial", value.StartDate));
+                        cmd.Parameters.Add(new SqlParameter("@FecFinal", value.EndDate));
+                        cmd.Parameters.Add(new SqlParameter("@Filtro", value.SearchText));
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            response = (List<OrdenVentaSodimacSelvaByFechaNumeroEntity>)context.ConvertTo<OrdenVentaSodimacSelvaByFechaNumeroEntity>(reader);
+                            response = (List<OrdenVentaSodimacSelvaQueryEntity>)context.ConvertTo<OrdenVentaSodimacSelvaQueryEntity>(reader);
                         }
                     }
 

@@ -1,25 +1,29 @@
 ﻿using AutoMapper;
-using Net.Data.Sap;
 using Net.Data.Web;
 using Net.Connection;
 using System.Net.Http;
 using Net.CrossCotting;
 using Net.Data.AppContext;
+using Net.Data.SAPBusinessOne;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
+using Net.Connection.ConnectionSAPBusinessOne;
+using Net.Data.SAPBusinessOne.Administration;
 namespace Net.Data
 {
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private readonly IMapper _mapper;
-        private readonly DataContextSeg _dbSeg;
-        private readonly DataContextSap _dbSap;
-        private readonly DataContextProfil _dbProfil;
         private readonly IConnectionSQL _repoContext;
         private readonly IConfiguration _configuration;
         private readonly IHttpClientFactory _clientFactory;
-        private readonly CompanyProviderSap _companyProviderSap;
+
+        private readonly DataContextProfil _dbProfil;
+        private readonly DataContextSeguridad _dbSeguridad;
+        private readonly DataContextSAPBusinessOne _dbSAPBusinessOne;
+
         private readonly IOptions<ParametrosTokenConfig> _tokenConfig;
+        private readonly CompanyProviderSAPBusinessOne _companyProviderSap;
 
 
         // =================================================================
@@ -27,38 +31,24 @@ namespace Net.Data
         // WEB
         // =================================================================
         // =================================================================
+        #region <<< << SEGURIDAD >>>
 
-        /// <summary>
-        /// SEGURIDAD
-        /// </summary>
+        private ISopRepository _sop;
         private IMenuRepository _menu;
         private IOpcionRepository _opcion;
         private IPerfilRepository _perfil;
         private IUsuarioRepository _usuario;
         private IDataBaseRepository _dataBase;
         private IAuditoriaRepository _auditoria;
+        private IPickingListRepository _pickingList;
         private ILogisticUserRepository _logisticUser;
         private IOpcionxPerfilRepository _opcionxPerfil;
         private IParametroSistemaRepository _parametroSistema;
         private IParametroConexionRepository _parametroConexion;
-
-
-        /// <summary>
-        /// GESTION
-        /// </summary>
-        private IStatusRepository _status;
-        private ITiempoRepository _tiempo;
-
-
-        /// <summary>
-        /// VENTAS
-        /// </summary>
-        private ISopRepository _sop;
-        private IOSKCRepository _OSKC;
-        private IOSKPRepository _OSKP;
-        private IPickingListRepository _pickingList;
         private IOrdenVentaSodimacRepository _ordenVentaSodimac;
+        private ITakeInventoryFinishedProductsRepository _takeInventoryFinishedProducts;
 
+        #endregion
 
 
 
@@ -68,121 +58,189 @@ namespace Net.Data
         // SAP Business One
         // =================================================================
         // =================================================================
+        #region <<< HERRAMIENTAS >>>
 
-        /// <summary>
-        /// GESTION
-        /// </summary>
+        private IUserDefinedFieldsRepository _userDefinedFields;
+
+        #endregion
+
+
+
+
+        #region <<< GESTIÓN >>>
+
+        private IExchangeRatesRepository _exchangeRates;
+
+        #endregion
+
+
+
+
+        #region <<< INICIALIZACIÓN >>>
+
+        private IDocumentTypeSunatRepository _tipoDocumentoSunat;
+        private IDocumentNumberingSeriesRepository _numeracionDocumento;
+        private IDocumentSeriesConfigurationRepository _documentSeriesConfiguration;
+        private IDocumentNumberingSeriesSunatRepository _documentNumberingSeriesSunat;
+
+        #endregion
+
+
+
+
+        #region <<< DEFINICIONES >>>
+
         private IUsersRepository _users;
-        private IProcesoRepository _proceso;
+        private IStatusRepository _status;
+        private ITiempoRepository _tiempo;
         private ILocationRepository _location;
         private IBranchesRepository _branches;
+        private IProcessesRepository _proceso;
         private ITaxGroupsRepository _taxGroups;
-        private IVehiculoSapRepository _vehiculo;
-        private IWarehousesRepository _warehouses;
         private ITiempoVidaRepository _tiempoVida;
+        private IWarehousesRepository _warehouses;
         private IItemGroupsRepository _itemGroups;
-        private IConductorSapRepository _conductor;
         private IDepartmentsRepository _departments;
         private IUnidadMedidaRepository _unidadMedida;
         private ITipoLaminadoRepository _tipoLaminado;
-        private ISalesPersonsRepository _SalesPersons;
+        private ISalesPersonsRepository _salesPersons;
+        private IOperationTypeRepository _operationType;
         private ICurrencyCodesRepository _currencyCodes;
-        private IExchangeRatesRepository _exchangeRates;
         private ILongitudAnchoRepository _longitudAncho;
         private IColorImpresionRepository _colorImpresion;
-        private ITipoOperacionRepository _tipoOperacion;
-        private IUserDefinedFieldsRepository _userDefinedFields;
+        private ISubGrupoArticuloRepository _subGrupoArticulo;
         private IPaymentTermsTypesRepository _paymentTermsTypes;
-        private ISubGrupoArticuloSapRepository _subGrupoArticulo;
-        private ITipoDocumentoSunatRepository _tipoDocumentoSunat;
-        private ISubGrupoArticulo2SapRepository _subGrupoArticulo2;
-        private INumeracionDocumentoRepository _numeracionDocumento;
+        private ISubGrupoArticulo2Repository _subGrupoArticulo2;
         private IBusinessPartnerGroupsRepository _businessPartnerGroups;
         private IBusinessPartnerSectorsRepository _businessPartnerSectors;
-        private INumeracionDocumentoSunatRepository _numeracionDocumentoSunat;
+
+        #endregion
 
 
-        /// <summary>
-        /// FINZAS
-        /// </summary>
+
+        
+        #region <<< PROCEDIMIENTO DE AUTORIZACIÓN >>>
+
+        private IApprovalRequestsRepository _approvalRequests;
+
+        #endregion
+
+
+
+
+        #region <<< FINANZAS >>>
+
         private ICostCentersRepository _costCenters;
         private IChartOfAccountsRepository _chartOfAccounts;
 
+        #endregion
 
-        /// <summary>
-        /// COMPRAS
-        /// </summary>
+
+
+
+        #region <<< DOCUMENTOS EN BORRADOR >>>
+
+        private IDraftsRepository _drafts;
+
+        #endregion
+
+
+
+
+        #region <<< VENTAS >>>
+
+        private IOrdersRepository _orders;
+        private IInvoicesRepository _invoices;
+        private IDeliveryNotesRepository _deliveryNotes;
+        private IFacturaVentaSapRepository _facturaVenta;
+        private IGuiaElectronicaRepository _guiaElectronica;
+        private IFacturacionElectronicaRepositoy _facturacionElectronica;
+
+        #endregion
+
+
+
+
+        #region <<< COMPRAS >>>
+
         private IPurchaseRequestRepository _purchaseRequest;
 
-
-        /// <summary>
-        /// SOCIOS DE NEGOCIOS
-        /// </summary>
-        private IDireccionRepository _direccion;
-        private IBusinessPartnersRepository _socioNegocio;
-        private IPersonaContactoSapRepository _personaContacto;
+        #endregion
 
 
-        /// <summary>
-        /// VENTAS
-        /// </summary>
-        private IOrdersRepository _orders;
-        private IEntregaSapRepository _entrega;
-        private IFacturaVentaSapRepository _facturaVenta;
 
 
-        /// <summary>
-        /// FACTURACIÓN ELECTRÓNICA
-        /// </summary>
-        IGuiaElectronicaSapRepository _guiaElectronica;
-        IFacturacionElectronicaSapRepositoy _facturacionElectronica;
+        #region <<< SOCIOS DE NEGOCIOS >>>
+
+        private IDriversRepository _drivers;
+        private IVehiclesRepository _vehicles;
+        private IAddressesRepository _addresses;
+        private IBusinessPartnersRepository _businessPartners;
+        private IContactEmployeesRepository _contactEmployees;
+
+        #endregion
 
 
-        /// <summary>
-        /// INVENTARIO
-        /// </summary>
-        private IPickingRepository _picking;
-        private IItemsRepository _articulo;
-        private ICargaSaldoInicialRepository _cargaSaldoInicial;
-        private ISolicitudTrasladoRepository _solicitudTraslado;
-        private ITransferenciaStockRepository _transferenciaStock;
-        private ITakeInventorySparePartsRepository _takeInventorySpareParts;
-        private ITakeInventoryFinishedProductsRepository _takeInventoryFinishedProducts;
 
 
-        /// <summary>
-        /// GESTION DE BANCOS
-        /// </summary>
+        #region <<< GESTION DE BANCOS >>>
+        
         private IPagoRecibidoRepository _pagoRecibido;
 
-
-        /// <summary>
-        /// PRODUCCION
-        /// </summary>
-        private IOrdenFabricacionSapRepository _ordenFabricacion;
+        #endregion
 
 
 
-        /// <summary>
-        /// RECURSOS HUMANOS
-        /// </summary>
+
+        #region <<< INVENTARIO >>>
+
+        private IOSKPRepository _OSKP;
+        private IOSKCRepository _OSKC;
+        private IItemsRepository _items;
+        private IPickingRepository _picking;
+        private IStockTransfersRepository _stockTransfers;
+        private ICargaSaldoInicialRepository _cargaSaldoInicial;
+        private ITakeInventorySparePartsRepository _takeInventorySpareParts;
+        private IInventoryTransferRequestRepository _inventoryTransferRequest;
+
+        #endregion
+
+
+
+
+        #region <<< RECURSOS HUMANOS >>>
+
         private IEmployeesInfoRepository _employeesInfo;
 
+        #endregion
 
 
-        public RepositoryWrapper(IConnectionSQL repoContext, IOptions<ParametrosTokenConfig> tokenConfig, IConfiguration configuration, IHttpClientFactory clientFactory, DataContextSeg dbSeg, DataContextSap dbSap, DataContextProfil dbProfil, IMapper mapper, CompanyProviderSap companyProviderSap)
+
+
+        #region <<< PRODUCCIÓN >>>
+
+        private IOrdenFabricacionSapRepository _ordenFabricacion;
+
+        #endregion
+
+
+
+
+        public RepositoryWrapper(IConnectionSQL repoContext, IOptions<ParametrosTokenConfig> tokenConfig, IConfiguration configuration, IHttpClientFactory clientFactory, DataContextSeguridad dbSeguridad, DataContextSAPBusinessOne dbSapBusinessOne, DataContextProfil dbProfil, IMapper mapper, CompanyProviderSAPBusinessOne companyProviderSap)
         {
             _mapper = mapper;
-            _dbSeg = dbSeg;
-            _dbSap = dbSap;
+
             _dbProfil = dbProfil;
+            _dbSeguridad = dbSeguridad;
+            _dbSAPBusinessOne = dbSapBusinessOne;
+
             _repoContext = repoContext;
-            _tokenConfig = tokenConfig;
             _configuration = configuration;
             _clientFactory = clientFactory;
+
+            _tokenConfig = tokenConfig;
             _companyProviderSap = companyProviderSap;
         }
-
 
 
 
@@ -192,10 +250,19 @@ namespace Net.Data
         // WEB
         // =================================================================
         // =================================================================
+        #region <<< << SEGURIDAD >>>
 
-        /// <summary>
-        /// SEGURIDAD
-        /// </summary>
+        public ISopRepository Sop
+        {
+            get
+            {
+                if (_sop == null)
+                {
+                    _sop = new SopRepository(_repoContext, _configuration);
+                }
+                return _sop;
+            }
+        }
         public IMenuRepository Menu
         {
             get
@@ -224,7 +291,7 @@ namespace Net.Data
             {
                 if (_perfil == null)
                 {
-                    _perfil = new PerfilRepository(_repoContext, _dbSeg);
+                    _perfil = new PerfilRepository(_repoContext, _dbSeguridad);
                 }
                 return _perfil;
             }
@@ -235,7 +302,7 @@ namespace Net.Data
             {
                 if (_usuario == null)
                 {
-                    _usuario = new UsuarioRepository(_repoContext, _configuration, _tokenConfig, _dbSap, _dbSeg, _companyProviderSap);
+                    _usuario = new UsuarioRepository(_repoContext, _configuration, _tokenConfig, _dbSAPBusinessOne, _dbSeguridad, _companyProviderSap);
                 }
                 return _usuario;
             }
@@ -262,13 +329,24 @@ namespace Net.Data
                 return _auditoria;
             }
         }
+        public IPickingListRepository PickingList
+        {
+            get
+            {
+                if (_pickingList == null)
+                {
+                    _pickingList = new PickingListRepository(_repoContext, _configuration);
+                }
+                return _pickingList;
+            }
+        }
         public ILogisticUserRepository LogisticUser
         {
             get
             {
                 if (_logisticUser == null)
                 {
-                    _logisticUser = new LogisticUserRepository(_repoContext, _dbSeg, _mapper);
+                    _logisticUser = new LogisticUserRepository(_repoContext, _dbSeguridad, _mapper);
                 }
                 return _logisticUser;
             }
@@ -306,10 +384,144 @@ namespace Net.Data
                 return _parametroConexion;
             }
         }
+        public IOrdenVentaSodimacRepository OrdenVentaSodimac
+        {
+            get
+            {
+                if (_ordenVentaSodimac == null)
+                {
+                    _ordenVentaSodimac = new OrdenVentaSodimacRepository(_repoContext, _configuration);
+                }
+                return _ordenVentaSodimac;
+            }
+        }
+        public ITakeInventoryFinishedProductsRepository TakeInventoryFinishedProducts
+        {
+            get
+            {
+                if (_takeInventoryFinishedProducts == null)
+                {
+                    _takeInventoryFinishedProducts = new TakeInventoryFinishedProductsRepository(_repoContext, _configuration, _dbSeguridad, _dbSAPBusinessOne, _companyProviderSap);
+                }
+                return _takeInventoryFinishedProducts;
+            }
+        }
 
-        /// <summary>
-        /// GESTIÓN
-        /// </summary>
+        #endregion
+
+
+
+
+        // =================================================================
+        // =================================================================
+        // SAP Business One
+        // =================================================================
+        // =================================================================
+        #region <<< HERRAMIENTAS >>>
+
+        public IUserDefinedFieldsRepository UserDefinedFields
+        {
+            get
+            {
+                if (_userDefinedFields == null)
+                {
+                    _userDefinedFields = new UserDefinedFieldsRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _userDefinedFields;
+            }
+        }
+
+        #endregion
+
+
+
+
+        #region <<< GESTIÓN >>>
+
+        public IExchangeRatesRepository ExchangeRates
+        {
+            get
+            {
+                if (_exchangeRates == null)
+                {
+                    _exchangeRates = new ExchangeRatesRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _exchangeRates;
+            }
+        }
+
+        #endregion
+
+
+
+
+        #region <<< INICIALIZACIÓN >>>
+
+        public IDocumentTypeSunatRepository DocumentTypeSunat
+        {
+            get
+            {
+                if (_tipoDocumentoSunat == null)
+                {
+                    _tipoDocumentoSunat = new DocumentTypeSunatRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _tipoDocumentoSunat;
+            }
+        }
+        public IDocumentNumberingSeriesRepository DocumentNumberingSeries
+        {
+            get
+            {
+                if (_numeracionDocumento == null)
+                {
+                    _numeracionDocumento = new DocumentNumberingSeriesRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _numeracionDocumento;
+            }
+        }
+        public IDocumentSeriesConfigurationRepository DocumentSeriesConfiguration
+        {
+            get
+            {
+                if (_documentSeriesConfiguration == null)
+                {
+                    _documentSeriesConfiguration = new DocumentSeriesConfigurationRepository(_repoContext, _dbSAPBusinessOne, _dbSeguridad, _companyProviderSap);
+                }
+                return _documentSeriesConfiguration;
+            }
+        }
+        public IDocumentNumberingSeriesSunatRepository DocumentNumberingSeriesSunat
+        {
+            get
+            {
+                if (_documentNumberingSeriesSunat == null)
+                {
+                    _documentNumberingSeriesSunat = new DocumentNumberingSeriesSunatRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _documentNumberingSeriesSunat;
+            }
+        }
+        
+
+
+        #endregion
+
+
+
+
+        #region <<< DEFINICIONES >>>
+
+        public IUsersRepository Users
+        {
+            get
+            {
+                if (_users == null)
+                {
+                    _users = new UsersRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _users;
+            }
+        }
         public IStatusRepository Status
         {
             get
@@ -332,100 +544,13 @@ namespace Net.Data
                 return _tiempo;
             }
         }
-
-        /// <summary>
-        /// INVENTARIO
-        /// </summary>
-        public ISolicitudTrasladoRepository SolicitudTraslado
-        {
-            get
-            {
-                if (_solicitudTraslado == null)
-                {
-                    _solicitudTraslado = new SolicitudTrasladoRepository(_repoContext, _configuration, _dbSap, _companyProviderSap);
-                }
-                return _solicitudTraslado;
-            }
-        }
-        /// <summary>
-        /// VENTAS
-        /// </summary>
-        public ISopRepository Sop
-        {
-            get
-            {
-                if (_sop == null)
-                {
-                    _sop = new SopRepository(_repoContext, _configuration);
-                }
-                return _sop;
-            }
-        }
-        public IPickingListRepository PickingList
-        {
-            get
-            {
-                if (_pickingList == null)
-                {
-                    _pickingList = new PickingListRepository(_repoContext, _configuration);
-                }
-                return _pickingList;
-            }
-        }
-        public IOrdenVentaSodimacRepository OrdenVentaSodimac
-        {
-            get
-            {
-                if (_ordenVentaSodimac == null)
-                {
-                    _ordenVentaSodimac = new OrdenVentaSodimacRepository(_repoContext, _configuration);
-                }
-                return _ordenVentaSodimac;
-            }
-        }
-
-
-
-
-
-        // =================================================================
-        // =================================================================
-        // SAP Business One
-        // =================================================================
-        // =================================================================
-
-        /// <summary>
-        /// GESTION
-        /// </summary>
-        public IUsersRepository Users
-        {
-            get
-            {
-                if (_users == null)
-                {
-                    _users = new UsersRepository(_repoContext, _dbSap);
-                }
-                return _users;
-            }
-        }
-        public IProcesoRepository Proceso
-        {
-            get
-            {
-                if (_proceso == null)
-                {
-                    _proceso = new ProcesoRepository(_repoContext, _dbSap);
-                }
-                return _proceso;
-            }
-        }
         public ILocationRepository Location
         {
             get
             {
                 if (_location == null)
                 {
-                    _location = new LocationRepository(_repoContext, _dbSap);
+                    _location = new LocationRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _location;
             }
@@ -436,31 +561,20 @@ namespace Net.Data
             {
                 if (_branches == null)
                 {
-                    _branches = new BranchesRepository(_repoContext, _dbSap);
+                    _branches = new BranchesRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _branches;
             }
         }
-        public IItemGroupsRepository ItemGroups
+        public IProcessesRepository Processes
         {
             get
             {
-                if (_itemGroups == null)
+                if (_proceso == null)
                 {
-                    _itemGroups = new ItemGroupsRepository(_repoContext, _dbSap);
+                    _proceso = new ProcesoRepository(_repoContext, _dbSAPBusinessOne);
                 }
-                return _itemGroups;
-            }
-        }
-        public ITiempoVidaRepository TiempoVida
-        {
-            get
-            {
-                if (_tiempoVida == null)
-                {
-                    _tiempoVida = new TiempoVidaRepository(_repoContext, _dbSap);
-                }
-                return _tiempoVida;
+                return _proceso;
             }
         }
         public ITaxGroupsRepository TaxGroups
@@ -469,20 +583,20 @@ namespace Net.Data
             {
                 if (_taxGroups == null)
                 {
-                    _taxGroups = new TaxGroupsRepository(_repoContext, _dbSap);
+                    _taxGroups = new TaxGroupsRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _taxGroups;
             }
         }
-        public IVehiculoSapRepository Vehiculo
+        public ITiempoVidaRepository TiempoVida
         {
             get
             {
-                if (_vehiculo == null)
+                if (_tiempoVida == null)
                 {
-                    _vehiculo = new VehiculoSapRepository(_repoContext, _configuration);
+                    _tiempoVida = new TiempoVidaRepository(_repoContext, _dbSAPBusinessOne);
                 }
-                return _vehiculo;
+                return _tiempoVida;
             }
         }
         public IWarehousesRepository Warehouses
@@ -491,20 +605,20 @@ namespace Net.Data
             {
                 if (_warehouses == null)
                 {
-                    _warehouses = new WarehousesRepository(_repoContext, _dbSap);
+                    _warehouses = new WarehousesRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _warehouses;
             }
         }
-        public IConductorSapRepository Conductor
+        public IItemGroupsRepository ItemGroups
         {
             get
             {
-                if (_conductor == null)
+                if (_itemGroups == null)
                 {
-                    _conductor = new ConductorSapRepository(_repoContext, _configuration);
+                    _itemGroups = new ItemGroupsRepository(_repoContext, _dbSAPBusinessOne);
                 }
-                return _conductor;
+                return _itemGroups;
             }
         }
         public IDepartmentsRepository Departments
@@ -513,7 +627,7 @@ namespace Net.Data
             {
                 if (_departments == null)
                 {
-                    _departments = new DepartmentsRepository(_repoContext, _dbSap);
+                    _departments = new DepartmentsRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _departments;
             }
@@ -524,7 +638,7 @@ namespace Net.Data
             {
                 if (_unidadMedida == null)
                 {
-                    _unidadMedida = new UnidadMedidaRepository(_repoContext, _dbSap);
+                    _unidadMedida = new UnidadMedidaRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _unidadMedida;
             }
@@ -535,9 +649,31 @@ namespace Net.Data
             {
                 if (_tipoLaminado == null)
                 {
-                    _tipoLaminado = new TipoLaminadoRepository(_repoContext, _dbSap);
+                    _tipoLaminado = new TipoLaminadoRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _tipoLaminado;
+            }
+        }
+        public ISalesPersonsRepository SalesPersons
+        {
+            get
+            {
+                if (_salesPersons == null)
+                {
+                    _salesPersons = new SalesPersonsRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _salesPersons;
+            }
+        }
+        public IOperationTypeRepository OperationType
+        {
+            get
+            {
+                if (_operationType == null)
+                {
+                    _operationType = new OperationTypeRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _operationType;
             }
         }
         public ICurrencyCodesRepository CurrencyCodes
@@ -546,20 +682,9 @@ namespace Net.Data
             {
                 if (_currencyCodes == null)
                 {
-                    _currencyCodes = new CurrencyCodesRepository(_repoContext, _dbSap);
+                    _currencyCodes = new CurrencyCodesRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _currencyCodes;
-            }
-        }
-        public IExchangeRatesRepository ExchangeRates
-        {
-            get
-            {
-                if (_exchangeRates == null)
-                {
-                    _exchangeRates = new ExchangeRatesRepository(_repoContext, _dbSap);
-                }
-                return _exchangeRates;
             }
         }
         public ILongitudAnchoRepository LongitudAncho
@@ -568,20 +693,9 @@ namespace Net.Data
             {
                 if (_longitudAncho == null)
                 {
-                    _longitudAncho = new LongitudAnchoRepository(_repoContext, _dbSap);
+                    _longitudAncho = new LongitudAnchoRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _longitudAncho;
-            }
-        }
-        public ISalesPersonsRepository SalesPersons
-        {
-            get
-            {
-                if (_SalesPersons == null)
-                {
-                    _SalesPersons = new SalesPersonsRepository(_repoContext, _dbSap);
-                }
-                return _SalesPersons;
             }
         }
         public IColorImpresionRepository ColorImpresion
@@ -590,31 +704,20 @@ namespace Net.Data
             {
                 if (_colorImpresion == null)
                 {
-                    _colorImpresion = new ColorImpresionRepository(_repoContext, _dbSap);
+                    _colorImpresion = new ColorImpresionRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _colorImpresion;
             }
         }
-        public ITipoOperacionRepository TipoOperacion
+        public ISubGrupoArticuloRepository SubGrupoArticulo
         {
             get
             {
-                if (_tipoOperacion == null)
+                if (_subGrupoArticulo == null)
                 {
-                    _tipoOperacion = new TipoOperacionRepository(_repoContext, _dbSap);
+                    _subGrupoArticulo = new SubGrupoArticuloRepository(_repoContext, _dbSAPBusinessOne);
                 }
-                return _tipoOperacion;
-            }
-        }
-        public IUserDefinedFieldsRepository UserDefinedFields
-        {
-            get
-            {
-                if (_userDefinedFields == null)
-                {
-                    _userDefinedFields = new UserDefinedFieldsRepository(_repoContext, _dbSap);
-                }
-                return _userDefinedFields;
+                return _subGrupoArticulo;
             }
         }
         public IPaymentTermsTypesRepository PaymentTermsTypes
@@ -623,53 +726,20 @@ namespace Net.Data
             {
                 if (_paymentTermsTypes == null)
                 {
-                    _paymentTermsTypes = new PaymentTermsTypesRepository(_repoContext, _dbSap);
+                    _paymentTermsTypes = new PaymentTermsTypesRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _paymentTermsTypes;
             }
         }
-        public ISubGrupoArticuloSapRepository SubGrupoArticulo
-        {
-            get
-            {
-                if (_subGrupoArticulo == null)
-                {
-                    _subGrupoArticulo = new SubGrupoArticuloSapRepository(_repoContext, _dbSap);
-                }
-                return _subGrupoArticulo;
-            }
-        }
-        public ITipoDocumentoSunatRepository TipoDocumentoSunat
-        {
-            get
-            {
-                if (_tipoDocumentoSunat == null)
-                {
-                    _tipoDocumentoSunat = new TipoDocumentoSunatRepository(_repoContext, _dbSap);
-                }
-                return _tipoDocumentoSunat;
-            }
-        }
-        public ISubGrupoArticulo2SapRepository SubGrupoArticulo2
+        public ISubGrupoArticulo2Repository SubGrupoArticulo2
         {
             get
             {
                 if (_subGrupoArticulo2 == null)
                 {
-                    _subGrupoArticulo2 = new SubGrupoArticulo2SapRepository(_repoContext, _dbSap);
+                    _subGrupoArticulo2 = new SubGrupoArticulo2SapRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _subGrupoArticulo2;
-            }
-        }
-        public INumeracionDocumentoRepository NumeracionDocumento
-        {
-            get
-            {
-                if (_numeracionDocumento == null)
-                {
-                    _numeracionDocumento = new NumeracionDocumentoRepository(_repoContext, _dbSap, _mapper);
-                }
-                return _numeracionDocumento;
             }
         }
         public IBusinessPartnerGroupsRepository BusinessPartnerGroups
@@ -678,7 +748,7 @@ namespace Net.Data
             {
                 if (_businessPartnerGroups == null)
                 {
-                    _businessPartnerGroups = new BusinessPartnerGroupsRepository(_repoContext, _dbSap);
+                    _businessPartnerGroups = new BusinessPartnerGroupsRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _businessPartnerGroups;
             }
@@ -694,30 +764,39 @@ namespace Net.Data
                 return _businessPartnerSectors;
             }
         }
-        public INumeracionDocumentoSunatRepository NumeracionDocumentoSunat
+        #endregion
+
+
+
+
+        #region <<< PROCEDIMIENTO DE AUTORIZACIÓN >>>
+
+        public IApprovalRequestsRepository ApprovalRequests
         {
             get
             {
-                if (_numeracionDocumentoSunat == null)
+                if (_approvalRequests == null)
                 {
-                    _numeracionDocumentoSunat = new NumeracionDocumentoSunatRepository(_repoContext, _dbSap);
+                    _approvalRequests = new ApprovalRequestsRepository(_repoContext, _configuration, _dbSAPBusinessOne, _companyProviderSap);
                 }
-                return _numeracionDocumentoSunat;
+                return _approvalRequests;
             }
         }
 
+        #endregion
 
 
-        /// <summary>
-        /// FINANZAS
-        /// </summary>
+
+
+        #region <<< FINANZAS >>>
+
         public ICostCentersRepository CostCenters
         {
             get
             {
                 if (_costCenters == null)
                 {
-                    _costCenters = new CostCentersRepository(_repoContext, _dbSap);
+                    _costCenters = new CostCentersRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _costCenters;
             }
@@ -728,72 +807,37 @@ namespace Net.Data
             {
                 if (_chartOfAccounts == null)
                 {
-                    _chartOfAccounts = new ChartOfAccountsRepository(_repoContext, _dbSap);
+                    _chartOfAccounts = new ChartOfAccountsRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _chartOfAccounts;
             }
         }
 
+        #endregion
 
 
-        /// <summary>
-        /// SOCIOS DE NEGOCIOS
-        /// </summary>
-        public IPurchaseRequestRepository PurchaseRequest
+
+
+        #region <<< DOCUMENTOS EN BORRADOR >>>
+
+        public IDraftsRepository Drafts
         {
             get
             {
-                if (_purchaseRequest == null)
+                if (_drafts == null)
                 {
-                    _purchaseRequest = new PurchaseRequestRepository(_repoContext, _dbSap, _companyProviderSap);
+                    _drafts = new DraftsRepository(_repoContext, _dbSAPBusinessOne, _companyProviderSap);
                 }
-                return _purchaseRequest;
+                return _drafts;
             }
         }
 
-
-        /// <summary>
-        /// SOCIOS DE NEGOCIOS
-        /// </summary>
-        public IDireccionRepository Direccion
-        {
-            get
-            {
-                if (_direccion == null)
-                {
-                    _direccion = new DireccionRepository(_repoContext, _dbSap);
-                }
-                return _direccion;
-            }
-        }
-        public IBusinessPartnersRepository SocioNegocio
-        {
-            get
-            {
-                if (_socioNegocio == null)
-                {
-                    _socioNegocio = new BusinessPartnersRepository(_repoContext, _configuration, _dbSap);
-                }
-                return _socioNegocio;
-            }
-        }
-        public IPersonaContactoSapRepository PersonaContacto
-        {
-            get
-            {
-                if (_personaContacto == null)
-                {
-                    _personaContacto = new PersonaContactoSapRepository(_repoContext, _configuration);
-                }
-                return _personaContacto;
-            }
-        }
+        #endregion
 
 
 
-        /// <summary>
-        /// VENTAS
-        /// </summary>
+
+        #region <<< VENTAS >>>
 
         public IOrdersRepository Orders
         {
@@ -801,23 +845,33 @@ namespace Net.Data
             {
                 if (_orders == null)
                 {
-                    _orders = new OrdersRepository(_repoContext, _configuration, _dbSap, _companyProviderSap);
+                    _orders = new OrdersRepository(_repoContext, _configuration, _dbSAPBusinessOne, _companyProviderSap);
                 }
                 return _orders;
             }
         }
-        public IEntregaSapRepository Entrega
+        public IInvoicesRepository Invoices
         {
             get
             {
-                if (_entrega == null)
+                if (_invoices == null)
                 {
-                    _entrega = new EntregaSapRepository(_repoContext, _configuration);
+                    _invoices = new InvoicesRepository(_repoContext, _configuration, _dbSAPBusinessOne, _companyProviderSap);
                 }
-                return _entrega;
+                return _invoices;
             }
         }
-        
+        public IDeliveryNotesRepository DeliveryNotes
+        {
+            get
+            {
+                if (_deliveryNotes == null)
+                {
+                    _deliveryNotes = new DeliveryNotesRepository(_repoContext, _dbSAPBusinessOne, _companyProviderSap);
+                }
+                return _deliveryNotes;
+            }
+        }
         public IFacturaVentaSapRepository FacturaVenta
         {
             get
@@ -829,82 +883,185 @@ namespace Net.Data
                 return _facturaVenta;
             }
         }
-        public IOSKCRepository OSKC
+        public IGuiaElectronicaRepository GuiaElectronica
         {
             get
             {
-                if (_OSKC == null)
+                if (_guiaElectronica == null)
                 {
-                    _OSKC = new OSKCRepository(_repoContext, _configuration, _dbSap, _mapper, _companyProviderSap);
+                    _guiaElectronica = new GuiaElectronicaRepository(_repoContext, _configuration);
                 }
-                return _OSKC;
+                return _guiaElectronica;
             }
         }
+        public IFacturacionElectronicaRepositoy FacturacionElectronica
+        {
+            get
+            {
+                if (_facturacionElectronica == null)
+                {
+                    _facturacionElectronica = new FacturacionElectronicaRepositoy(_repoContext, _configuration);
+                }
+                return _facturacionElectronica;
+            }
+        }
+
+        #endregion
+
+
+
+
+        #region <<< COMPRAS >>>
+        public IPurchaseRequestRepository PurchaseRequest
+        {
+            get
+            {
+                if (_purchaseRequest == null)
+                {
+                    _purchaseRequest = new PurchaseRequestRepository(_repoContext, _dbSAPBusinessOne, _companyProviderSap);
+                }
+                return _purchaseRequest;
+            }
+        }
+
+        #endregion
+
+
+
+
+        #region <<< SOCIOS DE NEGOCIOS >>>
+
+        public IDriversRepository Drivers
+        {
+            get
+            {
+                if (_drivers == null)
+                {
+                    _drivers = new DriversRepository(_repoContext, _dbSAPBusinessOne, _mapper);
+                }
+                return _drivers;
+            }
+        }
+        public IVehiclesRepository Vehicles
+        {
+            get
+            {
+                if (_vehicles == null)
+                {
+                    _vehicles = new VehiclesRepository(_repoContext, _dbSAPBusinessOne, _mapper);
+                }
+                return _vehicles;
+            }
+        }
+        public IAddressesRepository Addresses
+        {
+            get
+            {
+                if (_addresses == null)
+                {
+                    _addresses = new AddressesRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _addresses;
+            }
+        }
+        public IBusinessPartnersRepository BusinessPartners
+        {
+            get
+            {
+                _businessPartners ??= new BusinessPartnersRepository(_repoContext, _configuration, _dbSAPBusinessOne);
+                return _businessPartners;
+            }
+        }
+        public IContactEmployeesRepository ContactEmployees
+        {
+            get
+            {
+                if (_contactEmployees == null)
+                {
+                    _contactEmployees = new ContactEmployeesRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _contactEmployees;
+            }
+        }
+
+
+
+        #endregion
+
+
+
+
+        #region <<<< GESTION DE BANCOS >>>
+
+        public IPagoRecibidoRepository PagoRecibido
+        {
+            get
+            {
+                _pagoRecibido ??= new PagoRecibidoRepository(_repoContext, _configuration);
+                return _pagoRecibido;
+            }
+        }
+
+        #endregion
+
+
+
+
+        #region <<< INVENTARIO >>>
+
         public IOSKPRepository OSKP
         {
             get
             {
                 if (_OSKP == null)
                 {
-                    _OSKP = new OSKPRepository(_repoContext, _configuration, _dbSap, _mapper, _companyProviderSap);
+                    _OSKP = new OSKPRepository(_repoContext, _configuration, _dbSAPBusinessOne, _mapper, _companyProviderSap);
                 }
                 return _OSKP;
             }
         }
-
-
-
-        /// <summary>
-        /// FACTURACIÓN ELECTRÓNICA
-        /// </summary>
-        public IFacturacionElectronicaSapRepositoy FacturacionElectronica
+        public IOSKCRepository OSKC
         {
             get
             {
-                if (_facturacionElectronica == null)
+                if (_OSKC == null)
                 {
-                    _facturacionElectronica = new FacturacionElectronicaSapRepositoy(_repoContext, _configuration);
+                    _OSKC = new OSKCRepository(_repoContext, _configuration, _dbSAPBusinessOne, _mapper, _companyProviderSap);
                 }
-                return _facturacionElectronica;
+                return _OSKC;
             }
         }
-        public IGuiaElectronicaSapRepository GuiaElectronica
+        public IItemsRepository Items
         {
             get
             {
-                if (_guiaElectronica == null)
+                if (_items == null)
                 {
-                    _guiaElectronica = new GuiaElectronicaSapRepository(_repoContext, _configuration);
+                    _items = new ItemsRepository(_repoContext, _configuration, _dbSAPBusinessOne, _companyProviderSap);
                 }
-                return _guiaElectronica;
+                return _items;
             }
         }
-
-
-
-        /// <summary>
-        /// INVENTARIO
-        /// </summary>
         public IPickingRepository Picking
         {
             get
             {
                 if (_picking == null)
                 {
-                    _picking = new PickingRepository(_repoContext, _configuration, _dbSap, _dbProfil, _companyProviderSap);
+                    _picking = new PickingRepository(_repoContext, _configuration, _dbSAPBusinessOne, _dbProfil, _companyProviderSap);
                 }
                 return _picking;
             }
         }
-        public IItemsRepository Articulo
+        public IStockTransfersRepository StockTransfers
         {
             get
             {
-                if (_articulo == null)
+                if (_stockTransfers == null)
                 {
-                    _articulo = new ItemsRepository(_repoContext, _configuration, _dbSap, _companyProviderSap);
+                    _stockTransfers = new StockTransfersRepository(_repoContext, _configuration, _dbSAPBusinessOne, _mapper, _companyProviderSap);
                 }
-                return _articulo;
+                return _stockTransfers;
             }
         }
         public ICargaSaldoInicialRepository CargaSaldoInicial
@@ -913,20 +1070,20 @@ namespace Net.Data
             {
                 if (_cargaSaldoInicial == null)
                 {
-                    _cargaSaldoInicial = new CargaSaldoInicialRepository(_repoContext, _configuration, _dbSap, _mapper);
+                    _cargaSaldoInicial = new CargaSaldoInicialRepository(_repoContext, _configuration, _dbSAPBusinessOne, _mapper);
                 }
                 return _cargaSaldoInicial;
             }
         }
-        public ITransferenciaStockRepository TransferenciaStock
+        public IInventoryTransferRequestRepository InventoryTransferRequest
         {
             get
             {
-                if (_transferenciaStock == null)
+                if (_inventoryTransferRequest == null)
                 {
-                    _transferenciaStock = new TransferenciaStockRepository(_repoContext, _configuration, _dbSap, _mapper, _companyProviderSap);
+                    _inventoryTransferRequest = new InventoryTransferRequestRepository(_repoContext, _configuration, _dbSAPBusinessOne, _companyProviderSap);
                 }
-                return _transferenciaStock;
+                return _inventoryTransferRequest;
             }
         }
         public ITakeInventorySparePartsRepository TakeInventorySpareParts
@@ -935,45 +1092,35 @@ namespace Net.Data
             {
                 if (_takeInventorySpareParts == null)
                 {
-                    _takeInventorySpareParts = new TakeInventorySparePartsRepository(_repoContext, _configuration, _dbSeg, _dbSap, _companyProviderSap);
+                    _takeInventorySpareParts = new TakeInventorySparePartsRepository(_repoContext, _configuration, _dbSeguridad, _dbSAPBusinessOne, _companyProviderSap);
                 }
                 return _takeInventorySpareParts;
             }
         }
-        public ITakeInventoryFinishedProductsRepository TakeInventoryFinishedProducts
+
+        #endregion
+
+
+
+
+        #region <<< RECURSOS HUMANOS >>>
+
+        public IEmployeesInfoRepository EmployeesInfo
         {
             get
             {
-                if (_takeInventoryFinishedProducts == null)
-                {
-                    _takeInventoryFinishedProducts = new TakeInventoryFinishedProductsRepository(_repoContext, _configuration, _dbSeg, _dbSap, _companyProviderSap);
-                }
-                return _takeInventoryFinishedProducts;
+                _employeesInfo ??= new EmployeesInfoRepository(_repoContext, _dbSAPBusinessOne);
+                return _employeesInfo;
             }
         }
 
-
-
-        /// <summary>
-        /// GESTION DE BANCOS
-        /// </summary>
-        public IPagoRecibidoRepository PagoRecibido
-        {
-            get
-            {
-                if (_pagoRecibido == null)
-                {
-                    _pagoRecibido = new PagoRecibidoRepository(_repoContext, _configuration);
-                }
-                return _pagoRecibido;
-            }
-        }
+        #endregion
 
 
 
-        /// <summary>
-        /// PRODUCCION
-        /// </summary>
+
+        #region <<< PRODUCCIÓN >>>        
+
         public IOrdenFabricacionSapRepository OrdenFabricacion
         {
             get
@@ -986,22 +1133,6 @@ namespace Net.Data
             }
         }
 
-
-
-
-        /// <summary>
-        /// PRODUCCION
-        /// </summary>
-        public IEmployeesInfoRepository EmployeesInfo
-        {
-            get
-            {
-                if (_employeesInfo == null)
-                {
-                    _employeesInfo = new EmployeesInfoRepository(_repoContext, _dbSap);
-                }
-                return _employeesInfo;
-            }
-        }
+        #endregion
     }
 }

@@ -11,17 +11,17 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
     [ApiExplorerSettings(GroupName = "ApiFibrafil")]
     public class AutenticarController : ControllerBase
     {
-        private readonly IRepositoryWrapper repository;
+        private readonly IRepositoryWrapper _repository;
 
         public AutenticarController(IRepositoryWrapper repository)
         {
-            this.repository = repository;
+            this._repository = repository;
         }
 
         [HttpPost]
         public IActionResult Autenticar([FromBody] UsuarioAutenticarRequestDto request)
         {
-            var response = repository.Usuario.Autenticar(request.UsuarioAutenticar());
+            var response = _repository.Usuario.Autenticar(request.UsuarioAutenticar());
             if (response.Result.ResultadoCodigo < 0)
             {
                 return BadRequest(response.Result);
@@ -33,14 +33,14 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
         [HttpPost]
         public async Task<IActionResult> ObtienePermisosPorUsuario([FromBody] UsuarioDatosRequestDto request)
         {
-            var response = await repository.Usuario.ObtienePermisosPorUsuario(request.UsuarioDatos());
+            var result = await _repository.Usuario.ObtienePermisosPorUsuario(request.UsuarioDatos());
 
-            if (response == null)
+            if (result.ResultadoCodigo == -1)
             {
-                return BadRequest("Credenciales incorrectas");
+                return BadRequest(result);
             }
 
-            return Ok(response.data);
+            return Ok(result.data);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
                 return BadRequest(ModelState);
             }
 
-            await repository.Usuario.RecuperarPassword(value.RetornaUsuario());
+            await _repository.Usuario.RecuperarPassword(value.RetornaUsuario());
 
             return NoContent();
         }
@@ -71,7 +71,7 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
         public async Task<IActionResult> ValidarToken([FromBody] DtoUsuarioTokenRequest value)
         {
 
-            var data = await repository.Usuario.ValidarToken(value.UsuarioDatos());
+            var data = await _repository.Usuario.ValidarToken(value.UsuarioDatos());
 
             return Ok(data);
         }

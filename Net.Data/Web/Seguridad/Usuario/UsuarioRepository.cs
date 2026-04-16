@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text.RegularExpressions;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
+using Net.Connection.ConnectionSAPBusinessOne;
 namespace Net.Data.Web
 {
     public class UsuarioRepository : RepositoryBase<UsuarioEntity>, IUsuarioRepository
@@ -24,10 +25,10 @@ namespace Net.Data.Web
         private readonly string _aplicacionName;
         private readonly Regex regex = new Regex(@"<(\w+)>.*");
 
-        private readonly DataContextSap _dbSap;
-        private readonly DataContextSeg _dbSeg;
+        private readonly DataContextSAPBusinessOne _dbSap;
+        private readonly DataContextSeguridad _dbSeg;
         private readonly ParametrosTokenConfig _tokenConfig;
-        private readonly CompanyProviderSap _companyProviderSap;
+        private readonly CompanyProviderSAPBusinessOne _companyProviderSap;
 
         const string DB_ESQUEMA = "";
         const string SP_INSERT = DB_ESQUEMA + "SEG_SetUsuarioInsert";
@@ -37,7 +38,7 @@ namespace Net.Data.Web
         const string SP_UPDATE_AUTOGENERADA = DB_ESQUEMA + "SEG_SetUsuarioUpdatePassword";
         const string SP_UPDATE_GENERAR_TOKEN = DB_ESQUEMA + "SEG_SetUsuarioUpdateToken";
 
-        public UsuarioRepository(IConnectionSQL context, IConfiguration configuration, IOptions<ParametrosTokenConfig> tokenConfig, DataContextSap dbSap, DataContextSeg dbSeg, CompanyProviderSap companyProviderSap)
+        public UsuarioRepository(IConnectionSQL context, IConfiguration configuration, IOptions<ParametrosTokenConfig> tokenConfig, DataContextSAPBusinessOne dbSap, DataContextSeguridad dbSeg, CompanyProviderSAPBusinessOne companyProviderSap)
             : base(context)
         {
             _dbSap = dbSap;
@@ -445,6 +446,7 @@ namespace Net.Data.Web
         }        
         public async Task<ResultadoTransaccionEntity<UsuarioDatosEntity>> ObtienePermisosPorUsuario(UsuarioDatosEntity entidad)
         {
+            UsuarioDatosEntity UsuarioAutenticar = null;
             var claveDesEncriptada = EncriptaHelper.DecryptStringAES(entidad.Clave);
             var usuarioDesEncriptada = EncriptaHelper.DecryptStringAES(entidad.Usuario);
 
@@ -452,61 +454,78 @@ namespace Net.Data.Web
 
             ResultadoTransaccionEntity<UsuarioDatosEntity> resultadoTransaccion = new ResultadoTransaccionEntity<UsuarioDatosEntity>();
 
-            if (user.Clave != entidad.Clave)
+            try
+            {
+                if (user.Clave != entidad.Clave)
+                {
+                    resultadoTransaccion.ResultadoCodigo = -1;
+                    resultadoTransaccion.ResultadoDescripcion = "Usuario y/o Contraseña incorrecto.";
+                    return resultadoTransaccion;
+                }
+
+                if (user == null)
+                {
+                    resultadoTransaccion.ResultadoCodigo = -1;
+                    resultadoTransaccion.ResultadoDescripcion = "Usuario y/o Contraseña incorrecto.";
+                    return resultadoTransaccion;
+                }
+
+                MenuRepository menuRepository = new MenuRepository(context);
+
+                var listaAccesoMenu = menuRepository.GetAllPorIdUsuario(user.IdUsuario).Result.ToList();
+
+                // Obtenemos los datos de la sociedad
+                var adminInfo = await _dbSap.AdminInfo.FirstOrDefaultAsync();
+                // Obtenemos las rutas de vías de acceso
+                var attachmentsSettings = await _dbSap.AttachmentsSettings.FirstOrDefaultAsync();
+                // Obtenemos los datos de configuración general
+                var generalSettings = await _dbSap.GeneralSettings.FirstOrDefaultAsync();
+                // Obtenemos los datos del usuario logístico
+                var logisticUser = await _dbSeg.LogisticUser.Where(n => n.IdUsuario == user.IdUsuario).FirstOrDefaultAsync();
+                var userSap = await _dbSap.Users.Where(n => n.USERID == user.IdUserSap).FirstOrDefaultAsync();
+
+                UsuarioAutenticar = new UsuarioDatosEntity
+                {
+                    IdUsuario = userSap == null ? 0 : user.IdUsuario,
+                    IdPerfil = userSap == null ? 0 : user.IdPerfil ?? 0,
+                    IdUserSap = userSap == null ? 0 : userSap.USERID,
+                    UserSap = userSap == null ? "" : userSap.USER_CODE ?? "",
+                    IdLocation = logisticUser == null ? 0 : logisticUser.IdLocation ?? 0,
+                    SuperUser = logisticUser == null ? false : logisticUser.SuperUser ?? false,
+                    Usuario = user == null ? "" : user.Usuario ?? "",
+                    Nombre = user == null ? "" : user.Nombre ?? "",
+                    Email = user == null ? "" : user.Email ?? "",
+                    Imagen = user.Imagen,
+
+                    CompnyName = adminInfo.CompnyName,
+                    CompnyAddr = adminInfo.CompnyAddr,
+                    PrintHeadr = adminInfo.PrintHeadr,
+                    TaxIdNum = adminInfo.TaxIdNum,
+                    Phone1 = adminInfo.Phone1,
+                    Phone2 = adminInfo.Phone2,
+                    MainCurncy = adminInfo.MainCurncy,
+                    SysCurrncy = adminInfo.SysCurrncy,
+                    DfltWhs = adminInfo.DfltWhs,
+                    AttachPath  = attachmentsSettings == null ? "" : attachmentsSettings.AttachPath ?? "",
+                    WhsCodeSpaPar = generalSettings == null ? "" : generalSettings.U_WhsCodeSpaPar ?? "",
+                    CodGrpSuppNat = generalSettings == null ? 0 : generalSettings.U_CodGrpSuppNat ?? 0,
+                    CodGrpSuppFor = generalSettings == null ? 0 : generalSettings.U_CodGrpSuppFor ?? 0,
+                    CodGrpCustNat = generalSettings == null ? 0 : generalSettings.U_CodGrpCustNat ?? 0,
+                    CodGrpCustFor = generalSettings == null ? 0 : generalSettings.U_CodGrpCustFor ?? 0,
+                
+                    ListaAccesoMenu = listaAccesoMenu
+                };
+
+                resultadoTransaccion.ResultadoCodigo = 0;
+                resultadoTransaccion.ResultadoDescripcion = "Se autentico correctamente";
+                resultadoTransaccion.data = UsuarioAutenticar;
+            }
+            catch (Exception ex)
             {
                 resultadoTransaccion.ResultadoCodigo = -1;
-                resultadoTransaccion.ResultadoDescripcion = "Usuario y/o Contraseña incorrecto.";
-                return resultadoTransaccion;
+                resultadoTransaccion.ResultadoDescripcion = ex.Message;
             }
 
-            if (user == null)
-            {
-                resultadoTransaccion.ResultadoCodigo = -1;
-                resultadoTransaccion.ResultadoDescripcion = "Usuario y/o Contraseña incorrecto.";
-                return resultadoTransaccion;
-            }
-
-            MenuRepository menuRepository = new MenuRepository(context);
-
-            var listaAccesoMenu = menuRepository.GetAllPorIdUsuario(user.IdUsuario).Result.ToList();
-
-            // Obtenemos los datos de la sociedad
-            var adminInfo = await _dbSap.AdminInfo.FirstOrDefaultAsync();
-            // Obtenemos los datos de configuración general
-            var generalSettings = await _dbSap.GeneralSettings.FirstOrDefaultAsync();
-            // Obtenemos los datos del usuario logístico
-            var logisticUser = await _dbSeg.LogisticUser.Where(n => n.IdUsuario == user.IdUsuario).FirstOrDefaultAsync();
-            var userSap = await _dbSap.Users.Where(n => n.USERID == user.IdUserSap).FirstOrDefaultAsync();
-
-            UsuarioDatosEntity UsuarioAutenticar = new UsuarioDatosEntity
-            {
-                IdUsuario = user.IdUsuario,
-                IdPerfil = user.IdPerfil,
-                IdUserSap = userSap != null ? userSap.USERID : 0,
-                UserSap = userSap !=null? userSap.USER_CODE: "",
-                IdLocation = logisticUser != null? logisticUser.IdLocation : 0,
-                SuperUser = logisticUser != null? logisticUser.SuperUser : false,
-                Usuario = user.Usuario,
-                Nombre = user.Nombre,
-                Email = user.Email,
-                Imagen = user.Imagen,
-
-                CompnyName = adminInfo.CompnyName,
-                CompnyAddr = adminInfo.CompnyAddr,
-                PrintHeadr = adminInfo.PrintHeadr,
-                TaxIdNum = adminInfo.TaxIdNum,
-                Phone1 = adminInfo.Phone1,
-                Phone2 = adminInfo.Phone2,
-                MainCurncy = adminInfo.MainCurncy,
-                SysCurrncy = adminInfo.SysCurrncy,
-                DfltWhs = adminInfo.DfltWhs,
-                WhsCodeSpareParts = generalSettings.U_WhsCodeSp,
-                ListaAccesoMenu = listaAccesoMenu
-            };
-
-            resultadoTransaccion.ResultadoCodigo = 0;
-            resultadoTransaccion.ResultadoDescripcion = "Se autentico correctamente";
-            resultadoTransaccion.data = UsuarioAutenticar;
             return resultadoTransaccion;
         }
         public async Task RecuperarPassword(UsuarioRecuperarPasswordEntity entidad)

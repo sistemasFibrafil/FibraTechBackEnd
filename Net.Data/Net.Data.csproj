@@ -6,12 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Sap\RecursosHumanos\**" />
-    <EmbeddedResource Remove="Sap\RecursosHumanos\**" />
-    <None Remove="Sap\RecursosHumanos\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <COMReference Include="SAPbobsCOM">
       <WrapperTool>tlbimp</WrapperTool>
       <VersionMinor>0</VersionMinor>

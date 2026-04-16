@@ -2,8 +2,7 @@
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
-using Net.Business.Entities.Sap;
-
+using Net.Business.Entities.SAPBusinessOne;
 namespace Net.CrossCotting
 {
     public static class FacturacionElectronica

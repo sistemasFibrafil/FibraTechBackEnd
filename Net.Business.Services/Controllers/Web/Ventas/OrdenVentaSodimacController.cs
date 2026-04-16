@@ -1,20 +1,19 @@
 ﻿using System;
 using Net.Data;
+using System.IO;
+using Net.Business.DTO;
+using Net.Business.DTO.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
-using Net.Business.DTO.Web;
-using Net.Business.DTO;
-using System.IO;
-using Net.Business.DTO.Web.Ventas.Sop;
 namespace Net.Business.Services.Controllers.Web.Ventas
 {
-    [Route("api/[controller]/[action]")]
     [ApiController]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ApiExplorerSettings(GroupName = "ApiFibrafil")]
+    [Route("api/[controller]/[action]")]
     [Authorize(AuthenticationSchemes = "Bearer")]
+    [ApiExplorerSettings(GroupName = "ApiFibrafil")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class OrdenVentaSodimacController : Controller
     {
         private readonly IRepositoryWrapper _repository;
@@ -236,7 +235,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetListOrdenVentaSodimacByFechaNumero([FromQuery] FilterRequestDto value)
+        public async Task<IActionResult> GetListOrdenVentaSodimacByFechaNumero([FromQuery] OrdenVentaSodimacFilterRequestDto value)
         {
             var objectGetAll = await _repository.OrdenVentaSodimac.GetListOrdenVentaSodimacByFechaNumero(value.ReturnValue());
 
@@ -252,7 +251,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetListOrdenVentaSodimacExcelByFechaNumero([FromQuery] FilterRequestDto value)
+        public async Task<IActionResult> GetListOrdenVentaSodimacExcelByFechaNumero([FromQuery] OrdenVentaSodimacFilterRequestDto value)
         {
             try
             {
@@ -272,7 +271,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetListOrdenVentaSodimacSelvaFechaNumero([FromQuery] FilterRequestDto value)
+        public async Task<IActionResult> GetListOrdenVentaSodimacSelvaFechaNumero([FromQuery] OrdenVentaSodimacSelvaFilterRequestDto value)
         {
             var objectGetAll = await _repository.OrdenVentaSodimac.GetListOrdenVentaSodimacSelvaFechaNumero(value.ReturnValue());
 
@@ -288,7 +287,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesDefaultResponseType]
-        public async Task<FileContentResult> GetListOrdenVentaSodimacSelvaPdfByFechaNumero([FromQuery] FilterRequestDto value)
+        public async Task<FileContentResult> GetListOrdenVentaSodimacSelvaPdfByFechaNumero([FromQuery] OrdenVentaSodimacSelvaFilterRequestDto value)
         {
             try
             {

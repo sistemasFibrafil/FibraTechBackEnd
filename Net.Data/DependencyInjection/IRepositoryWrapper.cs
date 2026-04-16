@@ -1,5 +1,6 @@
-﻿using Net.Data.Sap;
-using Net.Data.Web;
+﻿using Net.Data.Web;
+using Net.Data.SAPBusinessOne;
+using Net.Data.SAPBusinessOne.Administration;
 namespace Net.Data
 {
     public interface IRepositoryWrapper
@@ -9,34 +10,23 @@ namespace Net.Data
         // WEB
         // =================================================================
         // =================================================================
-
-        /// <summary>
-        /// SEGURIDAD
-        /// </summary>
+        #region <<< << SEGURIDAD >>>
+        ISopRepository Sop { get; }
         IMenuRepository Menu { get; }
         IOpcionRepository Opcion { get; }
         IPerfilRepository Perfil { get; }
         IUsuarioRepository Usuario { get; }
         IDataBaseRepository DataBase { get; }
         IAuditoriaRepository Auditoria { get; }
+        IPickingListRepository PickingList { get; }
         ILogisticUserRepository LogisticUser { get; }
         IOpcionxPerfilRepository OpcionxPerfil { get; }
         IParametroSistemaRepository ParametroSistema { get; }
         IParametroConexionRepository ParametroConexion { get; }
-
-        /// <summary>
-        /// GESTION
-        /// </summary>
-        IStatusRepository Status { get; }
-        ITiempoRepository Tiempo { get; }
-        
-        /// <summary>
-        /// VENTAS
-        /// </summary>
-        ISopRepository Sop { get; }
-        IPickingListRepository PickingList { get; }
         IOrdenVentaSodimacRepository OrdenVentaSodimac { get; }
+        ITakeInventoryFinishedProductsRepository TakeInventoryFinishedProducts { get; }
 
+        #endregion
 
 
 
@@ -46,113 +36,170 @@ namespace Net.Data
         // SAP Business One
         // =================================================================
         // =================================================================
+        #region <<< HERRAMIENTAS >>>
 
-        /// <summary>
-        /// GESTION
-        /// </summary>
+        IUserDefinedFieldsRepository UserDefinedFields { get; }
+
+        #endregion
+
+
+
+
+        #region <<< GESTIÓN >>>
+
+        IExchangeRatesRepository ExchangeRates { get; }
+
+        #endregion
+
+
+
+
+        #region <<< INICIALIZACIÓN >>>
+
+        IDocumentTypeSunatRepository DocumentTypeSunat { get; }
+        IDocumentNumberingSeriesRepository DocumentNumberingSeries { get; }
+        IDocumentSeriesConfigurationRepository DocumentSeriesConfiguration { get; }
+        IDocumentNumberingSeriesSunatRepository DocumentNumberingSeriesSunat { get; }
+
+        #endregion
+
+
+
+
+        #region <<< DEFINICIONES >>>
+
         IUsersRepository Users { get; }
-        IProcesoRepository Proceso { get; }
+        IStatusRepository Status { get; }
+        ITiempoRepository Tiempo { get; }
         ILocationRepository Location { get; }
         IBranchesRepository Branches { get; }
+        IProcessesRepository Processes { get; }
         ITaxGroupsRepository TaxGroups { get; }
-        IVehiculoSapRepository Vehiculo { get; }
-        IWarehousesRepository Warehouses { get; }
         ITiempoVidaRepository TiempoVida { get; }
+        IWarehousesRepository Warehouses { get; }
         IItemGroupsRepository ItemGroups { get; }
-        IConductorSapRepository Conductor { get; }
         IDepartmentsRepository Departments { get; }
         IUnidadMedidaRepository UnidadMedida { get; }
         ITipoLaminadoRepository TipoLaminado { get; }
         ISalesPersonsRepository SalesPersons { get; }
+        IOperationTypeRepository OperationType { get; }
         ICurrencyCodesRepository CurrencyCodes { get; }
-        IExchangeRatesRepository ExchangeRates { get; }
         ILongitudAnchoRepository LongitudAncho { get; }
         IColorImpresionRepository ColorImpresion { get; }
-        ITipoOperacionRepository TipoOperacion { get; }
-        IUserDefinedFieldsRepository UserDefinedFields { get; }
+        ISubGrupoArticuloRepository SubGrupoArticulo { get; }
         IPaymentTermsTypesRepository PaymentTermsTypes { get; }
-        ISubGrupoArticuloSapRepository SubGrupoArticulo { get; }
-        ITipoDocumentoSunatRepository TipoDocumentoSunat { get; }
-        ISubGrupoArticulo2SapRepository SubGrupoArticulo2 { get; }
-        INumeracionDocumentoRepository NumeracionDocumento { get; }
+        ISubGrupoArticulo2Repository SubGrupoArticulo2 { get; }
         IBusinessPartnerGroupsRepository BusinessPartnerGroups { get; }
         IBusinessPartnerSectorsRepository BusinessPartnerSectors { get; }
-        INumeracionDocumentoSunatRepository NumeracionDocumentoSunat { get; }
+
+        #endregion
 
 
 
-        /// <summary>
-        /// FINZAS
-        /// </summary>
+
+        #region <<< PROCEDIMIENTO DE AUTORIZACIÓN >>>
+        
+        IApprovalRequestsRepository ApprovalRequests { get; }
+
+        #endregion
+
+
+
+
+        #region <<< FINANZAS >>>
+
         ICostCentersRepository CostCenters { get; }
         IChartOfAccountsRepository ChartOfAccounts { get; }
 
+        #endregion
 
 
-        /// <summary>
-        /// COMPRAS
-        /// </summary>
+
+
+        #region <<< DOCUMENTOS EN BORRADOR >>>
+
+        IDraftsRepository Drafts { get; }
+
+
+        #endregion
+
+
+
+
+        #region <<< VENTAS >>>
+
+        IOrdersRepository Orders { get; }
+        IInvoicesRepository Invoices { get; }
+        IDeliveryNotesRepository DeliveryNotes { get; }
+        IFacturaVentaSapRepository FacturaVenta { get; }
+        IGuiaElectronicaRepository GuiaElectronica { get; }
+        IFacturacionElectronicaRepositoy FacturacionElectronica { get; }
+
+        #endregion
+
+
+
+
+        #region <<< COMPRAS >>>
+
         IPurchaseRequestRepository PurchaseRequest { get; }
 
-
-
-        /// <summary>
-        /// SOCIOS DE NEGOCIOS
-        /// </summary>
-        IDireccionRepository Direccion { get; }
-        IBusinessPartnersRepository SocioNegocio { get; }
-        IPersonaContactoSapRepository PersonaContacto { get; }
-
-
-        /// <summary>
-        /// VENTAS
-        /// </summary>
-        IOrdersRepository Orders { get; }
-        IEntregaSapRepository Entrega { get; }
-        IFacturaVentaSapRepository FacturaVenta { get; }
-        IOSKCRepository OSKC { get; }
-        IOSKPRepository OSKP { get; }
+        #endregion
 
 
 
-        /// <summary>
-        /// FACTURACIÓN ELECTRÓNICA
-        /// </summary>
-        IGuiaElectronicaSapRepository GuiaElectronica { get; }
-        IFacturacionElectronicaSapRepositoy FacturacionElectronica { get; }
+
+        #region <<< SOCIOS DE NEGOCIOS >>>
+
+        IDriversRepository Drivers { get; }
+        IVehiclesRepository Vehicles { get; }
+        IAddressesRepository Addresses { get; }
+        IBusinessPartnersRepository BusinessPartners { get; }
+        IContactEmployeesRepository ContactEmployees { get; }
+
+        #endregion
 
 
 
-        /// <summary>
-        /// INVENTARIO
-        /// </summary>
-        IPickingRepository Picking { get; }
-        IItemsRepository Articulo { get; }
-        ICargaSaldoInicialRepository CargaSaldoInicial { get; }
-        ISolicitudTrasladoRepository SolicitudTraslado { get; }
-        ITransferenciaStockRepository TransferenciaStock { get; }
-        ITakeInventorySparePartsRepository TakeInventorySpareParts { get; }
-        ITakeInventoryFinishedProductsRepository TakeInventoryFinishedProducts { get; }
-        
 
+        #region <<< GESTION DE BANCOS >>>
 
-        /// <summary>
-        /// GESTION DE BANCOS
-        /// </summary>
         IPagoRecibidoRepository PagoRecibido { get; }
 
+        #endregion
 
 
-        /// <summary>
-        /// PRODUCCION
-        /// </summary>
+
+
+        #region <<< INVENTARIO >>>
+
+        IOSKCRepository OSKC { get; }
+        IOSKPRepository OSKP { get; }
+        IItemsRepository Items { get; }
+        IPickingRepository Picking { get; }
+        IStockTransfersRepository StockTransfers { get; }
+        ICargaSaldoInicialRepository CargaSaldoInicial { get; }
+        ITakeInventorySparePartsRepository TakeInventorySpareParts { get; }
+        IInventoryTransferRequestRepository InventoryTransferRequest { get; }
+
+        #endregion
+
+
+
+
+        #region <<< RECURSOS HUMANOS >>>
+
+        IEmployeesInfoRepository EmployeesInfo { get; }
+
+        #endregion
+
+
+
+
+        #region <<< PRODUCCIÓN >>>
+
         IOrdenFabricacionSapRepository OrdenFabricacion { get; }
 
-
-
-        /// <summary>
-        /// RECURSOS HUMANOS
-        /// </summary>
-        IEmployeesInfoRepository EmployeesInfo { get; }
+        #endregion
     }
 }

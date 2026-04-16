@@ -17,9 +17,9 @@ namespace Net.Data.Web
 
         // PARAMETROS DE COXIÓN
         private readonly IMapper _mapper;
-        private readonly DataContextSeg _db;
+        private readonly DataContextSeguridad _db;
 
-        public LogisticUserRepository(IConnectionSQL context, DataContextSeg db, IMapper mapper)
+        public LogisticUserRepository(IConnectionSQL context, DataContextSeguridad db, IMapper mapper)
             : base(context)
         {
             _db = db;
@@ -49,7 +49,7 @@ namespace Net.Data.Web
                    ApellidoMaterno = p.ApellidoMaterno,
                    Nombre = p.Nombre,
                    // p.LogisticUser puede ser null -> LEFT JOIN
-                   SuperUser = p.LogisticUser != null ? p.LogisticUser.SuperUser : false,
+                   SuperUser = p.LogisticUser == null ? false :  p.LogisticUser.SuperUser ?? false,
                    Blocked = p.LogisticUser != null ? p.LogisticUser.Blocked  : false
                })
                .FirstOrDefaultAsync();
@@ -86,7 +86,7 @@ namespace Net.Data.Web
                .Select(p => new LogisticUserQueryEntity
                {
                    IdLogisticUser = p.IdLogisticUser,
-                   SuperUser = p.SuperUser,
+                   SuperUser = p.SuperUser ?? false,
                    Blocked =  p.Blocked
                })
                .FirstOrDefaultAsync();

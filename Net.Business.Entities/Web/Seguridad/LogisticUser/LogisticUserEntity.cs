@@ -8,7 +8,7 @@ namespace Net.Business.Entities.Web
         // FK hacia Usuario: nullable para que la relación pueda ser opcional (LEFT JOIN)
         public int? IdUsuario { get; set; }
         public int? IdLocation { get; set; }
-        public bool SuperUser { get; set; }
+        public bool? SuperUser { get; set; }
         public bool Blocked { get; set; }
 
 

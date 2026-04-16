@@ -1578,6 +1578,539 @@
         }
       }
     },
+    "/api/DeliveryNotes/GetListByFilter": {
+      "get": {
+        "tags": [
+          "DeliveryNotes"
+        ],
+        "parameters": [
+          {
+            "name": "StartDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "DocStatus",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "SearchText",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DeliveryNotes/GetByDocEntry/{docEntry}": {
+      "get": {
+        "tags": [
+          "DeliveryNotes"
+        ],
+        "parameters": [
+          {
+            "name": "docEntry",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DeliveryNotes/SetCreate": {
+      "post": {
+        "tags": [
+          "DeliveryNotes"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryNotesCreateRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryNotesCreateRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryNotesCreateRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/DeliveryNotes/SetUpdate": {
+      "put": {
+        "tags": [
+          "DeliveryNotes"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryNotesUpdateRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryNotesUpdateRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryNotesUpdateRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DeliveryNotes/SetClose": {
+      "put": {
+        "tags": [
+          "DeliveryNotes"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryNotesCloseRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryNotesCloseRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryNotesCloseRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DeliveryNotes/GetPrintNationalDocEntry/{docEntry}": {
+      "get": {
+        "tags": [
+          "DeliveryNotes"
+        ],
+        "parameters": [
+          {
+            "name": "docEntry",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DeliveryNotes/GetPrintExportDocEntry/{docEntry}": {
+      "get": {
+        "tags": [
+          "DeliveryNotes"
+        ],
+        "parameters": [
+          {
+            "name": "docEntry",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Departments/GetList": {
       "get": {
         "tags": [
@@ -1732,6 +2265,326 @@
           },
           {
             "name": "AdresType",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DocumentNumberingSeries/GetNumero": {
+      "get": {
+        "tags": [
+          "DocumentNumberingSeries"
+        ],
+        "parameters": [
+          {
+            "name": "ObjectCode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "DocSubType",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DocumentNumberingSeriesSunat/GetListSerieDocumento": {
+      "get": {
+        "tags": [
+          "DocumentNumberingSeriesSunat"
+        ],
+        "parameters": [
+          {
+            "name": "U_BPP_NDTD",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "U_BPP_NDCD",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "U_FIB_SEDE",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "U_FIB_ENTR",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "U_FIB_FAVE",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "U_FIB_TRAN",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DocumentNumberingSeriesSunat/GetNumeroDocumentoByTipoSerie": {
+      "get": {
+        "tags": [
+          "DocumentNumberingSeriesSunat"
+        ],
+        "parameters": [
+          {
+            "name": "U_BPP_NDTD",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "U_BPP_NDSD",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DocumentTypeSunat/GetListByTipo": {
+      "get": {
+        "tags": [
+          "DocumentTypeSunat"
+        ],
+        "parameters": [
+          {
+            "name": "U_FIB_ENTR",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "U_FIB_FAVE",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "U_FIB_TRAN",
             "in": "query",
             "schema": {
               "type": "string",
@@ -2222,570 +3075,6 @@
           },
           "404": {
             "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/EntregaSap/GetListGuiaByFecha": {
-      "get": {
-        "tags": [
-          "EntregaSap"
-        ],
-        "parameters": [
-          {
-            "name": "Dat1",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Dat2",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Id1",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Id2",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Id3",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Id4",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Id5",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Cod1",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Cod2",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Cod3",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Cod4",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Cod5",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Val1",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Val2",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Val3",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Val4",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Val5",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Dec1",
-            "in": "query",
-            "schema": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          {
-            "name": "Dec2",
-            "in": "query",
-            "schema": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          {
-            "name": "Dec3",
-            "in": "query",
-            "schema": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          {
-            "name": "Dec4",
-            "in": "query",
-            "schema": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          {
-            "name": "Dec5",
-            "in": "query",
-            "schema": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          {
-            "name": "Text1",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Text2",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Text3",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Text4",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Text5",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/EntregaSap/GetGuiaExcelByFecha": {
-      "get": {
-        "tags": [
-          "EntregaSap"
-        ],
-        "parameters": [
-          {
-            "name": "Dat1",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Dat2",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Id1",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Id2",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Id3",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Id4",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Id5",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Cod1",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Cod2",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Cod3",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Cod4",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Cod5",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Val1",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Val2",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Val3",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Val4",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Val5",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Dec1",
-            "in": "query",
-            "schema": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          {
-            "name": "Dec2",
-            "in": "query",
-            "schema": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          {
-            "name": "Dec3",
-            "in": "query",
-            "schema": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          {
-            "name": "Dec4",
-            "in": "query",
-            "schema": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          {
-            "name": "Dec5",
-            "in": "query",
-            "schema": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          {
-            "name": "Text1",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Text2",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Text3",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Text4",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Text5",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4155,6 +4444,924 @@
           },
           "404": {
             "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/InventoryTransferRequest/GetListOpen": {
+      "get": {
+        "tags": [
+          "InventoryTransferRequest"
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/InventoryTransferRequest/GetListByFilter": {
+      "get": {
+        "tags": [
+          "InventoryTransferRequest"
+        ],
+        "parameters": [
+          {
+            "name": "StartDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "DocStatus",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "SearchText",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/InventoryTransferRequest/GetByDocEntry/{docEntry}": {
+      "get": {
+        "tags": [
+          "InventoryTransferRequest"
+        ],
+        "parameters": [
+          {
+            "name": "docEntry",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/InventoryTransferRequest/GetToTransferenciaByDocEntry/{docEntry}": {
+      "get": {
+        "tags": [
+          "InventoryTransferRequest"
+        ],
+        "parameters": [
+          {
+            "name": "docEntry",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/InventoryTransferRequest/GetListNotPicking": {
+      "get": {
+        "tags": [
+          "InventoryTransferRequest"
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/InventoryTransferRequest/SetCreate": {
+      "post": {
+        "tags": [
+          "InventoryTransferRequest"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryTransferRequestCreateRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryTransferRequestCreateRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryTransferRequestCreateRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/InventoryTransferRequest/SetUpdate": {
+      "put": {
+        "tags": [
+          "InventoryTransferRequest"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryTransferRequestUpdateRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryTransferRequestUpdateRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryTransferRequestUpdateRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/InventoryTransferRequest/SetClose": {
+      "put": {
+        "tags": [
+          "InventoryTransferRequest"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryTransferRequestCloseRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryTransferRequestCloseRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryTransferRequestCloseRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/InventoryTransferRequest/GetFormatoPdfByDocEntry/{id}": {
+      "get": {
+        "tags": [
+          "InventoryTransferRequest"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Invoices/GetListByFilter": {
+      "get": {
+        "tags": [
+          "Invoices"
+        ],
+        "parameters": [
+          {
+            "name": "StartDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "DocStatus",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "DocSubType",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "isIns",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "SearchText",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Invoices/SetCreate": {
+      "post": {
+        "tags": [
+          "Invoices"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoicesCreateRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoicesCreateRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoicesCreateRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/Invoices/GetByDocEntry/{docEntry}": {
+      "get": {
+        "tags": [
+          "Invoices"
+        ],
+        "parameters": [
+          {
+            "name": "docEntry",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
             "content": {
               "text/plain": {
                 "schema": {
@@ -7403,232 +8610,6 @@
           },
           "409": {
             "description": "Si ocurrio un conflicto",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/NumeracionDocumento/GetNumero": {
-      "get": {
-        "tags": [
-          "NumeracionDocumento"
-        ],
-        "parameters": [
-          {
-            "name": "ObjectCode",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/NumeracionDocumentoSunat/GetListSerieDocumento": {
-      "get": {
-        "tags": [
-          "NumeracionDocumentoSunat"
-        ],
-        "parameters": [
-          {
-            "name": "U_BPP_NDTD",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "U_BPP_NDCD",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "U_FIB_TDED",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "U_FIB_TDTD",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "U_FIB_SEDE",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/NumeracionDocumentoSunat/GetNumeroDocumentoByTipoSerie": {
-      "get": {
-        "tags": [
-          "NumeracionDocumentoSunat"
-        ],
-        "parameters": [
-          {
-            "name": "U_BPP_NDTD",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "U_BPP_NDSD",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12347,6 +13328,58 @@
         }
       }
     },
+    "/api/Orders/GetListOpen": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Orders/GetListByFilter": {
       "get": {
         "tags": [
@@ -12436,6 +13469,89 @@
       }
     },
     "/api/Orders/GetByDocEntry/{docEntry}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "parameters": [
+          {
+            "name": "docEntry",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Orders/GetToCopy/{docEntry}": {
       "get": {
         "tags": [
           "Orders"
@@ -15596,6 +16712,397 @@
         }
       }
     },
+    "/api/Orders/SetUpdate": {
+      "put": {
+        "tags": [
+          "Orders"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrdersUpdateRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrdersUpdateRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrdersUpdateRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Orders/SetClose": {
+      "put": {
+        "tags": [
+          "Orders"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrdersCloseRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrdersCloseRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrdersCloseRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Orders/GetPrintNationalDocEntry/{docEntry}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "parameters": [
+          {
+            "name": "docEntry",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Orders/GetPrintExportPlantaDocEntry/{docEntry}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "parameters": [
+          {
+            "name": "docEntry",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Orders/GetPrintExportClienteDocEntry/{docEntry}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "parameters": [
+          {
+            "name": "docEntry",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/OSKC/SetCreate": {
       "post": {
         "tags": [
@@ -17115,6 +18622,89 @@
         }
       }
     },
+    "/api/PaymentTermsTypes/GetByCode/{groupNum}": {
+      "get": {
+        "tags": [
+          "PaymentTermsTypes"
+        ],
+        "parameters": [
+          {
+            "name": "groupNum",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Perfil/GetList": {
       "get": {
         "tags": [
@@ -18440,7 +20030,61 @@
         }
       }
     },
-    "/api/Picking/GetToCopy": {
+    "/api/Picking/GetToCopyTransferRequest": {
+      "post": {
+        "tags": [
+          "Picking"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PickingCopyToFindDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PickingCopyToFindDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PickingCopyToFindDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/Picking/GetToCopyOrder": {
       "post": {
         "tags": [
           "Picking"
@@ -19591,683 +21235,6 @@
           },
           "404": {
             "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/SolicitudTraslado/GetListOpen": {
-      "get": {
-        "tags": [
-          "SolicitudTraslado"
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/SolicitudTraslado/GetListByFilter": {
-      "get": {
-        "tags": [
-          "SolicitudTraslado"
-        ],
-        "parameters": [
-          {
-            "name": "StartDate",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time",
-              "nullable": true
-            }
-          },
-          {
-            "name": "EndDate",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time",
-              "nullable": true
-            }
-          },
-          {
-            "name": "DocStatus",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "SearchText",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/SolicitudTraslado/GetByDocEntry/{docEntry}": {
-      "get": {
-        "tags": [
-          "SolicitudTraslado"
-        ],
-        "parameters": [
-          {
-            "name": "docEntry",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/SolicitudTraslado/GetToTransferenciaByDocEntry/{docEntry}": {
-      "get": {
-        "tags": [
-          "SolicitudTraslado"
-        ],
-        "parameters": [
-          {
-            "name": "docEntry",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/SolicitudTraslado/GetListNotPicking": {
-      "get": {
-        "tags": [
-          "SolicitudTraslado"
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/SolicitudTraslado/SetCreate": {
-      "post": {
-        "tags": [
-          "SolicitudTraslado"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SolicitudTrasladoCreateRequestDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SolicitudTrasladoCreateRequestDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/SolicitudTrasladoCreateRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Success"
-          },
-          "500": {
-            "description": "Server Error"
-          }
-        }
-      }
-    },
-    "/api/SolicitudTraslado/SetUpdate": {
-      "put": {
-        "tags": [
-          "SolicitudTraslado"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SolicitudTrasladoUpdateRequestDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SolicitudTrasladoUpdateRequestDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/SolicitudTrasladoUpdateRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/SolicitudTraslado/SetClose": {
-      "put": {
-        "tags": [
-          "SolicitudTraslado"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SolicitudTrasladoCloseRequestDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SolicitudTrasladoCloseRequestDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/SolicitudTrasladoCloseRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/SolicitudTraslado/GetFormatoPdfByDocEntry/{id}": {
-      "get": {
-        "tags": [
-          "SolicitudTraslado"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
             "content": {
               "text/plain": {
                 "schema": {
@@ -22767,14 +23734,30 @@
         }
       }
     },
-    "/api/TaxGroups/GetBySplCode": {
+    "/api/TaxGroups/GetByCardCode": {
       "get": {
         "tags": [
           "TaxGroups"
         ],
         "parameters": [
           {
-            "name": "slpCode",
+            "name": "CardCode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "Address",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "SlpCode",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -23285,68 +24268,6 @@
         "parameters": [
           {
             "name": "Name",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/TipoDocumentoSunat/GetListByTipo": {
-      "get": {
-        "tags": [
-          "TipoDocumentoSunat"
-        ],
-        "parameters": [
-          {
-            "name": "U_FIB_TDTD",
             "in": "query",
             "schema": {
               "type": "string",
@@ -25444,6 +26365,568 @@
         },
         "additionalProperties": false
       },
+      "DeliveryNotes1CreateRequestDto": {
+        "type": "object",
+        "properties": {
+          "baseType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseEntry": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "baseLine": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "u_FIB_FromPkg": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "dscription": {
+            "type": "string",
+            "nullable": true
+          },
+          "acctCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "whsCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitMsr": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_FIB_PesoKg": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "u_FIB_NBulto": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "priceBefDi": {
+            "type": "number",
+            "format": "double"
+          },
+          "discPrcnt": {
+            "type": "number",
+            "format": "double"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "taxCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_tipoOpT12": {
+            "type": "string",
+            "nullable": true
+          },
+          "lineTotal": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PickingUpdateRequestDto": {
+        "type": "object",
+        "properties": {
+          "docEntry": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "u_BaseEntry": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "u_BaseLine": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "u_Status": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_UsrUpdate": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeliveryNotesCreateRequestDto": {
+        "type": "object",
+        "properties": {
+          "docDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "docDueDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "taxDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "docType": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDTD": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDSD": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDCD": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardName": {
+            "type": "string",
+            "nullable": true
+          },
+          "cntctCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numAtCard": {
+            "type": "string",
+            "nullable": true
+          },
+          "docCur": {
+            "type": "string",
+            "nullable": true
+          },
+          "docRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "payToCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "shipToCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "address2": {
+            "type": "string",
+            "nullable": true
+          },
+          "groupNum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "u_BPP_MDCT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDRT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDNT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_AgencyToCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDDT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_TIP_TRANS": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_COD_TRA": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_TIPDOC_TRA": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_RUC_TRANS2": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_TRANS2": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDVC": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_TIPDOC_COND": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_NUMDOC_COD": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_NOM_COND": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_APE_COND": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDFN": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDFC": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_RUCDestInter": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_DestGuiaInter": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_DireccDestInter": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_STR_NCONTENEDOR": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_STR_NPRESCINTO": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_NPRESCINTO2": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_NPRESCINTO3": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_NPRESCINTO4": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_STR_TVENTA": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDMT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDOM": {
+            "type": "string",
+            "nullable": true
+          },
+          "slpCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "u_FIB_NBULTOS": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_FIB_KG": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_NroOrden": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_OrdenCompra": {
+            "type": "string",
+            "nullable": true
+          },
+          "comments": {
+            "type": "string",
+            "nullable": true
+          },
+          "discPrcnt": {
+            "type": "number",
+            "format": "double"
+          },
+          "docTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_UsrCreate": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeliveryNotes1CreateRequestDto"
+            },
+            "nullable": true
+          },
+          "pickingLines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PickingUpdateRequestDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeliveryNotesUpdateRequestDto": {
+        "type": "object",
+        "properties": {
+          "docEntry": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "docDueDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "docType": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDTD": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDSD": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDCD": {
+            "type": "string",
+            "nullable": true
+          },
+          "cntctCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numAtCard": {
+            "type": "string",
+            "nullable": true
+          },
+          "payToCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "groupNum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "u_BPP_MDCT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDRT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDNT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_AgencyToCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDDT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_TIP_TRANS": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_COD_TRA": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_TIPDOC_TRA": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_RUC_TRANS2": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_TRANS2": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDVC": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_TIPDOC_COND": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_NUMDOC_COD": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_NOM_COND": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_APE_COND": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDFN": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDFC": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_RUCDestInter": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_DestGuiaInter": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_DireccDestInter": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_STR_NCONTENEDOR": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_STR_NPRESCINTO": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_NPRESCINTO2": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_NPRESCINTO3": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_NPRESCINTO4": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_STR_TVENTA": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDMT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDOM": {
+            "type": "string",
+            "nullable": true
+          },
+          "slpCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "u_FIB_NBULTOS": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "u_FIB_KG": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "u_NroOrden": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_OrdenCompra": {
+            "type": "string",
+            "nullable": true
+          },
+          "comments": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_UsrUpdate": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeliveryNotesCloseRequestDto": {
+        "type": "object",
+        "properties": {
+          "docEntry": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "u_UsrClose": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "FilterRequestDto": {
         "type": "object",
         "properties": {
@@ -25555,6 +27038,589 @@
           },
           "text5": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryTransferRequest1CreateRequestDto": {
+        "type": "object",
+        "properties": {
+          "itemCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "dscription": {
+            "type": "string",
+            "nullable": true
+          },
+          "fromWhsCod": {
+            "type": "string",
+            "nullable": true
+          },
+          "whsCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_tipoOpT12": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitMsr": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "openQty": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_FIB_OpQtyPkg": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_FIB_LinStPkg": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PickingInventoryTransferRequestCreateDto": {
+        "type": "object",
+        "properties": {
+          "u_ItemCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_Dscription": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_CodeBar": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FromWhsCod": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_WhsCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_UnitMsr": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_Quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_WeightKg": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_Status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryTransferRequestCreateRequestDto": {
+        "type": "object",
+        "properties": {
+          "objType": {
+            "type": "string",
+            "nullable": true
+          },
+          "docDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "docDueDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "taxDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "u_FIB_IsPkg": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_DocStPkg": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardName": {
+            "type": "string",
+            "nullable": true
+          },
+          "cntctCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "filler": {
+            "type": "string",
+            "nullable": true
+          },
+          "toWhsCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_TIP_TRAS": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDMT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDTS": {
+            "type": "string",
+            "nullable": true
+          },
+          "slpCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "jrnlMemo": {
+            "type": "string",
+            "nullable": true
+          },
+          "comments": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_UsrCreate": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventoryTransferRequest1CreateRequestDto"
+            },
+            "nullable": true
+          },
+          "pickingLines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PickingInventoryTransferRequestCreateDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryTransferRequest1UpdateDto": {
+        "type": "object",
+        "properties": {
+          "docEntry": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lineNum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lineStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "dscription": {
+            "type": "string",
+            "nullable": true
+          },
+          "fromWhsCod": {
+            "type": "string",
+            "nullable": true
+          },
+          "whsCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_tipoOpT12": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitMsr": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "openQty": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_FIB_OpQtyPkg": {
+            "type": "number",
+            "format": "double"
+          },
+          "record": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryTransferRequestUpdateRequestDto": {
+        "type": "object",
+        "properties": {
+          "docEntry": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "objType": {
+            "type": "string",
+            "nullable": true
+          },
+          "docDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "docDueDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "taxDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "u_FIB_IsPkg": {
+            "type": "string",
+            "nullable": true
+          },
+          "filler": {
+            "type": "string",
+            "nullable": true
+          },
+          "toWhsCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_TIP_TRAS": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDMT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDTS": {
+            "type": "string",
+            "nullable": true
+          },
+          "slpCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "jrnlMemo": {
+            "type": "string",
+            "nullable": true
+          },
+          "comments": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_UsrUpdate": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventoryTransferRequest1UpdateDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryTransferRequestCloseRequestDto": {
+        "type": "object",
+        "properties": {
+          "docEntry": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "u_UsrUpdate": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Invoices1CreateRequestDto": {
+        "type": "object",
+        "properties": {
+          "baseType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseEntry": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseLine": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itemCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "dscription": {
+            "type": "string",
+            "nullable": true
+          },
+          "acctCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "whsCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitMsr": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "priceBefDi": {
+            "type": "number",
+            "format": "double"
+          },
+          "discPrcnt": {
+            "type": "number",
+            "format": "double"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "taxCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "lineTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_FIB_LinStPkg": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_OpQtyPkg": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_tipoOpT12": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InvoicesCreateRequestDto": {
+        "type": "object",
+        "properties": {
+          "docDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "docDueDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "taxDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reserveInvoice": {
+            "type": "string",
+            "nullable": true
+          },
+          "docType": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDTD": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDSD": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDCD": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_DocStPkg": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_IsPkg": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardName": {
+            "type": "string",
+            "nullable": true
+          },
+          "cntctCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numAtCard": {
+            "type": "string",
+            "nullable": true
+          },
+          "docCur": {
+            "type": "string",
+            "nullable": true
+          },
+          "docRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "payToCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "shipToCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "address2": {
+            "type": "string",
+            "nullable": true
+          },
+          "groupNum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "u_BPP_MDCT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDRT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDNT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_AgencyToCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDDT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_TipoFlete": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_ValorFlete": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "u_FIB_TFLETE": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_FIB_IMPSEG": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_FIB_PUERTO": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_STR_TVENTA": {
+            "type": "string",
+            "nullable": true
+          },
+          "slpCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "u_NroOrden": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_OrdenCompra": {
+            "type": "string",
+            "nullable": true
+          },
+          "comments": {
+            "type": "string",
+            "nullable": true
+          },
+          "discPrcnt": {
+            "type": "number",
+            "format": "double"
+          },
+          "docTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_UsrCreate": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Invoices1CreateRequestDto"
+            },
             "nullable": true
           }
         },
@@ -26253,6 +28319,253 @@
             "type": "string",
             "nullable": true
           },
+          "acctCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "whsCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitMsr": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "priceBefDi": {
+            "type": "number",
+            "format": "double"
+          },
+          "discPrcnt": {
+            "type": "number",
+            "format": "double"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "taxCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "vatPrcnt": {
+            "type": "number",
+            "format": "double"
+          },
+          "vatSum": {
+            "type": "number",
+            "format": "double"
+          },
+          "lineTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_FIB_LinStPkg": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_OpQtyPkg": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_tipoOpT12": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrdersCreateRequestDto": {
+        "type": "object",
+        "properties": {
+          "docDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "docDueDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "taxDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "docType": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_DocStPkg": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_IsPkg": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardName": {
+            "type": "string",
+            "nullable": true
+          },
+          "cntctCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numAtCard": {
+            "type": "string",
+            "nullable": true
+          },
+          "docCur": {
+            "type": "string",
+            "nullable": true
+          },
+          "docRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "groupNum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shipToCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "address2": {
+            "type": "string",
+            "nullable": true
+          },
+          "payToCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDCT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDRT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDNT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_CODT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_MDDT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_TipoFlete": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_ValorFlete": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "u_FIB_TFLETE": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_FIB_IMPSEG": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_FIB_PUERTO": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_STR_TVENTA": {
+            "type": "string",
+            "nullable": true
+          },
+          "slpCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "u_NroOrden": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_OrdenCompra": {
+            "type": "string",
+            "nullable": true
+          },
+          "comments": {
+            "type": "string",
+            "nullable": true
+          },
+          "discPrcnt": {
+            "type": "number",
+            "format": "double"
+          },
+          "discSum": {
+            "type": "number",
+            "format": "double"
+          },
+          "vatSum": {
+            "type": "number",
+            "format": "double"
+          },
+          "docTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "u_UsrCreate": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Orders1CreateRequestDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Orders1UpdateRequestDto": {
+        "type": "object",
+        "properties": {
+          "lineStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "lineNum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itemCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "dscription": {
+            "type": "string",
+            "nullable": true
+          },
+          "acctCode": {
+            "type": "string",
+            "nullable": true
+          },
           "whsCode": {
             "type": "string",
             "nullable": true
@@ -26305,13 +28618,21 @@
           "lineTotal": {
             "type": "number",
             "format": "double"
+          },
+          "record": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "OrdersCreateRequestDto": {
+      "OrdersUpdateRequestDto": {
         "type": "object",
         "properties": {
+          "docEntry": {
+            "type": "integer",
+            "format": "int32"
+          },
           "docDate": {
             "type": "string",
             "format": "date-time"
@@ -26325,14 +28646,6 @@
             "format": "date-time"
           },
           "docType": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_FIB_DocStPkg": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_FIB_IsPkg": {
             "type": "string",
             "nullable": true
           },
@@ -26433,6 +28746,10 @@
             "format": "int32",
             "nullable": true
           },
+          "u_NroOrden": {
+            "type": "string",
+            "nullable": true
+          },
           "u_OrdenCompra": {
             "type": "string",
             "nullable": true
@@ -26457,7 +28774,7 @@
             "type": "number",
             "format": "double"
           },
-          "u_UsrCreate": {
+          "u_UsrUpdate": {
             "type": "integer",
             "format": "int32",
             "nullable": true
@@ -26465,9 +28782,23 @@
           "lines": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Orders1CreateRequestDto"
+              "$ref": "#/components/schemas/Orders1UpdateRequestDto"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrdersCloseRequestDto": {
+        "type": "object",
+        "properties": {
+          "docEntry": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "u_UsrClose": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -27803,282 +30134,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "u_UsrUpdate": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SolicitudTrasladoDetalleCreateRequestDto": {
-        "type": "object",
-        "properties": {
-          "itemCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "dscription": {
-            "type": "string",
-            "nullable": true
-          },
-          "fromWhsCod": {
-            "type": "string",
-            "nullable": true
-          },
-          "whsCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_tipoOpT12": {
-            "type": "string",
-            "nullable": true
-          },
-          "unitMsr": {
-            "type": "string",
-            "nullable": true
-          },
-          "quantity": {
-            "type": "number",
-            "format": "double"
-          },
-          "openQty": {
-            "type": "number",
-            "format": "double"
-          },
-          "u_FIB_OpQtyPkg": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SolicitudTrasladoCreateRequestDto": {
-        "type": "object",
-        "properties": {
-          "objType": {
-            "type": "string",
-            "nullable": true
-          },
-          "docDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "docDueDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "taxDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "u_FIB_IsPkg": {
-            "type": "string",
-            "nullable": true
-          },
-          "cardCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "cardName": {
-            "type": "string",
-            "nullable": true
-          },
-          "cntctCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "address": {
-            "type": "string",
-            "nullable": true
-          },
-          "filler": {
-            "type": "string",
-            "nullable": true
-          },
-          "toWhsCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_FIB_TIP_TRAS": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_BPP_MDMT": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_BPP_MDTS": {
-            "type": "string",
-            "nullable": true
-          },
-          "slpCode": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "jrnlMemo": {
-            "type": "string",
-            "nullable": true
-          },
-          "comments": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_UsrCreate": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "lines": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SolicitudTrasladoDetalleCreateRequestDto"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "SolicitudTraslado1UpdateDto": {
-        "type": "object",
-        "properties": {
-          "docEntry": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "lineNum": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "lineStatus": {
-            "type": "string",
-            "nullable": true
-          },
-          "itemCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "dscription": {
-            "type": "string",
-            "nullable": true
-          },
-          "fromWhsCod": {
-            "type": "string",
-            "nullable": true
-          },
-          "whsCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_tipoOpT12": {
-            "type": "string",
-            "nullable": true
-          },
-          "unitMsr": {
-            "type": "string",
-            "nullable": true
-          },
-          "quantity": {
-            "type": "number",
-            "format": "double"
-          },
-          "openQty": {
-            "type": "number",
-            "format": "double"
-          },
-          "u_FIB_OpQtyPkg": {
-            "type": "number",
-            "format": "double"
-          },
-          "record": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SolicitudTrasladoUpdateRequestDto": {
-        "type": "object",
-        "properties": {
-          "docEntry": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "objType": {
-            "type": "string",
-            "nullable": true
-          },
-          "docDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "docDueDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "taxDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "u_FIB_IsPkg": {
-            "type": "string",
-            "nullable": true
-          },
-          "filler": {
-            "type": "string",
-            "nullable": true
-          },
-          "toWhsCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_FIB_TIP_TRAS": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_BPP_MDMT": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_BPP_MDTS": {
-            "type": "string",
-            "nullable": true
-          },
-          "slpCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "jrnlMemo": {
-            "type": "string",
-            "nullable": true
-          },
-          "comments": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_UsrUpdate": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "lines": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SolicitudTraslado1UpdateDto"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "SolicitudTrasladoCloseRequestDto": {
-        "type": "object",
-        "properties": {
-          "docEntry": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "u_UsrUpdate": {
+          "u_UsrClose": {
             "type": "integer",
             "format": "int32"
           }
@@ -28699,32 +30755,6 @@
         },
         "additionalProperties": false
       },
-      "PickingUpdateDto": {
-        "type": "object",
-        "properties": {
-          "docEntry": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "u_BaseEntry": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "u_BaseLine": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "u_Status": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_UsrUpdate": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
       "TransferenciaStockCreateDto": {
         "type": "object",
         "properties": {
@@ -28868,7 +30898,7 @@
           "pickingLines": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/PickingUpdateDto"
+              "$ref": "#/components/schemas/PickingUpdateRequestDto"
             },
             "nullable": true
           }

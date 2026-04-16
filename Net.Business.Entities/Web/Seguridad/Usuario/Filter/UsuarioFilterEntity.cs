@@ -2,6 +2,6 @@
 {
     public class UsuarioFilterEntity
     {
-        public string Filter { get; set; }
+        public string? Filter { get; set; }
     }
 }

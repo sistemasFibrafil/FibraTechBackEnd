@@ -182,7 +182,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.General.BranchesController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.BranchesController",
     "Method": "GetList",
     "RelativePath": "api/Branches/GetList",
     "HttpMethod": "GET",
@@ -216,7 +216,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.BusinessPartners.BusinessPartnerGroupsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.BusinessPartners.BusinessPartnerGroupsController",
     "Method": "GetListByGroupType",
     "RelativePath": "api/BusinessPartnerGroups/GetListByGroupType",
     "HttpMethod": "GET",
@@ -256,7 +256,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.BusinessPartners.BusinessPartnersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.BusinessPartnersController",
     "Method": "GetByCode",
     "RelativePath": "api/BusinessPartners/GetByCode",
     "HttpMethod": "GET",
@@ -296,7 +296,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.BusinessPartners.BusinessPartnersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.BusinessPartnersController",
     "Method": "GetClienteBySectorStatusExcel",
     "RelativePath": "api/BusinessPartners/GetClienteBySectorStatusExcel",
     "HttpMethod": "GET",
@@ -355,7 +355,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.BusinessPartners.BusinessPartnersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.BusinessPartnersController",
     "Method": "GetListByFilter",
     "RelativePath": "api/BusinessPartners/GetListByFilter",
     "HttpMethod": "GET",
@@ -405,7 +405,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.BusinessPartners.BusinessPartnersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.BusinessPartnersController",
     "Method": "GetListClienteBySectorStatus",
     "RelativePath": "api/BusinessPartners/GetListClienteBySectorStatus",
     "HttpMethod": "GET",
@@ -455,7 +455,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.BusinessPartners.BusinessPartnerSectorsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.BusinessPartners.BusinessPartnerSectorsController",
     "Method": "GetList",
     "RelativePath": "api/BusinessPartnerSectors/GetList",
     "HttpMethod": "GET",
@@ -489,7 +489,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.InventoryTransactions.CargaSaldoInicialController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions.CargaSaldoInicialController",
     "Method": "GetListByFilter",
     "RelativePath": "api/CargaSaldoInicial/GetListByFilter",
     "HttpMethod": "GET",
@@ -539,7 +539,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Financials.ChartOfAccountsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Financials.ChartOfAccountsController",
     "Method": "GetListByFilter",
     "RelativePath": "api/ChartOfAccounts/GetListByFilter",
     "HttpMethod": "GET",
@@ -579,7 +579,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.ColorImpresionController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.ColorImpresionController",
     "Method": "GetList",
     "RelativePath": "api/ColorImpresion/GetList",
     "HttpMethod": "GET",
@@ -613,7 +613,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.ColorImpresionController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.ColorImpresionController",
     "Method": "GetListByFiltro",
     "RelativePath": "api/ColorImpresion/GetListByFiltro",
     "HttpMethod": "GET",
@@ -653,7 +653,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.BusinessPartners.ConductorSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.BusinessPartners.ConductorSapController",
     "Method": "GetListByFiltro",
     "RelativePath": "api/ConductorSap/GetListByFiltro",
     "HttpMethod": "GET",
@@ -823,7 +823,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Financials.CostAccounting.CostCenters.CostCentersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Financials.CostAccounting.CostCenters.CostCentersController",
     "Method": "GetListByFilter",
     "RelativePath": "api/CostCenters/GetListByFilter",
     "HttpMethod": "GET",
@@ -868,7 +868,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Financials.CurrencyCodesController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Financials.CurrencyCodesController",
     "Method": "GetList",
     "RelativePath": "api/CurrencyCodes/GetList",
     "HttpMethod": "GET",
@@ -902,7 +902,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Financials.CurrencyCodesController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Financials.CurrencyCodesController",
     "Method": "GetListByCode",
     "RelativePath": "api/CurrencyCodes/GetListByCode",
     "HttpMethod": "GET",
@@ -976,7 +976,325 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.General.DepartmentsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.DeliveryNotesController",
+    "Method": "GetByDocEntry",
+    "RelativePath": "api/DeliveryNotes/GetByDocEntry/{docEntry}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "docEntry",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.DeliveryNotesController",
+    "Method": "GetListByFilter",
+    "RelativePath": "api/DeliveryNotes/GetListByFilter",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "StartDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "EndDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "DocStatus",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchText",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.DeliveryNotesController",
+    "Method": "GetPrintExportDocEntry",
+    "RelativePath": "api/DeliveryNotes/GetPrintExportDocEntry/{docEntry}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "docEntry",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.DeliveryNotesController",
+    "Method": "GetPrintNationalDocEntry",
+    "RelativePath": "api/DeliveryNotes/GetPrintNationalDocEntry/{docEntry}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "docEntry",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.DeliveryNotesController",
+    "Method": "SetClose",
+    "RelativePath": "api/DeliveryNotes/SetClose",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "Net.Business.DTO.SAPBusinessOne.DeliveryNotesCloseRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 204
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.DeliveryNotesController",
+    "Method": "SetCreate",
+    "RelativePath": "api/DeliveryNotes/SetCreate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "Net.Business.DTO.SAPBusinessOne.DeliveryNotesCreateRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 201
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 500
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.DeliveryNotesController",
+    "Method": "SetUpdate",
+    "RelativePath": "api/DeliveryNotes/SetUpdate",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "Net.Business.DTO.SAPBusinessOne.DeliveryNotesUpdateRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 204
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.DepartmentsController",
     "Method": "GetList",
     "RelativePath": "api/Departments/GetList",
     "HttpMethod": "GET",
@@ -1010,7 +1328,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.BusinessPartners.DireccionController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.DireccionController",
     "Method": "GetByCode",
     "RelativePath": "api/Direccion/GetByCode",
     "HttpMethod": "GET",
@@ -1060,7 +1378,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.BusinessPartners.DireccionController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.DireccionController",
     "Method": "GetListByCode",
     "RelativePath": "api/Direccion/GetListByCode",
     "HttpMethod": "GET",
@@ -1110,7 +1428,212 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.ElectronicBilling.ElectronicBillingController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.SystemInitialization.DocumentNumberingSeriesController",
+    "Method": "GetNumero",
+    "RelativePath": "api/DocumentNumberingSeries/GetNumero",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ObjectCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DocSubType",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.SystemInitialization.DocumentNumberingSeriesSunatController",
+    "Method": "GetListSerieDocumento",
+    "RelativePath": "api/DocumentNumberingSeriesSunat/GetListSerieDocumento",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "U_BPP_NDTD",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "U_BPP_NDCD",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "U_FIB_SEDE",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "U_FIB_ENTR",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "U_FIB_FAVE",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "U_FIB_TRAN",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.SystemInitialization.DocumentNumberingSeriesSunatController",
+    "Method": "GetNumeroDocumentoByTipoSerie",
+    "RelativePath": "api/DocumentNumberingSeriesSunat/GetNumeroDocumentoByTipoSerie",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "U_BPP_NDTD",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "U_BPP_NDSD",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.SystemInitialization.DocumentTypeSunatController",
+    "Method": "GetListByTipo",
+    "RelativePath": "api/DocumentTypeSunat/GetListByTipo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "U_FIB_ENTR",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "U_FIB_FAVE",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "U_FIB_TRAN",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.ElectronicBilling.ElectronicBillingController",
     "Method": "GetListGuiaElectronicaByFiltro",
     "RelativePath": "api/ElectronicBilling/GetListGuiaElectronicaByFiltro",
     "HttpMethod": "GET",
@@ -1280,7 +1803,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.ElectronicBilling.ElectronicBillingController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.ElectronicBilling.ElectronicBillingController",
     "Method": "SetEnviar",
     "RelativePath": "api/ElectronicBilling/SetEnviar",
     "HttpMethod": "PUT",
@@ -1320,7 +1843,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.HumanResources.EmployeesInfoController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.HumanResources.EmployeesInfoController",
     "Method": "GetById",
     "RelativePath": "api/EmployeesInfo/GetById",
     "HttpMethod": "GET",
@@ -1360,7 +1883,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.HumanResources.EmployeesInfoController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.HumanResources.EmployeesInfoController",
     "Method": "GetList",
     "RelativePath": "api/EmployeesInfo/GetList",
     "HttpMethod": "GET",
@@ -1394,356 +1917,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.EntregaSapController",
-    "Method": "GetGuiaExcelByFecha",
-    "RelativePath": "api/EntregaSap/GetGuiaExcelByFecha",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Dat1",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dat2",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Id1",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Id2",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Id3",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Id4",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Id5",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Cod1",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Cod2",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Cod3",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Cod4",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Cod5",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Val1",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Val2",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Val3",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Val4",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Val5",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dec1",
-        "Type": "System.Decimal",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dec2",
-        "Type": "System.Decimal",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dec3",
-        "Type": "System.Decimal",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dec4",
-        "Type": "System.Decimal",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dec5",
-        "Type": "System.Decimal",
-        "IsRequired": false
-      },
-      {
-        "Name": "Text1",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Text2",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Text3",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Text4",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Text5",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 0
-      }
-    ]
-  },
-  {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.EntregaSapController",
-    "Method": "GetListGuiaByFecha",
-    "RelativePath": "api/EntregaSap/GetListGuiaByFecha",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Dat1",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dat2",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Id1",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Id2",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Id3",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Id4",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Id5",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Cod1",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Cod2",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Cod3",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Cod4",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Cod5",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Val1",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Val2",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Val3",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Val4",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Val5",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dec1",
-        "Type": "System.Decimal",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dec2",
-        "Type": "System.Decimal",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dec3",
-        "Type": "System.Decimal",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dec4",
-        "Type": "System.Decimal",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dec5",
-        "Type": "System.Decimal",
-        "IsRequired": false
-      },
-      {
-        "Name": "Text1",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Text2",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Text3",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Text4",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Text5",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      }
-    ]
-  },
-  {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.ExchangeRatesController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.ExchangeRatesController",
     "Method": "GetByDocDateAndCurrency",
     "RelativePath": "api/ExchangeRates/GetByDocDateAndCurrency",
     "HttpMethod": "GET",
@@ -1793,7 +1967,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.FacturaVentaSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.FacturaVentaSapController",
     "Method": "GetFacturaVentaByFilterExcel",
     "RelativePath": "api/FacturaVentaSap/GetFacturaVentaByFilterExcel",
     "HttpMethod": "GET",
@@ -1852,7 +2026,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.FacturaVentaSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.FacturaVentaSapController",
     "Method": "GetListFacturaVentaByFilter",
     "RelativePath": "api/FacturaVentaSap/GetListFacturaVentaByFilter",
     "HttpMethod": "GET",
@@ -1902,7 +2076,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.FacturaVentaSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.FacturaVentaSapController",
     "Method": "GetListVentaByFilter",
     "RelativePath": "api/FacturaVentaSap/GetListVentaByFilter",
     "HttpMethod": "GET",
@@ -1962,7 +2136,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.FacturaVentaSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.FacturaVentaSapController",
     "Method": "GetListVentaProyeccionByFecha",
     "RelativePath": "api/FacturaVentaSap/GetListVentaProyeccionByFecha",
     "HttpMethod": "GET",
@@ -2132,7 +2306,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.FacturaVentaSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.FacturaVentaSapController",
     "Method": "GetListVentaResumenByFechaGrupo",
     "RelativePath": "api/FacturaVentaSap/GetListVentaResumenByFechaGrupo",
     "HttpMethod": "GET",
@@ -2302,7 +2476,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.FacturaVentaSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.FacturaVentaSapController",
     "Method": "GetVentaByFilterExcel",
     "RelativePath": "api/FacturaVentaSap/GetVentaByFilterExcel",
     "HttpMethod": "GET",
@@ -2371,7 +2545,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.FacturaVentaSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.FacturaVentaSapController",
     "Method": "GetVentaResumenExcelByFechaGrupo",
     "RelativePath": "api/FacturaVentaSap/GetVentaResumenExcelByFechaGrupo",
     "HttpMethod": "GET",
@@ -2550,7 +2724,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.ElectronicBilling.GuiaElectronicaSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.ElectronicBilling.GuiaElectronicaSapController",
     "Method": "SetEnviar",
     "RelativePath": "api/GuiaElectronicaSap/SetEnviar",
     "HttpMethod": "PUT",
@@ -2590,7 +2764,561 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.ItemGroupsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequestController",
+    "Method": "GetByDocEntry",
+    "RelativePath": "api/InventoryTransferRequest/GetByDocEntry/{docEntry}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "docEntry",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequestController",
+    "Method": "GetFormatoPdfByDocEntry",
+    "RelativePath": "api/InventoryTransferRequest/GetFormatoPdfByDocEntry/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequestController",
+    "Method": "GetListByFilter",
+    "RelativePath": "api/InventoryTransferRequest/GetListByFilter",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "StartDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "EndDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "DocStatus",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchText",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequestController",
+    "Method": "GetListNotPicking",
+    "RelativePath": "api/InventoryTransferRequest/GetListNotPicking",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequestController",
+    "Method": "GetListOpen",
+    "RelativePath": "api/InventoryTransferRequest/GetListOpen",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequestController",
+    "Method": "GetToTransferenciaByDocEntry",
+    "RelativePath": "api/InventoryTransferRequest/GetToTransferenciaByDocEntry/{docEntry}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "docEntry",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequestController",
+    "Method": "SetClose",
+    "RelativePath": "api/InventoryTransferRequest/SetClose",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "Net.Business.DTO.SAPBusinessOne.InventoryTransferRequestCloseRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 204
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequestController",
+    "Method": "SetCreate",
+    "RelativePath": "api/InventoryTransferRequest/SetCreate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "Net.Business.DTO.SAPBusinessOne.InventoryTransferRequestCreateRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 201
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 500
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequestController",
+    "Method": "SetUpdate",
+    "RelativePath": "api/InventoryTransferRequest/SetUpdate",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "Net.Business.DTO.SAPBusinessOne.InventoryTransferRequestUpdateRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 204
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.InvoicesController",
+    "Method": "GetByDocEntry",
+    "RelativePath": "api/Invoices/GetByDocEntry/{docEntry}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "docEntry",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.InvoicesController",
+    "Method": "GetListByFilter",
+    "RelativePath": "api/Invoices/GetListByFilter",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "StartDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "EndDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "DocStatus",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DocSubType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isIns",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchText",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.InvoicesController",
+    "Method": "SetCreate",
+    "RelativePath": "api/Invoices/SetCreate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "Net.Business.DTO.SAPBusinessOne.InvoicesCreateRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 201
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 500
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.ItemGroupsController",
     "Method": "GetList",
     "RelativePath": "api/ItemGroups/GetList",
     "HttpMethod": "GET",
@@ -2624,7 +3352,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "GetArticuloForOrdenVentaSodimacBySku",
     "RelativePath": "api/Items/GetArticuloForOrdenVentaSodimacBySku",
     "HttpMethod": "POST",
@@ -2633,7 +3361,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.ItemsSodimacBySkuFindRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.ItemsSodimacBySkuFindRequestDto",
         "IsRequired": true
       }
     ],
@@ -2660,7 +3388,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "GetArticuloVentaByCode",
     "RelativePath": "api/Items/GetArticuloVentaByCode",
     "HttpMethod": "GET",
@@ -2830,7 +3558,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "GetArticuloVentaExcelByGrupoSubGrupoEstado",
     "RelativePath": "api/Items/GetArticuloVentaExcelByGrupoSubGrupoEstado",
     "HttpMethod": "GET",
@@ -3000,7 +3728,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "GetArticuloVentaStockExcelByGrupoSubGrupo",
     "RelativePath": "api/Items/GetArticuloVentaStockExcelByGrupoSubGrupo",
     "HttpMethod": "GET",
@@ -3170,7 +3898,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "GetListArticuloByGrupoSubGrupoFiltro",
     "RelativePath": "api/Items/GetListArticuloByGrupoSubGrupoFiltro",
     "HttpMethod": "GET",
@@ -3340,7 +4068,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "GetListArticuloExcelByGrupoSubGrupoFiltro",
     "RelativePath": "api/Items/GetListArticuloExcelByGrupoSubGrupoFiltro",
     "HttpMethod": "GET",
@@ -3510,7 +4238,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "GetListArticuloVentaByGrupoSubGrupoEstado",
     "RelativePath": "api/Items/GetListArticuloVentaByGrupoSubGrupoEstado",
     "HttpMethod": "GET",
@@ -3680,7 +4408,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "GetListArticuloVentaStockByGrupoSubGrupo",
     "RelativePath": "api/Items/GetListArticuloVentaStockByGrupoSubGrupo",
     "HttpMethod": "GET",
@@ -3850,7 +4578,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "GetListByCode",
     "RelativePath": "api/Items/GetListByCode",
     "HttpMethod": "GET",
@@ -3910,7 +4638,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "GetListByFilter",
     "RelativePath": "api/Items/GetListByFilter",
     "HttpMethod": "GET",
@@ -3965,7 +4693,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "GetListMovimientoStockByFechaSede",
     "RelativePath": "api/Items/GetListMovimientoStockByFechaSede",
     "HttpMethod": "GET",
@@ -4030,7 +4758,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "GetListStockGeneralDetailed",
     "RelativePath": "api/Items/GetListStockGeneralDetailed",
     "HttpMethod": "GET",
@@ -4080,7 +4808,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "GetListStockGeneralSummary",
     "RelativePath": "api/Items/GetListStockGeneralSummary",
     "HttpMethod": "GET",
@@ -4130,7 +4858,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "GetMovimientoStockExcelByFechaSede",
     "RelativePath": "api/Items/GetMovimientoStockExcelByFechaSede",
     "HttpMethod": "GET",
@@ -4204,7 +4932,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "GetStockGeneralDetailedExcel",
     "RelativePath": "api/Items/GetStockGeneralDetailedExcel",
     "HttpMethod": "GET",
@@ -4254,7 +4982,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "GetStockGeneralSummaryExcel",
     "RelativePath": "api/Items/GetStockGeneralSummaryExcel",
     "HttpMethod": "GET",
@@ -4304,7 +5032,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.ItemsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.ItemsController",
     "Method": "SetCreateMassive",
     "RelativePath": "api/Items/SetCreateMassive",
     "HttpMethod": "POST",
@@ -4313,7 +5041,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.ItemsCreateMassiveRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.ItemsCreateMassiveRequestDto",
         "IsRequired": true
       }
     ],
@@ -4340,7 +5068,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.LocationController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.LocationController",
     "Method": "GetList",
     "RelativePath": "api/Location/GetList",
     "HttpMethod": "GET",
@@ -4450,7 +5178,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.LongitudAnchoController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.LongitudAnchoController",
     "Method": "GetList",
     "RelativePath": "api/LongitudAncho/GetList",
     "HttpMethod": "GET",
@@ -4621,151 +5349,6 @@
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      }
-    ]
-  },
-  {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.SystemInitialization.NumeracionDocumentoController",
-    "Method": "GetNumero",
-    "RelativePath": "api/NumeracionDocumento/GetNumero",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "ObjectCode",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      }
-    ]
-  },
-  {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.SystemInitialization.NumeracionDocumentoSunatController",
-    "Method": "GetListSerieDocumento",
-    "RelativePath": "api/NumeracionDocumentoSunat/GetListSerieDocumento",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "U_BPP_NDTD",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "U_BPP_NDCD",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "U_FIB_TDED",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "U_FIB_TDTD",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "U_FIB_SEDE",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      }
-    ]
-  },
-  {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.SystemInitialization.NumeracionDocumentoSunatController",
-    "Method": "GetNumeroDocumentoByTipoSerie",
-    "RelativePath": "api/NumeracionDocumentoSunat/GetNumeroDocumentoByTipoSerie",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "U_BPP_NDTD",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "U_BPP_NDSD",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
@@ -5151,7 +5734,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Production.OrdenFabricacionSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Production.OrdenFabricacionSapController",
     "Method": "GetListOrdenFabricacionBySede",
     "RelativePath": "api/OrdenFabricacionSap/GetListOrdenFabricacionBySede",
     "HttpMethod": "GET",
@@ -5321,7 +5904,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Production.OrdenFabricacionSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Production.OrdenFabricacionSapController",
     "Method": "GetListOrdenFabricacionGeneralBySede",
     "RelativePath": "api/OrdenFabricacionSap/GetListOrdenFabricacionGeneralBySede",
     "HttpMethod": "GET",
@@ -5491,7 +6074,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Production.OrdenFabricacionSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Production.OrdenFabricacionSapController",
     "Method": "GetOrdenFabricacionExcelBySede",
     "RelativePath": "api/OrdenFabricacionSap/GetOrdenFabricacionExcelBySede",
     "HttpMethod": "GET",
@@ -5670,7 +6253,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Production.OrdenFabricacionSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Production.OrdenFabricacionSapController",
     "Method": "GetOrdenFabricacionGeneralExcelBySede",
     "RelativePath": "api/OrdenFabricacionSap/GetOrdenFabricacionGeneralExcelBySede",
     "HttpMethod": "GET",
@@ -7651,7 +8234,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "GetByDocEntry",
     "RelativePath": "api/Orders/GetByDocEntry/{docEntry}",
     "HttpMethod": "GET",
@@ -7700,7 +8283,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "GetListByFilter",
     "RelativePath": "api/Orders/GetListByFilter",
     "HttpMethod": "GET",
@@ -7755,7 +8338,41 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
+    "Method": "GetListOpen",
+    "RelativePath": "api/Orders/GetListOpen",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "GetListOrdenVentaPendienteStockAlmacenProduccionByFecha",
     "RelativePath": "api/Orders/GetListOrdenVentaPendienteStockAlmacenProduccionByFecha",
     "HttpMethod": "GET",
@@ -7925,7 +8542,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "GetListOrdenVentaPreliminarPendienteByFecha",
     "RelativePath": "api/Orders/GetListOrdenVentaPreliminarPendienteByFecha",
     "HttpMethod": "GET",
@@ -8095,7 +8712,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "GetListOrdenVentaPreliminarPendienteExcelByFecha",
     "RelativePath": "api/Orders/GetListOrdenVentaPreliminarPendienteExcelByFecha",
     "HttpMethod": "GET",
@@ -8274,7 +8891,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "GetListOrdenVentaProgramacionByFecha",
     "RelativePath": "api/Orders/GetListOrdenVentaProgramacionByFecha",
     "HttpMethod": "GET",
@@ -8444,7 +9061,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "GetListOrdenVentaSodimacPendienteByFiltro",
     "RelativePath": "api/Orders/GetListOrdenVentaSodimacPendienteByFiltro",
     "HttpMethod": "GET",
@@ -8614,7 +9231,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "GetListSeguimientoByFilter",
     "RelativePath": "api/Orders/GetListSeguimientoByFilter",
     "HttpMethod": "GET",
@@ -8689,7 +9306,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "GetListSeguimientoDetalladoDireccionDespachoByFilter",
     "RelativePath": "api/Orders/GetListSeguimientoDetalladoDireccionDespachoByFilter",
     "HttpMethod": "GET",
@@ -8764,7 +9381,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "GetListSeguimientoDetalladoDireccionFiscalByFilter",
     "RelativePath": "api/Orders/GetListSeguimientoDetalladoDireccionFiscalByFilter",
     "HttpMethod": "GET",
@@ -8839,7 +9456,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "GetOrdenVentaPendienteStockAlmacenProduccionExcelByFecha",
     "RelativePath": "api/Orders/GetOrdenVentaPendienteStockAlmacenProduccionExcelByFecha",
     "HttpMethod": "GET",
@@ -9018,7 +9635,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "GetOrdenVentaProgramacionExcelByFecha",
     "RelativePath": "api/Orders/GetOrdenVentaProgramacionExcelByFecha",
     "HttpMethod": "GET",
@@ -9197,7 +9814,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "GetOrdenVentaSodimacPendienteById",
     "RelativePath": "api/Orders/GetOrdenVentaSodimacPendienteById",
     "HttpMethod": "GET",
@@ -9376,7 +9993,154 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
+    "Method": "GetPrintExportClienteDocEntry",
+    "RelativePath": "api/Orders/GetPrintExportClienteDocEntry/{docEntry}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "docEntry",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
+    "Method": "GetPrintExportPlantaDocEntry",
+    "RelativePath": "api/Orders/GetPrintExportPlantaDocEntry/{docEntry}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "docEntry",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
+    "Method": "GetPrintNationalDocEntry",
+    "RelativePath": "api/Orders/GetPrintNationalDocEntry/{docEntry}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "docEntry",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "GetSeguimientoByFilterExcel",
     "RelativePath": "api/Orders/GetSeguimientoByFilterExcel",
     "HttpMethod": "GET",
@@ -9460,7 +10224,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "GetSeguimientoDetalladoDireccionDespachoByFilterExcel",
     "RelativePath": "api/Orders/GetSeguimientoDetalladoDireccionDespachoByFilterExcel",
     "HttpMethod": "GET",
@@ -9544,7 +10308,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "GetSeguimientoDetalladoDireccionFiscalByFilterExcel",
     "RelativePath": "api/Orders/GetSeguimientoDetalladoDireccionFiscalByFilterExcel",
     "HttpMethod": "GET",
@@ -9628,7 +10392,96 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Sales.OrdersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
+    "Method": "GetToCopy",
+    "RelativePath": "api/Orders/GetToCopy/{docEntry}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "docEntry",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
+    "Method": "SetClose",
+    "RelativePath": "api/Orders/SetClose",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "Net.Business.DTO.SAPBusinessOne.OrdersCloseRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 204
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
     "Method": "SetCreate",
     "RelativePath": "api/Orders/SetCreate",
     "HttpMethod": "POST",
@@ -9636,8 +10489,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "value",
-        "Type": "Net.Business.DTO.Sap.OrdersCreateRequestDto",
+        "Name": "dto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.OrdersCreateRequestDto",
         "IsRequired": true
       }
     ],
@@ -9664,7 +10517,47 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Sales.OrdersController",
+    "Method": "SetUpdate",
+    "RelativePath": "api/Orders/SetUpdate",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "Net.Business.DTO.SAPBusinessOne.OrdersUpdateRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 204
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKCController",
     "Method": "GetByCode",
     "RelativePath": "api/OSKC/GetByCode",
     "HttpMethod": "GET",
@@ -9704,7 +10597,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKCController",
     "Method": "GetListByDateRange",
     "RelativePath": "api/OSKC/GetListByDateRange",
     "HttpMethod": "GET",
@@ -9749,7 +10642,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKCController",
     "Method": "GetListByFiltro",
     "RelativePath": "api/OSKC/GetListByFiltro",
     "HttpMethod": "GET",
@@ -9789,7 +10682,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKCController",
     "Method": "GetOSKCExcel",
     "RelativePath": "api/OSKC/GetOSKCExcel",
     "HttpMethod": "GET",
@@ -9830,7 +10723,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKCController",
     "Method": "SetCreate",
     "RelativePath": "api/OSKC/SetCreate",
     "HttpMethod": "POST",
@@ -9839,7 +10732,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.OSKCCreateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.OSKCCreateRequestDto",
         "IsRequired": true
       }
     ],
@@ -9866,7 +10759,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKCController",
     "Method": "SetDelete",
     "RelativePath": "api/OSKC/SetDelete",
     "HttpMethod": "DELETE",
@@ -9875,7 +10768,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.OSKCDeleteRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.OSKCDeleteRequestDto",
         "IsRequired": true
       }
     ],
@@ -9897,7 +10790,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKCController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKCController",
     "Method": "SetUpdate",
     "RelativePath": "api/OSKC/SetUpdate",
     "HttpMethod": "PUT",
@@ -9906,7 +10799,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.OSKCUpdateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.OSKCUpdateRequestDto",
         "IsRequired": true
       }
     ],
@@ -9928,7 +10821,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKPController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKPController",
     "Method": "GetByDocEntry",
     "RelativePath": "api/OSKP/GetByDocEntry",
     "HttpMethod": "GET",
@@ -9968,7 +10861,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKPController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKPController",
     "Method": "GetListByFiltro",
     "RelativePath": "api/OSKP/GetListByFiltro",
     "HttpMethod": "GET",
@@ -10008,7 +10901,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKPController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKPController",
     "Method": "SetCreate",
     "RelativePath": "api/OSKP/SetCreate",
     "HttpMethod": "POST",
@@ -10017,7 +10910,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.OSKPCreateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.OSKPCreateRequestDto",
         "IsRequired": true
       }
     ],
@@ -10044,7 +10937,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKPController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKPController",
     "Method": "SetDelete",
     "RelativePath": "api/OSKP/SetDelete",
     "HttpMethod": "PATCH",
@@ -10053,7 +10946,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.OSKPDeleteRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.OSKPDeleteRequestDto",
         "IsRequired": true
       }
     ],
@@ -10075,7 +10968,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.SKU.OSKPController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU.OSKPController",
     "Method": "SetUpdate",
     "RelativePath": "api/OSKP/SetUpdate",
     "HttpMethod": "PUT",
@@ -10084,7 +10977,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.OSKPUpdateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.OSKPUpdateRequestDto",
         "IsRequired": true
       }
     ],
@@ -10115,7 +11008,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Banking.PagoRecibidoController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Banking.PagoRecibidoController",
     "Method": "GetCobranzaCarteraVencidaByFilterExcel",
     "RelativePath": "api/PagoRecibido/GetCobranzaCarteraVencidaByFilterExcel",
     "HttpMethod": "GET",
@@ -10174,7 +11067,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Banking.PagoRecibidoController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Banking.PagoRecibidoController",
     "Method": "GetListCobranzaCarteraVencidaByFilter",
     "RelativePath": "api/PagoRecibido/GetListCobranzaCarteraVencidaByFilter",
     "HttpMethod": "GET",
@@ -10556,7 +11449,56 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.BusinessPartners.PaymentTermsTypesController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.BusinessPartners.PaymentTermsTypesController",
+    "Method": "GetByCode",
+    "RelativePath": "api/PaymentTermsTypes/GetByCode/{groupNum}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "groupNum",
+        "Type": "System.Int16",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.BusinessPartners.PaymentTermsTypesController",
     "Method": "GetList",
     "RelativePath": "api/PaymentTermsTypes/GetList",
     "HttpMethod": "GET",
@@ -10835,7 +11777,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.BusinessPartners.PersonaContactoSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.PersonaContactoSapController",
     "Method": "GetById",
     "RelativePath": "api/PersonaContactoSap/GetById",
     "HttpMethod": "GET",
@@ -11005,7 +11947,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.BusinessPartners.PersonaContactoSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.PersonaContactoSapController",
     "Method": "GetListByFiltro",
     "RelativePath": "api/PersonaContactoSap/GetListByFiltro",
     "HttpMethod": "GET",
@@ -11175,7 +12117,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.PickingController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.PickingController",
     "Method": "GetListByBaseEntry",
     "RelativePath": "api/Picking/GetListByBaseEntry",
     "HttpMethod": "GET",
@@ -11235,7 +12177,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.PickingController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.PickingController",
     "Method": "GetListByBaseEntryBaseType",
     "RelativePath": "api/Picking/GetListByBaseEntryBaseType",
     "HttpMethod": "GET",
@@ -11295,7 +12237,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.PickingController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.PickingController",
     "Method": "GetListByFilter",
     "RelativePath": "api/Picking/GetListByFilter",
     "HttpMethod": "GET",
@@ -11355,7 +12297,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.PickingController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.PickingController",
     "Method": "GetListByTarget",
     "RelativePath": "api/Picking/GetListByTarget",
     "HttpMethod": "GET",
@@ -11410,7 +12352,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.PickingController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.PickingController",
     "Method": "GetPickingPrint",
     "RelativePath": "api/Picking/GetPickingPrint",
     "HttpMethod": "GET",
@@ -11464,16 +12406,16 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.PickingController",
-    "Method": "GetToCopy",
-    "RelativePath": "api/Picking/GetToCopy",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.PickingController",
+    "Method": "GetToCopyOrder",
+    "RelativePath": "api/Picking/GetToCopyOrder",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.PickingCopyToFindDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.PickingCopyToFindDto",
         "IsRequired": true
       }
     ],
@@ -11500,7 +12442,43 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.PickingController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.PickingController",
+    "Method": "GetToCopyTransferRequest",
+    "RelativePath": "api/Picking/GetToCopyTransferRequest",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "Net.Business.DTO.SAPBusinessOne.PickingCopyToFindDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 201
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 500
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.PickingController",
     "Method": "SetCreate",
     "RelativePath": "api/Picking/SetCreate",
     "HttpMethod": "POST",
@@ -11509,7 +12487,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.PickingCreateDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.PickingCreateDto",
         "IsRequired": true
       }
     ],
@@ -11536,7 +12514,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.PickingController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.PickingController",
     "Method": "SetDelete",
     "RelativePath": "api/Picking/SetDelete",
     "HttpMethod": "PATCH",
@@ -11545,7 +12523,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.PickingDeleteDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.PickingDeleteDto",
         "IsRequired": true
       }
     ],
@@ -11576,7 +12554,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.PickingController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.PickingController",
     "Method": "SetDeleteMassive",
     "RelativePath": "api/Picking/SetDeleteMassive",
     "HttpMethod": "PATCH",
@@ -11585,7 +12563,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.PickingDeleteDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.PickingDeleteDto",
         "IsRequired": true
       }
     ],
@@ -11616,7 +12594,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.PickingController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.PickingController",
     "Method": "SetRelease",
     "RelativePath": "api/Picking/SetRelease",
     "HttpMethod": "PATCH",
@@ -11625,7 +12603,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.PickingReleaseDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.PickingReleaseDto",
         "IsRequired": true
       }
     ],
@@ -11705,7 +12683,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.General.ProcesoController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.ProcesoController",
     "Method": "GetList",
     "RelativePath": "api/Proceso/GetList",
     "HttpMethod": "GET",
@@ -11739,7 +12717,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.General.ProcesoController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.ProcesoController",
     "Method": "GetListByFiltro",
     "RelativePath": "api/Proceso/GetListByFiltro",
     "HttpMethod": "GET",
@@ -11779,7 +12757,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Purchasing.PurchaseRequestController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Purchasing.PurchaseRequestController",
     "Method": "GetByDocEntry",
     "RelativePath": "api/PurchaseRequest/GetByDocEntry/{docEntry}",
     "HttpMethod": "GET",
@@ -11828,7 +12806,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Purchasing.PurchaseRequestController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Purchasing.PurchaseRequestController",
     "Method": "GetListByFilter",
     "RelativePath": "api/PurchaseRequest/GetListByFilter",
     "HttpMethod": "GET",
@@ -11883,7 +12861,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Purchasing.PurchaseRequestController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Purchasing.PurchaseRequestController",
     "Method": "SetClose",
     "RelativePath": "api/PurchaseRequest/SetClose",
     "HttpMethod": "PUT",
@@ -11892,7 +12870,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.PurchaseRequestCloseRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.PurchaseRequestCloseRequestDto",
         "IsRequired": true
       }
     ],
@@ -11923,7 +12901,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Purchasing.PurchaseRequestController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Purchasing.PurchaseRequestController",
     "Method": "SetCreate",
     "RelativePath": "api/PurchaseRequest/SetCreate",
     "HttpMethod": "POST",
@@ -11932,7 +12910,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.PurchaseRequestCreateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.PurchaseRequestCreateRequestDto",
         "IsRequired": true
       }
     ],
@@ -11959,7 +12937,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Purchasing.PurchaseRequestController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Purchasing.PurchaseRequestController",
     "Method": "SetUpdate",
     "RelativePath": "api/PurchaseRequest/SetUpdate",
     "HttpMethod": "PUT",
@@ -11968,7 +12946,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.PurchaseRequestUpdateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.PurchaseRequestUpdateRequestDto",
         "IsRequired": true
       }
     ],
@@ -11999,7 +12977,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.General.SalesPersonsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.SalesPersonsController",
     "Method": "GetById",
     "RelativePath": "api/SalesPersons/GetById/{id}",
     "HttpMethod": "GET",
@@ -12048,7 +13026,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.General.SalesPersonsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.SalesPersonsController",
     "Method": "GetList",
     "RelativePath": "api/SalesPersons/GetList",
     "HttpMethod": "GET",
@@ -12082,7 +13060,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.General.SalesPersonsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.SalesPersonsController",
     "Method": "GetListByFiltro",
     "RelativePath": "api/SalesPersons/GetListByFiltro",
     "HttpMethod": "GET",
@@ -12109,410 +13087,6 @@
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      }
-    ]
-  },
-  {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.InventoryTransactions.SolicitudTrasladoController",
-    "Method": "GetByDocEntry",
-    "RelativePath": "api/SolicitudTraslado/GetByDocEntry/{docEntry}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "docEntry",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 0
-      }
-    ]
-  },
-  {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.InventoryTransactions.SolicitudTrasladoController",
-    "Method": "GetFormatoPdfByDocEntry",
-    "RelativePath": "api/SolicitudTraslado/GetFormatoPdfByDocEntry/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 0
-      }
-    ]
-  },
-  {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.InventoryTransactions.SolicitudTrasladoController",
-    "Method": "GetListByFilter",
-    "RelativePath": "api/SolicitudTraslado/GetListByFilter",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "StartDate",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "EndDate",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "DocStatus",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "SearchText",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      }
-    ]
-  },
-  {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.InventoryTransactions.SolicitudTrasladoController",
-    "Method": "GetListNotPicking",
-    "RelativePath": "api/SolicitudTraslado/GetListNotPicking",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 0
-      }
-    ]
-  },
-  {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.InventoryTransactions.SolicitudTrasladoController",
-    "Method": "GetListOpen",
-    "RelativePath": "api/SolicitudTraslado/GetListOpen",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 0
-      }
-    ]
-  },
-  {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.InventoryTransactions.SolicitudTrasladoController",
-    "Method": "GetToTransferenciaByDocEntry",
-    "RelativePath": "api/SolicitudTraslado/GetToTransferenciaByDocEntry/{docEntry}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "docEntry",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 0
-      }
-    ]
-  },
-  {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.InventoryTransactions.SolicitudTrasladoController",
-    "Method": "SetClose",
-    "RelativePath": "api/SolicitudTraslado/SetClose",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "value",
-        "Type": "Net.Business.DTO.Sap.SolicitudTrasladoCloseRequestDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      }
-    ]
-  },
-  {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.InventoryTransactions.SolicitudTrasladoController",
-    "Method": "SetCreate",
-    "RelativePath": "api/SolicitudTraslado/SetCreate",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "value",
-        "Type": "Net.Business.DTO.Sap.SolicitudTrasladoCreateRequestDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 201
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 500
-      }
-    ]
-  },
-  {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.InventoryTransactions.SolicitudTrasladoController",
-    "Method": "SetUpdate",
-    "RelativePath": "api/SolicitudTraslado/SetUpdate",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "value",
-        "Type": "Net.Business.DTO.Sap.SolicitudTrasladoUpdateRequestDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 204
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
@@ -13114,7 +13688,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.SubGrupoArticulo2SapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.SubGrupoArticulo2SapController",
     "Method": "GetList",
     "RelativePath": "api/SubGrupoArticulo2Sap/GetList",
     "HttpMethod": "GET",
@@ -13148,7 +13722,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.SubGrupoArticuloSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.SubGrupoArticuloSapController",
     "Method": "GetList",
     "RelativePath": "api/SubGrupoArticuloSap/GetList",
     "HttpMethod": "GET",
@@ -13182,7 +13756,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.SubGrupoArticuloSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.SubGrupoArticuloSapController",
     "Method": "GetListByFiltro",
     "RelativePath": "api/SubGrupoArticuloSap/GetListByFiltro",
     "HttpMethod": "GET",
@@ -13222,7 +13796,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
     "Method": "GetDetailedExcelByFilter",
     "RelativePath": "api/TakeInventoryFinishedProducts/GetDetailedExcelByFilter",
     "HttpMethod": "GET",
@@ -13282,7 +13856,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
     "Method": "GetListByFilter",
     "RelativePath": "api/TakeInventoryFinishedProducts/GetListByFilter",
     "HttpMethod": "GET",
@@ -13342,7 +13916,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
     "Method": "GetListByItemCode",
     "RelativePath": "api/TakeInventoryFinishedProducts/GetListByItemCode",
     "HttpMethod": "GET",
@@ -13387,7 +13961,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
     "Method": "GetListCurrentDate",
     "RelativePath": "api/TakeInventoryFinishedProducts/GetListCurrentDate",
     "HttpMethod": "GET",
@@ -13437,7 +14011,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
     "Method": "GetSummaryItemExcelByFilter",
     "RelativePath": "api/TakeInventoryFinishedProducts/GetSummaryItemExcelByFilter",
     "HttpMethod": "GET",
@@ -13497,7 +14071,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
     "Method": "GetSummaryUserExcelByFilter",
     "RelativePath": "api/TakeInventoryFinishedProducts/GetSummaryUserExcelByFilter",
     "HttpMethod": "GET",
@@ -13557,7 +14131,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
     "Method": "GetToCopy",
     "RelativePath": "api/TakeInventoryFinishedProducts/GetToCopy",
     "HttpMethod": "GET",
@@ -13622,7 +14196,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
     "Method": "SetCreate",
     "RelativePath": "api/TakeInventoryFinishedProducts/SetCreate",
     "HttpMethod": "POST",
@@ -13631,7 +14205,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.TakeInventoryFinishedProductsCreateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.TakeInventoryFinishedProductsCreateRequestDto",
         "IsRequired": true
       }
     ],
@@ -13658,7 +14232,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
     "Method": "SetDelete",
     "RelativePath": "api/TakeInventoryFinishedProducts/SetDelete",
     "HttpMethod": "PATCH",
@@ -13667,7 +14241,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.TakeInventoryFinishedProductsDeleteRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.TakeInventoryFinishedProductsDeleteRequestDto",
         "IsRequired": true
       }
     ],
@@ -13698,7 +14272,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInventory.TakeInventoryFinishedProductsController",
     "Method": "SetDeleteLine",
     "RelativePath": "api/TakeInventoryFinishedProducts/SetDeleteLine",
     "HttpMethod": "PATCH",
@@ -13707,7 +14281,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.TakeInventoryFinishedProducts1DeleteRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.TakeInventoryFinishedProducts1DeleteRequestDto",
         "IsRequired": true
       }
     ],
@@ -13738,7 +14312,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.TakeInventory.TakeInventorySparePartsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInventory.TakeInventorySparePartsController",
     "Method": "GetExcelByFilter",
     "RelativePath": "api/TakeInventorySpareParts/GetExcelByFilter",
     "HttpMethod": "GET",
@@ -13798,7 +14372,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.TakeInventory.TakeInventorySparePartsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInventory.TakeInventorySparePartsController",
     "Method": "GetListByFilter",
     "RelativePath": "api/TakeInventorySpareParts/GetListByFilter",
     "HttpMethod": "GET",
@@ -13858,7 +14432,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.TakeInventory.TakeInventorySparePartsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInventory.TakeInventorySparePartsController",
     "Method": "GetListCurrentDate",
     "RelativePath": "api/TakeInventorySpareParts/GetListCurrentDate",
     "HttpMethod": "GET",
@@ -13908,7 +14482,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.TakeInventory.TakeInventorySparePartsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInventory.TakeInventorySparePartsController",
     "Method": "SetCreate",
     "RelativePath": "api/TakeInventorySpareParts/SetCreate",
     "HttpMethod": "POST",
@@ -13917,7 +14491,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.TakeInventorySparePartsCreateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.TakeInventorySparePartsCreateRequestDto",
         "IsRequired": true
       }
     ],
@@ -13944,7 +14518,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.TakeInventory.TakeInventorySparePartsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInventory.TakeInventorySparePartsController",
     "Method": "SetDelete",
     "RelativePath": "api/TakeInventorySpareParts/SetDelete",
     "HttpMethod": "PUT",
@@ -13953,7 +14527,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.TakeInventorySparePartsDeleteRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.TakeInventorySparePartsDeleteRequestDto",
         "IsRequired": true
       }
     ],
@@ -13984,7 +14558,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.TakeInventory.TakeInventorySparePartsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInventory.TakeInventorySparePartsController",
     "Method": "SetUpdate",
     "RelativePath": "api/TakeInventorySpareParts/SetUpdate",
     "HttpMethod": "PUT",
@@ -13993,7 +14567,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.TakeInventorySparePartsUpdateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.TakeInventorySparePartsUpdateRequestDto",
         "IsRequired": true
       }
     ],
@@ -14024,15 +14598,25 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Financials.TaxGroupsController",
-    "Method": "GetBySplCode",
-    "RelativePath": "api/TaxGroups/GetBySplCode",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Financials.TaxGroupsController",
+    "Method": "GetByCardCode",
+    "RelativePath": "api/TaxGroups/GetByCardCode",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "slpCode",
+        "Name": "CardCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SlpCode",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -14073,7 +14657,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Financials.TaxGroupsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Financials.TaxGroupsController",
     "Method": "GetListByFilter",
     "RelativePath": "api/TaxGroups/GetListByFilter",
     "HttpMethod": "GET",
@@ -14351,7 +14935,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.TiempoVidaController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.TiempoVidaController",
     "Method": "GetList",
     "RelativePath": "api/TiempoVida/GetList",
     "HttpMethod": "GET",
@@ -14385,7 +14969,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.TiempoVidaController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.TiempoVidaController",
     "Method": "GetListByFiltro",
     "RelativePath": "api/TiempoVida/GetListByFiltro",
     "HttpMethod": "GET",
@@ -14425,47 +15009,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.SystemInitialization.TipoDocumentoSunatController",
-    "Method": "GetListByTipo",
-    "RelativePath": "api/TipoDocumentoSunat/GetListByTipo",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "U_FIB_TDTD",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      }
-    ]
-  },
-  {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.TipoLaminadoController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.TipoLaminadoController",
     "Method": "GetList",
     "RelativePath": "api/TipoLaminado/GetList",
     "HttpMethod": "GET",
@@ -14499,7 +15043,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.TipoLaminadoController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.TipoLaminadoController",
     "Method": "GetListByFiltro",
     "RelativePath": "api/TipoLaminado/GetListByFiltro",
     "HttpMethod": "GET",
@@ -14539,7 +15083,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.General.TipoOperacionController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.TipoOperacionController",
     "Method": "GetListByFilter",
     "RelativePath": "api/TipoOperacion/GetListByFilter",
     "HttpMethod": "GET",
@@ -14579,7 +15123,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.InventoryTransactions.TransferenciaStockController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions.TransferenciaStockController",
     "Method": "GetByDocEntry",
     "RelativePath": "api/TransferenciaStock/GetByDocEntry/{id}",
     "HttpMethod": "GET",
@@ -14628,7 +15172,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.InventoryTransactions.TransferenciaStockController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions.TransferenciaStockController",
     "Method": "GetFormatoPdfByDocEntry",
     "RelativePath": "api/TransferenciaStock/GetFormatoPdfByDocEntry/{id}",
     "HttpMethod": "GET",
@@ -14677,7 +15221,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.InventoryTransactions.TransferenciaStockController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions.TransferenciaStockController",
     "Method": "GetListByFilter",
     "RelativePath": "api/TransferenciaStock/GetListByFilter",
     "HttpMethod": "GET",
@@ -14732,7 +15276,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.InventoryTransactions.TransferenciaStockController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions.TransferenciaStockController",
     "Method": "SetCreate",
     "RelativePath": "api/TransferenciaStock/SetCreate",
     "HttpMethod": "POST",
@@ -14741,7 +15285,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.TransferenciaStockCreateDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.TransferenciaStockCreateDto",
         "IsRequired": true
       }
     ],
@@ -14768,7 +15312,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Inventory.InventoryTransactions.TransferenciaStockController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions.TransferenciaStockController",
     "Method": "SetUpdate",
     "RelativePath": "api/TransferenciaStock/SetUpdate",
     "HttpMethod": "PUT",
@@ -14777,7 +15321,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.Sap.TransferenciaStockUpdateDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.TransferenciaStockUpdateDto",
         "IsRequired": true
       }
     ],
@@ -14808,7 +15352,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.UnidadMedidaController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.UnidadMedidaController",
     "Method": "GetList",
     "RelativePath": "api/UnidadMedida/GetList",
     "HttpMethod": "GET",
@@ -14842,7 +15386,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.UnidadMedidaController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.UnidadMedidaController",
     "Method": "GetListByFiltro",
     "RelativePath": "api/UnidadMedida/GetListByFiltro",
     "HttpMethod": "GET",
@@ -14882,7 +15426,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.General.UserDefinedFieldsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.UserDefinedFieldsController",
     "Method": "GetList",
     "RelativePath": "api/UserDefinedFields/GetList",
     "HttpMethod": "GET",
@@ -14927,7 +15471,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.General.UserDefinedFieldsController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.UserDefinedFieldsController",
     "Method": "GetListByFilter",
     "RelativePath": "api/UserDefinedFields/GetListByFilter",
     "HttpMethod": "GET",
@@ -14977,7 +15521,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.General.UsersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.UsersController",
     "Method": "GetByCode",
     "RelativePath": "api/Users/GetByCode",
     "HttpMethod": "GET",
@@ -15017,7 +15561,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.General.UsersController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.UsersController",
     "Method": "GetList",
     "RelativePath": "api/Users/GetList",
     "HttpMethod": "GET",
@@ -15330,7 +15874,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.BusinessPartners.VehiculoSapController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.BusinessPartners.VehiculoSapController",
     "Method": "GetListByFiltro",
     "RelativePath": "api/VehiculoSap/GetListByFiltro",
     "HttpMethod": "GET",
@@ -15500,7 +16044,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.WarehousesController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.WarehousesController",
     "Method": "GetListByInactive",
     "RelativePath": "api/Warehouses/GetListByInactive",
     "HttpMethod": "GET",
@@ -15540,7 +16084,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.WarehousesController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.WarehousesController",
     "Method": "GetListByItem",
     "RelativePath": "api/Warehouses/GetListByItem",
     "HttpMethod": "GET",
@@ -15590,7 +16134,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.WarehousesController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.WarehousesController",
     "Method": "GetListByWhsCodeAndItemCode",
     "RelativePath": "api/Warehouses/GetListByWhsCodeAndItemCode",
     "HttpMethod": "GET",
@@ -15640,7 +16184,7 @@
     ]
   },
   {
-    "ContainingType": "Net.Business.Services.Controllers.Sap.Administration.Definitions.Inventory.WarehousesController",
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.WarehousesController",
     "Method": "GetListProduccion",
     "RelativePath": "api/Warehouses/GetListProduccion",
     "HttpMethod": "GET",

@@ -8,18 +8,18 @@ namespace Net.Data.Web
     {
         Task<ResultadoTransaccionEntity<OrdenVentaSodimacEntity>> SetCreate(OrdenVentaSodimacEntity value);
         Task<ResultadoTransaccionEntity<OrdenVentaSodimacEntity>> SetUpdate(OrdenVentaSodimacEntity value);
-        Task<ResultadoTransaccionEntity<OrdenVentaSodimacByFiltroEntity>> GetListOrdenVentaSodimacByFiltro(FilterRequestEntity value);
+        Task<ResultadoTransaccionEntity<OrdenVentaSodimacQueryEntity>> GetListOrdenVentaSodimacByFiltro(FilterRequestEntity value);
         Task<ResultadoTransaccionEntity<OrdenVentaSodimacEntity>> GetOrdenVentaSodimacById(int id);
-        Task<ResultadoTransaccionEntity<OrdenVentaSodimaConsultaFiltroEntity>> GetListOrdenVentaSodimacPendienteLpnByFiltro(FilterRequestEntity value);
-        Task<ResultadoTransaccionEntity<OrdenVentaSodimaConsultaFiltroEntity>> GetListOrdenVentaSodimacDetallePendienteLpnByIdAndFiltro(FilterRequestEntity value);
-        Task<ResultadoTransaccionEntity<OrdenVentaSodimaConsultaFiltroEntity>> GetListOrdenVentaSodimacLpnByFiltro(FilterRequestEntity value);
-        Task<ResultadoTransaccionEntity<OrdenVentaSodimaConsultaFiltroEntity>> GetListOrdenVentaSodimacDetalleById(FilterRequestEntity value);
+        Task<ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacPendienteLpnByFiltro(FilterRequestEntity value);
+        Task<ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacDetallePendienteLpnByIdAndFiltro(FilterRequestEntity value);
+        Task<ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacLpnByFiltro(FilterRequestEntity value);
+        Task<ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacDetalleById(FilterRequestEntity value);
         Task<ResultadoTransaccionEntity<OrdenVentaSodimacEntity>> SetLpnUpdate(OrdenVentaSodimacEntity value);
         Task<ResultadoTransaccionEntity<MemoryStream>> GetBarcodeLpnPdfById(int id);
         Task<ResultadoTransaccionEntity<MemoryStream>> GetListBarcodeEanPdfByEan(string ean);
-        Task<ResultadoTransaccionEntity<OrdenVentaSodimaConsultaFiltroEntity>> GetListOrdenVentaSodimacByFechaNumero(FilterRequestEntity value);
-        Task<ResultadoTransaccionEntity<MemoryStream>> GetListOrdenVentaSodimacExcelByFechaNumero(FilterRequestEntity value);
-        Task<ResultadoTransaccionEntity<OrdenVentaSodimacSelvaByFechaNumeroEntity>> GetListOrdenVentaSodimacSelvaFechaNumero(FilterRequestEntity value);
-        Task<ResultadoTransaccionEntity<MemoryStream>> GetListOrdenVentaSodimacSelvaPdfByFechaNumero(FilterRequestEntity value);
+        Task<ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacByFechaNumero(OrdenVentaSodimacFilterEntity value);
+        Task<ResultadoTransaccionEntity<MemoryStream>> GetListOrdenVentaSodimacExcelByFechaNumero(OrdenVentaSodimacFilterEntity value);
+        Task<ResultadoTransaccionEntity<OrdenVentaSodimacSelvaQueryEntity>> GetListOrdenVentaSodimacSelvaFechaNumero(OrdenVentaSodimacSelvaFilterEntity value);
+        Task<ResultadoTransaccionEntity<MemoryStream>> GetListOrdenVentaSodimacSelvaPdfByFechaNumero(OrdenVentaSodimacSelvaFilterEntity value);
     }
 }
