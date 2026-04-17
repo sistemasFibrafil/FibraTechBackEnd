@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "wS7vjCHjYdc=",
+  "dgSpecHash": "b4/EgZ+qKes=",
   "success": true,
-  "projectFilePath": "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj",
+  "projectFilePath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\nflores\\.nuget\\packages\\microsoft.aspnetcore.http.features\\3.1.32\\microsoft.aspnetcore.http.features.3.1.32.nupkg.sha512",
-    "C:\\Users\\nflores\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.0\\microsoft.entityframeworkcore.abstractions.6.0.0.nupkg.sha512",
-    "C:\\Users\\nflores\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.32\\microsoft.extensions.primitives.3.1.32.nupkg.sha512",
-    "C:\\Users\\nflores\\.nuget\\packages\\system.io.pipelines\\4.7.5\\system.io.pipelines.4.7.5.nupkg.sha512"
+    "C:\\Users\\jhuaman\\.nuget\\packages\\microsoft.aspnetcore.http.features\\3.1.32\\microsoft.aspnetcore.http.features.3.1.32.nupkg.sha512",
+    "C:\\Users\\jhuaman\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.0\\microsoft.entityframeworkcore.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\jhuaman\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.32\\microsoft.extensions.primitives.3.1.32.nupkg.sha512",
+    "C:\\Users\\jhuaman\\.nuget\\packages\\system.io.pipelines\\4.7.5\\system.io.pipelines.4.7.5.nupkg.sha512"
   ],
   "logs": []
 }

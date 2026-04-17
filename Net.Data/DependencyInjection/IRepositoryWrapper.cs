@@ -1,4 +1,4 @@
-﻿using Net.Data.Web;
+using Net.Data.Web;
 using Net.Data.SAPBusinessOne;
 using Net.Data.SAPBusinessOne.Administration;
 namespace Net.Data
@@ -89,6 +89,9 @@ namespace Net.Data
         ISubGrupoArticuloRepository SubGrupoArticulo { get; }
         IPaymentTermsTypesRepository PaymentTermsTypes { get; }
         ISubGrupoArticulo2Repository SubGrupoArticulo2 { get; }
+        ICountriesRepository Countries { get; }
+        IStatesRepository States { get; }
+        IUbigeoRepository Ubigeo { get; }
         IBusinessPartnerGroupsRepository BusinessPartnerGroups { get; }
         IBusinessPartnerSectorsRepository BusinessPartnerSectors { get; }
 

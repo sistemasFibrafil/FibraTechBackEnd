@@ -1,6 +1,73 @@
 [
   {
     "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.AddressesController",
+    "Method": "Create",
+    "RelativePath": "api/Addresses/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "Net.Business.Entities.SAPBusinessOne.AddressesEntity",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.AddressesController",
+    "Method": "Delete",
+    "RelativePath": "api/Addresses/Delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cardCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "address",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.AddressesController",
     "Method": "GetByCode",
     "RelativePath": "api/Addresses/GetByCode",
     "HttpMethod": "GET",
@@ -96,6 +163,37 @@
           "text/json"
         ],
         "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.AddressesController",
+    "Method": "Update",
+    "RelativePath": "api/Addresses/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "Net.Business.Entities.SAPBusinessOne.AddressesEntity",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
       }
     ]
   },
@@ -393,6 +491,68 @@
   },
   {
     "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.BusinessPartnersController",
+    "Method": "Create",
+    "RelativePath": "api/BusinessPartners/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "Net.Business.DTO.SAPBusinessOne.BusinessPartnersCreateRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.BusinessPartnersController",
+    "Method": "Delete",
+    "RelativePath": "api/BusinessPartners/Delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cardCode",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.BusinessPartnersController",
     "Method": "GetByCode",
     "RelativePath": "api/BusinessPartners/GetByCode",
     "HttpMethod": "GET",
@@ -401,6 +561,46 @@
     "Parameters": [
       {
         "Name": "cardCode",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.BusinessPartnersController",
+    "Method": "GetByRUC",
+    "RelativePath": "api/BusinessPartners/GetByRUC",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ruc",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -716,6 +916,37 @@
     ]
   },
   {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.BusinessPartnersController",
+    "Method": "Update",
+    "RelativePath": "api/BusinessPartners/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "Net.Business.DTO.SAPBusinessOne.BusinessPartnersUpdateRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.BusinessPartners.BusinessPartnerSectorsController",
     "Method": "GetList",
     "RelativePath": "api/BusinessPartnerSectors/GetList",
@@ -915,6 +1146,108 @@
   },
   {
     "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.ContactEmployeesController",
+    "Method": "Create",
+    "RelativePath": "api/ContactEmployees/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "Net.Business.Entities.SAPBusinessOne.ContactEmployeesEntity",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.ContactEmployeesController",
+    "Method": "Delete",
+    "RelativePath": "api/ContactEmployees/Delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cntctCode",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.ContactEmployeesController",
+    "Method": "GetByCardCode",
+    "RelativePath": "api/ContactEmployees/GetByCardCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cardCode",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.ContactEmployeesController",
     "Method": "GetById",
     "RelativePath": "api/ContactEmployees/GetById",
     "HttpMethod": "GET",
@@ -1004,6 +1337,37 @@
     ]
   },
   {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners.ContactEmployeesController",
+    "Method": "Update",
+    "RelativePath": "api/ContactEmployees/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "Net.Business.Entities.SAPBusinessOne.ContactEmployeesEntity",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Financials.CostAccounting.CostCenters.CostCentersController",
     "Method": "GetListByFilter",
     "RelativePath": "api/CostCenters/GetListByFilter",
@@ -1047,6 +1411,16 @@
         "StatusCode": 404
       }
     ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.CountriesController",
+    "Method": "GetList",
+    "RelativePath": "api/Countries/GetList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Financials.CurrencyCodesController",
@@ -13522,6 +13896,22 @@
     ]
   },
   {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.StatesController",
+    "Method": "GetList",
+    "RelativePath": "api/States/GetList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "countryCode",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Net.Business.Services.Controllers.Web.Gestion.Definiciones.General.StatusController",
     "Method": "GetList",
     "RelativePath": "api/Status/GetList",
@@ -15178,6 +15568,69 @@
         "StatusCode": 404
       }
     ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.UbigeoController",
+    "Method": "GetList",
+    "RelativePath": "api/Ubigeo/GetList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dpto",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "prov",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "dist",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.UbigeoController",
+    "Method": "GetListDistritos",
+    "RelativePath": "api/Ubigeo/GetListDistritos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dpto",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "prov",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.UbigeoController",
+    "Method": "GetListProvincias",
+    "RelativePath": "api/Ubigeo/GetListProvincias",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dpto",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Inventory.UnidadMedidaController",

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 namespace Net.Business.Entities.SAPBusinessOne
 {
@@ -15,6 +15,8 @@ namespace Net.Business.Entities.SAPBusinessOne
         public string? U_BPP_BPTD { get; set; }
         public string? Currency { get; set; }
         public string? Phone1 { get; set; }
+        public string? Cellular { get; set; }
+        public string? E_Mail { get; set; }
         public int SlpCode { get; set; }
         public string? CntctPrsn { get; set; }
         public string? BillToDef { get; set; }

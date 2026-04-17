@@ -171,6 +171,158 @@
         }
       }
     },
+    "/api/Addresses/Create": {
+      "post": {
+        "tags": [
+          "Addresses"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressesEntity"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressesEntity"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressesEntity"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Addresses/Update": {
+      "put": {
+        "tags": [
+          "Addresses"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressesEntity"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressesEntity"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressesEntity"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Addresses/Delete": {
+      "delete": {
+        "tags": [
+          "Addresses"
+        ],
+        "parameters": [
+          {
+            "name": "cardCode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/ApprovalRequests/GetApprovalStatusReport": {
       "post": {
         "tags": [
@@ -1167,6 +1319,212 @@
         }
       }
     },
+    "/api/BusinessPartners/GetByRUC": {
+      "get": {
+        "tags": [
+          "BusinessPartners"
+        ],
+        "parameters": [
+          {
+            "name": "ruc",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/BusinessPartners/Create": {
+      "post": {
+        "tags": [
+          "BusinessPartners"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessPartnersCreateRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessPartnersCreateRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessPartnersCreateRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/BusinessPartners/Update": {
+      "put": {
+        "tags": [
+          "BusinessPartners"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessPartnersUpdateRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessPartnersUpdateRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessPartnersUpdateRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/BusinessPartners/Delete": {
+      "delete": {
+        "tags": [
+          "BusinessPartners"
+        ],
+        "parameters": [
+          {
+            "name": "cardCode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/BusinessPartnerSectors/GetList": {
       "get": {
         "tags": [
@@ -1613,6 +1971,212 @@
         }
       }
     },
+    "/api/ContactEmployees/GetByCardCode": {
+      "get": {
+        "tags": [
+          "ContactEmployees"
+        ],
+        "parameters": [
+          {
+            "name": "cardCode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ContactEmployees/Create": {
+      "post": {
+        "tags": [
+          "ContactEmployees"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactEmployeesEntity"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactEmployeesEntity"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactEmployeesEntity"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/ContactEmployees/Update": {
+      "put": {
+        "tags": [
+          "ContactEmployees"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactEmployeesEntity"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactEmployeesEntity"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactEmployeesEntity"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/ContactEmployees/Delete": {
+      "delete": {
+        "tags": [
+          "ContactEmployees"
+        ],
+        "parameters": [
+          {
+            "name": "cntctCode",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/CostCenters/GetListByFilter": {
       "get": {
         "tags": [
@@ -1679,6 +2243,18 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/Countries/GetList": {
+      "get": {
+        "tags": [
+          "Countries"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -21944,6 +22520,28 @@
         }
       }
     },
+    "/api/States/GetList": {
+      "get": {
+        "tags": [
+          "States"
+        ],
+        "parameters": [
+          {
+            "name": "countryCode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Status/GetList": {
       "get": {
         "tags": [
@@ -24589,6 +25187,96 @@
         }
       }
     },
+    "/api/Ubigeo/GetList": {
+      "get": {
+        "tags": [
+          "Ubigeo"
+        ],
+        "parameters": [
+          {
+            "name": "dpto",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "prov",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "dist",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Ubigeo/GetListProvincias": {
+      "get": {
+        "tags": [
+          "Ubigeo"
+        ],
+        "parameters": [
+          {
+            "name": "dpto",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Ubigeo/GetListDistritos": {
+      "get": {
+        "tags": [
+          "Ubigeo"
+        ],
+        "parameters": [
+          {
+            "name": "dpto",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "prov",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/UnidadMedida/GetList": {
       "get": {
         "tags": [
@@ -25908,6 +26596,410 @@
           "additionalProperties": false
         }
       },
+      "StatesEntity": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BusinessPartnerGroupsEntity": {
+        "type": "object",
+        "properties": {
+          "groupCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "groupName": {
+            "type": "string",
+            "nullable": true
+          },
+          "groupType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SalesPersonsEntity": {
+        "type": "object",
+        "properties": {
+          "slpCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "slpName": {
+            "type": "string",
+            "nullable": true
+          },
+          "active": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContactEmployeesEntity": {
+        "type": "object",
+        "properties": {
+          "cntctCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "middleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "tel1": {
+            "type": "string",
+            "nullable": true
+          },
+          "cellolar": {
+            "type": "string",
+            "nullable": true
+          },
+          "e_MailL": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VehiclesEntity": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_VEPL": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_VEMA": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_VEMO": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_VEAN": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_VECO": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_VESE": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_VEPM": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "u_FIB_COTR": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DriversEntity": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_CHNO": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_CHAP": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_CHTD": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_CHND": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_CHLI": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_COTR": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BusinessPartnersEntity": {
+        "type": "object",
+        "properties": {
+          "cardCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "licTradNum": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardName": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardType": {
+            "type": "string",
+            "nullable": true
+          },
+          "groupCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "u_BPP_BPTD": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone1": {
+            "type": "string",
+            "nullable": true
+          },
+          "cellular": {
+            "type": "string",
+            "nullable": true
+          },
+          "e_Mail": {
+            "type": "string",
+            "nullable": true
+          },
+          "slpCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cntctPrsn": {
+            "type": "string",
+            "nullable": true
+          },
+          "billToDef": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "shipToDef": {
+            "type": "string",
+            "nullable": true
+          },
+          "mailAddres": {
+            "type": "string",
+            "nullable": true
+          },
+          "state2": {
+            "type": "string",
+            "nullable": true
+          },
+          "mailCounty": {
+            "type": "string",
+            "nullable": true
+          },
+          "mailCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPAT": {
+            "type": "string",
+            "nullable": true
+          },
+          "groupNum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "listNum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "creditLine": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "balance": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ordersBal": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "businessPartnerGroups": {
+            "$ref": "#/components/schemas/BusinessPartnerGroupsEntity"
+          },
+          "salesPersons": {
+            "$ref": "#/components/schemas/SalesPersonsEntity"
+          },
+          "contactEmployees": {
+            "$ref": "#/components/schemas/ContactEmployeesEntity"
+          },
+          "state": {
+            "$ref": "#/components/schemas/StatesEntity"
+          },
+          "linesAddresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressesEntity"
+            },
+            "nullable": true
+          },
+          "linesVehicles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VehiclesEntity"
+            },
+            "nullable": true
+          },
+          "linesDrivers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DriversEntity"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TaxGroupsEntity": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "rate": {
+            "type": "number",
+            "format": "double"
+          },
+          "lock": {
+            "type": "number",
+            "format": "double"
+          },
+          "validForAR": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddressesEntity": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          },
+          "lineNum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "adresType": {
+            "type": "string",
+            "nullable": true
+          },
+          "county": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "states": {
+            "$ref": "#/components/schemas/StatesEntity"
+          },
+          "businessPartner": {
+            "$ref": "#/components/schemas/BusinessPartnersEntity"
+          },
+          "taxGroup": {
+            "$ref": "#/components/schemas/TaxGroupsEntity"
+          }
+        },
+        "additionalProperties": false
+      },
       "ApprovalStatusReportFilterRequestDto": {
         "type": "object",
         "properties": {
@@ -26019,6 +27111,464 @@
           },
           "token": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BPAddressesCreateRequestDto": {
+        "type": "object",
+        "properties": {
+          "addressName": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressType": {
+            "type": "string",
+            "nullable": true
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          },
+          "block": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "zipCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "county": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "buildingFloorRoom": {
+            "type": "string",
+            "nullable": true
+          },
+          "glblLocNum": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BPContactEmployeesCreateRequestDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "middleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone1": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone2": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobilePhone": {
+            "type": "string",
+            "nullable": true
+          },
+          "e_Mail": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BusinessPartnersCreateRequestDto": {
+        "type": "object",
+        "properties": {
+          "cardCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardName": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardType": {
+            "type": "string",
+            "nullable": true
+          },
+          "groupCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "licTradNum": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone1": {
+            "type": "string",
+            "nullable": true
+          },
+          "cellular": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "slpCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "groupNum": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "creditLine": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "cntctPrsn": {
+            "type": "string",
+            "nullable": true
+          },
+          "debitLine": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPAT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPTD": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPTP": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPN1": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPN2": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPNO": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPAP": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPAM": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_Divi": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_Sector": {
+            "type": "string",
+            "nullable": true
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BPAddressesCreateRequestDto"
+            },
+            "nullable": true
+          },
+          "contactEmployees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BPContactEmployeesCreateRequestDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BPAddressesUpdateRequestDto": {
+        "type": "object",
+        "properties": {
+          "addressName": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressType": {
+            "type": "string",
+            "nullable": true
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          },
+          "block": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "zipCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "county": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "buildingFloorRoom": {
+            "type": "string",
+            "nullable": true
+          },
+          "glblLocNum": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BPContactEmployeesUpdateRequestDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "middleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone1": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone2": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobilePhone": {
+            "type": "string",
+            "nullable": true
+          },
+          "e_Mail": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BusinessPartnersUpdateRequestDto": {
+        "type": "object",
+        "properties": {
+          "cardCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardName": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardType": {
+            "type": "string",
+            "nullable": true
+          },
+          "groupCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "licTradNum": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone1": {
+            "type": "string",
+            "nullable": true
+          },
+          "cellular": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "slpCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "groupNum": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "creditLine": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "cntctPrsn": {
+            "type": "string",
+            "nullable": true
+          },
+          "debitLine": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPAT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPTD": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPTP": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPN1": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPN2": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPNO": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPAP": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPAM": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_Divi": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_Sector": {
+            "type": "string",
+            "nullable": true
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BPAddressesUpdateRequestDto"
+            },
+            "nullable": true
+          },
+          "contactEmployees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BPContactEmployeesUpdateRequestDto"
+            },
             "nullable": true
           }
         },

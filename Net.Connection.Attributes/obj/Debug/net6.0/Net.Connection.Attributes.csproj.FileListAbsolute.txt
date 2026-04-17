@@ -70,3 +70,15 @@ D:\Fil\Web\BackEnd\Net.Connection.Attributes\obj\Debug\net6.0\Net.Connection.Att
 D:\Fil\Web\BackEnd\Net.Connection.Attributes\obj\Debug\net6.0\refint\Net.Connection.Attributes.dll
 D:\Fil\Web\BackEnd\Net.Connection.Attributes\obj\Debug\net6.0\Net.Connection.Attributes.pdb
 D:\Fil\Web\BackEnd\Net.Connection.Attributes\obj\Debug\net6.0\ref\Net.Connection.Attributes.dll
+C:\Users\jhuaman\Documents\PROYECTO_FIL_NUEVO\FibraTechBackEnd\Net.Connection.Attributes\bin\Debug\net6.0\Net.Connection.Attributes.deps.json
+C:\Users\jhuaman\Documents\PROYECTO_FIL_NUEVO\FibraTechBackEnd\Net.Connection.Attributes\bin\Debug\net6.0\Net.Connection.Attributes.dll
+C:\Users\jhuaman\Documents\PROYECTO_FIL_NUEVO\FibraTechBackEnd\Net.Connection.Attributes\bin\Debug\net6.0\Net.Connection.Attributes.pdb
+C:\Users\jhuaman\Documents\PROYECTO_FIL_NUEVO\FibraTechBackEnd\Net.Connection.Attributes\obj\Debug\net6.0\Net.Connection.Attributes.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jhuaman\Documents\PROYECTO_FIL_NUEVO\FibraTechBackEnd\Net.Connection.Attributes\obj\Debug\net6.0\Net.Connection.Attributes.AssemblyInfoInputs.cache
+C:\Users\jhuaman\Documents\PROYECTO_FIL_NUEVO\FibraTechBackEnd\Net.Connection.Attributes\obj\Debug\net6.0\Net.Connection.Attributes.AssemblyInfo.cs
+C:\Users\jhuaman\Documents\PROYECTO_FIL_NUEVO\FibraTechBackEnd\Net.Connection.Attributes\obj\Debug\net6.0\Net.Connection.Attributes.csproj.CoreCompileInputs.cache
+C:\Users\jhuaman\Documents\PROYECTO_FIL_NUEVO\FibraTechBackEnd\Net.Connection.Attributes\obj\Debug\net6.0\Net.Connection.Attributes.sourcelink.json
+C:\Users\jhuaman\Documents\PROYECTO_FIL_NUEVO\FibraTechBackEnd\Net.Connection.Attributes\obj\Debug\net6.0\Net.Connection.Attributes.dll
+C:\Users\jhuaman\Documents\PROYECTO_FIL_NUEVO\FibraTechBackEnd\Net.Connection.Attributes\obj\Debug\net6.0\refint\Net.Connection.Attributes.dll
+C:\Users\jhuaman\Documents\PROYECTO_FIL_NUEVO\FibraTechBackEnd\Net.Connection.Attributes\obj\Debug\net6.0\Net.Connection.Attributes.pdb
+C:\Users\jhuaman\Documents\PROYECTO_FIL_NUEVO\FibraTechBackEnd\Net.Connection.Attributes\obj\Debug\net6.0\ref\Net.Connection.Attributes.dll

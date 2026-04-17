@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Net.Business.Entities.SAPBusinessOne;
 namespace Net.Data.AppContext
 {
@@ -271,6 +271,14 @@ namespace Net.Data.AppContext
             modelBuilder.Entity<StatesEntity>(entity =>
             {
                 entity.ToTable("OCST");
+                entity.HasKey(e => e.Code);
+            });
+            // ========================================================================================================================================================
+            // UBIGEO
+            // ========================================================================================================================================================
+            modelBuilder.Entity<UbigeoEntity>(entity =>
+            {
+                entity.ToTable("@FIB_UBIGEO");
                 entity.HasKey(e => e.Code);
             });
             // ========================================================================================================================================================
@@ -1278,7 +1286,9 @@ namespace Net.Data.AppContext
         public DbSet<BusinessPartnersEntity> BusinessPartners { get; set; }
         public DbSet<ContactEmployeesEntity> ContactEmployees { get; set; }
         public DbSet<BusinessPartnersViewEntity> BusinessPartnersView { get; set; }
-
+        public DbSet<CountryEntity> Country { get; set; }
+        public DbSet<StatesEntity> States { get; set; }
+        public DbSet<UbigeoEntity> Ubigeo { get; set; }
 
         #endregion
 

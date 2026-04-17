@@ -1,9 +1,10 @@
-﻿using Net.Data;
+using Net.Data;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
+using Net.Business.Entities.SAPBusinessOne;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners
 {
     [ApiController]
@@ -47,6 +48,50 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners
             }
 
             return Ok(result.data);
+        }
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Create([FromBody] AddressesEntity value)
+        {
+            var result = await _repository.Addresses.SetCreate(value);
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Update([FromBody] AddressesEntity value)
+        {
+            var result = await _repository.Addresses.SetUpdate(value);
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Delete([FromQuery] string cardCode, [FromQuery] string address)
+        {
+            var result = await _repository.Addresses.SetDelete(cardCode, address);
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
         }
     }
 }

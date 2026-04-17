@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\Net.Business.Services.csproj": {}
+    "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.Services\\Net.Business.Services.csproj": {}
   },
   "projects": {
-    "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj": {
+    "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj",
+        "projectUniqueName": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj",
         "projectName": "Net.Business.DTO",
-        "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj",
-        "packagesPath": "C:\\Users\\nflores\\.nuget\\packages\\",
-        "outputPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\obj\\",
+        "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj",
+        "packagesPath": "C:\\Users\\jhuaman\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.DTO\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nflores\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jhuaman\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,8 +32,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj": {
-                "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj"
+              "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj": {
+                "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj"
               }
             }
           }
@@ -48,7 +48,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net6.0": {
@@ -75,24 +75,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj": {
+    "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj",
+        "projectUniqueName": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj",
         "projectName": "Net.Business.Entities",
-        "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj",
-        "packagesPath": "C:\\Users\\nflores\\.nuget\\packages\\",
-        "outputPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\obj\\",
+        "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj",
+        "packagesPath": "C:\\Users\\jhuaman\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nflores\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jhuaman\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -107,8 +107,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj": {
-                "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj"
+              "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj": {
+                "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj"
               }
             }
           }
@@ -123,7 +123,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net6.0": {
@@ -154,24 +154,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\Net.Business.Services.csproj": {
+    "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.Services\\Net.Business.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\Net.Business.Services.csproj",
+        "projectUniqueName": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.Services\\Net.Business.Services.csproj",
         "projectName": "ApiFibrafil",
-        "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\Net.Business.Services.csproj",
-        "packagesPath": "C:\\Users\\nflores\\.nuget\\packages\\",
-        "outputPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\obj\\",
+        "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.Services\\Net.Business.Services.csproj",
+        "packagesPath": "C:\\Users\\jhuaman\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.Services\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nflores\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jhuaman\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -186,14 +186,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj": {
-                "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj"
+              "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj": {
+                "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj"
               },
-              "D:\\Fil\\Web\\BackEnd\\Net.Connection\\Net.Connection.csproj": {
-                "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Connection\\Net.Connection.csproj"
+              "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection\\Net.Connection.csproj": {
+                "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection\\Net.Connection.csproj"
               },
-              "D:\\Fil\\Web\\BackEnd\\Net.Data\\Net.Data.csproj": {
-                "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Net.Data.csproj"
+              "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Data\\Net.Data.csproj": {
+                "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Data\\Net.Data.csproj"
               }
             }
           }
@@ -208,7 +208,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -258,24 +258,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj": {
+    "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj",
+        "projectUniqueName": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj",
         "projectName": "Net.Connection.Attributes",
-        "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj",
-        "packagesPath": "C:\\Users\\nflores\\.nuget\\packages\\",
-        "outputPath": "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\obj\\",
+        "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj",
+        "packagesPath": "C:\\Users\\jhuaman\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection.Attributes\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nflores\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jhuaman\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -302,7 +302,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net6.0": {
@@ -323,24 +323,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Fil\\Web\\BackEnd\\Net.Connection\\Net.Connection.csproj": {
+    "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection\\Net.Connection.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Fil\\Web\\BackEnd\\Net.Connection\\Net.Connection.csproj",
+        "projectUniqueName": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection\\Net.Connection.csproj",
         "projectName": "Net.Connection",
-        "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Connection\\Net.Connection.csproj",
-        "packagesPath": "C:\\Users\\nflores\\.nuget\\packages\\",
-        "outputPath": "D:\\Fil\\Web\\BackEnd\\Net.Connection\\obj\\",
+        "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection\\Net.Connection.csproj",
+        "packagesPath": "C:\\Users\\jhuaman\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nflores\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jhuaman\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -355,11 +355,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj": {
-                "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj"
+              "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj": {
+                "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj"
               },
-              "D:\\Fil\\Web\\BackEnd\\Net.CrossCotting\\Net.CrossCotting.csproj": {
-                "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.CrossCotting\\Net.CrossCotting.csproj"
+              "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.CrossCotting\\Net.CrossCotting.csproj": {
+                "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.CrossCotting\\Net.CrossCotting.csproj"
               }
             }
           }
@@ -374,7 +374,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net6.0": {
@@ -405,24 +405,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Fil\\Web\\BackEnd\\Net.CrossCotting\\Net.CrossCotting.csproj": {
+    "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.CrossCotting\\Net.CrossCotting.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Fil\\Web\\BackEnd\\Net.CrossCotting\\Net.CrossCotting.csproj",
+        "projectUniqueName": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.CrossCotting\\Net.CrossCotting.csproj",
         "projectName": "Net.CrossCotting",
-        "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.CrossCotting\\Net.CrossCotting.csproj",
-        "packagesPath": "C:\\Users\\nflores\\.nuget\\packages\\",
-        "outputPath": "D:\\Fil\\Web\\BackEnd\\Net.CrossCotting\\obj\\",
+        "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.CrossCotting\\Net.CrossCotting.csproj",
+        "packagesPath": "C:\\Users\\jhuaman\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.CrossCotting\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nflores\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jhuaman\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -437,8 +437,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj": {
-                "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj"
+              "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj": {
+                "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj"
               }
             }
           }
@@ -453,7 +453,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net6.0": {
@@ -492,24 +492,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Fil\\Web\\BackEnd\\Net.Data\\Net.Data.csproj": {
+    "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Data\\Net.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Net.Data.csproj",
+        "projectUniqueName": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Data\\Net.Data.csproj",
         "projectName": "Net.Data",
-        "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Net.Data.csproj",
-        "packagesPath": "C:\\Users\\nflores\\.nuget\\packages\\",
-        "outputPath": "D:\\Fil\\Web\\BackEnd\\Net.Data\\obj\\",
+        "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Data\\Net.Data.csproj",
+        "packagesPath": "C:\\Users\\jhuaman\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nflores\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jhuaman\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -524,14 +524,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj": {
-                "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj"
+              "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj": {
+                "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj"
               },
-              "D:\\Fil\\Web\\BackEnd\\Net.Connection\\Net.Connection.csproj": {
-                "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Connection\\Net.Connection.csproj"
+              "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection\\Net.Connection.csproj": {
+                "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection\\Net.Connection.csproj"
               },
-              "D:\\Fil\\Web\\BackEnd\\Net.CrossCotting\\Net.CrossCotting.csproj": {
-                "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.CrossCotting\\Net.CrossCotting.csproj"
+              "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.CrossCotting\\Net.CrossCotting.csproj": {
+                "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.CrossCotting\\Net.CrossCotting.csproj"
               }
             }
           }
@@ -546,7 +546,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net6.0": {
@@ -613,7 +613,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -8,23 +8,23 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\nflores\\.nuget\\packages\\": {},
+    "C:\\Users\\jhuaman\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj",
+      "projectUniqueName": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj",
       "projectName": "Net.Connection.Attributes",
-      "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj",
-      "packagesPath": "C:\\Users\\nflores\\.nuget\\packages\\",
-      "outputPath": "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\obj\\",
+      "projectPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj",
+      "packagesPath": "C:\\Users\\jhuaman\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jhuaman\\Documents\\PROYECTO_FIL_NUEVO\\FibraTechBackEnd\\Net.Connection.Attributes\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\nflores\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jhuaman\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -51,7 +51,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net6.0": {
@@ -72,7 +72,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
