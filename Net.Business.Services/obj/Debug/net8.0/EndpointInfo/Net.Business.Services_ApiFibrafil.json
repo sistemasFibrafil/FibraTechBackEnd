@@ -27331,6 +27331,14 @@
             "type": "string",
             "nullable": true
           },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "adresType": {
+            "type": "string",
+            "nullable": true
+          },
           "street": {
             "type": "string",
             "nullable": true
@@ -27565,6 +27573,14 @@
             "nullable": true
           },
           "addressType": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "adresType": {
             "type": "string",
             "nullable": true
           },

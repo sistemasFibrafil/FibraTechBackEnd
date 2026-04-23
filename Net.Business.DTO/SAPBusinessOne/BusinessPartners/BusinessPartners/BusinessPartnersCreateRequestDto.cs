@@ -78,8 +78,8 @@ namespace Net.Business.DTO.SAPBusinessOne
                 {
                     entity.Addresses.Add(new BPAddressesCreateEntity
                     {
-                        AddressName = addr.AddressName ?? string.Empty,
-                        AddressType = addr.AddressType ?? "B",
+                        AddressName = addr.AddressName ?? addr.Address ?? string.Empty,
+                        AddressType = addr.AddressType ?? addr.AdresType ?? "B",
                         Street = addr.Street,
                         Block = addr.Block,
                         City = addr.City,
@@ -123,6 +123,8 @@ namespace Net.Business.DTO.SAPBusinessOne
     {
         public string? AddressName { get; set; }
         public string? AddressType { get; set; } 
+        public string? Address { get; set; } // Compatibility with frontend
+        public string? AdresType { get; set; } // Compatibility with frontend
         public string? Street { get; set; }
         public string? Block { get; set; }
         public string? City { get; set; }
