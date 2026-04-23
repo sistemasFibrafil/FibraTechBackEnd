@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Net.Connection")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a537d80b9ac2e4b75f8845ad3f8d34ea5ffe6d4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb39d0855e6e06d9f6d2368cba7bcfda8be95bb3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Net.Connection")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Net.Connection")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

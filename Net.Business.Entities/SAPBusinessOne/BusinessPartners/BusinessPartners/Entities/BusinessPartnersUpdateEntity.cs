@@ -24,13 +24,14 @@ namespace Net.Business.Entities.SAPBusinessOne
         public string U_BPP_BPAT { get; set; } 
         public string U_BPP_BPTD { get; set; } 
         public string U_BPP_BPTP { get; set; } 
-        public string U_BPP_BPN1 { get; set; } 
-        public string U_BPP_BPN2 { get; set; } 
         public string U_BPP_BPNO { get; set; } 
         public string U_BPP_BPAP { get; set; } 
         public string U_BPP_BPAM { get; set; } 
         public string U_FIB_Divi { get; set; } 
         public string U_FIB_Sector { get; set; } 
+        public string ValidFor { get; set; } 
+        public string U_FIB_Email2 { get; set; } 
+        public string U_FIB_Email3 { get; set; } 
 
         public List<BPAddressesUpdateEntity> Addresses { get; set; }
         public List<BPContactEmployeesUpdateEntity> ContactEmployees { get; set; }
@@ -49,6 +50,7 @@ namespace Net.Business.Entities.SAPBusinessOne
         public string Country { get; set; }
         public string BuildingFloorRoom { get; set; }
         public string GlblLocNum { get; set; }
+        public string TaxCode { get; set; }
     }
 
     public class BPContactEmployeesUpdateEntity

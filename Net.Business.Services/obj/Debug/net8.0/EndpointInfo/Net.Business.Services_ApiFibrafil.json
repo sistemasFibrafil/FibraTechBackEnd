@@ -3082,6 +3082,58 @@
         }
       }
     },
+    "/api/Division/GetList": {
+      "get": {
+        "tags": [
+          "Division"
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/DocumentNumberingSeries/GetNumero": {
       "get": {
         "tags": [
@@ -20856,6 +20908,58 @@
         }
       }
     },
+    "/api/PriceLists/GetList": {
+      "get": {
+        "tags": [
+          "PriceLists"
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Proceso/GetList": {
       "get": {
         "tags": [
@@ -24423,6 +24527,58 @@
         }
       }
     },
+    "/api/TaxGroups/GetList": {
+      "get": {
+        "tags": [
+          "TaxGroups"
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/TaxGroups/GetListByFilter": {
       "get": {
         "tags": [
@@ -26808,6 +26964,50 @@
             "type": "string",
             "nullable": true
           },
+          "u_BPP_BPTP": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPNO": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPAP": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPAM": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_BPP_BPAT": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_Divi": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_Sector": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_Email2": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_Email3": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "validFor": {
+            "type": "string",
+            "nullable": true
+          },
           "currency": {
             "type": "string",
             "nullable": true
@@ -26857,10 +27057,6 @@
             "nullable": true
           },
           "mailCity": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_BPP_BPAT": {
             "type": "string",
             "nullable": true
           },
@@ -27170,6 +27366,10 @@
           "glblLocNum": {
             "type": "string",
             "nullable": true
+          },
+          "taxCode": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -27308,14 +27508,6 @@
             "type": "string",
             "nullable": true
           },
-          "u_BPP_BPN1": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_BPP_BPN2": {
-            "type": "string",
-            "nullable": true
-          },
           "u_BPP_BPNO": {
             "type": "string",
             "nullable": true
@@ -27333,6 +27525,18 @@
             "nullable": true
           },
           "u_FIB_Sector": {
+            "type": "string",
+            "nullable": true
+          },
+          "validFor": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_Email2": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_Email3": {
             "type": "string",
             "nullable": true
           },
@@ -27397,6 +27601,10 @@
             "nullable": true
           },
           "glblLocNum": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxCode": {
             "type": "string",
             "nullable": true
           }
@@ -27537,14 +27745,6 @@
             "type": "string",
             "nullable": true
           },
-          "u_BPP_BPN1": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_BPP_BPN2": {
-            "type": "string",
-            "nullable": true
-          },
           "u_BPP_BPNO": {
             "type": "string",
             "nullable": true
@@ -27562,6 +27762,18 @@
             "nullable": true
           },
           "u_FIB_Sector": {
+            "type": "string",
+            "nullable": true
+          },
+          "validFor": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_Email2": {
+            "type": "string",
+            "nullable": true
+          },
+          "u_FIB_Email3": {
             "type": "string",
             "nullable": true
           },

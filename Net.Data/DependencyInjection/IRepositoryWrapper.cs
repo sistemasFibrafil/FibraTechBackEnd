@@ -94,6 +94,7 @@ namespace Net.Data
         IUbigeoRepository Ubigeo { get; }
         IBusinessPartnerGroupsRepository BusinessPartnerGroups { get; }
         IBusinessPartnerSectorsRepository BusinessPartnerSectors { get; }
+        IDivisionRepository Division { get; }
 
         #endregion
 
@@ -184,6 +185,7 @@ namespace Net.Data
         ICargaSaldoInicialRepository CargaSaldoInicial { get; }
         ITakeInventorySparePartsRepository TakeInventorySpareParts { get; }
         IInventoryTransferRequestRepository InventoryTransferRequest { get; }
+        IPriceListRepository PriceList { get; }
 
         #endregion
 

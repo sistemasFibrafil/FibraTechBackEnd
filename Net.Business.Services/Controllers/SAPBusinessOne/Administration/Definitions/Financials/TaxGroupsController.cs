@@ -1,4 +1,4 @@
-﻿using Net.Data;
+using Net.Data;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
@@ -17,6 +17,21 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
         public TaxGroupsController(IRepositoryWrapper repository)
         {
             _repository = repository;
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetList()
+        {
+            var resutl = await _repository.TaxGroups.GetList();
+
+            if (resutl.ResultadoCodigo == -1)
+            {
+                return BadRequest(resutl);
+            }
+
+            return Ok(resutl.dataList);
         }
 
         [HttpGet]

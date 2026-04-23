@@ -116,6 +116,7 @@ namespace Net.Data
         private IUbigeoRepository _ubigeo;
         private IBusinessPartnerGroupsRepository _businessPartnerGroups;
         private IBusinessPartnerSectorsRepository _businessPartnerSectors;
+        private IDivisionRepository _division;
 
         #endregion
 
@@ -205,6 +206,7 @@ namespace Net.Data
         private ICargaSaldoInicialRepository _cargaSaldoInicial;
         private ITakeInventorySparePartsRepository _takeInventorySpareParts;
         private IInventoryTransferRequestRepository _inventoryTransferRequest;
+        private IPriceListRepository _priceList;
 
         #endregion
 
@@ -795,9 +797,20 @@ namespace Net.Data
             {
                 if (_businessPartnerSectors == null)
                 {
-                    _businessPartnerSectors = new BusinessPartnerSectorsRepository(_repoContext, _configuration);
+                    _businessPartnerSectors = new BusinessPartnerSectorsRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _businessPartnerSectors;
+            }
+        }
+        public IDivisionRepository Division
+        {
+            get
+            {
+                if (_division == null)
+                {
+                    _division = new DivisionRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _division;
             }
         }
         #endregion
@@ -1131,6 +1144,17 @@ namespace Net.Data
                     _takeInventorySpareParts = new TakeInventorySparePartsRepository(_repoContext, _configuration, _dbSeguridad, _dbSAPBusinessOne, _companyProviderSap);
                 }
                 return _takeInventorySpareParts;
+            }
+        }
+        public IPriceListRepository PriceList
+        {
+            get
+            {
+                if (_priceList == null)
+                {
+                    _priceList = new PriceListRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _priceList;
             }
         }
 

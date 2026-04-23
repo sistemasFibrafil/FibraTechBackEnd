@@ -8,7 +8,6 @@ namespace Net.Business.Entities.SAPBusinessOne
         public string? CardName { get; set; }
         public string? CardType { get; set; }
 
-
         /// <summary>
         /// TIPO DE DOCUMENTO DE IDENTIDAD
         /// </summary>
@@ -37,6 +36,16 @@ namespace Net.Business.Entities.SAPBusinessOne
         public string? Cellular { get; set; }
         public decimal CreditLine { get; set; }
         public short GroupCode { get; set; }
+        public string? U_BPP_BPTP { get; set; }
+        public string? U_BPP_BPNO { get; set; }
+        public string? U_BPP_BPAP { get; set; }
+        public string? U_BPP_BPAM { get; set; }
+        public string? U_FIB_Divi { get; set; }
+        public string? U_FIB_Sector { get; set; }
+        public string? U_FIB_EMAIL2 { get; set; }
+        public string? U_FIB_EMAIL3 { get; set; }
+        public string? Notes { get; set; }
+        public string? ValidFor { get; set; }
         public List<ContactEmployeesQueryEntity> ContactEmployees { get; set; } = new List<ContactEmployeesQueryEntity>();
     }
 }

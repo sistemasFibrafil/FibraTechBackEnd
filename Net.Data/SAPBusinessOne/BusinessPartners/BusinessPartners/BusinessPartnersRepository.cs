@@ -159,7 +159,6 @@ namespace Net.Data.SAPBusinessOne
                                n.State.Name + " " +
                                n.MailCounty + " - " +
                                n.MailCity,
-                    U_BPP_BPTD = n.U_BPP_BPTD,
                 })
                 .ToListAsync();
 
@@ -197,7 +196,6 @@ namespace Net.Data.SAPBusinessOne
                     LicTradNum = p.LicTradNum,
                     CardName = p.CardName,
                     CardType = p.CardType,
-                    U_BPP_BPTD = p.U_BPP_BPTD,
                     Currency = p.Currency,
 
                     LinesCurrency = _db.CurrencyCodes
@@ -262,6 +260,18 @@ namespace Net.Data.SAPBusinessOne
                     EmailAddress = p.E_Mail,
                     Cellular = p.Cellular,
                     CreditLine = p.CreditLine ?? 0,
+                    U_BPP_BPTD = p.U_BPP_BPTD,
+                    U_BPP_BPTP = p.U_BPP_BPTP,
+                    U_BPP_BPNO = p.U_BPP_BPNO,
+                    U_BPP_BPAP = p.U_BPP_BPAP,
+                    U_BPP_BPAM = p.U_BPP_BPAM,
+                    U_BPP_BPAT = p.U_BPP_BPAT,
+                    U_FIB_Divi = p.U_FIB_Divi,
+                    U_FIB_Sector = p.U_FIB_Sector,
+                    U_FIB_EMAIL2 = p.U_FIB_Email2,
+                    U_FIB_EMAIL3 = p.U_FIB_Email3,
+                    Notes = p.Notes,
+                    ValidFor = p.ValidFor,
 
                     // Propiedad primaria de contacto
                     CntctCode = _db.ContactEmployees
@@ -816,18 +826,24 @@ namespace Net.Data.SAPBusinessOne
                     if (!string.IsNullOrEmpty(value.CntctPrsn)) bp.ContactPerson = value.CntctPrsn;
                     if (!string.IsNullOrEmpty(value.Currency)) bp.Currency = value.Currency;
                     if (!string.IsNullOrEmpty(value.Notes)) bp.Notes = value.Notes;
+                    if (!string.IsNullOrEmpty(value.ValidFor)) bp.Valid = value.ValidFor == "Y" ? BoYesNoEnum.tYES : BoYesNoEnum.tNO;
 
                     // UDFs
-                    if (!string.IsNullOrEmpty(value.U_BPP_BPAT)) bp.UserFields.Fields.Item("U_BPP_BPAT").Value = value.U_BPP_BPAT;
-                    if (!string.IsNullOrEmpty(value.U_BPP_BPTD)) bp.UserFields.Fields.Item("U_BPP_BPTD").Value = value.U_BPP_BPTD;
-                    if (!string.IsNullOrEmpty(value.U_BPP_BPTP)) bp.UserFields.Fields.Item("U_BPP_BPTP").Value = value.U_BPP_BPTP;
-                    if (!string.IsNullOrEmpty(value.U_BPP_BPN1)) bp.UserFields.Fields.Item("U_BPP_BPN1").Value = value.U_BPP_BPN1;
-                    if (!string.IsNullOrEmpty(value.U_BPP_BPN2)) bp.UserFields.Fields.Item("U_BPP_BPN2").Value = value.U_BPP_BPN2;
-                    if (!string.IsNullOrEmpty(value.U_BPP_BPNO)) bp.UserFields.Fields.Item("U_BPP_BPNO").Value = value.U_BPP_BPNO;
-                    if (!string.IsNullOrEmpty(value.U_BPP_BPAP)) bp.UserFields.Fields.Item("U_BPP_BPAP").Value = value.U_BPP_BPAP;
-                    if (!string.IsNullOrEmpty(value.U_BPP_BPAM)) bp.UserFields.Fields.Item("U_BPP_BPAM").Value = value.U_BPP_BPAM;
-                    if (!string.IsNullOrEmpty(value.U_FIB_Divi)) bp.UserFields.Fields.Item("U_FIB_Divi").Value = value.U_FIB_Divi;
-                    if (!string.IsNullOrEmpty(value.U_FIB_Sector)) bp.UserFields.Fields.Item("U_FIB_Sector").Value = value.U_FIB_Sector;
+                    string currentField = "";
+                    try {
+                    currentField = "U_BPP_BPAT"; if (!string.IsNullOrEmpty(value.U_BPP_BPAT)) bp.UserFields.Fields.Item("U_BPP_BPAT").Value = value.U_BPP_BPAT;
+                    currentField = "U_BPP_BPTD"; if (!string.IsNullOrEmpty(value.U_BPP_BPTD)) bp.UserFields.Fields.Item("U_BPP_BPTD").Value = value.U_BPP_BPTD;
+                    currentField = "U_BPP_BPTP"; if (!string.IsNullOrEmpty(value.U_BPP_BPTP)) bp.UserFields.Fields.Item("U_BPP_BPTP").Value = value.U_BPP_BPTP;
+                    currentField = "U_BPP_BPNO"; if (!string.IsNullOrEmpty(value.U_BPP_BPNO)) bp.UserFields.Fields.Item("U_BPP_BPNO").Value = value.U_BPP_BPNO;
+                    currentField = "U_BPP_BPAP"; if (!string.IsNullOrEmpty(value.U_BPP_BPAP)) bp.UserFields.Fields.Item("U_BPP_BPAP").Value = value.U_BPP_BPAP;
+                    currentField = "U_BPP_BPAM"; if (!string.IsNullOrEmpty(value.U_BPP_BPAM)) bp.UserFields.Fields.Item("U_BPP_BPAM").Value = value.U_BPP_BPAM;
+                    currentField = "U_FIB_Divi"; if (!string.IsNullOrEmpty(value.U_FIB_Divi)) bp.UserFields.Fields.Item("U_FIB_Divi").Value = value.U_FIB_Divi;
+                    currentField = "U_FIB_Sector"; if (!string.IsNullOrEmpty(value.U_FIB_Sector)) bp.UserFields.Fields.Item("U_FIB_Sector").Value = value.U_FIB_Sector;
+                    currentField = "U_FIB_EMAIL2"; if (!string.IsNullOrEmpty(value.U_FIB_Email2)) bp.UserFields.Fields.Item("U_FIB_EMAIL2").Value = value.U_FIB_Email2;
+                    currentField = "U_FIB_EMAIL3"; if (!string.IsNullOrEmpty(value.U_FIB_Email3)) bp.UserFields.Fields.Item("U_FIB_EMAIL3").Value = value.U_FIB_Email3;
+
+
+                    } catch (Exception ex) { throw new Exception($"Error en campo {currentField} de la tabla OCRD: {ex.Message}"); }
 
                     // Direcciones
                     if (value.Addresses != null)
@@ -847,6 +863,7 @@ namespace Net.Data.SAPBusinessOne
                             bp.Addresses.Country = addr.Country;
                             bp.Addresses.BuildingFloorRoom = addr.BuildingFloorRoom;
                             if (!string.IsNullOrEmpty(addr.GlblLocNum)) bp.Addresses.GlobalLocationNumber = addr.GlblLocNum;
+                            if (!string.IsNullOrEmpty(addr.TaxCode)) bp.Addresses.TaxCode = addr.TaxCode;
                             addrCount++;
                         }
                     }
@@ -944,18 +961,23 @@ namespace Net.Data.SAPBusinessOne
                     if (!string.IsNullOrEmpty(value.CntctPrsn)) bp.ContactPerson = value.CntctPrsn;
                     if (!string.IsNullOrEmpty(value.Currency)) bp.Currency = value.Currency;
                     if (!string.IsNullOrEmpty(value.Notes)) bp.Notes = value.Notes;
+                    if (!string.IsNullOrEmpty(value.ValidFor)) bp.Valid = value.ValidFor == "Y" ? BoYesNoEnum.tYES : BoYesNoEnum.tNO;
 
                     // UDFs
-                    if (!string.IsNullOrEmpty(value.U_BPP_BPAT)) bp.UserFields.Fields.Item("U_BPP_BPAT").Value = value.U_BPP_BPAT;
-                    if (!string.IsNullOrEmpty(value.U_BPP_BPTD)) bp.UserFields.Fields.Item("U_BPP_BPTD").Value = value.U_BPP_BPTD;
-                    if (!string.IsNullOrEmpty(value.U_BPP_BPTP)) bp.UserFields.Fields.Item("U_BPP_BPTP").Value = value.U_BPP_BPTP;
-                    if (!string.IsNullOrEmpty(value.U_BPP_BPN1)) bp.UserFields.Fields.Item("U_BPP_BPN1").Value = value.U_BPP_BPN1;
-                    if (!string.IsNullOrEmpty(value.U_BPP_BPN2)) bp.UserFields.Fields.Item("U_BPP_BPN2").Value = value.U_BPP_BPN2;
-                    if (!string.IsNullOrEmpty(value.U_BPP_BPNO)) bp.UserFields.Fields.Item("U_BPP_BPNO").Value = value.U_BPP_BPNO;
-                    if (!string.IsNullOrEmpty(value.U_BPP_BPAP)) bp.UserFields.Fields.Item("U_BPP_BPAP").Value = value.U_BPP_BPAP;
-                    if (!string.IsNullOrEmpty(value.U_BPP_BPAM)) bp.UserFields.Fields.Item("U_BPP_BPAM").Value = value.U_BPP_BPAM;
-                    if (!string.IsNullOrEmpty(value.U_FIB_Divi)) bp.UserFields.Fields.Item("U_FIB_Divi").Value = value.U_FIB_Divi;
-                    if (!string.IsNullOrEmpty(value.U_FIB_Sector)) bp.UserFields.Fields.Item("U_FIB_Sector").Value = value.U_FIB_Sector;
+                    string currentField = "";
+                    try {
+                    currentField = "U_BPP_BPAT"; if (!string.IsNullOrEmpty(value.U_BPP_BPAT)) bp.UserFields.Fields.Item("U_BPP_BPAT").Value = value.U_BPP_BPAT;
+                    currentField = "U_BPP_BPTD"; if (!string.IsNullOrEmpty(value.U_BPP_BPTD)) bp.UserFields.Fields.Item("U_BPP_BPTD").Value = value.U_BPP_BPTD;
+                    currentField = "U_BPP_BPTP"; if (!string.IsNullOrEmpty(value.U_BPP_BPTP)) bp.UserFields.Fields.Item("U_BPP_BPTP").Value = value.U_BPP_BPTP;
+                    currentField = "U_BPP_BPNO"; if (!string.IsNullOrEmpty(value.U_BPP_BPNO)) bp.UserFields.Fields.Item("U_BPP_BPNO").Value = value.U_BPP_BPNO;
+                    currentField = "U_BPP_BPAP"; if (!string.IsNullOrEmpty(value.U_BPP_BPAP)) bp.UserFields.Fields.Item("U_BPP_BPAP").Value = value.U_BPP_BPAP;
+                    currentField = "U_BPP_BPAM"; if (!string.IsNullOrEmpty(value.U_BPP_BPAM)) bp.UserFields.Fields.Item("U_BPP_BPAM").Value = value.U_BPP_BPAM;
+                    currentField = "U_FIB_Divi"; if (!string.IsNullOrEmpty(value.U_FIB_Divi)) bp.UserFields.Fields.Item("U_FIB_Divi").Value = value.U_FIB_Divi;
+                    currentField = "U_FIB_Sector"; if (!string.IsNullOrEmpty(value.U_FIB_Sector)) bp.UserFields.Fields.Item("U_FIB_Sector").Value = value.U_FIB_Sector;
+                    currentField = "U_FIB_EMAIL2"; if (!string.IsNullOrEmpty(value.U_FIB_Email2)) bp.UserFields.Fields.Item("U_FIB_EMAIL2").Value = value.U_FIB_Email2;
+                    currentField = "U_FIB_EMAIL3"; if (!string.IsNullOrEmpty(value.U_FIB_Email3)) bp.UserFields.Fields.Item("U_FIB_EMAIL3").Value = value.U_FIB_Email3;
+
+                    } catch (Exception ex) { throw new Exception($"Error en campo {currentField} de la tabla OCRD: {ex.Message}"); }
 
                     // Direcciones
                     if (value.Addresses != null)
@@ -991,6 +1013,7 @@ namespace Net.Data.SAPBusinessOne
                             bp.Addresses.Country = addr.Country;
                             bp.Addresses.BuildingFloorRoom = addr.BuildingFloorRoom;
                             if (!string.IsNullOrEmpty(addr.GlblLocNum)) bp.Addresses.GlobalLocationNumber = addr.GlblLocNum;
+                            if (!string.IsNullOrEmpty(addr.TaxCode)) bp.Addresses.TaxCode = addr.TaxCode;
                         }
                     }
 
@@ -1127,7 +1150,6 @@ namespace Net.Data.SAPBusinessOne
                     CardCode = p.CardCode,
                     LicTradNum = p.LicTradNum,
                     CardName = p.CardName,
-                    U_BPP_BPTD = p.U_BPP_BPTD
                 })
                 .FirstOrDefaultAsync();
 

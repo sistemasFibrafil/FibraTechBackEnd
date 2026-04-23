@@ -1923,6 +1923,40 @@
     ]
   },
   {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.BusinessPartners.DivisionController",
+    "Method": "GetList",
+    "RelativePath": "api/Division/GetList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
     "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.SystemInitialization.DocumentNumberingSeriesController",
     "Method": "GetNumero",
     "RelativePath": "api/DocumentNumberingSeries/GetNumero",
@@ -12882,6 +12916,40 @@
     ]
   },
   {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Inventory.PriceListsController",
+    "Method": "GetList",
+    "RelativePath": "api/PriceLists/GetList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
     "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General.ProcesoController",
     "Method": "GetList",
     "RelativePath": "api/Proceso/GetList",
@@ -15140,6 +15208,40 @@
           "text/json"
         ],
         "StatusCode": 0
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Financials.TaxGroupsController",
+    "Method": "GetList",
+    "RelativePath": "api/TaxGroups/GetList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
       }
     ]
   },

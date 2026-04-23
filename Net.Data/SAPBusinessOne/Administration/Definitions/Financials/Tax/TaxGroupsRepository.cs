@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Linq;
 using Net.Connection;
@@ -28,6 +28,11 @@ namespace Net.Data.SAPBusinessOne
             _aplicacionName = GetType().Name;
         }
 
+
+        public async Task<ResultadoTransaccionEntity<TaxGroupsEntity>> GetList()
+        {
+            return await GetListByFilter(null);
+        }
 
         public async Task<ResultadoTransaccionEntity<TaxGroupsEntity>> GetListByFilter(string filter)
         {

@@ -1,8 +1,15 @@
-﻿namespace Net.Business.Entities.SAPBusinessOne
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Net.Business.Entities.SAPBusinessOne
 {
+    [Table("@FIB_SECTOR")]
     public class BusinessPartnerSectorsEntity
     {
-        public string Code { get; set; }
-        public string Name { get; set; }
+        [Key]
+        [Column("Code")]
+        public string Codigo { get; set; }
+        [Column("Name")]
+        public string Nombre { get; set; }
     }
 }

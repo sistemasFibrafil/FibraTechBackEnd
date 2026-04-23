@@ -25,13 +25,14 @@ namespace Net.Business.DTO.SAPBusinessOne
         public string? U_BPP_BPAT { get; set; }
         public string? U_BPP_BPTD { get; set; }
         public string? U_BPP_BPTP { get; set; }
-        public string? U_BPP_BPN1 { get; set; }
-        public string? U_BPP_BPN2 { get; set; }
         public string? U_BPP_BPNO { get; set; }
         public string? U_BPP_BPAP { get; set; }
         public string? U_BPP_BPAM { get; set; }
         public string? U_FIB_Divi { get; set; }
         public string? U_FIB_Sector { get; set; }
+        public string? ValidFor { get; set; }
+        public string? U_FIB_Email2 { get; set; }
+        public string? U_FIB_Email3 { get; set; }
 
         public List<BPAddressesUpdateRequestDto>? Addresses { get; set; }
         public List<BPContactEmployeesUpdateRequestDto>? ContactEmployees { get; set; }
@@ -59,13 +60,14 @@ namespace Net.Business.DTO.SAPBusinessOne
                 U_BPP_BPAT = this.U_BPP_BPAT,
                 U_BPP_BPTD = this.U_BPP_BPTD,
                 U_BPP_BPTP = this.U_BPP_BPTP,
-                U_BPP_BPN1 = this.U_BPP_BPN1,
-                U_BPP_BPN2 = this.U_BPP_BPN2,
                 U_BPP_BPNO = this.U_BPP_BPNO,
                 U_BPP_BPAP = this.U_BPP_BPAP,
                 U_BPP_BPAM = this.U_BPP_BPAM,
                 U_FIB_Divi = this.U_FIB_Divi,
                 U_FIB_Sector = this.U_FIB_Sector,
+                ValidFor = this.ValidFor,
+                U_FIB_Email2 = this.U_FIB_Email2,
+                U_FIB_Email3 = this.U_FIB_Email3,
                 Addresses = new List<BPAddressesUpdateEntity>(),
                 ContactEmployees = new List<BPContactEmployeesUpdateEntity>()
             };
@@ -86,7 +88,8 @@ namespace Net.Business.DTO.SAPBusinessOne
                         State = addr.State,
                         Country = addr.Country,
                         BuildingFloorRoom = addr.BuildingFloorRoom,
-                        GlblLocNum = addr.GlblLocNum
+                        GlblLocNum = addr.GlblLocNum,
+                        TaxCode = addr.TaxCode
                     });
                 }
             }
@@ -129,6 +132,7 @@ namespace Net.Business.DTO.SAPBusinessOne
         public string? Country { get; set; }
         public string? BuildingFloorRoom { get; set; }
         public string? GlblLocNum { get; set; }
+        public string? TaxCode { get; set; }
     }
 
     public class BPContactEmployeesUpdateRequestDto
