@@ -1,4 +1,4 @@
-﻿namespace Net.Business.Entities.SAPBusinessOne
+namespace Net.Business.Entities.SAPBusinessOne
 {
     public class AddressesEntity
     {
@@ -10,6 +10,8 @@
         public string? County { get; set; }
         public string? City { get; set; }
         public string? State { get; set; }
+        public string? Country { get; set; }
+        public string? GlblLocNum { get; set; }
         public string? TaxCode { get; set; }
 
         public StatesEntity? States { get; set; } = null;

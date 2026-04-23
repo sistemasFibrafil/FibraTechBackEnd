@@ -26984,6 +26984,14 @@
             "type": "string",
             "nullable": true
           },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "glblLocNum": {
+            "type": "string",
+            "nullable": true
+          },
           "taxCode": {
             "type": "string",
             "nullable": true
