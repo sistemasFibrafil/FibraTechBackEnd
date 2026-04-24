@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
@@ -25,9 +25,9 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<ExchangeRatesQueryEntity>> GetByDocDateAndCurrency(ExchangeRatesFindEntity value)
+        public async Task<ResultadoTransaccionResponse<ExchangeRatesQueryEntity>> GetByDocDateAndCurrency(ExchangeRatesFindEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<ExchangeRatesQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<ExchangeRatesQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

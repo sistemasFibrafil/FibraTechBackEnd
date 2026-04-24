@@ -40,10 +40,10 @@ namespace Net.Data.SAPBusinessOne
         }
         
 
-        public async Task<ResultadoTransaccionEntity<OrdenFabricacionSapEntity>> GetListOrdenFabricacionBySede(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdenFabricacionSapEntity>> GetListOrdenFabricacionBySede(FilterRequestEntity value)
         {
             var response = new List<OrdenFabricacionSapEntity>();
-            var ResultTransaccion = new ResultadoTransaccionEntity<OrdenFabricacionSapEntity>();
+            var ResultTransaccion = new ResultadoTransaccionResponse<OrdenFabricacionSapEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -85,9 +85,9 @@ namespace Net.Data.SAPBusinessOne
 
             return ResultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetOrdenFabricacionExcelBySede(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetOrdenFabricacionExcelBySede(FilterRequestEntity value)
         {
-            var ResultTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var ResultTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
             ResultTransaccion.NombreMetodo = _metodoName;
@@ -171,10 +171,10 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<OrdenFabricacionGeneralSapBySedeEntity>> GetListOrdenFabricacionGeneralBySede(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdenFabricacionGeneralSapBySedeEntity>> GetListOrdenFabricacionGeneralBySede(FilterRequestEntity value)
         {
             var response = new List<OrdenFabricacionGeneralSapBySedeEntity>();
-            var ResultTransaccion = new ResultadoTransaccionEntity<OrdenFabricacionGeneralSapBySedeEntity>();
+            var ResultTransaccion = new ResultadoTransaccionResponse<OrdenFabricacionGeneralSapBySedeEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -216,10 +216,10 @@ namespace Net.Data.SAPBusinessOne
 
             return ResultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetOrdenFabricacionGeneralExcelBySede(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetOrdenFabricacionGeneralExcelBySede(FilterRequestEntity value)
         {
             var ms = new MemoryStream();
-            var ResultTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var ResultTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
             ResultTransaccion.NombreMetodo = _metodoName;

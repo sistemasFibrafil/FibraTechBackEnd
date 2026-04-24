@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.Entities.SAPBusinessOne
+namespace Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Update
 {
     public class InventoryTransferRequestUpdateEntity
     {
@@ -26,7 +26,7 @@ namespace Net.Business.Entities.SAPBusinessOne
 
         public int U_UsrUpdate { get; set; }
 
-        public List<InventoryTransferRequest1UpdateEntity> Lines { get; set; } = new List<InventoryTransferRequest1UpdateEntity>();
+        public List<InventoryTransferRequest1UpdateEntity> Lines { get; set; } = [];
     }
 
     public class InventoryTransferRequest1UpdateEntity
@@ -34,14 +34,14 @@ namespace Net.Business.Entities.SAPBusinessOne
         public int DocEntry { get; set; }
         public int LineNum { get; set; }
         public string? LineStatus { get; set; }
-        public string ItemCode { get; set; } = string.Empty;
+        public string? ItemCode { get; set; }
         public string? Dscription { get; set; }
         public string? FromWhsCod { get; set; }
         public string? WhsCode { get; set; }
         public string? UnitMsr { get; set; }
         public double Quantity { get; set; }
 
-        public string U_FIB_LinStPkg { get; set; } = string.Empty;
+        public string? U_FIB_LinStPkg { get; set; }
         public double U_FIB_OpQtyPkg { get; set; }
         public string? U_tipoOpT12 { get; set; }
 

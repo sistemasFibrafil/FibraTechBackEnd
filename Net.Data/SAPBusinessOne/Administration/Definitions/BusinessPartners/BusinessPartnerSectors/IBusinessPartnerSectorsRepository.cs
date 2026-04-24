@@ -1,10 +1,10 @@
-﻿using Net.Business.Entities;
+﻿using Net.CrossCotting;
 using System.Threading.Tasks;
 using Net.Business.Entities.SAPBusinessOne;
 namespace Net.Data.SAPBusinessOne
 {
     public interface IBusinessPartnerSectorsRepository
     {
-        Task<ResultadoTransaccionEntity<BusinessPartnerSectorsEntity>> GetList();
+        Task<ResultadoTransaccionResponse<BusinessPartnerSectorsEntity>> GetList();
     }
 }

@@ -1,30 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.Users.Entities;
 namespace Net.Business.Entities.SAPBusinessOne
 {
     public class InvoicesEntity
     {
         public int DocEntry { get; set; }
         public int DocNum { get; set; }
-        public string ObjType { get; set; } = string.Empty;
-        public string DocType { get; set; } = string.Empty;
-        public string CANCELED { get; set; } = string.Empty;
-        public string DocStatus { get; set; } = string.Empty;
-        public string InvntSttus { get; set; } = string.Empty;
+        public string? ObjType { get; set; } = string.Empty;
+        public string? DocType { get; set; } = string.Empty;
+        public string? CANCELED { get; set; } = string.Empty;
+        public string? DocStatus { get; set; } = string.Empty;
+        public string? InvntSttus { get; set; } = string.Empty;
 
 
         /// <summary>
         /// Factura             : "DocSubType" = '--'
         /// Factura Exportación : "DocSubType" = 'IX'
         /// </summary>
-        public string DocSubType { get; set; } = string.Empty;
+        public string? DocSubType { get; set; } = string.Empty;
 
 
         /// <summary>
         /// Factura         : "isIns" = 'N'
         /// Factura Reserva : "isIns" = 'Y'
         /// </summary>
-        public string isIns { get; set; } = string.Empty;
+        public string? isIns { get; set; } = string.Empty;
 
         public DateTime DocDate { get; set; }
         public DateTime DocDueDate { get; set; }
@@ -53,7 +54,7 @@ namespace Net.Business.Entities.SAPBusinessOne
         /// <summary>
         /// SOCIO DE NEGOCIOS
         /// </summary>
-        public string CardCode { get; set; } = string.Empty;
+        public string? CardCode { get; set; } = string.Empty;
         public string? CardName { get; set; }
         public short GroupCode { get; set; }
         public int? CntctCode { get; set; }

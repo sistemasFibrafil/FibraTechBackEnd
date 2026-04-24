@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Net.Business.Entities.SAPBusinessOne
+namespace Net.Business.Entities.SAPBusinessOne.Sales.Invoices.Update
 {
     public class InvoicesUpdateEntity
     {

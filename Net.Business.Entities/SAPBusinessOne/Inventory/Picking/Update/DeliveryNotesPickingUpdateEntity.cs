@@ -1,4 +1,4 @@
-﻿namespace Net.Business.Entities.SAPBusinessOne
+﻿namespace Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Update
 {
     public class DeliveryNotesPickingUpdateEntity
     {

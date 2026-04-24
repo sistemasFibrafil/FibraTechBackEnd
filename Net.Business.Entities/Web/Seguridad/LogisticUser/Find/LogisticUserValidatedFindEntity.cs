@@ -2,7 +2,7 @@
 {
     public class LogisticUserValidatedFindEntity
     {
-        public string ObjectType { get; set; }
+        public string? ObjectType { get; set; }
         public int IdUsuario { get; set; }
     }
 }

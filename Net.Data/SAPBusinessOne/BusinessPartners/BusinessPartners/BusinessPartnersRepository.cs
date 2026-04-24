@@ -5,7 +5,6 @@ using System.Linq;
 using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml;
 using System.Collections.Generic;
@@ -46,9 +45,9 @@ namespace Net.Data.SAPBusinessOne
 
 
 
-        public async Task<ResultadoTransaccionEntity<BusinessPartnersQueryEntity>> GetListByFilter(BusinessPartnersFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<BusinessPartnersQueryEntity>> GetListByFilter(BusinessPartnersFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<BusinessPartnersQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<BusinessPartnersQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -104,9 +103,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<BusinessPartnersQueryEntity>> GetListModalByFilter(BusinessPartnersModalFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<BusinessPartnersQueryEntity>> GetListModalByFilter(BusinessPartnersModalFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<BusinessPartnersQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<BusinessPartnersQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -177,9 +176,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<BusinessPartnersQueryEntity>> GetByCode(string cardCode)
+        public async Task<ResultadoTransaccionResponse<BusinessPartnersQueryEntity>> GetByCode(string cardCode)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<BusinessPartnersQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<BusinessPartnersQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -316,9 +315,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<BusinessPartnersQueryEntity>> GetVehicleByCode(string cardCode)
+        public async Task<ResultadoTransaccionResponse<BusinessPartnersQueryEntity>> GetVehicleByCode(string cardCode)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<BusinessPartnersQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<BusinessPartnersQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -364,9 +363,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<BusinessPartnersQueryEntity>> GetDriverByCode(string cardCode)
+        public async Task<ResultadoTransaccionResponse<BusinessPartnersQueryEntity>> GetDriverByCode(string cardCode)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<BusinessPartnersQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<BusinessPartnersQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -410,9 +409,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<BusinessPartnersViewEntity>> GetListClienteBySectorStatus(BusinessPartnersSectorStatusFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<BusinessPartnersViewEntity>> GetListClienteBySectorStatus(BusinessPartnersSectorStatusFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<BusinessPartnersViewEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<BusinessPartnersViewEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -529,9 +528,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<BusinessPartnersViewEntity>> GetLitClienteContactoBySectorStatus(BusinessPartnersSectorStatusFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<BusinessPartnersViewEntity>> GetLitClienteContactoBySectorStatus(BusinessPartnersSectorStatusFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<BusinessPartnersViewEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<BusinessPartnersViewEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -607,10 +606,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetClienteBySectorStatusExcel(BusinessPartnersSectorStatusFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetClienteBySectorStatusExcel(BusinessPartnersSectorStatusFilterEntity value)
         {
             var ms = new MemoryStream();
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 

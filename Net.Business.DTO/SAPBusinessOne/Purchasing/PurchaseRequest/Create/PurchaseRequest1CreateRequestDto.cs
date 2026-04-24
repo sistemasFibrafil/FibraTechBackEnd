@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Net.Business.DTO.SAPBusinessOne
+namespace Net.Business.DTO.SAPBusinessOne.Purchasing.PurchaseRequest.Create
 {
     public class PurchaseRequest1CreateRequestDto
     {

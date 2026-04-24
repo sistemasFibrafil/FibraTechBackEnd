@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.Entities.SAPBusinessOne
+using Net.Business.Entities.SAPBusinessOne.Common.Attachments2.Update;
+namespace Net.Business.Entities.SAPBusinessOne.Sales.Orders.Update
 {
     public class OrdersUpdateEntity
     {
@@ -78,6 +79,8 @@ namespace Net.Business.Entities.SAPBusinessOne
 
         public int U_UsrUpdate { get; set; }
 
-        public List<Orders1UpdateEntity> Lines { get; set; } = new List<Orders1UpdateEntity>();
+
+        public Attachments2UpdateEntity? Attachments2 { get; set; } = null;
+        public List<OrdersLinesUpdateEntity> Lines { get; set; } = [];
     }
 }

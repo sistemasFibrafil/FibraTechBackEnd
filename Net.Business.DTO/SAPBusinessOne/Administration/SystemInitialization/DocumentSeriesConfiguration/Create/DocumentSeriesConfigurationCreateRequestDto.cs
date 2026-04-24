@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-namespace Net.Business.DTO.SAPBusinessOne
+namespace Net.Business.DTO.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Create
 {
     public class DocumentSeriesConfigurationCreateRequestDto
     {
@@ -7,6 +7,6 @@ namespace Net.Business.DTO.SAPBusinessOne
         public int? U_IdUser { get; set; }
         public string? U_Active { get; set; }
 
-        public List<DocumentSeriesConfiguration1CreateRequestDto> Lines { get; set; } = new List<DocumentSeriesConfiguration1CreateRequestDto>();
+        public List<DocumentSeriesConfigurationLinesCreateRequestDto> Lines { get; set; } = [];
     }
 }

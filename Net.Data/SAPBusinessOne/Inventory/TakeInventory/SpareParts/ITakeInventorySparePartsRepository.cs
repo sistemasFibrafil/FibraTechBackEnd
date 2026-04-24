@@ -1,16 +1,16 @@
 ﻿using System.IO;
-using Net.Business.Entities;
+using Net.CrossCotting;
 using System.Threading.Tasks;
 using Net.Business.Entities.SAPBusinessOne;
 namespace Net.Data.SAPBusinessOne
 {
     public interface ITakeInventorySparePartsRepository
     {
-        Task<ResultadoTransaccionEntity<TakeInventorySparePartsEntity>> GetListByFilter(TakeInventorySparePartsFilterEntity value);
-        Task<ResultadoTransaccionEntity<MemoryStream>> GetExcelByFilter(TakeInventorySparePartsFilterEntity value);
-        Task<ResultadoTransaccionEntity<TakeInventorySparePartsEntity>> GetListCurrentDate(TakeInventorySparePartsFindEntity value);
-        Task<ResultadoTransaccionEntity<TakeInventorySparePartsEntity>> SetCreate(TakeInventorySparePartsCreateEntity value);
-        Task<ResultadoTransaccionEntity<TakeInventorySparePartsEntity>> SetUpdate(TakeInventorySparePartsUpdateEntity value);
-        Task<ResultadoTransaccionEntity<TakeInventorySparePartsEntity>> SetDelete(TakeInventorySparePartsDeleteEntity value);
+        Task<ResultadoTransaccionResponse<TakeInventorySparePartsEntity>> GetListByFilter(TakeInventorySparePartsFilterEntity value);
+        Task<ResultadoTransaccionResponse<MemoryStream>> GetExcelByFilter(TakeInventorySparePartsFilterEntity value);
+        Task<ResultadoTransaccionResponse<TakeInventorySparePartsEntity>> GetListCurrentDate(TakeInventorySparePartsFindEntity value);
+        Task<ResultadoTransaccionResponse<TakeInventorySparePartsEntity>> SetCreate(TakeInventorySparePartsCreateEntity value);
+        Task<ResultadoTransaccionResponse<TakeInventorySparePartsEntity>> SetUpdate(TakeInventorySparePartsUpdateEntity value);
+        Task<ResultadoTransaccionResponse<TakeInventorySparePartsEntity>> SetDelete(TakeInventorySparePartsDeleteEntity value);
     }
 }

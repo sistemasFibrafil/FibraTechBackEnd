@@ -1,20 +1,21 @@
 ﻿using System.IO;
-using Net.Business.Entities;
+using Net.CrossCotting;
 using System.Threading.Tasks;
 using Net.Business.Entities.SAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Query;
 namespace Net.Data.SAPBusinessOne
 {
     public interface ITakeInventoryFinishedProductsRepository
     {
-        Task<ResultadoTransaccionEntity<TakeInventoryFinishedProductsQueryEntity>> GetListByFilter(TakeInventoryFinishedProductsFilterEntity value);
-        Task<ResultadoTransaccionEntity<MemoryStream>> GetSummaryItemExcelByFilter(TakeInventoryFinishedProductsFilterEntity value);
-        Task<ResultadoTransaccionEntity<MemoryStream>> GetDetailedExcelByFilter(TakeInventoryFinishedProductsFilterEntity value);
-        Task<ResultadoTransaccionEntity<MemoryStream>> GetSummaryUserExcelByFilter(TakeInventoryFinishedProductsFilterEntity value);
-        Task<ResultadoTransaccionEntity<TakeInventoryFinishedProducts1Entity>> GetListByItemCode(TakeInventoryFinishedProductsModalFilterEntity value);
-        Task<ResultadoTransaccionEntity<TakeInventoryFinishedProductsQueryEntity>> GetListCurrentDate(TakeInventoryFinishedProductsFindEntity value);
-        Task<ResultadoTransaccionEntity<InventoryTransferRequestQueryEntity>> GetToCopy(TakeInventoryFinishedProductsToCopyFindEntity value);
-        Task<ResultadoTransaccionEntity<TakeInventoryFinishedProductsQueryEntity>> SetCreate(TakeInventoryFinishedProductsCreateEntity value);
-        Task<ResultadoTransaccionEntity<TakeInventoryFinishedProducts1Entity>> SetDeleteLine(TakeInventoryFinishedProducts1DeleteEntity value);
-        Task<ResultadoTransaccionEntity<TakeInventoryFinishedProductsEntity>> SetDelete(TakeInventoryFinishedProductsDeleteEntity value);
+        Task<ResultadoTransaccionResponse<TakeInventoryFinishedProductsQueryEntity>> GetListByFilter(TakeInventoryFinishedProductsFilterEntity value);
+        Task<ResultadoTransaccionResponse<MemoryStream>> GetSummaryItemExcelByFilter(TakeInventoryFinishedProductsFilterEntity value);
+        Task<ResultadoTransaccionResponse<MemoryStream>> GetDetailedExcelByFilter(TakeInventoryFinishedProductsFilterEntity value);
+        Task<ResultadoTransaccionResponse<MemoryStream>> GetSummaryUserExcelByFilter(TakeInventoryFinishedProductsFilterEntity value);
+        Task<ResultadoTransaccionResponse<TakeInventoryFinishedProducts1Entity>> GetListByItemCode(TakeInventoryFinishedProductsModalFilterEntity value);
+        Task<ResultadoTransaccionResponse<TakeInventoryFinishedProductsQueryEntity>> GetListCurrentDate(TakeInventoryFinishedProductsFindEntity value);
+        Task<ResultadoTransaccionResponse<InventoryTransferRequestQueryEntity>> GetToCopy(TakeInventoryFinishedProductsToCopyFindEntity value);
+        Task<ResultadoTransaccionResponse<TakeInventoryFinishedProductsQueryEntity>> SetCreate(TakeInventoryFinishedProductsCreateEntity value);
+        Task<ResultadoTransaccionResponse<TakeInventoryFinishedProducts1Entity>> SetDeleteLine(TakeInventoryFinishedProducts1DeleteEntity value);
+        Task<ResultadoTransaccionResponse<TakeInventoryFinishedProductsEntity>> SetDelete(TakeInventoryFinishedProductsDeleteEntity value);
     }
 }

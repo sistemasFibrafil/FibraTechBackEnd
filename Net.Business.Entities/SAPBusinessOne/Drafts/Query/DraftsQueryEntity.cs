@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.Entities.SAPBusinessOne
+namespace Net.Business.Entities.SAPBusinessOne.Drafts.Query
 {
     public class DraftsQueryEntity
     {
@@ -11,9 +11,11 @@ namespace Net.Business.Entities.SAPBusinessOne
         public string? DocStatus { get; set; }
         public string? WddStatus { get; set; }
 
+        public DateTime CreateDate { get; set; }
         public DateTime DocDate { get; set; }
         public DateTime DocDueDate { get; set; }
         public DateTime TaxDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
         public string? DocTime { get; set; }
 
 

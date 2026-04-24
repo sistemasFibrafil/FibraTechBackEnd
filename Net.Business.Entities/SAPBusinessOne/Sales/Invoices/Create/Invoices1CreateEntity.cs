@@ -1,4 +1,4 @@
-﻿namespace Net.Business.Entities.SAPBusinessOne
+﻿namespace Net.Business.Entities.SAPBusinessOne.Sales.Invoices.Create
 {
     public class Invoices1CreateEntity
     {

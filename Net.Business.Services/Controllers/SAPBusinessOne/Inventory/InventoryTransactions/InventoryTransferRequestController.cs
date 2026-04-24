@@ -1,14 +1,14 @@
 ﻿using System;
 using Net.Data;
-using System.Linq;
-using FluentValidation;
-using Net.Business.DTO.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
-using Net.Business.Services.Mappers.SAPBusinessOne;
+using Net.BusinessLogic.Interfaces.SAPBusinessOne.Inventory.InventoryTransactions;
+using Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Close;
+using Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Filter;
+using Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Create;
+using Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Update;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions
 {
     [ApiController]
@@ -16,11 +16,14 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTr
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiExplorerSettings(GroupName = "ApiFibrafil")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public class InventoryTransferRequestController(IRepositoryWrapper repository, IValidator<InventoryTransferRequestCreateRequestDto> validatorCreate, IValidator<InventoryTransferRequestUpdateRequestDto> validatorUpdate) : ControllerBase
+    public class InventoryTransferRequestController
+        (
+            IRepositoryWrapper repository,
+            IInventoryTransferRequestService inventoryTransferRequestService
+        ) : ControllerBase
     {
         private readonly IRepositoryWrapper _repository = repository;
-        private readonly IValidator<InventoryTransferRequestCreateRequestDto> _validatorCreate = validatorCreate;
-        private readonly IValidator<InventoryTransferRequestUpdateRequestDto> _validatorUpdate = validatorUpdate;
+        private readonly IInventoryTransferRequestService _inventoryTransferRequestService = inventoryTransferRequestService;
 
 
         #region <<< CONSULTAS >>>
@@ -108,119 +111,48 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTr
         #region <<< OPERACIONES >>>
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> SetCreate([FromBody] InventoryTransferRequestCreateRequestDto dto)
         {
-            var validationResult = await _validatorCreate.ValidateAsync(dto);
-
-            if (!validationResult.IsValid)
-            {
-                return BadRequest(validationResult.Errors.Select(e => new
-                {
-                    field = e.PropertyName,
-                    message = e.ErrorMessage
-                }));
-            }
-
-
-            #region <<< VALIDACIÓN DE PERMISOS LOGÍSTICOS >>>
-
-            var permisos = await _repository.LogisticUser.GetValidateByUser(new LogisticUserValidatedFindRequestDto { ObjectType = dto.ObjType ,IdUsuario = dto.U_UsrCreate }.ReturnValue());
-
-            if(permisos.data == null)
-            {
-                return BadRequest(new { ResultadoCodigo = -1, ResultadoDescripcion = "No cuentas con permisos logísticos para realizar esta operación." });
-            }
-
-            if (!permisos.data.SuperUser)
-            {
-                for (int i = 0; i < dto.Lines.Count; i++)
-                {
-                    var permiso = permisos.data.Permissions.FirstOrDefault(p => p.WhsCode == dto.Lines[i].FromWhsCod && p.ToWhsCode == dto.Lines[i].WhsCode);
-                    if (permiso == null)
-                    {
-                        return BadRequest(new { ResultadoCodigo = -1, ResultadoDescripcion = $"No tienes permiso para realizar operaciones de almacén <b>{dto.Lines[i].FromWhsCod}</b> a <b>{dto.Lines[i].WhsCode}</b>. Línea {i + 1}." });
-                    }
-                }
-            }
-
-            #endregion
-
-
-            var entity = InventoryTransferRequestCreateMapper.ToEntity(dto);
-            var result = await _repository.InventoryTransferRequest.SetCreate(entity);
+            var result = await _inventoryTransferRequestService.SetCreate(dto);
 
             if (result.ResultadoCodigo == -1)
+            {
                 return BadRequest(result);
+            }
 
-            return NoContent();
+            return Ok(result);
         }
 
         [HttpPut]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> SetUpdate([FromBody] InventoryTransferRequestUpdateRequestDto dto)
         {
-            var validationResult = await _validatorUpdate.ValidateAsync(dto);
-
-            if (!validationResult.IsValid)
-            {
-                return BadRequest(validationResult.Errors.Select(e => new
-                {
-                    field = e.PropertyName,
-                    message = e.ErrorMessage
-                }));
-            }
-
-
-            #region <<< VALIDACIÓN DE PERMISOS LOGÍSTICOS >>>
-
-            var permisos = await _repository.LogisticUser.GetValidateByUser(new LogisticUserValidatedFindRequestDto { ObjectType = dto.ObjType, IdUsuario = dto.U_UsrUpdate }.ReturnValue());
-
-            if (permisos.data == null)
-            {
-                return BadRequest(new { ResultadoCodigo = -1, ResultadoDescripcion = "No cuentas con permisos logísticos para realizar esta operación." });
-            }
-
-            if (!permisos.data.SuperUser)
-            {
-                for (int i = 0; i < dto.Lines.Count; i++)
-                {
-                    var permiso = permisos.data.Permissions.FirstOrDefault(p => p.WhsCode == dto.Lines[i].FromWhsCod && p.ToWhsCode == dto.Lines[i].WhsCode);
-                    if (permiso == null)
-                    {
-                        return BadRequest(new { ResultadoCodigo = -1, ResultadoDescripcion = $"No tienes permiso para realizar operaciones de almacén <b>{dto.Lines[i].FromWhsCod}</b> a <b>{dto.Lines[i].WhsCode}</b>. Línea {i + 1}." });
-                    }
-                }
-            }
-
-            #endregion
-
-
-            var entity = InventoryTransferRequestUpdateMapper.ToEntity(dto);
-            var result = await _repository.InventoryTransferRequest.SetUpdate(entity);
+            var result = await _inventoryTransferRequestService.SetUpdate(dto);
 
             if (result.ResultadoCodigo == -1)
+            {
                 return BadRequest(result);
+            }
 
-            return NoContent();
+            return Ok(result);
         }
 
         [HttpPut]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> SetClose([FromBody] InventoryTransferRequestCloseRequestDto value)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> SetClose([FromBody] InventoryTransferRequestCloseRequestDto dto)
         {
-            var result = await _repository.InventoryTransferRequest.SetClose(value.ReturnValue());
+            var result = await _inventoryTransferRequestService.SetClose(dto);
 
             if (result.ResultadoCodigo == -1)
             {
                 return BadRequest(result);
             }
 
-            return NoContent();
+            return Ok(result);
         }
 
         #endregion

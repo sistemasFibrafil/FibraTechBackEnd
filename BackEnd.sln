@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30413.136
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37203.1 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net.Connection", "Net.Connection\Net.Connection.csproj", "{D75B0B78-3681-4A1B-8D56-7B496FF9B6C5}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net.Business.Entities", "Net.Business.Entities\Net.Business.Entities.csproj", "{6B4A2102-0841-40F8-9D89-7362ADF64AC5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net.CrossCotting", "Net.CrossCotting\Net.CrossCotting.csproj", "{45B1CB16-5141-4D6A-9C08-003C9B99F504}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.BusinessLogic", "Net.BusinessLogic\Net.BusinessLogic.csproj", "{797E3CAD-736E-4BEE-9201-07E11253DBE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{45B1CB16-5141-4D6A-9C08-003C9B99F504}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45B1CB16-5141-4D6A-9C08-003C9B99F504}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45B1CB16-5141-4D6A-9C08-003C9B99F504}.Release|Any CPU.Build.0 = Release|Any CPU
+		{797E3CAD-736E-4BEE-9201-07E11253DBE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{797E3CAD-736E-4BEE-9201-07E11253DBE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{797E3CAD-736E-4BEE-9201-07E11253DBE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{797E3CAD-736E-4BEE-9201-07E11253DBE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

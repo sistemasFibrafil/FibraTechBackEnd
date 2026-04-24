@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using System.Globalization;
 using Net.Business.Entities;
 using System.Threading.Tasks;
@@ -24,10 +25,10 @@ namespace Net.Data.Web
             _aplicacionName = GetType().Name;
         }
 
-        public async Task<ResultadoTransaccionEntity<AnioEntity>> GetListAnio()
+        public async Task<ResultadoTransaccionResponse<AnioEntity>> GetListAnio()
         {
             var response = new List<AnioEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<AnioEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<AnioEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -54,11 +55,11 @@ namespace Net.Data.Web
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MesEntity>> GetListMes()
+        public async Task<ResultadoTransaccionResponse<MesEntity>> GetListMes()
         {
             List<MesEntity> ListaItems = new();
             var response = new List<MesEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<MesEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<MesEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -83,10 +84,10 @@ namespace Net.Data.Web
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<SemanaEntity>> GetListSemana(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<SemanaEntity>> GetListSemana(FilterRequestEntity value)
         {
             var response = new List<SemanaEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<SemanaEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<SemanaEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -108,11 +109,11 @@ namespace Net.Data.Web
             // Se obtiene la semana según cada viernes
             var numero = 1;
             var listSemana = new List<SemanaEntity>();
-            int daysInMonth = DateTime.DaysInMonth(value.Id1, value.Id2);
+            int daysInMonth = DateTime.DaysInMonth(value.Id1 ?? 0, value.Id2 ?? 0);
 
             for (int day = 1; day <= daysInMonth; day++)
             {
-                DateTime date = new DateTime(value.Id1, value.Id2, day);
+                DateTime date = new DateTime(value.Id1 ?? 0, value.Id2 ?? 0, day);
                 if (date.DayOfWeek == DayOfWeek.Friday)
                 {
                     listSemana.Add(new SemanaEntity { CodSemana = numero, NomSemana = $"Semana {numero}" });

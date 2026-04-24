@@ -1,11 +1,11 @@
 ﻿using System;
-namespace Net.Business.Entities.SAPBusinessOne
+namespace Net.Business.Entities.SAPBusinessOne.Purchasing.PurchaseRequest.Update
 {
     public class PurchaseRequest1UpdateEntity
     {
         public int DocEntry { get; set; }
         public int LineNum { get; set; }
-        public string LineStatus { get; set; } = string.Empty;
+        public string? LineStatus { get; set; }
 
         public string? ItemCode { get; set; }
         public string? Dscription { get; set; }

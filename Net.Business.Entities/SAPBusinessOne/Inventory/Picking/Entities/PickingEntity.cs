@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.Entities.SAPBusinessOne
+namespace Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Entities
 {
     public class PickingEntity
     {
@@ -51,6 +51,6 @@ namespace Net.Business.Entities.SAPBusinessOne
         public int U_BaseEntry { get; set; }
         public int U_BaseType { get; set; }
         public int U_BaseLine { get; set; }
-        public string U_FIB_IsPkg { get; set; }
+        public string? U_FIB_IsPkg { get; set; }
     }
 }

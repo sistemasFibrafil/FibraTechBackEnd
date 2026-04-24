@@ -59,9 +59,9 @@ namespace Net.Data.Web
         }
 
 
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimacEntity>> SetCreate(OrdenVentaSodimacEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdenVentaSodimacEntity>> SetCreate(OrdenVentaSodimacEntity value)
         {
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimacEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<OrdenVentaSodimacEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -156,9 +156,9 @@ namespace Net.Data.Web
             return resultadoTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimacEntity>> SetUpdate(OrdenVentaSodimacEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdenVentaSodimacEntity>> SetUpdate(OrdenVentaSodimacEntity value)
         {
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimacEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<OrdenVentaSodimacEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -227,10 +227,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimacQueryEntity>> GetListOrdenVentaSodimacByFiltro(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdenVentaSodimacQueryEntity>> GetListOrdenVentaSodimacByFiltro(FilterRequestEntity value)
         {
             var response = new List<OrdenVentaSodimacQueryEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimacQueryEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<OrdenVentaSodimacQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -273,10 +273,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimacEntity>> GetOrdenVentaSodimacById(int id)
+        public async Task<ResultadoTransaccionResponse<OrdenVentaSodimacEntity>> GetOrdenVentaSodimacById(int id)
         {
             var response = new OrdenVentaSodimacEntity();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimacEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<OrdenVentaSodimacEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -328,10 +328,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacPendienteLpnByFiltro(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacPendienteLpnByFiltro(FilterRequestEntity value)
         {
             var response = new List<OrdenVentaSodimaGeneralQueryEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<OrdenVentaSodimaGeneralQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -371,10 +371,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacDetallePendienteLpnByIdAndFiltro(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacDetallePendienteLpnByIdAndFiltro(FilterRequestEntity value)
         {
             var response = new List<OrdenVentaSodimaGeneralQueryEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<OrdenVentaSodimaGeneralQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -415,10 +415,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacLpnByFiltro(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacLpnByFiltro(FilterRequestEntity value)
         {
             var response = new List<OrdenVentaSodimaGeneralQueryEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<OrdenVentaSodimaGeneralQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -460,11 +460,11 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimacEntity>> SetLpnUpdate(OrdenVentaSodimacEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdenVentaSodimacEntity>> SetLpnUpdate(OrdenVentaSodimacEntity value)
         {
             var response = new OrdenVentaSodimacEntity();
             var responseItem = new OrdenVentaSodimacLinesEntity();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimacEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<OrdenVentaSodimacEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -536,10 +536,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacDetalleById(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacDetalleById(FilterRequestEntity value)
         {
             var response = new List<OrdenVentaSodimaGeneralQueryEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<OrdenVentaSodimaGeneralQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -579,10 +579,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetBarcodeLpnPdfById(int id)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetBarcodeLpnPdfById(int id)
         {
             var response = new List<OrdenVentaSodimaGeneralQueryEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
 
             try
             {
@@ -678,10 +678,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetListBarcodeEanPdfByEan(string ean)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetListBarcodeEanPdfByEan(string ean)
         {
             var response = new List<OrdenVentaSodimaGeneralQueryEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
 
             try
             {
@@ -775,10 +775,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacByFechaNumero(OrdenVentaSodimacFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdenVentaSodimaGeneralQueryEntity>> GetListOrdenVentaSodimacByFechaNumero(OrdenVentaSodimacFilterEntity value)
         {
             var response = new List<OrdenVentaSodimaGeneralQueryEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimaGeneralQueryEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<OrdenVentaSodimaGeneralQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -821,11 +821,11 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetListOrdenVentaSodimacExcelByFechaNumero(OrdenVentaSodimacFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetListOrdenVentaSodimacExcelByFechaNumero(OrdenVentaSodimacFilterEntity value)
         {
             var ms = new MemoryStream();
             var response = new List<OrdenVentaSodimaGeneralQueryEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
             resultadoTransaccion.NombreMetodo = _metodoName;
@@ -924,10 +924,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdenVentaSodimacSelvaQueryEntity>> GetListOrdenVentaSodimacSelvaFechaNumero(OrdenVentaSodimacSelvaFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdenVentaSodimacSelvaQueryEntity>> GetListOrdenVentaSodimacSelvaFechaNumero(OrdenVentaSodimacSelvaFilterEntity value)
         {
             var response = new List<OrdenVentaSodimacSelvaQueryEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<OrdenVentaSodimacSelvaQueryEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<OrdenVentaSodimacSelvaQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -969,10 +969,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetListOrdenVentaSodimacSelvaPdfByFechaNumero(OrdenVentaSodimacSelvaFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetListOrdenVentaSodimacSelvaPdfByFechaNumero(OrdenVentaSodimacSelvaFilterEntity value)
         {
             var response = new List<OrdenVentaSodimacSelvaQueryEntity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Net.Business.Entities.SAPBusinessOne;
@@ -19,9 +19,9 @@ namespace Net.Data.SAPBusinessOne
             _db = db;
         }
 
-        public async Task<ResultadoTransaccionEntity<TiempoVidaEntity>> GetList()
+        public async Task<ResultadoTransaccionResponse<TiempoVidaEntity>> GetList()
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TiempoVidaEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<TiempoVidaEntity>();
 
             try
             {
@@ -42,9 +42,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<TiempoVidaEntity>> GetListByFiltro(TiempoVidaEntity value)
+        public async Task<ResultadoTransaccionResponse<TiempoVidaEntity>> GetListByFiltro(TiempoVidaEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TiempoVidaEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<TiempoVidaEntity>();
 
             try
             {

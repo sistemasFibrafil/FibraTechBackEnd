@@ -1,4 +1,4 @@
-﻿namespace Net.Business.Entities.SAPBusinessOne
+﻿namespace Net.Business.Entities.SAPBusinessOne.Sales.DeliveryNotes.Create
 {
     public class DeliveryNotes1CreateEntity
     {

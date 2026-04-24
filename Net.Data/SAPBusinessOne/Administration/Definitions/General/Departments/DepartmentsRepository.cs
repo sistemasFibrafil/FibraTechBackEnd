@@ -1,12 +1,11 @@
 ﻿using System;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 using Net.Business.Entities.SAPBusinessOne;
-
 namespace Net.Data.SAPBusinessOne
 {
     public class DepartmentsRepository : RepositoryBase<DepartmentsEntity>, IDepartmentsRepository
@@ -24,9 +23,9 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<DepartmentsEntity>> GetList()
+        public async Task<ResultadoTransaccionResponse<DepartmentsEntity>> GetList()
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<DepartmentsEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<DepartmentsEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

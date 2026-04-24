@@ -45,10 +45,10 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<VentaProyeccionSapByFechaEntity>> GetListVentaProyeccionByFecha(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<VentaProyeccionSapByFechaEntity>> GetListVentaProyeccionByFecha(FilterRequestEntity value)
         {
             var response = new List<VentaProyeccionSapByFechaEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<VentaProyeccionSapByFechaEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<VentaProyeccionSapByFechaEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -91,10 +91,10 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<FacturaVentaSapEntity>> GetListVentaResumenByFechaGrupo(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<FacturaVentaSapEntity>> GetListVentaResumenByFechaGrupo(FilterRequestEntity value)
         {
             var response = new FacturaVentaSapEntity();
-            var resultTransaccion = new ResultadoTransaccionEntity<FacturaVentaSapEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<FacturaVentaSapEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -162,10 +162,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetVentaResumenExcelByFechaGrupo(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetVentaResumenExcelByFechaGrupo(FilterRequestEntity value)
         {
             var ms = new MemoryStream();
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -312,10 +312,10 @@ namespace Net.Data.SAPBusinessOne
             }
         }
 
-        public async Task<ResultadoTransaccionEntity<VentaSapByFilterCodeEntity>> GetListVentaByFilter(VentaSapByFilterFindEntity value)
+        public async Task<ResultadoTransaccionResponse<VentaSapByFilterCodeEntity>> GetListVentaByFilter(VentaSapByFilterFindEntity value)
         {
             var response = new List<VentaSapByFilterCodeEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<VentaSapByFilterCodeEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<VentaSapByFilterCodeEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -359,11 +359,11 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetVentaByFilterExcel(VentaSapByFilterFindEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetVentaByFilterExcel(VentaSapByFilterFindEntity value)
         {
             var ms = new MemoryStream();
             var response = new List<FilterRequestEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
             resultTransaccion.NombreMetodo = _metodoName;
@@ -530,10 +530,10 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<FacturaVentaSapByFechaEntity>> GetListFacturaVentaByFilter(FacturaVentaSapByFilterFindEntity value)
+        public async Task<ResultadoTransaccionResponse<FacturaVentaSapByFechaEntity>> GetListFacturaVentaByFilter(FacturaVentaSapByFilterFindEntity value)
         {
             var response = new List<FacturaVentaSapByFechaEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<FacturaVentaSapByFechaEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<FacturaVentaSapByFechaEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -575,10 +575,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetFacturaVentaByFilterExcel(FacturaVentaSapByFilterFindEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetFacturaVentaByFilterExcel(FacturaVentaSapByFilterFindEntity value)
         {
             var ms = new MemoryStream();
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
             resultTransaccion.NombreMetodo = _metodoName;

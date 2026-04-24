@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.DTO.SAPBusinessOne
+using Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Update;
+namespace Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Create
 {
     public class StockTransfersCreateRequestDto
     {
-        public string ObjType { get; set; } = string.Empty;
+        public string? ObjType { get; set; }
 
         public string? U_BPP_MDTD { get; set; }
         public string? U_BPP_MDSD { get; set; }
@@ -18,8 +19,8 @@ namespace Net.Business.DTO.SAPBusinessOne
         public int CntctCode { get; set; }
         public string? Address { get; set; }
 
-        public string Filler { get; set; } = string.Empty;
-        public string ToWhsCode { get; set; } = string.Empty;
+        public string? Filler { get; set; }
+        public string? ToWhsCode { get; set; }
 
         public string? U_FIB_TIP_TRANS { get; set; }
         public string? U_FIB_COD_TRA { get; set; }
@@ -49,7 +50,7 @@ namespace Net.Business.DTO.SAPBusinessOne
 
         public int U_UsrCreate { get; set; }
 
-        public List<StockTransfers1CreateRequestDto> Lines { get; set; } = new List<StockTransfers1CreateRequestDto>();
-        public List<StockTransferPickingUpdateRequestDto> PickingLines { get; set; } = new List<StockTransferPickingUpdateRequestDto>();
+        public List<StockTransfersLinesCreateRequestDto> Lines { get; set; } = [];
+        public List<StockTransferPickingUpdateRequestDto> PickingLines { get; set; } = [];
     }
 }

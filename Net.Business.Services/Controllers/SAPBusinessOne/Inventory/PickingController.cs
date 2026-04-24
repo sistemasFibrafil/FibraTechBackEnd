@@ -3,9 +3,13 @@ using Net.Data;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
-using Net.Business.Services.Mappers.SAPBusinessOne;
+using Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Find;
+using Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Filter;
+using Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Create;
+using Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Delete;
+using Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Release;
+using Net.BusinessLogic.Mappers.SAPBusinessOne.Inventory.Picking.Find;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
 {
     [ApiController]

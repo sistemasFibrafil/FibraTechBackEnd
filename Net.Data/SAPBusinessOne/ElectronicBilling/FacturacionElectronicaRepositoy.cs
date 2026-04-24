@@ -50,10 +50,10 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<FacturacionElectronicaSapEntity>> GetListGuiaElectronicaByFiltro(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<FacturacionElectronicaSapEntity>> GetListGuiaElectronicaByFiltro(FilterRequestEntity value)
         {
             var response = new List<FacturacionElectronicaSapEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<FacturacionElectronicaSapEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<FacturacionElectronicaSapEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -100,10 +100,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<FacturacionElectronicaSapEntity>> SetEnviar(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<FacturacionElectronicaSapEntity>> SetEnviar(FilterRequestEntity value)
         {
             var guia = new Invoice();
-            var resultTransaccion = new ResultadoTransaccionEntity<FacturacionElectronicaSapEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<FacturacionElectronicaSapEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 

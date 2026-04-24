@@ -1,4 +1,4 @@
-﻿namespace Net.Business.Entities.SAPBusinessOne
+﻿namespace Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.Users.Find
 {
     public class UsersFindEntity
     {

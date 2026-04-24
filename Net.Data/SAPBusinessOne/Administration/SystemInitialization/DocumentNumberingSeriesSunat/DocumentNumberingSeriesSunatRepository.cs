@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
@@ -24,9 +24,9 @@ namespace Net.Data.SAPBusinessOne
             _aplicacionName = GetType().Name;
         }
 
-        public async Task<ResultadoTransaccionEntity<DocumentNumberingSeriesSunatQueryEntity>> GetListSerieDocumento(DocumentNumberingSeriesSunatFindEntity value)
+        public async Task<ResultadoTransaccionResponse<DocumentNumberingSeriesSunatQueryEntity>> GetListSerieDocumento(DocumentNumberingSeriesSunatFindEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<DocumentNumberingSeriesSunatQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<DocumentNumberingSeriesSunatQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -104,9 +104,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<DocumentNumberingSeriesSunatQueryEntity>> GetNumeroDocumentoByTipoSerie(DocumentNumberingSeriesSunatEntity value)
+        public async Task<ResultadoTransaccionResponse<DocumentNumberingSeriesSunatQueryEntity>> GetNumeroDocumentoByTipoSerie(DocumentNumberingSeriesSunatEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<DocumentNumberingSeriesSunatQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<DocumentNumberingSeriesSunatQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

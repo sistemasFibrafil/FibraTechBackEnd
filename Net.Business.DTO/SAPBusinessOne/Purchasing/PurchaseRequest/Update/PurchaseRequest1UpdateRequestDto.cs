@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Net.Business.DTO.SAPBusinessOne
+namespace Net.Business.DTO.SAPBusinessOne.Purchasing.PurchaseRequest.Update
 {
     public class PurchaseRequest1UpdateRequestDto
     {

@@ -1,9 +1,8 @@
 ﻿using System;
 using Net.Data;
 using System.IO;
-using System.Linq;
 using Newtonsoft.Json;
-using FluentValidation;
+using Net.CrossCotting;
 using Net.Business.DTO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +10,10 @@ using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
-using Net.Business.Services.Mappers.SAPBusinessOne;
+using Net.BusinessLogic.Interfaces.SAPBusinessOne.Sales;
+using Net.Business.DTO.SAPBusinessOne.Sales.Orders.Close;
+using Net.Business.DTO.SAPBusinessOne.Sales.Orders.Create;
+using Net.Business.DTO.SAPBusinessOne.Sales.Orders.Update;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
 {
     [ApiController]
@@ -22,13 +24,11 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
     public class OrdersController
         (
             IRepositoryWrapper repository,
-            IValidator<OrdersCreateRequestDto> validatorCreate,
-            IValidator<OrdersUpdateRequestDto> validatorUpdate
+            IOrdersService orderService
         ) : ControllerBase
     {
         private readonly IRepositoryWrapper _repository = repository;
-        private readonly IValidator<OrdersCreateRequestDto> _validatorCreate = validatorCreate;
-        private readonly IValidator<OrdersUpdateRequestDto> _validatorUpdate = validatorUpdate;
+        private readonly IOrdersService _orderService = orderService;
 
 
         #region <<< CONSULTAS >>>
@@ -350,109 +350,61 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> SetCreate([FromForm] string value, [FromForm] IList<IFormFile> files)
         {
             var dto = JsonConvert.DeserializeObject<OrdersCreateRequestDto>(value);
 
-            // 🔥 Asignar archivos manualmente
-            if (files != null && files.Any())
+            if (dto == null)
             {
-                dto.Attachments2 ??= new Attachments2CreateDto();
-
-                for (int i = 0; i < files.Count; i++)
-                {
-                    var f = files[i];
-                    var line = dto.Attachments2.Lines[i];
-
-                    var expectedName = $"{line.FileName}.{line.FileExt}";
-                    var incomingName = Path.GetFileName(f.FileName);
-
-                    // 🔥 Comparación segura
-                    if (string.Equals(incomingName, expectedName, StringComparison.OrdinalIgnoreCase))
-                    {
-                        if (!Directory.Exists(line.TrgtPath))
-                        {
-                            return BadRequest($"La ruta no existe: {line.TrgtPath}");
-                        }
-
-                        var fullPath = Path.Combine(line.TrgtPath, expectedName);
-
-                        try
-                        {
-                            using (var stream = new FileStream(fullPath, FileMode.Create))
-                            {
-                                await f.CopyToAsync(stream);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            return BadRequest($"Error al guardar archivo en ruta: {line.TrgtPath}. Detalle: {ex.Message}");
-                        }
-                    }
-                }
+                return BadRequest(ResponseHelper.Error<object>("Datos inválidos"));
             }
 
-            var validationResult = await _validatorCreate.ValidateAsync(dto);
-
-            if (!validationResult.IsValid)
-            {
-                return BadRequest(validationResult.Errors.Select(e => new
-                {
-                    field = e.PropertyName,
-                    message = e.ErrorMessage
-                }));
-            }
-
-            var entity = OrdersCreateMapper.ToEntity(dto);
-            var result = await _repository.Orders.SetCreate(entity);
+            var result = await _orderService.SetCreate(dto, files);
 
             if (result.ResultadoCodigo == -1)
+            {
                 return BadRequest(result);
+            }
 
-            return NoContent();
+            return Ok(result);
         }
 
         [HttpPut]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> SetUpdate([FromBody] OrdersUpdateRequestDto dto)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> SetUpdate([FromForm] string value, [FromForm] IList<IFormFile> files)
         {
-            var validationResult = await _validatorUpdate.ValidateAsync(dto);
+            var dto = JsonConvert.DeserializeObject<OrdersUpdateRequestDto>(value);
 
-            if (!validationResult.IsValid)
+            if (dto == null)
             {
-                return BadRequest(validationResult.Errors.Select(e => new
-                {
-                    field = e.PropertyName,
-                    message = e.ErrorMessage
-                }));
+                return BadRequest(ResponseHelper.Error<object>("Datos inválidos"));
             }
 
-            var entity = OrdersUpdateMapper.ToEntity(dto);
-            var result = await _repository.Orders.SetUpdate(entity);
+            var result = await _orderService.SetUpdate(dto, files);
 
             if (result.ResultadoCodigo == -1)
+            {
                 return BadRequest(result);
+            }
 
-            return NoContent();
+            return Ok(result);
         }
 
         [HttpPut]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> SetClose([FromBody] OrdersCloseRequestDto value)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> SetClose([FromBody] OrdersCloseRequestDto dto)
         {
-            var result = await _repository.Orders.SetClose(value.ReturnValue());
+            var result = await _orderService.SetClose(dto);
 
             if (result.ResultadoCodigo == -1)
             {
                 return BadRequest(result);
             }
 
-            return NoContent();
+            return Ok(result);
         }
 
         #endregion

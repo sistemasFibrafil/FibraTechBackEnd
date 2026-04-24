@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.Entities.SAPBusinessOne
+using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Update;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Create;
+namespace Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Create
 {
     public class StockTransfersCreateEntity
     {
@@ -16,8 +18,8 @@ namespace Net.Business.Entities.SAPBusinessOne
         public int CntctCode { get; set; }
         public string? Address { get; set; }
 
-        public string Filler { get; set; } = string.Empty;
-        public string ToWhsCode { get; set; } = string.Empty;
+        public string? Filler { get; set; }
+        public string? ToWhsCode { get; set; }
 
         public string? U_FIB_TIP_TRANS { get; set; }
         public string? U_FIB_COD_TRA { get; set; }
@@ -46,7 +48,7 @@ namespace Net.Business.Entities.SAPBusinessOne
         public string? Comments { get; set; }
 
         public int U_UsrCreate { get; set; }
-        public List<StockTransfers1CreateEntity> Lines { get; set; } = new List<StockTransfers1CreateEntity>();
-        public List<StockTransferPickingUpdateEntity> PickingLines { get; set; } = new List<StockTransferPickingUpdateEntity>();
+        public List<StockTransfersLinesCreateEntity> Lines { get; set; } = [];
+        public List<StockTransferPickingUpdateEntity> PickingLines { get; set; } = [];
     }
 }

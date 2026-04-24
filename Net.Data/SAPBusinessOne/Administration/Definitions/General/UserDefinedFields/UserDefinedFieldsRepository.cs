@@ -3,7 +3,6 @@ using System.Linq;
 using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -26,9 +25,9 @@ namespace Net.Data.SAPBusinessOne
             _aplicacionName = GetType().Name;
         }
 
-        public async Task<ResultadoTransaccionEntity<UserDefinedFieldsQueryEntity>> GetList(UserDefinedFieldsEntity value)
+        public async Task<ResultadoTransaccionResponse<UserDefinedFieldsQueryEntity>> GetList(UserDefinedFieldsEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<UserDefinedFieldsQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<UserDefinedFieldsQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -72,9 +71,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<UserDefinedFieldsQueryEntity>> GetListByFilter(UserDefinedFieldsFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<UserDefinedFieldsQueryEntity>> GetListByFilter(UserDefinedFieldsFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<UserDefinedFieldsQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<UserDefinedFieldsQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

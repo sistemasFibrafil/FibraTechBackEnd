@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.Entities.SAPBusinessOne
+using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Update;
+namespace Net.Business.Entities.SAPBusinessOne.Sales.DeliveryNotes.Create
 {
     public class DeliveryNotesCreateEntity
     {
         public DateTime DocDate { get; set; }
         public DateTime DocDueDate { get; set; }
         public DateTime TaxDate { get; set; }
-        public string DocType { get; set; } = string.Empty;
+        public string? DocType { get; set; }
 
         public string? U_BPP_MDTD { get; set; }
         public string? U_BPP_MDSD { get; set; }
@@ -17,7 +18,7 @@ namespace Net.Business.Entities.SAPBusinessOne
         /// <summary>
         /// SOCIO DE NEGOCIO
         /// </summary>
-        public string CardCode { get; set; } = string.Empty;
+        public string? CardCode { get; set; }
         public string? CardName { get; set; }
         public int CntctCode { get; set; }
         public string? NumAtCard { get; set; }
@@ -109,7 +110,7 @@ namespace Net.Business.Entities.SAPBusinessOne
         /// </summary>
         public int U_UsrCreate { get; set; }
 
-        public List<DeliveryNotes1CreateEntity> Lines { get; set; } = new List<DeliveryNotes1CreateEntity>();
-        public List<DeliveryNotesPickingUpdateEntity> PickingLines { get; set; } = new List<DeliveryNotesPickingUpdateEntity>();
+        public List<DeliveryNotes1CreateEntity> Lines { get; set; } = [];
+        public List<DeliveryNotesPickingUpdateEntity> PickingLines { get; set; } = [];
     }
 }

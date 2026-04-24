@@ -3,7 +3,6 @@ using System.Linq;
 using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Net.Business.Entities.SAPBusinessOne;
@@ -21,9 +20,9 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<ChartOfAccountsQueryEntity>> GetListByFilter(ChartOfAccountsFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<ChartOfAccountsQueryEntity>> GetListByFilter(ChartOfAccountsFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<ChartOfAccountsQueryEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<ChartOfAccountsQueryEntity>();
 
             try
             {

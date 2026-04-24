@@ -6,7 +6,6 @@ using System.Data;
 using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -14,8 +13,15 @@ using System.Collections.Immutable;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
-using Net.Business.Entities.SAPBusinessOne;
 using Net.Connection.ConnectionSAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Query;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Print;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Query;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Close;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Update;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Create;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Filter;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Entities;
 namespace Net.Data.SAPBusinessOne
 {
     public class InventoryTransferRequestRepository : RepositoryBase<InventoryTransferRequestEntity>, IInventoryTransferRequestRepository
@@ -45,9 +51,9 @@ namespace Net.Data.SAPBusinessOne
 
         #region <<< CONSULTAS >>>
 
-        public async Task<ResultadoTransaccionEntity<InventoryTransferRequestOpenQueryEntity>> GetListOpen()
+        public async Task<ResultadoTransaccionResponse<InventoryTransferRequestOpenQueryEntity>> GetListOpen()
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<InventoryTransferRequestOpenQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<InventoryTransferRequestOpenQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -80,9 +86,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<InventoryTransferRequestEntity>> GetListByFilter(InventoryTransferRequestFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<InventoryTransferRequestEntity>> GetListByFilter(InventoryTransferRequestFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<InventoryTransferRequestEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<InventoryTransferRequestEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -139,9 +145,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<InventoryTransferRequestQueryEntity>> GetByDocEntry(int docEntry)
+        public async Task<ResultadoTransaccionResponse<InventoryTransferRequestQueryEntity>> GetByDocEntry(int docEntry)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<InventoryTransferRequestQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<InventoryTransferRequestQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -223,9 +229,9 @@ namespace Net.Data.SAPBusinessOne
         /// </summary>
         /// <param name="docEntry"></param>
         /// <returns></returns>
-        public async Task<ResultadoTransaccionEntity<InventoryTransferRequestQueryEntity>> GetToTransferenciaByDocEntry(int docEntry)
+        public async Task<ResultadoTransaccionResponse<InventoryTransferRequestQueryEntity>> GetToTransferenciaByDocEntry(int docEntry)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<InventoryTransferRequestQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<InventoryTransferRequestQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -307,9 +313,9 @@ namespace Net.Data.SAPBusinessOne
         /// En el FrontEnd muestra una ventana con los suministros indirectos para ser seleccionados
         /// </summary>
         /// <returns></returns>
-        public async Task<ResultadoTransaccionEntity<PickingQueryEntity>> GetListNotPicking()
+        public async Task<ResultadoTransaccionResponse<PickingQueryEntity>> GetListNotPicking()
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<PickingQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<PickingQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -367,9 +373,9 @@ namespace Net.Data.SAPBusinessOne
 
         #region <<< OPERACIONES >>>
 
-        public async Task<ResultadoTransaccionEntity<InventoryTransferRequestEntity>> SetCreate(InventoryTransferRequestCreateEntity value)
+        public async Task<ResultadoTransaccionResponse<InventoryTransferRequestEntity>> SetCreate(InventoryTransferRequestCreateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<InventoryTransferRequestEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<InventoryTransferRequestEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -560,9 +566,9 @@ namespace Net.Data.SAPBusinessOne
                 return resultTransaccion;
             });
         }
-        public async Task<ResultadoTransaccionEntity<InventoryTransferRequestEntity>> SetUpdate(InventoryTransferRequestUpdateEntity value)
+        public async Task<ResultadoTransaccionResponse<InventoryTransferRequestEntity>> SetUpdate(InventoryTransferRequestUpdateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<InventoryTransferRequestEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<InventoryTransferRequestEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -707,9 +713,9 @@ namespace Net.Data.SAPBusinessOne
                 return resultTransaccion;
             });
         }
-        public async Task<ResultadoTransaccionEntity<InventoryTransferRequestEntity>> SetClose(InventoryTransferRequestCloseEntity value)
+        public async Task<ResultadoTransaccionResponse<InventoryTransferRequestEntity>> SetClose(InventoryTransferRequestCloseEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<InventoryTransferRequestEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<InventoryTransferRequestEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -777,11 +783,11 @@ namespace Net.Data.SAPBusinessOne
 
         #region <<< IMPRESIONES >>>
 
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetFormatoPdfByDocEntry(int id)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetFormatoPdfByDocEntry(int id)
         {
             var header = new InventoryTransferRequestPrintEntity();
             var linea = new List<InventoryTransferRequest1PrintEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

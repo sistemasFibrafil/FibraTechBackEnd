@@ -7,7 +7,6 @@ using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
 using System.Data.SqlClient;
-using Net.Business.Entities;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Net.Business.Entities.Web;
@@ -48,9 +47,9 @@ namespace Net.Data.Web
             _companyProviderSap = companyProviderSap;
         }
 
-        public async Task<ResultadoTransaccionEntity<UsuarioQueryEntity>> GetList()
+        public async Task<ResultadoTransaccionResponse<UsuarioQueryEntity>> GetList()
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<UsuarioQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<UsuarioQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -82,9 +81,9 @@ namespace Net.Data.Web
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<UsuarioQueryEntity>> GetListByFilter(UsuarioFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<UsuarioQueryEntity>> GetListByFilter(UsuarioFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<UsuarioQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<UsuarioQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -140,9 +139,9 @@ namespace Net.Data.Web
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<UsuarioEntity>> GetById(UsuarioEntity value)
+        public async Task<ResultadoTransaccionResponse<UsuarioEntity>> GetById(UsuarioEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<UsuarioEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<UsuarioEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -205,7 +204,7 @@ namespace Net.Data.Web
 
             return dat;
         }
-        public async Task<ResultadoTransaccionEntity<UsuarioAutenticarEntity>> Autenticar(UsuarioAutenticarEntity entidad)
+        public async Task<ResultadoTransaccionResponse<UsuarioAutenticarEntity>> Autenticar(UsuarioAutenticarEntity entidad)
         {
             var claveDesEncriptada = EncriptaHelper.DecryptStringAES(entidad.Clave);
             var usuarioDesEncriptada = EncriptaHelper.DecryptStringAES(entidad.Usuario);
@@ -213,14 +212,14 @@ namespace Net.Data.Web
             // Obtenemos los datos del usuario
             UsuarioEntity user = await VerificarLogin(new UsuarioEntity { Usuario = usuarioDesEncriptada.ToUpper() });
 
-            ResultadoTransaccionEntity<UsuarioAutenticarEntity> resultadoTransaccion = new ResultadoTransaccionEntity<UsuarioAutenticarEntity>();
+            ResultadoTransaccionResponse<UsuarioAutenticarEntity> resultadoTransaccion = new ResultadoTransaccionResponse<UsuarioAutenticarEntity>();
 
             ParametroSistemaRepository parametroSistema = new ParametroSistemaRepository(context);
             ParametroSistemaEntity _ParametroSistema = await parametroSistema.GetById(new ParametroSistemaEntity { IdParametrosSistema = 1 });
 
             if (_ParametroSistema.TipoAutenticacion.Equals("AUTO-NORMAL"))
             {
-                resultadoTransaccion = new ResultadoTransaccionEntity<UsuarioAutenticarEntity>();
+                resultadoTransaccion = new ResultadoTransaccionResponse<UsuarioAutenticarEntity>();
 
                 if (user.Clave != entidad.Clave)
                 {
@@ -301,9 +300,9 @@ namespace Net.Data.Web
             resultadoTransaccion.data = UsuarioAutenticar;
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<UsuarioEntity>> Create(UsuarioCreateEntity value)
+        public async Task<ResultadoTransaccionResponse<UsuarioEntity>> Create(UsuarioCreateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<UsuarioEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<UsuarioEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -363,9 +362,9 @@ namespace Net.Data.Web
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<UsuarioEntity>> Update(UsuarioUpdateEntity value)
+        public async Task<ResultadoTransaccionResponse<UsuarioEntity>> Update(UsuarioUpdateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<UsuarioEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<UsuarioEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -417,9 +416,9 @@ namespace Net.Data.Web
             
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<UsuarioEntity>> Delete(UsuarioEntity value)
+        public async Task<ResultadoTransaccionResponse<UsuarioEntity>> Delete(UsuarioEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<UsuarioEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<UsuarioEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -444,7 +443,7 @@ namespace Net.Data.Web
             
             return resultTransaccion;
         }        
-        public async Task<ResultadoTransaccionEntity<UsuarioDatosEntity>> ObtienePermisosPorUsuario(UsuarioDatosEntity entidad)
+        public async Task<ResultadoTransaccionResponse<UsuarioDatosEntity>> ObtienePermisosPorUsuario(UsuarioDatosEntity entidad)
         {
             UsuarioDatosEntity UsuarioAutenticar = null;
             var claveDesEncriptada = EncriptaHelper.DecryptStringAES(entidad.Clave);
@@ -452,7 +451,7 @@ namespace Net.Data.Web
 
             UsuarioEntity user = await VerificarLogin(new UsuarioEntity { Usuario = usuarioDesEncriptada.ToUpper() });
 
-            ResultadoTransaccionEntity<UsuarioDatosEntity> resultadoTransaccion = new ResultadoTransaccionEntity<UsuarioDatosEntity>();
+            ResultadoTransaccionResponse<UsuarioDatosEntity> resultadoTransaccion = new ResultadoTransaccionResponse<UsuarioDatosEntity>();
 
             try
             {
@@ -563,9 +562,9 @@ namespace Net.Data.Web
                 //await emailSenderRepository.SendEmailAsync(Email, string.Format("AuthCode: {0}", nuevaClaveAutogenerado), mensaje);
             });
         }
-        public async Task<ResultadoTransaccionEntity<UsuarioTokenEntity>> ValidarToken(UsuarioTokenEntity value)
+        public async Task<ResultadoTransaccionResponse<UsuarioTokenEntity>> ValidarToken(UsuarioTokenEntity value)
         {
-            ResultadoTransaccionEntity<UsuarioTokenEntity> resultadoTransaccion = new ResultadoTransaccionEntity<UsuarioTokenEntity>();
+            ResultadoTransaccionResponse<UsuarioTokenEntity> resultadoTransaccion = new ResultadoTransaccionResponse<UsuarioTokenEntity>();
 
             try
             {
@@ -613,9 +612,9 @@ namespace Net.Data.Web
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
-        public async Task<ResultadoTransaccionEntity<UsuarioEntity>> UpdatePassword(UsuarioUpdatePasswordEntity value)
+        public async Task<ResultadoTransaccionResponse<UsuarioEntity>> UpdatePassword(UsuarioUpdatePasswordEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<UsuarioEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<UsuarioEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

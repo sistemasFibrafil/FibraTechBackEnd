@@ -1,26 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.Entities.SAPBusinessOne
+namespace Net.Business.Entities.SAPBusinessOne.Drafts.Entities
 {
     public class DraftsEntity
     {
         public int DocEntry { get; set; }
         public int DocNum { get; set; }
-        public string ObjType { get; set; } = string.Empty;
-        public string DocType { get; set; } = string.Empty;
-        public string DocStatus { get; set; } = string.Empty;
+        public string? ObjType { get; set; }
+        public string? DocType { get; set; }
+        public string? DocStatus { get; set; }
         public string? WddStatus { get; set; }
 
+        public DateTime CreateDate { get; set; }
         public DateTime DocDate { get; set; }
         public DateTime DocDueDate { get; set; }
         public DateTime TaxDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
         public short DocTime { get; set; }
+        public short UserSign { get; set; }
 
 
         /// <summary>
         /// SOCIO DE NEGOCIO
         /// </summary>
-        public string CardCode { get; set; } = string.Empty;
+        public string? CardCode { get; set; }
         public string? CardName { get; set; }
         public short GroupCode { get; set; }
         public int? CntctCode { get; set; }

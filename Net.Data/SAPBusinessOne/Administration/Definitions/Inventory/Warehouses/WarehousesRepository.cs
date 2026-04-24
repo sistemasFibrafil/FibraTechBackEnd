@@ -4,7 +4,6 @@ using System.Linq;
 using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -30,9 +29,9 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<WarehousesQueryEntity>> GetListByInactive(WarehousesEntity value)
+        public async Task<ResultadoTransaccionResponse<WarehousesQueryEntity>> GetListByInactive(WarehousesEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<WarehousesQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<WarehousesQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -76,9 +75,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<WarehousesQueryEntity>> GetListProduccion()
+        public async Task<ResultadoTransaccionResponse<WarehousesQueryEntity>> GetListProduccion()
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<WarehousesQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<WarehousesQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -112,9 +111,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<WarehousesQueryEntity>> GetListByItem(WarehousesByItemFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<WarehousesQueryEntity>> GetListByItem(WarehousesByItemFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<WarehousesQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<WarehousesQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -180,9 +179,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }        
-        public async Task<ResultadoTransaccionEntity<WarehousesQueryEntity>> GetListByWhsCodeAndItemCode(WarehousesByItemFindEntity value)
+        public async Task<ResultadoTransaccionResponse<WarehousesQueryEntity>> GetListByWhsCodeAndItemCode(WarehousesByItemFindEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<WarehousesQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<WarehousesQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

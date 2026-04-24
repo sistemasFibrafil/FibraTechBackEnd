@@ -4,13 +4,15 @@ using System.Linq;
 using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
 using Net.Business.Entities.SAPBusinessOne;
 using Net.Connection.ConnectionSAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Sales.Invoices.Create;
+using Net.Business.Entities.SAPBusinessOne.Sales.Invoices.Update;
+using Net.Business.Entities.SAPBusinessOne.Sales.Invoices.Cancel;
 namespace Net.Data.SAPBusinessOne
 {
     public class InvoicesRepository : RepositoryBase<InvoicesEntity>, IInvoicesRepository
@@ -33,9 +35,9 @@ namespace Net.Data.SAPBusinessOne
 
         #region <<< CONSULTAS >>>
 
-        public async Task<ResultadoTransaccionEntity<InvoicesOpenQueryEntity>> GetListOpen()
+        public async Task<ResultadoTransaccionResponse<InvoicesOpenQueryEntity>> GetListOpen()
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<InvoicesOpenQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<InvoicesOpenQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -72,9 +74,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<InvoicesQueryEntity>> GetListByFilter(InvoicesFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<InvoicesQueryEntity>> GetListByFilter(InvoicesFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<InvoicesQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<InvoicesQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -184,9 +186,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<InvoicesQueryEntity>> GetByDocEntry(int docEntry)
+        public async Task<ResultadoTransaccionResponse<InvoicesQueryEntity>> GetByDocEntry(int docEntry)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<InvoicesQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<InvoicesQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -373,9 +375,9 @@ namespace Net.Data.SAPBusinessOne
 
 
         #region <<< OPERACIONES >>>
-        public async Task<ResultadoTransaccionEntity<InvoicesEntity>> SetCreate(InvoicesCreateEntity value)
+        public async Task<ResultadoTransaccionResponse<InvoicesEntity>> SetCreate(InvoicesCreateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<InvoicesEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<InvoicesEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -582,9 +584,9 @@ namespace Net.Data.SAPBusinessOne
                 return resultTransaccion;
             });
         }
-        public async Task<ResultadoTransaccionEntity<InvoicesEntity>> SetUpdate(InvoicesUpdateEntity value)
+        public async Task<ResultadoTransaccionResponse<InvoicesEntity>> SetUpdate(InvoicesUpdateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<InvoicesEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<InvoicesEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -720,9 +722,9 @@ namespace Net.Data.SAPBusinessOne
                 return resultTransaccion;
             });
         }
-        public async Task<ResultadoTransaccionEntity<InvoicesEntity>> SetCancel(InvoicesCancelEntity value)
+        public async Task<ResultadoTransaccionResponse<InvoicesEntity>> SetCancel(InvoicesCancelEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<InvoicesEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<InvoicesEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

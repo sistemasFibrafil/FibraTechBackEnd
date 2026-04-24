@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Net.Business.Entities.SAPBusinessOne
+namespace Net.Business.Entities.SAPBusinessOne.Purchasing.PurchaseRequest.Create
 {
     public class PurchaseRequest1CreateEntity
     {

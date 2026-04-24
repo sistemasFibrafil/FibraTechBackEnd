@@ -1,18 +1,22 @@
 ﻿using System.IO;
-using Net.Business.Entities;
+using Net.CrossCotting;
 using System.Threading.Tasks;
 using Net.Business.Entities.SAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Sales.DeliveryNotes.Close;
+using Net.Business.Entities.SAPBusinessOne.Sales.DeliveryNotes.Create;
+using Net.Business.Entities.SAPBusinessOne.Sales.DeliveryNotes.Update;
+using Net.Business.Entities.SAPBusinessOne.Sales.DeliveryNotes.Cancel;
 namespace Net.Data.SAPBusinessOne
 {
     public interface IDeliveryNotesRepository
     {
-        Task<ResultadoTransaccionEntity<DeliveryNotesQueryEntity>> GetListByFilter(DeliveryNotesFilterEntity value);
-        Task<ResultadoTransaccionEntity<DeliveryNotesQueryEntity>> GetByDocEntry(int docEntry);
-        Task<ResultadoTransaccionEntity<DeliveryNotesEntity>> SetCreate(DeliveryNotesCreateEntity value);
-        Task<ResultadoTransaccionEntity<DeliveryNotesEntity>> SetUpdate(DeliveryNotesUpdateEntity value);
-        Task<ResultadoTransaccionEntity<DeliveryNotesEntity>> SetClose(DeliveryNotesCloseEntity value);
-        Task<ResultadoTransaccionEntity<DeliveryNotesEntity>> SetCancel(DeliveryNotesCancelEntity value);
-        Task<ResultadoTransaccionEntity<MemoryStream>> GetPrintNationalDocEntry(int docEntry);
-        Task<ResultadoTransaccionEntity<MemoryStream>> GetPrintExportDocEntry(int docEntry);
+        Task<ResultadoTransaccionResponse<DeliveryNotesQueryEntity>> GetListByFilter(DeliveryNotesFilterEntity value);
+        Task<ResultadoTransaccionResponse<DeliveryNotesQueryEntity>> GetByDocEntry(int docEntry);
+        Task<ResultadoTransaccionResponse<DeliveryNotesEntity>> SetCreate(DeliveryNotesCreateEntity value);
+        Task<ResultadoTransaccionResponse<DeliveryNotesEntity>> SetUpdate(DeliveryNotesUpdateEntity value);
+        Task<ResultadoTransaccionResponse<DeliveryNotesEntity>> SetCancel(DeliveryNotesCancelEntity value);
+        Task<ResultadoTransaccionResponse<DeliveryNotesEntity>> SetClose(DeliveryNotesCloseEntity value);
+        Task<ResultadoTransaccionResponse<MemoryStream>> GetPrintNationalDocEntry(int docEntry);
+        Task<ResultadoTransaccionResponse<MemoryStream>> GetPrintExportDocEntry(int docEntry);
     }
 }

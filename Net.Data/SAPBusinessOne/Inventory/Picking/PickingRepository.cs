@@ -8,7 +8,6 @@ using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
 using System.Globalization;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +15,12 @@ using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
 using Net.Business.Entities.SAPBusinessOne;
 using Net.Connection.ConnectionSAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Find;
+using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Query;
+using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Filter;
+using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Create;
+using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Entities;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Query;
 namespace Net.Data.SAPBusinessOne
 {
     public class PickingRepository : RepositoryBase<PickingEntity>, IPickingRepository
@@ -40,9 +45,9 @@ namespace Net.Data.SAPBusinessOne
             _cnxSap = Utilidades.GetCon(configuration, "EntornoConnectionSap:Entorno");
         }
         
-        public async Task<ResultadoTransaccionEntity<PickingQueryEntity>> GetListByFilter(PickingFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<PickingQueryEntity>> GetListByFilter(PickingFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<PickingQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<PickingQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -125,9 +130,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<PickingEntity>> GetListByBaseEntry(PickingFindEntity value)
+        public async Task<ResultadoTransaccionResponse<PickingEntity>> GetListByBaseEntry(PickingFindEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<PickingEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<PickingEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -168,9 +173,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<PickingQueryEntity>> GetListByBaseEntryBaseType(PickingFindEntity value)
+        public async Task<ResultadoTransaccionResponse<PickingQueryEntity>> GetListByBaseEntryBaseType(PickingFindEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<PickingQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<PickingQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -232,9 +237,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<PickingEntity>> GetListByTarget(PickingEntity value)
+        public async Task<ResultadoTransaccionResponse<PickingEntity>> GetListByTarget(PickingEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<PickingEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<PickingEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -283,9 +288,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<InventoryTransferRequestQueryEntity>> GetToCopyTransferRequest(PickingCopyToFindEntity value)
+        public async Task<ResultadoTransaccionResponse<InventoryTransferRequestQueryEntity>> GetToCopyTransferRequest(PickingCopyToFindEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<InventoryTransferRequestQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<InventoryTransferRequestQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -506,9 +511,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<OrdersQueryEntity>> GetToCopyOrder(PickingCopyToFindEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdersQueryEntity>> GetToCopyOrder(PickingCopyToFindEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OrdersQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OrdersQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -818,9 +823,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<InvoicesQueryEntity>> GetToCopyInvoice(PickingCopyToFindEntity value)
+        public async Task<ResultadoTransaccionResponse<InvoicesQueryEntity>> GetToCopyInvoice(PickingCopyToFindEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<InvoicesQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<InvoicesQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -1130,9 +1135,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<PickingQueryEntity>> SetCreate(PickingEntity value)
+        public async Task<ResultadoTransaccionResponse<PickingQueryEntity>> SetCreate(PickingEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<PickingQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<PickingQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -1951,9 +1956,9 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<PickingEntity>> SetRelease(PickingEntity value)
+        public async Task<ResultadoTransaccionResponse<PickingEntity>> SetRelease(PickingEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<PickingEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<PickingEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -2027,9 +2032,9 @@ namespace Net.Data.SAPBusinessOne
             });
         }
 
-        public async Task<ResultadoTransaccionEntity<PickingEntity>> SetDelete(PickingEntity value)
+        public async Task<ResultadoTransaccionResponse<PickingEntity>> SetDelete(PickingEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<PickingEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<PickingEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -2191,9 +2196,9 @@ namespace Net.Data.SAPBusinessOne
             });
         }
 
-        public async Task<ResultadoTransaccionEntity<PickingEntity>> SetDeleteMassive(PickingEntity value)
+        public async Task<ResultadoTransaccionResponse<PickingEntity>> SetDeleteMassive(PickingEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<PickingEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<PickingEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -2365,9 +2370,9 @@ namespace Net.Data.SAPBusinessOne
             });
         }
 
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetPickingPrint(PickingEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetPickingPrint(PickingEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

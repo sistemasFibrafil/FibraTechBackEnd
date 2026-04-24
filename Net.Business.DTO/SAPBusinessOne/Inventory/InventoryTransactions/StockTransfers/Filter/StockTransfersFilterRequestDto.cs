@@ -1,5 +1,5 @@
 ﻿using System;
-using Net.Business.Entities.SAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Filter;
 namespace Net.Business.DTO.SAPBusinessOne
 {
     public class StockTransfersFilterRequestDto

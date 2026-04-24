@@ -4,7 +4,6 @@ using System.Linq;
 using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -36,7 +35,7 @@ namespace Net.Data.SAPBusinessOne
 
         public async Task<ResultadoTransaccionEntity<TaxGroupsEntity>> GetListByFilter(string filter)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TaxGroupsEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<TaxGroupsEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -85,9 +84,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<TaxGroupsEntity>> GetByCardCode(TaxGroupsFindEntity value)
+        public async Task<ResultadoTransaccionResponse<TaxGroupsEntity>> GetByCardCode(TaxGroupsFindEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TaxGroupsEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<TaxGroupsEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

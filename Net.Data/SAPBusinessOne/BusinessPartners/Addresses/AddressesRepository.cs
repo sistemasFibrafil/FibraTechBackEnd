@@ -1,11 +1,6 @@
 using System;
 using System.Data;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Net.Business.Entities;
-using Net.Business.Entities.SAPBusinessOne;
 using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
@@ -32,9 +27,9 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<AddressesEntity>> GetListByCode(AddressesEntity value)
+        public async Task<ResultadoTransaccionResponse<AddressesEntity>> GetListByCode(AddressesEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<AddressesEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<AddressesEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -62,9 +57,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<AddressesQueryEntity>> GetByCode(AddressesEntity value)
+        public async Task<ResultadoTransaccionResponse<AddressesQueryEntity>> GetByCode(AddressesEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<AddressesQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<AddressesQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

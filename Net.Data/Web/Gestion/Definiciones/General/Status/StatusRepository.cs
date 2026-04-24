@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using Net.Connection;
-using Net.Business.Entities;
+using Net.CrossCotting;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Net.Business.Entities.Web;
@@ -30,10 +30,10 @@ namespace Net.Data.Web
         }
 
 
-        public async Task<ResultadoTransaccionEntity<StatusEntity>> GetList()
+        public async Task<ResultadoTransaccionResponse<StatusEntity>> GetList()
         {
             var response = new List<StatusEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<StatusEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<StatusEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 

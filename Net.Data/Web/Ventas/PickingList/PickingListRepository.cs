@@ -3,7 +3,6 @@ using System.IO;
 using System.Data;
 using Net.Connection;
 using Net.CrossCotting;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Net.Business.Entities.Web;
@@ -35,11 +34,11 @@ namespace Net.Data.Web
             _connectionSap = new ConnectionSAPBusinessOne();
         }
 
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetListPickingPdfByDocEntry(int docEntry)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetListPickingPdfByDocEntry(int docEntry)
         {
             var listpackingListSap = new List<PickingItem1Entity>();
             var listpackingListItemSap = new List<PickingItem2Entity>();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 

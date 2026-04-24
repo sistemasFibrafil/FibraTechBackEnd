@@ -1,4 +1,4 @@
-﻿namespace Net.Business.Entities.SAPBusinessOne
+﻿namespace Net.Business.Entities.SAPBusinessOne.Sales.DeliveryNotes.Close
 {
     public class DeliveryNotesCloseEntity
     {

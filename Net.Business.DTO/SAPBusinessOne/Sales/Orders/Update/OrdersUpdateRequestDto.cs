@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.DTO.SAPBusinessOne
+using Net.Business.DTO.SAPBusinessOne.Common.Attachments2.Update;
+using Net.Business.DTO.SAPBusinessOne.Sales.Orders.Create;
+namespace Net.Business.DTO.SAPBusinessOne.Sales.Orders.Update
 {
     public class OrdersUpdateRequestDto
     {
@@ -78,6 +80,8 @@ namespace Net.Business.DTO.SAPBusinessOne
 
         public int U_UsrUpdate { get; set; }
 
-        public List<Orders1UpdateRequestDto> Lines { get; set; } = new List<Orders1UpdateRequestDto>();
+
+        public Attachments2UpdateRequestDto? Attachments2 { get; set; }
+        public List<OrdersLinesUpdateRequestDto> Lines { get; set; } = [];
     }
 }

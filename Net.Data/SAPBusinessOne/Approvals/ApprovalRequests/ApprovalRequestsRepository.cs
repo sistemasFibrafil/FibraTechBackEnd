@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Azure;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Net.Business.Entities;
-using Net.Business.Entities.SAPBusinessOne;
 using Net.Connection;
-using Net.Connection.ConnectionSAPBusinessOne;
+using Newtonsoft.Json;
 using Net.CrossCotting;
 using Net.Data.AppContext;
-using Newtonsoft.Json;
+using System.Data.SqlClient;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Microsoft.Extensions.Configuration;
+using Net.Connection.ConnectionSAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Approvals.ApprovalRequests.Query;
+using Net.Business.Entities.SAPBusinessOne.Approvals.ApprovalRequests.Filter;
+using Net.Business.Entities.SAPBusinessOne.Approvals.ApprovalRequests.Entities;
 namespace Net.Data.SAPBusinessOne.Administration
 {
     public class ApprovalRequestsRepository : RepositoryBase<ApprovalRequestsEntity>, IApprovalRequestsRepository
@@ -582,10 +580,10 @@ namespace Net.Data.SAPBusinessOne.Administration
         //    return resultTransaccion;
         //}
 
-        public async Task<ResultadoTransaccionEntity<ApprovalStatusReportQueryEntity>> GetApprovalStatusReport(ApprovalStatusReportFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<ApprovalStatusReportQueryEntity>> GetListApprovalStatusReport(ApprovalStatusReportFilterEntity value)
         {
             var response = new List<ApprovalStatusReportJsonQueryEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<ApprovalStatusReportQueryEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<ApprovalStatusReportQueryEntity>();
 
             try
             {
@@ -593,7 +591,7 @@ namespace Net.Data.SAPBusinessOne.Administration
                 {
                     conn.Open();
 
-                    using (SqlCommand cmd = new SqlCommand(SP_GET_LIST_APPROVAL_STATUS, conn))
+                    using (SqlCommand cmd = new(SP_GET_LIST_APPROVAL_STATUS, conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 0;

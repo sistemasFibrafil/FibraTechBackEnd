@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.Entities.SAPBusinessOne
+using Net.Business.Entities.SAPBusinessOne.Common.Attachments2.Create;
+namespace Net.Business.Entities.SAPBusinessOne.Sales.Orders.Create
 {
     public class OrdersCreateEntity
     {
@@ -87,7 +88,7 @@ namespace Net.Business.Entities.SAPBusinessOne
         public int U_UsrCreate { get; set; }
 
 
-        public Attachments2CreateEntity? Attachments2 { get; set; }
-        public List<Orders1CreateEntity> Lines { get; set; } = new List<Orders1CreateEntity>();
+        public Attachments2CreateEntity? Attachments2 { get; set; } = null;
+        public List<OrdersLinesCreateEntity> Lines { get; set; } = [];
     }
 }

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Net.Business.Entities.SAPBusinessOne.Common.Attachments2.Entities;
+using Net.Business.Entities.SAPBusinessOne.Common.Attachments2.Query;
+using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Entities;
 namespace Net.Business.Entities.SAPBusinessOne
 {
     public class OrdersQueryEntity
@@ -37,7 +40,7 @@ namespace Net.Business.Entities.SAPBusinessOne
         public string? NumAtCard { get; set; }
         public string? DocCur { get; set; }
         public string? CurrName { get; set; }
-        public List<CurrencyCodesEntity> CurrencyList { get; set; } = new List<CurrencyCodesEntity>();
+        public List<CurrencyCodesEntity> CurrencyList { get; set; } = [];
         public decimal DocRate { get; set; }
 
 
@@ -45,10 +48,10 @@ namespace Net.Business.Entities.SAPBusinessOne
         /// LOGISTICA
         /// </summary>
         public string? PayToCode { get; set; }
-        public List<AddressesEntity> PayAddressList { get; set; } = new List<AddressesEntity>();
+        public List<AddressesEntity> PayAddressList { get; set; } = [];
         public string? Address { get; set; }
         public string? ShipToCode { get; set; }
-        public List<AddressesEntity> ShipAddressList { get; set; } = new List<AddressesEntity>();
+        public List<AddressesEntity> ShipAddressList { get; set; } = [];
         public string? Address2 { get; set; }
 
 
@@ -66,7 +69,7 @@ namespace Net.Business.Entities.SAPBusinessOne
         public string? U_BPP_MDRT { get; set; }
         public string? U_BPP_MDNT { get; set; }
         public string? U_FIB_CODT { get; set; }
-        public List<AddressesEntity> AgencyAddressList { get; set; } = new List<AddressesEntity>();
+        public List<AddressesEntity> AgencyAddressList { get; set; } = [];
         public string? U_BPP_MDDT { get; set; }
 
         /// <summary>
@@ -106,11 +109,15 @@ namespace Net.Business.Entities.SAPBusinessOne
         public decimal DocTotalSy { get; set; }
 
 
+        // 🔗 1 → N (ORDR → OATC)
+        public Attachments2QueryEntity? Attachments2 { get; set; } = null;
+
+
         // 🔗 1 → N (ORDR → RDR1)
-        public List<Orders1QueryEntity> Lines { get; set; } = new List<Orders1QueryEntity>();
+        public List<Orders1QueryEntity> Lines { get; set; } = [];
 
         // 🔗 1 → N (ORDR → @FIB_OPKG)
-        public List<PickingEntity> PickingLines { get; set; } = new List<PickingEntity>();
+        public List<PickingEntity> PickingLines { get; set; } = [];
     }
 
     public class Orders1QueryEntity

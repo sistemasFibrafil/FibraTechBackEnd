@@ -1,24 +1,25 @@
 using System;
-using System.Collections.Generic;
+using Net.Data;
 using System.IO;
-using System.Reflection;
 using System.Text;
 using FluentValidation;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Net.CrossCotting;
+using System.Reflection;
+using Net.Data.AppContext;
+using Net.Business.Services;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Net.Business.Services;
-using Net.Business.Services.Validators.SAPBusinessOne;
+using Microsoft.Extensions.Configuration;
 using Net.Connection.ConnectionSAPBusinessOne;
-using Net.CrossCotting;
-using Net.Data;
-using Net.Data.AppContext;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Net.BusinessLogic.Validators.SAPBusinessOne.Sales.Orders.Create;
+
 
 // ===============================
 // BUILDER
@@ -70,6 +71,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+
+// ===============================
+// LOGISTIC SERVICES
+// ===============================
+
+builder.Services.ConfigureBusinessLogicServices();
+
 // ===============================
 // REPOSITORY
 // ===============================
@@ -88,6 +96,7 @@ builder.Services.AddControllers();
 // ===============================
 
 builder.Services.AddValidatorsFromAssemblyContaining<OrdersCreateRequestDtoValidator>();
+
 
 // ===============================
 // AUTOMAPPER

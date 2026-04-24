@@ -1,4 +1,4 @@
-﻿namespace Net.Business.Entities.SAPBusinessOne
+﻿namespace Net.Business.Entities.SAPBusinessOne.Purchasing.PurchaseRequest.Close
 {
     public class PurchaseRequestCloseEntity
     {

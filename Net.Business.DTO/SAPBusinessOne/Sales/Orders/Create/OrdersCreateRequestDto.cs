@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.DTO.SAPBusinessOne
+using Net.Business.DTO.SAPBusinessOne.Common.Attachments2.Create;
+namespace Net.Business.DTO.SAPBusinessOne.Sales.Orders.Create
 {
     public class OrdersCreateRequestDto
     {
@@ -87,7 +88,7 @@ namespace Net.Business.DTO.SAPBusinessOne
         public int U_UsrCreate { get; set; }
 
 
-        public Attachments2CreateDto? Attachments2 { get; set; }
-        public List<Orders1CreateRequestDto> Lines { get; set; } = new List<Orders1CreateRequestDto>();
+        public Attachments2CreateRequestDto? Attachments2 { get; set; }
+        public List<OrdersLinesCreateRequestDto> Lines { get; set; } = [];
     }
 }

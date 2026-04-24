@@ -1,10 +1,11 @@
-﻿using Net.Business.Entities;
+﻿using Net.CrossCotting;
 using System.Threading.Tasks;
-using Net.Business.Entities.SAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Approvals.ApprovalRequests.Filter;
+using Net.Business.Entities.SAPBusinessOne.Approvals.ApprovalRequests.Query;
 namespace Net.Data.SAPBusinessOne.Administration
 {
     public interface IApprovalRequestsRepository
     {
-        Task<ResultadoTransaccionEntity<ApprovalStatusReportQueryEntity>> GetApprovalStatusReport(ApprovalStatusReportFilterEntity value);
+        Task<ResultadoTransaccionResponse<ApprovalStatusReportQueryEntity>> GetListApprovalStatusReport(ApprovalStatusReportFilterEntity value);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Net.Business.DTO.SAPBusinessOne
+﻿namespace Net.Business.DTO.SAPBusinessOne.Sales.DeliveryNotes.Close
 {
     public class DeliveryNotesCloseRequestDto
     {
