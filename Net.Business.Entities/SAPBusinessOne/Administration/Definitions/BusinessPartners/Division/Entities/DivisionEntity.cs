@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Net.Business.Entities.SAPBusinessOne
 {
-    [Table("@FIB_SECTOR")]
-    public class BusinessPartnerSectorsEntity
+    [Table("@FIB_DIVISION")]
+    public class DivisionEntity
     {
         [Key]
         [Column("Code")]

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 namespace Net.Business.Entities.SAPBusinessOne
 {
     public class BusinessPartnersQueryEntity
@@ -7,7 +7,6 @@ namespace Net.Business.Entities.SAPBusinessOne
         public string? LicTradNum { get; set; }
         public string? CardName { get; set; }
         public string? CardType { get; set; }
-
 
         /// <summary>
         /// TIPO DE DOCUMENTO DE IDENTIDAD
@@ -32,6 +31,21 @@ namespace Net.Business.Entities.SAPBusinessOne
 
         public List<VehiclesQueryEntity> LinesVehicles { get; set; } = new List<VehiclesQueryEntity>();
         public List<DriversQueryEntity> LinesDrivers { get; set; } = new List<DriversQueryEntity>();
-
+        public string? Phone1 { get; set; }
+        public string? EmailAddress { get; set; }
+        public string? Cellular { get; set; }
+        public decimal CreditLine { get; set; }
+        public short GroupCode { get; set; }
+        public string? U_BPP_BPTP { get; set; }
+        public string? U_BPP_BPNO { get; set; }
+        public string? U_BPP_BPAP { get; set; }
+        public string? U_BPP_BPAM { get; set; }
+        public string? U_FIB_Divi { get; set; }
+        public string? U_FIB_Sector { get; set; }
+        public string? U_FIB_EMAIL2 { get; set; }
+        public string? U_FIB_EMAIL3 { get; set; }
+        public string? Notes { get; set; }
+        public string? ValidFor { get; set; }
+        public List<ContactEmployeesQueryEntity> ContactEmployees { get; set; } = new List<ContactEmployeesQueryEntity>();
     }
 }

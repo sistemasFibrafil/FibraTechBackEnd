@@ -2,46 +2,49 @@ using System;
 using System.Linq;
 using Net.Connection;
 using Net.Data.AppContext;
+using Net.Business.Entities;
 using System.Threading.Tasks;
+using Net.Business.Entities.SAPBusinessOne;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
-using Net.Business.Entities.SAPBusinessOne;
 
 namespace Net.Data.SAPBusinessOne
 {
-    public class BusinessPartnerSectorsRepository : RepositoryBase<BusinessPartnerSectorsEntity>, IBusinessPartnerSectorsRepository
+    public class StatesRepository : RepositoryBase<StatesEntity>, IStatesRepository
     {
         private string _aplicacionName;
-        private readonly Regex regex = new Regex(@"<(\w+)>.*");
         private readonly DataContextSAPBusinessOne _db;
 
-        public BusinessPartnerSectorsRepository(IConnectionSQL context, DataContextSAPBusinessOne db)
+        public StatesRepository(IConnectionSQL context, DataContextSAPBusinessOne db)
             : base(context)
         {
             _db = db;
             _aplicacionName = GetType().Name;
         }
 
-
-        public async Task<ResultadoTransaccionResponse<BusinessPartnerSectorsEntity>> GetList()
+        public async Task<ResultadoTransaccionEntity<StatesEntity>> GetList(string countryCode)
         {
-            var resultTransaccion = new ResultadoTransaccionResponse<BusinessPartnerSectorsEntity>
+            var resultTransaccion = new ResultadoTransaccionEntity<StatesEntity>
             {
-                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
+                NombreMetodo = "GetList",
                 NombreAplicacion = _aplicacionName
             };
 
             try
             {
-                var list = await _db.BusinessPartnerSectors
-                .AsNoTracking()
-                .OrderBy(x => x.Codigo)
-                .ToListAsync();
+                var query = _db.States.AsQueryable();
+
+                if (!string.IsNullOrEmpty(countryCode))
+                {
+                    query = query.Where(x => x.Country == countryCode);
+                }
+
+                var data = await query.OrderBy(x => x.Name).ToListAsync();
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
-                resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", data.Count);
+                resultTransaccion.dataList = data;
             }
             catch (Exception ex)
             {

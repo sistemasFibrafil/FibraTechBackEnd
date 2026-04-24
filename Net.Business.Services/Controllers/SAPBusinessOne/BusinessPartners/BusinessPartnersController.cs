@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Net.Data;
 using System.IO;
 using System.Threading.Tasks;
@@ -126,6 +126,65 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners
             {
                 return NotFound(ex.Message);
             }
+        }
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetByRUC([FromQuery] string ruc)
+        {
+            var result = await _repository.BusinessPartners.GetByRUC(ruc);
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result.data);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Create([FromBody] BusinessPartnersCreateRequestDto value)
+        {
+            var result = await _repository.BusinessPartners.SetCreate(value.ReturnValue());
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Update([FromBody] BusinessPartnersUpdateRequestDto value)
+        {
+            var result = await _repository.BusinessPartners.SetUpdate(value.ReturnValue());
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Delete([FromQuery] string cardCode)
+        {
+            var result = await _repository.BusinessPartners.SetDelete(cardCode);
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
         }
     }
 }

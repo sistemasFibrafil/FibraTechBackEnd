@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Net.Business.Entities.SAPBusinessOne;
 using Net.Business.Entities.SAPBusinessOne.Drafts.Entities;
 using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Entities;
@@ -284,6 +284,14 @@ namespace Net.Data.AppContext
                 entity.HasKey(e => e.Code);
             });
             // ========================================================================================================================================================
+            // UBIGEO
+            // ========================================================================================================================================================
+            modelBuilder.Entity<UbigeoEntity>(entity =>
+            {
+                entity.ToTable("@FIB_UBIGEO");
+                entity.HasKey(e => e.Code);
+            });
+            // ========================================================================================================================================================
             // CONDICIONES DE PAGO
             // ========================================================================================================================================================
             modelBuilder.Entity<PaymentTermsTypesEntity>(entity =>
@@ -297,7 +305,7 @@ namespace Net.Data.AppContext
             modelBuilder.Entity<BusinessPartnerSectorsEntity>(entity =>
             {
                 entity.ToTable("@FIB_SECTOR");
-                entity.HasKey(e => e.Code);
+                entity.HasKey(e => e.Codigo);
             });
 
 
@@ -1143,6 +1151,26 @@ namespace Net.Data.AppContext
             });
             modelBuilder.Entity<OSKPViewEntity>().HasNoKey().ToView("SKU_VW_OSKP", "dbo");
 
+            // ========================================================================================================================================================
+            // LISTA DE PRECIOS DEFINICIÓN (OPLN)
+            // ========================================================================================================================================================
+            modelBuilder.Entity<PriceListEntity>(entity =>
+            {
+                entity.ToTable("OPLN");
+                entity.HasKey(e => e.PriceListNo);
+            });
+
+            // ========================================================================================================================================================
+            // DIVISION (@FIB_DIVI)
+            // ========================================================================================================================================================
+            modelBuilder.Entity<DivisionEntity>(entity =>
+            {
+                entity.ToTable("@FIB_DIVISION");
+                entity.HasKey(e => e.Codigo);
+            });
+
+
+
             #endregion
 
 
@@ -1334,7 +1362,9 @@ namespace Net.Data.AppContext
         public DbSet<BusinessPartnersEntity> BusinessPartners { get; set; }
         public DbSet<ContactEmployeesEntity> ContactEmployees { get; set; }
         public DbSet<BusinessPartnersViewEntity> BusinessPartnersView { get; set; }
-
+        public DbSet<CountryEntity> Country { get; set; }
+        public DbSet<StatesEntity> States { get; set; }
+        public DbSet<UbigeoEntity> Ubigeo { get; set; }
 
         #endregion
 
@@ -1386,5 +1416,8 @@ namespace Net.Data.AppContext
         public DbSet<OSKPViewEntity> OSKPView { get; set; }
 
         #endregion
+        public DbSet<PriceListEntity> PriceList { get; set; }
+        public DbSet<DivisionEntity> Division { get; set; }
+        public DbSet<BusinessPartnerSectorsEntity> BusinessPartnerSectors { get; set; }
     }
 }

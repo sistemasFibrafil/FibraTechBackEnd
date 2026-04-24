@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Net.Data.Web;
 using Net.Connection;
 using System.Net.Http;
@@ -111,8 +111,12 @@ namespace Net.Data
         private ISubGrupoArticuloRepository _subGrupoArticulo;
         private IPaymentTermsTypesRepository _paymentTermsTypes;
         private ISubGrupoArticulo2Repository _subGrupoArticulo2;
+        private ICountriesRepository _countries;
+        private IStatesRepository _states;
+        private IUbigeoRepository _ubigeo;
         private IBusinessPartnerGroupsRepository _businessPartnerGroups;
         private IBusinessPartnerSectorsRepository _businessPartnerSectors;
+        private IDivisionRepository _division;
 
         #endregion
 
@@ -202,6 +206,7 @@ namespace Net.Data
         private ICargaSaldoInicialRepository _cargaSaldoInicial;
         private ITakeInventorySparePartsRepository _takeInventorySpareParts;
         private IInventoryTransferRequestRepository _inventoryTransferRequest;
+        private IPriceListRepository _priceList;
 
         #endregion
 
@@ -742,6 +747,39 @@ namespace Net.Data
                 return _subGrupoArticulo2;
             }
         }
+        public ICountriesRepository Countries
+        {
+            get
+            {
+                if (_countries == null)
+                {
+                    _countries = new CountriesRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _countries;
+            }
+        }
+        public IStatesRepository States
+        {
+            get
+            {
+                if (_states == null)
+                {
+                    _states = new StatesRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _states;
+            }
+        }
+        public IUbigeoRepository Ubigeo
+        {
+            get
+            {
+                if (_ubigeo == null)
+                {
+                    _ubigeo = new UbigeoRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _ubigeo;
+            }
+        }
         public IBusinessPartnerGroupsRepository BusinessPartnerGroups
         {
             get
@@ -759,9 +797,20 @@ namespace Net.Data
             {
                 if (_businessPartnerSectors == null)
                 {
-                    _businessPartnerSectors = new BusinessPartnerSectorsRepository(_repoContext, _configuration);
+                    _businessPartnerSectors = new BusinessPartnerSectorsRepository(_repoContext, _dbSAPBusinessOne);
                 }
                 return _businessPartnerSectors;
+            }
+        }
+        public IDivisionRepository Division
+        {
+            get
+            {
+                if (_division == null)
+                {
+                    _division = new DivisionRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _division;
             }
         }
         #endregion
@@ -959,7 +1008,7 @@ namespace Net.Data
             {
                 if (_addresses == null)
                 {
-                    _addresses = new AddressesRepository(_repoContext, _dbSAPBusinessOne);
+                    _addresses = new AddressesRepository(_repoContext, _dbSAPBusinessOne, _companyProviderSap);
                 }
                 return _addresses;
             }
@@ -968,7 +1017,7 @@ namespace Net.Data
         {
             get
             {
-                _businessPartners ??= new BusinessPartnersRepository(_repoContext, _configuration, _dbSAPBusinessOne);
+                _businessPartners ??= new BusinessPartnersRepository(_repoContext, _tokenConfig, _configuration, _dbSAPBusinessOne, _companyProviderSap);
                 return _businessPartners;
             }
         }
@@ -978,7 +1027,7 @@ namespace Net.Data
             {
                 if (_contactEmployees == null)
                 {
-                    _contactEmployees = new ContactEmployeesRepository(_repoContext, _dbSAPBusinessOne);
+                    _contactEmployees = new ContactEmployeesRepository(_repoContext, _dbSAPBusinessOne, _companyProviderSap);
                 }
                 return _contactEmployees;
             }
@@ -1095,6 +1144,17 @@ namespace Net.Data
                     _takeInventorySpareParts = new TakeInventorySparePartsRepository(_repoContext, _configuration, _dbSeguridad, _dbSAPBusinessOne, _companyProviderSap);
                 }
                 return _takeInventorySpareParts;
+            }
+        }
+        public IPriceListRepository PriceList
+        {
+            get
+            {
+                if (_priceList == null)
+                {
+                    _priceList = new PriceListRepository(_repoContext, _dbSAPBusinessOne);
+                }
+                return _priceList;
             }
         }
 
