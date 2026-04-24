@@ -2,8 +2,8 @@
 using SAPbobsCOM;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Net.Business.Entities.Web;
 using System.Collections.Generic;
@@ -11,6 +11,10 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 using Net.Business.Entities.SAPBusinessOne;
 using Net.Connection.ConnectionSAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Find;
+using Net.Business.Entities.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Query;
+using Net.Business.Entities.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Create;
+using Net.Business.Entities.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Entities;
 namespace Net.Data.SAPBusinessOne.Administration
 {
     public class DocumentSeriesConfigurationRepository : RepositoryBase<DocumentSeriesConfigurationEntity>, IDocumentSeriesConfigurationRepository
@@ -32,9 +36,9 @@ namespace Net.Data.SAPBusinessOne.Administration
             _aplicacionName = GetType().Name;
         }
 
-        public async Task<ResultadoTransaccionEntity<DocumentSeriesConfigurationQueryEntity>> GetById(DocumentSeriesConfigurationFindEntity value)
+        public async Task<ResultadoTransaccionResponse<DocumentSeriesConfigurationQueryEntity>> GetById(DocumentSeriesConfigurationFindEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<DocumentSeriesConfigurationQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<DocumentSeriesConfigurationQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -105,9 +109,9 @@ namespace Net.Data.SAPBusinessOne.Administration
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<DocumentSeriesConfigurationEntity>> SetCreate(DocumentSeriesConfigurationCreateEntity value)
+        public async Task<ResultadoTransaccionResponse<DocumentSeriesConfigurationEntity>> SetCreate(DocumentSeriesConfigurationCreateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<DocumentSeriesConfigurationEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<DocumentSeriesConfigurationEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -149,7 +153,7 @@ namespace Net.Data.SAPBusinessOne.Administration
 
                 #region <<< NUEVO >>>
 
-                foreach (var line in (value.Lines ?? Enumerable.Empty<DocumentSeriesConfiguration1CreateEntity>()).Where(x => x.Record == 1))
+                foreach (var line in (value.Lines ?? Enumerable.Empty<DocumentSeriesConfigurationLinesCreateEntity>()).Where(x => x.Record == 1))
                 {
                     var oGeneralDataLine = oGeneralDataCollection.Add();
                     oGeneralDataLine.SetProperty("U_Type", line.U_Type);
@@ -166,7 +170,7 @@ namespace Net.Data.SAPBusinessOne.Administration
 
                 #region <<< EDITAR >>>
 
-                foreach (var line in (value.Lines ?? Enumerable.Empty<DocumentSeriesConfiguration1CreateEntity>()).Where(x => x.Record == 3))
+                foreach (var line in (value.Lines ?? Enumerable.Empty<DocumentSeriesConfigurationLinesCreateEntity>()).Where(x => x.Record == 3))
                 {
                     var indice = oGeneralDataCollection.Cast<GeneralData>().ToList().FindIndex(x => (int)x.GetProperty("LineId") == line.LineId);
                     if (indice != -1)
@@ -187,7 +191,7 @@ namespace Net.Data.SAPBusinessOne.Administration
 
                 #region <<< ELIMINAR >>>
 
-                foreach (var line in (value.Lines ?? Enumerable.Empty<DocumentSeriesConfiguration1CreateEntity>()).Where(x => x.Record == 4))
+                foreach (var line in (value.Lines ?? Enumerable.Empty<DocumentSeriesConfigurationLinesCreateEntity>()).Where(x => x.Record == 4))
                 {
                     var indice = oGeneralDataCollection.Cast<GeneralData>().ToList().FindIndex(x => (int)x.GetProperty("LineId") == line.LineId);
                     if (indice != -1)

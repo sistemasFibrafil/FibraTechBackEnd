@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.Entities.SAPBusinessOne
+using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Create;
+namespace Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Create
 {
     public class InventoryTransferRequestCreateEntity
     {
@@ -8,16 +9,16 @@ namespace Net.Business.Entities.SAPBusinessOne
         public DateTime DocDueDate { get; set; }
         public DateTime TaxDate { get; set; }
 
-        public string U_FIB_DocStPkg { get; set; } = string.Empty;
-        public string U_FIB_IsPkg { get; set; } = string.Empty;
+        public string? U_FIB_DocStPkg { get; set; }
+        public string? U_FIB_IsPkg { get; set; }
 
         public string? CardCode { get; set; }
         public string? CardName { get; set; }
         public int CntctCode { get; set; }
         public string? Address { get; set; }
 
-        public string? Filler { get; set; } = string.Empty;
-        public string? ToWhsCode { get; set; } = string.Empty;
+        public string? Filler { get; set; }
+        public string? ToWhsCode { get; set; }
 
         public string? U_FIB_TIP_TRAS { get; set; }
         public string? U_BPP_MDMT { get; set; }
@@ -29,22 +30,21 @@ namespace Net.Business.Entities.SAPBusinessOne
 
         public int U_UsrCreate { get; set; }
 
-        public List<InventoryTransferRequest1CreateEntity> Lines { get; set; } = new List<InventoryTransferRequest1CreateEntity>();
-        public List<InventoryTransferRequestPickingCreateEntity> PickingLines { get; set; } = new List<InventoryTransferRequestPickingCreateEntity>();
+        public List<InventoryTransferRequest1CreateEntity> Lines { get; set; } = [];
+        public List<InventoryTransferRequestPickingCreateEntity> PickingLines { get; set; } = [];
     }
 
     public class InventoryTransferRequest1CreateEntity
     {
-        public string ItemCode { get; set; } = string.Empty;
+        public string? ItemCode { get; set; }
         public string? Dscription { get; set; }
 
-        public string FromWhsCod { get; set; } = string.Empty;
-        public string WhsCode { get; set; } = string.Empty;
-
+        public string? FromWhsCod { get; set; }
+        public string? WhsCode { get; set; }
         public string? UnitMsr { get; set; }
         public double Quantity { get; set; }
 
-        public string U_FIB_LinStPkg { get; set; } = string.Empty;
+        public string? U_FIB_LinStPkg { get; set; }
         public double U_FIB_OpQtyPkg { get; set; }
         public string? U_tipoOpT12 { get; set; }
     }

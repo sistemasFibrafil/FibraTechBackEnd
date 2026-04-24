@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.DTO.SAPBusinessOne
+namespace Net.Business.DTO.SAPBusinessOne.Sales.Invoices.Create
 {
     public class InvoicesCreateRequestDto
     {
@@ -94,6 +94,6 @@ namespace Net.Business.DTO.SAPBusinessOne
 
         public int U_UsrCreate { get; set; }
 
-        public List<Invoices1CreateRequestDto> Lines { get; set; } = new List<Invoices1CreateRequestDto>();
+        public List<Invoices1CreateRequestDto> Lines { get; set; } = [];
     }
 }

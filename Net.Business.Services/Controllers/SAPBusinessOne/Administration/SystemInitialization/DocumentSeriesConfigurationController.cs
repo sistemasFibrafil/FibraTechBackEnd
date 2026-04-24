@@ -2,9 +2,11 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
-using Net.Business.Services.Mappers.SAPBusinessOne;
+using Net.BusinessLogic.Interfaces.SAPBusinessOne.Administration.SystemInitialization;
+using Net.Business.DTO.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Find;
+using Net.Business.DTO.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Create;
+using Net.BusinessLogic.Mappers.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Find;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.SystemInitialization
 {
     [ApiController]
@@ -12,13 +14,15 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.System
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiExplorerSettings(GroupName = "ApiFibrafil")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public class DocumentSeriesConfigurationController : Controller
+    public class DocumentSeriesConfigurationController
+        (
+            IRepositoryWrapper repository,
+            IDocumentSeriesConfigurationService documentSeriesConfigurationService
+        ) : Controller
     {
-        private readonly IRepositoryWrapper _repository;
-        public DocumentSeriesConfigurationController(IRepositoryWrapper repository)
-        {
-            _repository = repository;
-        }
+        private readonly IRepositoryWrapper _repository = repository;
+        private readonly IDocumentSeriesConfigurationService _documentSeriesConfigurationService = documentSeriesConfigurationService;
+
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -37,18 +41,18 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.System
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> SetCreate([FromBody] DocumentSeriesConfigurationCreateRequestDto dto)
         {
-            var entity = DocumentSeriesConfigurationCreateMapper.ToEntity(dto);
-            var result = await _repository.DocumentSeriesConfiguration.SetCreate(entity);
+            var result = await _documentSeriesConfigurationService.SetCreate(dto);
 
             if (result.ResultadoCodigo == -1)
+            {
                 return BadRequest(result);
+            }
 
-            return NoContent();
+            return Ok(result);
         }
     }
 }

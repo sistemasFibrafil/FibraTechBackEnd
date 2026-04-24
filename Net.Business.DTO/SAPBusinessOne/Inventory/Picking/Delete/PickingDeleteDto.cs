@@ -1,5 +1,5 @@
-﻿using Net.Business.Entities.SAPBusinessOne;
-namespace Net.Business.DTO.SAPBusinessOne
+﻿using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Entities;
+namespace Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Delete
 {
     public class PickingDeleteDto
     {

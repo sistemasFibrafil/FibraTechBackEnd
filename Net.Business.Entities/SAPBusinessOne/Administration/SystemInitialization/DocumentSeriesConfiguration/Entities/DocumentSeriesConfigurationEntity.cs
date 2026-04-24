@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-
-namespace Net.Business.Entities.SAPBusinessOne
+namespace Net.Business.Entities.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Entities
 {
     public class DocumentSeriesConfigurationEntity
     {
@@ -10,6 +9,6 @@ namespace Net.Business.Entities.SAPBusinessOne
 
 
         // 🔗 1 → N (@FIB_OCSD → @FIB_CSD1)
-        public ICollection<DocumentSeriesConfiguration1Entity> Lines { get; set; } = new List<DocumentSeriesConfiguration1Entity>();
+        public ICollection<DocumentSeriesConfigurationLinesEntity> Lines { get; set; } = [];
     }
 }

@@ -1,14 +1,15 @@
 ﻿using System;
 using Net.Data;
 using System.IO;
-using System.Linq;
-using FluentValidation;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
-using Net.Business.Services.Mappers.SAPBusinessOne;
+using Net.Business.DTO.SAPBusinessOne.Purchasing.PurchaseRequest.Close;
+using Net.Business.DTO.SAPBusinessOne.Purchasing.PurchaseRequest.Create;
+using Net.Business.DTO.SAPBusinessOne.Purchasing.PurchaseRequest.Update;
+using Net.BusinessLogic.Interfaces.SAPBusinessOne.Purchasing;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Purchasing
 {
     [ApiController]
@@ -16,11 +17,14 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Purchasing
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiExplorerSettings(GroupName = "ApiFibrafil")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public class PurchaseRequestController(IRepositoryWrapper repository, IValidator<PurchaseRequestCreateRequestDto> validatorCreate, IValidator<PurchaseRequestUpdateRequestDto> validatorUpdate) : ControllerBase
+    public class PurchaseRequestController
+        (
+            IRepositoryWrapper repository,
+            IPurchaseRequestService purchaseRequestService
+        ) : ControllerBase
     {
         private readonly IRepositoryWrapper _repository = repository;
-        private readonly IValidator<PurchaseRequestCreateRequestDto> _validatorCreate = validatorCreate;
-        private readonly IValidator<PurchaseRequestUpdateRequestDto> _validatorUpdate = validatorUpdate;
+        private readonly IPurchaseRequestService _purchaseRequestService = purchaseRequestService;
 
 
         #region <<< CONSULTAS >>>
@@ -60,6 +64,57 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Purchasing
         #endregion
 
 
+        #region <<< OPERACIONES >>>
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> SetCreate([FromBody] PurchaseRequestCreateRequestDto dto)
+        {
+            var result = await _purchaseRequestService.SetCreate(dto);
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> SetUpdate([FromBody] PurchaseRequestUpdateRequestDto dto)
+        {
+            var result = await _purchaseRequestService.SetUpdate(dto);
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> SetClose([FromBody] PurchaseRequestCloseRequestDto dto)
+        {
+            var result = await _purchaseRequestService.SetClose(dto);
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        #endregion
+
+
         #region <<< EXPORTACIONES >>>
 
         [HttpGet]
@@ -81,77 +136,6 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Purchasing
             {
                 return NotFound(ex.Message);
             }
-        }
-
-        #endregion
-
-
-        #region <<< OPERACIONES >>>
-
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> SetCreate([FromBody] PurchaseRequestCreateRequestDto dto)
-        {
-            var validationResult = await _validatorCreate.ValidateAsync(dto);
-
-            if (!validationResult.IsValid)
-            {
-                return BadRequest(validationResult.Errors.Select(e => new
-                {
-                    field = e.PropertyName,
-                    message = e.ErrorMessage
-                }));
-            }
-
-            var entity = PurchaseRequestCreateMapper.ToEntity(dto);
-            var result = await _repository.PurchaseRequest.SetCreate(entity);
-
-            if (result.ResultadoCodigo == -1)
-                return BadRequest(result);
-
-            return NoContent();
-        }
-
-        [HttpPut]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> SetUpdate([FromBody] PurchaseRequestUpdateRequestDto dto)
-        {
-            var validationResult = await _validatorUpdate.ValidateAsync(dto);
-
-            if (!validationResult.IsValid)
-            {
-                return BadRequest(validationResult.Errors.Select(e => new
-                {
-                    field = e.PropertyName,
-                    message = e.ErrorMessage
-                }));
-            }
-
-            var entity = PurchaseRequestUpdateMapper.ToEntity(dto);
-            var result = await _repository.PurchaseRequest.SetUpdate(entity);
-
-            if (result.ResultadoCodigo == -1)
-                return BadRequest(result);
-
-            return NoContent();
-        }
-
-        [HttpPut]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> SetClose([FromBody] PurchaseRequestCloseRequestDto value)
-        {
-            var result = await _repository.PurchaseRequest.SetClose(value.ReturnValue());
-
-            if (result.ResultadoCodigo == -1)
-            {
-                return BadRequest(result);
-            }
-
-            return NoContent();
         }
 
         #endregion

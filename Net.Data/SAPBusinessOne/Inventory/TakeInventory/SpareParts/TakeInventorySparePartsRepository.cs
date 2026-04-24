@@ -5,7 +5,6 @@ using System.Linq;
 using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml;
 using Microsoft.EntityFrameworkCore;
@@ -37,9 +36,9 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<TakeInventorySparePartsEntity>> GetListByFilter(TakeInventorySparePartsFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<TakeInventorySparePartsEntity>> GetListByFilter(TakeInventorySparePartsFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TakeInventorySparePartsEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<TakeInventorySparePartsEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -112,10 +111,10 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetExcelByFilter(TakeInventorySparePartsFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetExcelByFilter(TakeInventorySparePartsFilterEntity value)
         {
             var ms = new MemoryStream();
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -275,9 +274,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<TakeInventorySparePartsEntity>> GetListCurrentDate(TakeInventorySparePartsFindEntity value)
+        public async Task<ResultadoTransaccionResponse<TakeInventorySparePartsEntity>> GetListCurrentDate(TakeInventorySparePartsFindEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TakeInventorySparePartsEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<TakeInventorySparePartsEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -319,9 +318,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<TakeInventorySparePartsEntity>> SetCreate(TakeInventorySparePartsCreateEntity value)
+        public async Task<ResultadoTransaccionResponse<TakeInventorySparePartsEntity>> SetCreate(TakeInventorySparePartsCreateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TakeInventorySparePartsEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<TakeInventorySparePartsEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -425,9 +424,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<TakeInventorySparePartsEntity>> SetUpdate(TakeInventorySparePartsUpdateEntity value)
+        public async Task<ResultadoTransaccionResponse<TakeInventorySparePartsEntity>> SetUpdate(TakeInventorySparePartsUpdateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TakeInventorySparePartsEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<TakeInventorySparePartsEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -491,9 +490,9 @@ namespace Net.Data.SAPBusinessOne
             });
         }
 
-        public async Task<ResultadoTransaccionEntity<TakeInventorySparePartsEntity>> SetDelete(TakeInventorySparePartsDeleteEntity value)
+        public async Task<ResultadoTransaccionResponse<TakeInventorySparePartsEntity>> SetDelete(TakeInventorySparePartsDeleteEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TakeInventorySparePartsEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<TakeInventorySparePartsEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

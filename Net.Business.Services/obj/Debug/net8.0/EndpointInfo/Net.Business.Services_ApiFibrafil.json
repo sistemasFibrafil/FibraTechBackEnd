@@ -171,7 +171,7 @@
         }
       }
     },
-    "/api/ApprovalRequests/GetApprovalStatusReport": {
+    "/api/ApprovalRequests/GetListApprovalStatusReport": {
       "post": {
         "tags": [
           "ApprovalRequests"
@@ -2066,11 +2066,8 @@
               }
             }
           },
-          "201": {
+          "200": {
             "description": "Success"
-          },
-          "500": {
-            "description": "Server Error"
           }
         }
       }
@@ -2120,99 +2117,8 @@
               }
             }
           },
-          "204": {
+          "200": {
             "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/DeliveryNotes/SetClose": {
-      "put": {
-        "tags": [
-          "DeliveryNotes"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeliveryNotesCloseRequestDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeliveryNotesCloseRequestDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeliveryNotesCloseRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
           }
         }
       }
@@ -2262,11 +2168,39 @@
               }
             }
           },
-          "204": {
+          "200": {
             "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
+          }
+        }
+      }
+    },
+    "/api/DeliveryNotes/SetClose": {
+      "put": {
+        "tags": [
+          "DeliveryNotes"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryNotesCloseRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryNotesCloseRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryNotesCloseRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2284,6 +2218,9 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -2855,11 +2792,8 @@
               }
             }
           },
-          "201": {
+          "200": {
             "description": "Success"
-          },
-          "500": {
-            "description": "Server Error"
           }
         }
       }
@@ -2938,6 +2872,60 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/Drafts/GetListDraftsDocumentReport": {
+      "post": {
+        "tags": [
+          "Drafts"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DraftsDocumentReportFilterRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DraftsDocumentReportFilterRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DraftsDocumentReportFilterRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Server Error"
           }
         }
       }
@@ -3115,19 +3103,31 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/DraftsCreateRequestDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DraftsCreateRequestDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/DraftsCreateRequestDto"
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "value": {
+                  "style": "form"
+                },
+                "files": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -3153,16 +3153,13 @@
               }
             }
           },
-          "201": {
+          "200": {
             "description": "Success"
-          },
-          "500": {
-            "description": "Server Error"
           }
         }
       }
     },
-    "/api/Drafts/SetResend": {
+    "/api/Drafts/SetSaveDraftToDocument": {
       "post": {
         "tags": [
           "Drafts"
@@ -3171,17 +3168,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DraftsResendRequestDto"
+                "$ref": "#/components/schemas/DraftsCreateToDocumentRequestDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/DraftsResendRequestDto"
+                "$ref": "#/components/schemas/DraftsCreateToDocumentRequestDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/DraftsResendRequestDto"
+                "$ref": "#/components/schemas/DraftsCreateToDocumentRequestDto"
               }
             }
           }
@@ -3207,11 +3204,71 @@
               }
             }
           },
-          "201": {
+          "200": {
             "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Drafts/SetUpdate": {
+      "put": {
+        "tags": [
+          "Drafts"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "value": {
+                  "style": "form"
+                },
+                "files": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           },
-          "500": {
-            "description": "Server Error"
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -3331,11 +3388,8 @@
               }
             }
           },
-          "201": {
+          "200": {
             "description": "Success"
-          },
-          "500": {
-            "description": "Server Error"
           }
         }
       }
@@ -3369,7 +3423,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -3377,7 +3432,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -3385,7 +3441,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -3393,7 +3450,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -3401,7 +3459,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -3449,7 +3508,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -3457,7 +3517,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -3465,7 +3526,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -3473,7 +3535,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -3481,7 +3544,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -3489,7 +3553,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -3497,7 +3562,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -3505,7 +3571,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -3513,7 +3580,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -3521,7 +3589,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -3904,7 +3973,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -3912,7 +3982,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -3920,7 +3991,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -3928,7 +4000,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -3936,7 +4009,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -3984,7 +4058,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -3992,7 +4067,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4000,7 +4076,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4008,7 +4085,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4016,7 +4094,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4024,7 +4103,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -4032,7 +4112,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -4040,7 +4121,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -4048,7 +4130,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -4056,7 +4139,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -4176,7 +4260,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4184,7 +4269,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4192,7 +4278,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4200,7 +4287,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4208,7 +4296,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4256,7 +4345,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4264,7 +4354,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4272,7 +4363,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4280,7 +4372,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4288,7 +4381,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4296,7 +4390,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -4304,7 +4399,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -4312,7 +4408,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -4320,7 +4417,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -4328,7 +4426,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -4448,7 +4547,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4456,7 +4556,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4464,7 +4565,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4472,7 +4574,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4480,7 +4583,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4528,7 +4632,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4536,7 +4641,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4544,7 +4650,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4552,7 +4659,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4560,7 +4668,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -4568,7 +4677,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -4576,7 +4686,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -4584,7 +4695,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -4592,7 +4704,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -4600,7 +4713,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -5569,11 +5683,8 @@
               }
             }
           },
-          "201": {
+          "200": {
             "description": "Success"
-          },
-          "500": {
-            "description": "Server Error"
           }
         }
       }
@@ -5623,28 +5734,8 @@
               }
             }
           },
-          "204": {
+          "200": {
             "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
           }
         }
       }
@@ -5694,28 +5785,8 @@
               }
             }
           },
-          "204": {
+          "200": {
             "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
           }
         }
       }
@@ -6087,11 +6158,8 @@
               }
             }
           },
-          "201": {
+          "200": {
             "description": "Success"
-          },
-          "500": {
-            "description": "Server Error"
           }
         }
       }
@@ -6141,28 +6209,8 @@
               }
             }
           },
-          "204": {
+          "200": {
             "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
           }
         }
       }
@@ -6212,28 +6260,8 @@
               }
             }
           },
-          "204": {
+          "200": {
             "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
           }
         }
       }
@@ -6811,7 +6839,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -6819,7 +6848,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -6827,7 +6857,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -6835,7 +6866,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -6843,7 +6875,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -6891,7 +6924,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -6899,7 +6933,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -6907,7 +6942,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -6915,7 +6951,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -6923,7 +6960,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -6931,7 +6969,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -6939,7 +6978,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -6947,7 +6987,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -6955,7 +6996,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -6963,7 +7005,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -7083,7 +7126,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7091,7 +7135,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7099,7 +7144,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7107,7 +7153,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7115,7 +7162,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7163,7 +7211,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7171,7 +7220,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7179,7 +7229,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7187,7 +7238,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7195,7 +7247,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7203,7 +7256,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -7211,7 +7265,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -7219,7 +7274,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -7227,7 +7283,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -7235,7 +7292,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -7355,7 +7413,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7363,7 +7422,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7371,7 +7431,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7379,7 +7440,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7387,7 +7449,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7435,7 +7498,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7443,7 +7507,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7451,7 +7516,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7459,7 +7525,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7467,7 +7534,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7475,7 +7543,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -7483,7 +7552,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -7491,7 +7561,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -7499,7 +7570,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -7507,7 +7579,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -7627,7 +7700,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7635,7 +7709,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7643,7 +7718,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7651,7 +7727,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7659,7 +7736,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7707,7 +7785,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7715,7 +7794,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7723,7 +7803,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7731,7 +7812,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7739,7 +7821,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7747,7 +7830,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -7755,7 +7839,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -7763,7 +7848,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -7771,7 +7857,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -7779,7 +7866,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -7899,7 +7987,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7907,7 +7996,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7915,7 +8005,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7923,7 +8014,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7931,7 +8023,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7979,7 +8072,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7987,7 +8081,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -7995,7 +8090,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8003,7 +8099,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8011,7 +8108,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8019,7 +8117,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -8027,7 +8126,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -8035,7 +8135,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -8043,7 +8144,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -8051,7 +8153,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -8171,7 +8274,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8179,7 +8283,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8187,7 +8292,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8195,7 +8301,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8203,7 +8310,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8251,7 +8359,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8259,7 +8368,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8267,7 +8377,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8275,7 +8386,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8283,7 +8395,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8291,7 +8404,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -8299,7 +8413,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -8307,7 +8422,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -8315,7 +8431,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -8323,7 +8440,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -8721,7 +8839,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8729,7 +8848,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8737,7 +8857,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8745,7 +8866,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8753,7 +8875,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8801,7 +8924,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8809,7 +8933,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8817,7 +8942,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8825,7 +8951,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8833,7 +8960,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -8841,7 +8969,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -8849,7 +8978,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -8857,7 +8987,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -8865,7 +8996,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -8873,7 +9005,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -10241,7 +10374,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10249,7 +10383,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10257,7 +10392,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10265,7 +10401,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10273,7 +10410,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10321,7 +10459,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10329,7 +10468,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10337,7 +10477,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10345,7 +10486,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10353,7 +10495,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10361,7 +10504,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -10369,7 +10513,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -10377,7 +10522,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -10385,7 +10531,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -10393,7 +10540,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -10513,7 +10661,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10521,7 +10670,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10529,7 +10679,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10537,7 +10688,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10545,7 +10697,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10593,7 +10746,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10601,7 +10755,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10609,7 +10764,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10617,7 +10773,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10625,7 +10782,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10633,7 +10791,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -10641,7 +10800,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -10649,7 +10809,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -10657,7 +10818,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -10665,7 +10827,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -10805,7 +10968,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10813,7 +10977,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10821,7 +10986,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10829,7 +10995,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10837,7 +11004,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10885,7 +11053,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10893,7 +11062,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10901,7 +11071,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10909,7 +11080,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10917,7 +11089,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -10925,7 +11098,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -10933,7 +11107,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -10941,7 +11116,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -10949,7 +11125,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -10957,7 +11134,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -11077,7 +11255,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11085,7 +11264,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11093,7 +11273,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11101,7 +11282,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11109,7 +11291,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11157,7 +11340,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11165,7 +11349,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11173,7 +11358,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11181,7 +11367,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11189,7 +11376,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11197,7 +11385,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -11205,7 +11394,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -11213,7 +11403,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -11221,7 +11412,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -11229,7 +11421,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -11494,7 +11687,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11502,7 +11696,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11510,7 +11705,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11518,7 +11714,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11526,7 +11723,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11574,7 +11772,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11582,7 +11781,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11590,7 +11790,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11598,7 +11799,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11606,7 +11808,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11614,7 +11817,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -11622,7 +11826,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -11630,7 +11835,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -11638,7 +11844,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -11646,7 +11853,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -11829,7 +12037,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11837,7 +12046,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11845,7 +12055,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11853,7 +12064,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11861,7 +12073,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11909,7 +12122,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11917,7 +12131,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11925,7 +12140,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11933,7 +12149,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11941,7 +12158,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -11949,7 +12167,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -11957,7 +12176,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -11965,7 +12185,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -11973,7 +12194,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -11981,7 +12203,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -12101,7 +12324,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12109,7 +12333,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12117,7 +12342,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12125,7 +12351,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12133,7 +12360,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12181,7 +12409,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12189,7 +12418,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12197,7 +12427,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12205,7 +12436,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12213,7 +12445,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12221,7 +12454,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -12229,7 +12463,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -12237,7 +12472,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -12245,7 +12481,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -12253,7 +12490,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -12373,7 +12611,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12381,7 +12620,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12389,7 +12629,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12397,7 +12638,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12405,7 +12647,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12453,7 +12696,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12461,7 +12705,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12469,7 +12714,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12477,7 +12723,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12485,7 +12732,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12493,7 +12741,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -12501,7 +12750,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -12509,7 +12759,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -12517,7 +12768,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -12525,7 +12777,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -12645,7 +12898,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12653,7 +12907,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12661,7 +12916,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12669,7 +12925,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12677,7 +12934,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12725,7 +12983,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12733,7 +12992,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12741,7 +13001,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12749,7 +13010,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12757,7 +13019,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -12765,7 +13028,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -12773,7 +13037,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -12781,7 +13046,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -12789,7 +13055,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -12797,7 +13064,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -14608,7 +14876,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14616,7 +14885,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14624,7 +14894,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14632,7 +14903,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14640,7 +14912,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14688,7 +14961,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14696,7 +14970,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14704,7 +14979,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14712,7 +14988,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14720,7 +14997,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14728,7 +15006,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -14736,7 +15015,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -14744,7 +15024,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -14752,7 +15033,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -14760,7 +15042,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -14880,7 +15163,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14888,7 +15172,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14896,7 +15181,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14904,7 +15190,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14912,7 +15199,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14960,7 +15248,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14968,7 +15257,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14976,7 +15266,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14984,7 +15275,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -14992,7 +15284,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15000,7 +15293,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15008,7 +15302,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15016,7 +15311,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15024,7 +15320,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15032,7 +15329,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15172,7 +15470,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15180,7 +15479,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15188,7 +15488,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15196,7 +15497,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15204,7 +15506,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15252,7 +15555,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15260,7 +15564,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15268,7 +15573,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15276,7 +15582,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15284,7 +15591,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15292,7 +15600,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15300,7 +15609,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15308,7 +15618,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15316,7 +15627,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15324,7 +15636,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15444,7 +15757,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15452,7 +15766,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15460,7 +15775,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15468,7 +15784,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15476,7 +15793,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15524,7 +15842,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15532,7 +15851,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15540,7 +15860,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15548,7 +15869,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15556,7 +15878,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15564,7 +15887,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15572,7 +15896,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15580,7 +15905,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15588,7 +15914,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15596,7 +15923,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15736,7 +16064,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15744,7 +16073,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15752,7 +16082,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15760,7 +16091,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15768,7 +16100,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15816,7 +16149,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15824,7 +16158,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15832,7 +16167,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15840,7 +16176,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15848,7 +16185,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -15856,7 +16194,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15864,7 +16203,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15872,7 +16212,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15880,7 +16221,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -15888,7 +16230,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -16008,7 +16351,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16016,7 +16360,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16024,7 +16369,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16032,7 +16378,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16040,7 +16387,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16088,7 +16436,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16096,7 +16445,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16104,7 +16454,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16112,7 +16463,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16120,7 +16472,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16128,7 +16481,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -16136,7 +16490,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -16144,7 +16499,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -16152,7 +16508,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -16160,7 +16517,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -16300,7 +16658,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16308,7 +16667,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16316,7 +16676,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16324,7 +16685,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16332,7 +16694,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16380,7 +16743,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16388,7 +16752,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16396,7 +16761,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16404,7 +16770,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16412,7 +16779,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16420,7 +16788,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -16428,7 +16797,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -16436,7 +16806,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -16444,7 +16815,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -16452,7 +16824,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -16572,7 +16945,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16580,7 +16954,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16588,7 +16963,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16596,7 +16972,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16604,7 +16981,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16652,7 +17030,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16660,7 +17039,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16668,7 +17048,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16676,7 +17057,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16684,7 +17066,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -16692,7 +17075,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -16700,7 +17084,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -16708,7 +17093,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -16716,7 +17102,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -16724,7 +17111,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -16894,12 +17282,6 @@
           },
           "200": {
             "description": "Success"
-          },
-          "201": {
-            "description": "Success"
-          },
-          "500": {
-            "description": "Server Error"
           }
         }
       }
@@ -16911,19 +17293,31 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/OrdersUpdateRequestDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OrdersUpdateRequestDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/OrdersUpdateRequestDto"
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "value": {
+                  "style": "form"
+                },
+                "files": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -16949,28 +17343,8 @@
               }
             }
           },
-          "204": {
+          "200": {
             "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
           }
         }
       }
@@ -17020,28 +17394,8 @@
               }
             }
           },
-          "204": {
+          "200": {
             "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
           }
         }
       }
@@ -20565,6 +20919,159 @@
         }
       }
     },
+    "/api/PurchaseRequest/SetCreate": {
+      "post": {
+        "tags": [
+          "PurchaseRequest"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseRequestCreateRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseRequestCreateRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseRequestCreateRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/PurchaseRequest/SetUpdate": {
+      "put": {
+        "tags": [
+          "PurchaseRequest"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseRequestUpdateRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseRequestUpdateRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseRequestUpdateRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/PurchaseRequest/SetClose": {
+      "put": {
+        "tags": [
+          "PurchaseRequest"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseRequestCloseRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseRequestCloseRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseRequestCloseRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/PurchaseRequest/GetDownloadFormat": {
       "get": {
         "tags": [
@@ -20616,202 +21123,6 @@
           },
           "default": {
             "description": "Error",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/PurchaseRequest/SetCreate": {
-      "post": {
-        "tags": [
-          "PurchaseRequest"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PurchaseRequestCreateRequestDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PurchaseRequestCreateRequestDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PurchaseRequestCreateRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Success"
-          },
-          "500": {
-            "description": "Server Error"
-          }
-        }
-      }
-    },
-    "/api/PurchaseRequest/SetUpdate": {
-      "put": {
-        "tags": [
-          "PurchaseRequest"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PurchaseRequestUpdateRequestDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PurchaseRequestUpdateRequestDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PurchaseRequestUpdateRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/PurchaseRequest/SetClose": {
-      "put": {
-        "tags": [
-          "PurchaseRequest"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PurchaseRequestCloseRequestDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PurchaseRequestCloseRequestDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PurchaseRequestCloseRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -21059,7 +21370,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21067,7 +21379,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21075,7 +21388,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21083,7 +21397,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21091,7 +21406,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21139,7 +21455,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21147,7 +21464,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21155,7 +21473,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21163,7 +21482,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21171,7 +21491,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21179,7 +21500,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -21187,7 +21509,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -21195,7 +21518,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -21203,7 +21527,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -21211,7 +21536,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -21414,7 +21740,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21422,7 +21749,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21430,7 +21758,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21438,7 +21767,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21446,7 +21776,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21494,7 +21825,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21502,7 +21834,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21510,7 +21843,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21518,7 +21852,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21526,7 +21861,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -21534,7 +21870,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -21542,7 +21879,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -21550,7 +21888,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -21558,7 +21897,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -21566,7 +21906,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -22212,11 +22553,8 @@
               }
             }
           },
-          "201": {
+          "200": {
             "description": "Success"
-          },
-          "500": {
-            "description": "Server Error"
           }
         }
       }
@@ -22266,28 +22604,8 @@
               }
             }
           },
-          "204": {
+          "200": {
             "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
           }
         }
       }
@@ -24118,7 +24436,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -24126,7 +24445,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -24134,7 +24454,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -24142,7 +24463,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -24150,7 +24472,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -24198,7 +24521,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -24206,7 +24530,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -24214,7 +24539,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -24222,7 +24548,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -24230,7 +24557,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -24238,7 +24566,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -24246,7 +24575,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -24254,7 +24584,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -24262,7 +24593,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -24270,7 +24602,8 @@
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "double"
+              "format": "double",
+              "nullable": true
             }
           },
           {
@@ -25619,11 +25952,8 @@
               }
             }
           },
-          "201": {
+          "200": {
             "description": "Success"
-          },
-          "500": {
-            "description": "Server Error"
           }
         }
       }
@@ -26569,20 +26899,6 @@
         },
         "additionalProperties": false
       },
-      "DeliveryNotesCloseRequestDto": {
-        "type": "object",
-        "properties": {
-          "docEntry": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "u_UsrClose": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
       "DeliveryNotesCancelRequestDto": {
         "type": "object",
         "properties": {
@@ -26601,7 +26917,21 @@
         },
         "additionalProperties": false
       },
-      "DocumentSeriesConfiguration1CreateRequestDto": {
+      "DeliveryNotesCloseRequestDto": {
+        "type": "object",
+        "properties": {
+          "docEntry": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "u_UsrClose": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentSeriesConfigurationLinesCreateRequestDto": {
         "type": "object",
         "properties": {
           "code": {
@@ -26666,14 +26996,95 @@
           "lines": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/DocumentSeriesConfiguration1CreateRequestDto"
+              "$ref": "#/components/schemas/DocumentSeriesConfigurationLinesCreateRequestDto"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "DraftsResendLinesRequestDto": {
+      "DraftsDocumentReportFilterRequestDto": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string",
+            "nullable": true
+          },
+          "pending": {
+            "type": "boolean"
+          },
+          "draftDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "orders": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Attachments2LinesCreateToDocumentRequestDto": {
+        "type": "object",
+        "properties": {
+          "absEntry": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "srcPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "trgtPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileExt": {
+            "type": "string",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "record": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Attachments2CreateToDocumentRequestDto": {
+        "type": "object",
+        "properties": {
+          "absEntry": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attachments2LinesCreateToDocumentRequestDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DraftsLinesCreateToDocumentRequestDto": {
         "type": "object",
         "properties": {
           "itemCode": {
@@ -26739,7 +27150,7 @@
         },
         "additionalProperties": false
       },
-      "DraftsCreateRequestDto": {
+      "DraftsCreateToDocumentRequestDto": {
         "type": "object",
         "properties": {
           "docEntry": {
@@ -26886,174 +27297,20 @@
             "type": "integer",
             "format": "int32"
           },
+          "attachments2": {
+            "$ref": "#/components/schemas/Attachments2CreateToDocumentRequestDto"
+          },
           "lines": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/DraftsResendLinesRequestDto"
+              "$ref": "#/components/schemas/DraftsLinesCreateToDocumentRequestDto"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "DraftsResendRequestDto": {
-        "type": "object",
-        "properties": {
-          "docEntry": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "docDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "docDueDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "taxDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "docType": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_FIB_DocStPkg": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_FIB_IsPkg": {
-            "type": "string",
-            "nullable": true
-          },
-          "cardCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "cardName": {
-            "type": "string",
-            "nullable": true
-          },
-          "cntctCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "numAtCard": {
-            "type": "string",
-            "nullable": true
-          },
-          "docCur": {
-            "type": "string",
-            "nullable": true
-          },
-          "docRate": {
-            "type": "number",
-            "format": "double"
-          },
-          "payToCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "address": {
-            "type": "string",
-            "nullable": true
-          },
-          "shipToCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "address2": {
-            "type": "string",
-            "nullable": true
-          },
-          "groupNum": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "u_BPP_MDCT": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_BPP_MDRT": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_BPP_MDNT": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_FIB_CODT": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_BPP_MDDT": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_TipoFlete": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_ValorFlete": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "u_FIB_TFLETE": {
-            "type": "number",
-            "format": "double"
-          },
-          "u_FIB_IMPSEG": {
-            "type": "number",
-            "format": "double"
-          },
-          "u_FIB_PUERTO": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_STR_TVENTA": {
-            "type": "string",
-            "nullable": true
-          },
-          "slpCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "u_NroOrden": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_OrdenCompra": {
-            "type": "string",
-            "nullable": true
-          },
-          "comments": {
-            "type": "string",
-            "nullable": true
-          },
-          "discPrcnt": {
-            "type": "number",
-            "format": "double"
-          },
-          "docTotal": {
-            "type": "number",
-            "format": "double"
-          },
-          "u_UsrCreate": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "lines": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DraftsResendLinesRequestDto"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Drivers1CreateRequestDto": {
+      "DriversLinesCreateRequestDto": {
         "type": "object",
         "properties": {
           "code": {
@@ -27105,7 +27362,7 @@
           "lines": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Drivers1CreateRequestDto"
+              "$ref": "#/components/schemas/DriversLinesCreateRequestDto"
             },
             "nullable": true
           }
@@ -27127,23 +27384,28 @@
           },
           "id1": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "id2": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "id3": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "id4": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "id5": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "cod1": {
             "type": "string",
@@ -27167,43 +27429,53 @@
           },
           "val1": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "val2": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "val3": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "val4": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "val5": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "dec1": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "dec2": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "dec3": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "dec4": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "dec5": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "text1": {
             "type": "string",
@@ -27228,7 +27500,7 @@
         },
         "additionalProperties": false
       },
-      "InventoryTransferRequest1CreateRequestDto": {
+      "InventoryTransferRequestLinesCreateRequestDto": {
         "type": "object",
         "properties": {
           "itemCode": {
@@ -27394,7 +27666,7 @@
           "lines": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/InventoryTransferRequest1CreateRequestDto"
+              "$ref": "#/components/schemas/InventoryTransferRequestLinesCreateRequestDto"
             },
             "nullable": true
           },
@@ -27408,7 +27680,7 @@
         },
         "additionalProperties": false
       },
-      "InventoryTransferRequest1UpdateRequestDto": {
+      "InventoryTransferRequestLinesUpdateRequestDto": {
         "type": "object",
         "properties": {
           "docEntry": {
@@ -27536,7 +27808,7 @@
           "lines": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/InventoryTransferRequest1UpdateRequestDto"
+              "$ref": "#/components/schemas/InventoryTransferRequestLinesUpdateRequestDto"
             },
             "nullable": true
           }
@@ -28629,229 +28901,6 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OrdenVentaDetalleSodimacLpnUpdateRequestDto"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Orders1UpdateRequestDto": {
-        "type": "object",
-        "properties": {
-          "lineStatus": {
-            "type": "string",
-            "nullable": true
-          },
-          "lineNum": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "itemCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "dscription": {
-            "type": "string",
-            "nullable": true
-          },
-          "acctCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "whsCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "unitMsr": {
-            "type": "string",
-            "nullable": true
-          },
-          "quantity": {
-            "type": "number",
-            "format": "double"
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          },
-          "priceBefDi": {
-            "type": "number",
-            "format": "double"
-          },
-          "discPrcnt": {
-            "type": "number",
-            "format": "double"
-          },
-          "price": {
-            "type": "number",
-            "format": "double"
-          },
-          "taxCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "lineTotal": {
-            "type": "number",
-            "format": "double"
-          },
-          "u_FIB_LinStPkg": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_FIB_OpQtyPkg": {
-            "type": "number",
-            "format": "double"
-          },
-          "u_tipoOpT12": {
-            "type": "string",
-            "nullable": true
-          },
-          "record": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "OrdersUpdateRequestDto": {
-        "type": "object",
-        "properties": {
-          "docEntry": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "docDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "docDueDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "taxDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "docType": {
-            "type": "string",
-            "nullable": true
-          },
-          "cardCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "cntctCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "numAtCard": {
-            "type": "string",
-            "nullable": true
-          },
-          "docCur": {
-            "type": "string",
-            "nullable": true
-          },
-          "docRate": {
-            "type": "number",
-            "format": "double"
-          },
-          "payToCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "address": {
-            "type": "string",
-            "nullable": true
-          },
-          "shipToCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "address2": {
-            "type": "string",
-            "nullable": true
-          },
-          "groupNum": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "u_BPP_MDCT": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_BPP_MDRT": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_BPP_MDNT": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_FIB_CODT": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_BPP_MDDT": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_TipoFlete": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_ValorFlete": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "u_FIB_TFLETE": {
-            "type": "number",
-            "format": "double"
-          },
-          "u_FIB_IMPSEG": {
-            "type": "number",
-            "format": "double"
-          },
-          "u_FIB_PUERTO": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_STR_TVENTA": {
-            "type": "string",
-            "nullable": true
-          },
-          "slpCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "u_NroOrden": {
-            "type": "string",
-            "nullable": true
-          },
-          "u_OrdenCompra": {
-            "type": "string",
-            "nullable": true
-          },
-          "comments": {
-            "type": "string",
-            "nullable": true
-          },
-          "discPrcnt": {
-            "type": "number",
-            "format": "double"
-          },
-          "docTotal": {
-            "type": "number",
-            "format": "double"
-          },
-          "u_UsrUpdate": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "lines": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Orders1UpdateRequestDto"
             },
             "nullable": true
           }
@@ -30590,7 +30639,7 @@
         },
         "additionalProperties": false
       },
-      "StockTransfers1CreateRequestDto": {
+      "StockTransfersLinesCreateRequestDto": {
         "type": "object",
         "properties": {
           "baseEntry": {
@@ -30815,7 +30864,7 @@
           "lines": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/StockTransfers1CreateRequestDto"
+              "$ref": "#/components/schemas/StockTransfersLinesCreateRequestDto"
             },
             "nullable": true
           },
@@ -31349,7 +31398,7 @@
         },
         "additionalProperties": false
       },
-      "VehiclesCreate1RequestDto": {
+      "VehiclesLinesCreateRequestDto": {
         "type": "object",
         "properties": {
           "code": {
@@ -31410,7 +31459,7 @@
           "lines": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/VehiclesCreate1RequestDto"
+              "$ref": "#/components/schemas/VehiclesLinesCreateRequestDto"
             },
             "nullable": true
           }

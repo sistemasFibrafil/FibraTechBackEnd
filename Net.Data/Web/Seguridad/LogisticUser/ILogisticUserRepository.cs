@@ -1,12 +1,12 @@
-﻿using Net.Business.Entities;
+﻿using Net.CrossCotting;
 using System.Threading.Tasks;
 using Net.Business.Entities.Web;
 namespace Net.Data.Web
 {
     public interface ILogisticUserRepository
     {
-        Task<ResultadoTransaccionEntity<LogisticUserQueryEntity>> GetById(LogisticUserEntity value);
-        Task<ResultadoTransaccionEntity<LogisticUserQueryEntity>> GetValidateByUser(LogisticUserValidatedFindEntity value);
-        Task<ResultadoTransaccionEntity<LogisticUserEntity>> SetCreate(LogisticUserCreateEntity value);
+        Task<ResultadoTransaccionResponse<LogisticUserQueryEntity>> GetById(LogisticUserEntity value);
+        Task<ResultadoTransaccionResponse<LogisticUserQueryEntity>> GetValidateByUser(LogisticUserValidatedFindEntity value);
+        Task<ResultadoTransaccionResponse<LogisticUserEntity>> SetCreate(LogisticUserCreateEntity value);
     }
 }

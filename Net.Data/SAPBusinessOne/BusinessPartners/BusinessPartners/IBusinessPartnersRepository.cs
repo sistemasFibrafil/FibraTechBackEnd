@@ -1,17 +1,17 @@
 ﻿using System.IO;
-using Net.Business.Entities;
+using Net.CrossCotting;
 using System.Threading.Tasks;
 using Net.Business.Entities.SAPBusinessOne;
 namespace Net.Data.SAPBusinessOne
 {
     public interface IBusinessPartnersRepository
     {
-        Task<ResultadoTransaccionEntity<BusinessPartnersQueryEntity>> GetListByFilter(BusinessPartnersFilterEntity value);
-        Task<ResultadoTransaccionEntity<BusinessPartnersQueryEntity>> GetListModalByFilter(BusinessPartnersModalFilterEntity value);
-        Task<ResultadoTransaccionEntity<BusinessPartnersQueryEntity>> GetByCode(string cardCode);
-        Task<ResultadoTransaccionEntity<BusinessPartnersQueryEntity>> GetVehicleByCode(string cardCode);
-        Task<ResultadoTransaccionEntity<BusinessPartnersQueryEntity>> GetDriverByCode(string cardCode);
-        Task<ResultadoTransaccionEntity<BusinessPartnersViewEntity>> GetListClienteBySectorStatus(BusinessPartnersSectorStatusFilterEntity value);
-        Task<ResultadoTransaccionEntity<MemoryStream>> GetClienteBySectorStatusExcel(BusinessPartnersSectorStatusFilterEntity value);
+        Task<ResultadoTransaccionResponse<BusinessPartnersQueryEntity>> GetListByFilter(BusinessPartnersFilterEntity value);
+        Task<ResultadoTransaccionResponse<BusinessPartnersQueryEntity>> GetListModalByFilter(BusinessPartnersModalFilterEntity value);
+        Task<ResultadoTransaccionResponse<BusinessPartnersQueryEntity>> GetByCode(string cardCode);
+        Task<ResultadoTransaccionResponse<BusinessPartnersQueryEntity>> GetVehicleByCode(string cardCode);
+        Task<ResultadoTransaccionResponse<BusinessPartnersQueryEntity>> GetDriverByCode(string cardCode);
+        Task<ResultadoTransaccionResponse<BusinessPartnersViewEntity>> GetListClienteBySectorStatus(BusinessPartnersSectorStatusFilterEntity value);
+        Task<ResultadoTransaccionResponse<MemoryStream>> GetClienteBySectorStatusExcel(BusinessPartnersSectorStatusFilterEntity value);
     }
 }

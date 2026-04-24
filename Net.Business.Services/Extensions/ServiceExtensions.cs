@@ -2,8 +2,14 @@
 using Net.Connection;
 using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
+using Net.BusinessLogic.Services.Common;
 using Microsoft.Extensions.Configuration;
+using Net.BusinessLogic.Interfaces.Common;
 using Microsoft.Extensions.DependencyInjection;
+using Net.BusinessLogic.Services.SAPBusinessOne.Draft;
+using Net.BusinessLogic.Services.SAPBusinessOne.Sales;
+using Net.BusinessLogic.Interfaces.SAPBusinessOne.Draft;
+using Net.BusinessLogic.Interfaces.SAPBusinessOne.Sales;
 namespace Net.Business.Services
 {
     public static class ServiceExtensions
@@ -32,6 +38,13 @@ namespace Net.Business.Services
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+        }
+
+        public static void ConfigureBusinessLogicServices(this IServiceCollection services)
+        {
+            services.AddScoped<IOrdersService, OrdersService>();
+            services.AddScoped<IDraftService, DraftService>();
+            services.AddScoped<IFileService, FileService>();
         }
 
         public static void ConfigureHttpClientServiceLayer(this IServiceCollection services)

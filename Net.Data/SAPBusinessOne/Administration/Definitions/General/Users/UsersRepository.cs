@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
-using Net.Business.Entities.SAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.Users.Find;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.Users.Query;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.Users.Filter;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.Users.Entities;
 namespace Net.Data.SAPBusinessOne
 {
     public class UsersRepository : RepositoryBase<UsersEntity>, IUsersRepository
@@ -24,9 +27,9 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<UsersQueryEntity>> GetList()
+        public async Task<ResultadoTransaccionResponse<UsersQueryEntity>> GetList()
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<UsersQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<UsersQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -59,9 +62,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<UsersQueryEntity>> GetListByFilter(UsersFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<UsersQueryEntity>> GetListByFilter(UsersFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<UsersQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<UsersQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -110,9 +113,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<UsersQueryEntity>> GetByCode(UsersFindEntity value)
+        public async Task<ResultadoTransaccionResponse<UsersQueryEntity>> GetByCode(UsersFindEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<UsersQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<UsersQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

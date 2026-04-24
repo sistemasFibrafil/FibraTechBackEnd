@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Net.Business.Entities.SAPBusinessOne
+namespace Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Query
 {
     public class PickingQueryEntity
     {

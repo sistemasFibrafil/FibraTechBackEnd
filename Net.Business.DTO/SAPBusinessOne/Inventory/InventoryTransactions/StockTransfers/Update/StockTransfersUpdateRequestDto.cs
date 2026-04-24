@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.DTO.SAPBusinessOne
+namespace Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Update
 {
     public class StockTransfersUpdateRequestDto
     {
@@ -43,6 +43,6 @@ namespace Net.Business.DTO.SAPBusinessOne
 
         public int U_UsrUpdate { get; set; }
 
-        public List<StockTransfers1UpdateRequestDto> Lines { get; set; } = new List<StockTransfers1UpdateRequestDto>();
+        public List<StockTransfers1UpdateRequestDto> Lines { get; set; } = [];
     }
 }

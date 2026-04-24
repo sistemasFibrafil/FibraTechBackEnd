@@ -2,8 +2,8 @@
 using AutoMapper;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Net.Business.Entities.Web;
 using Microsoft.EntityFrameworkCore;
@@ -28,9 +28,9 @@ namespace Net.Data.Web
         }
 
 
-        public async Task<ResultadoTransaccionEntity<LogisticUserQueryEntity>> GetById(LogisticUserEntity value)
+        public async Task<ResultadoTransaccionResponse<LogisticUserQueryEntity>> GetById(LogisticUserEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<LogisticUserQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<LogisticUserQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -71,9 +71,9 @@ namespace Net.Data.Web
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<LogisticUserQueryEntity>> GetValidateByUser(LogisticUserValidatedFindEntity value)
+        public async Task<ResultadoTransaccionResponse<LogisticUserQueryEntity>> GetValidateByUser(LogisticUserValidatedFindEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<LogisticUserQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<LogisticUserQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -108,9 +108,9 @@ namespace Net.Data.Web
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<LogisticUserEntity>> SetCreate(LogisticUserCreateEntity value)
+        public async Task<ResultadoTransaccionResponse<LogisticUserEntity>> SetCreate(LogisticUserCreateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<LogisticUserEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<LogisticUserEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

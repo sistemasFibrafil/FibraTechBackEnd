@@ -4,7 +4,6 @@ using System.Linq;
 using System.Data;
 using Net.Connection;
 using Net.CrossCotting;
-using Net.Business.Entities;
 using System.Data.SqlClient;
 using DocumentFormat.OpenXml;
 using System.Threading.Tasks;
@@ -40,10 +39,10 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<CobranzaCarteraVencidaByFilterSapEntity>> GetListCobranzaCarteraVencidaByFilter(PagoRecibidoByFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<CobranzaCarteraVencidaByFilterSapEntity>> GetListCobranzaCarteraVencidaByFilter(PagoRecibidoByFilterEntity value)
         {
             var response = new List<CobranzaCarteraVencidaByFilterSapEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<CobranzaCarteraVencidaByFilterSapEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<CobranzaCarteraVencidaByFilterSapEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -85,10 +84,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetCobranzaCarteraVencidaByFilterExcel(PagoRecibidoByFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetCobranzaCarteraVencidaByFilterExcel(PagoRecibidoByFilterEntity value)
         {
             var ms = new MemoryStream();
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
             resultTransaccion.NombreMetodo = _metodoName;

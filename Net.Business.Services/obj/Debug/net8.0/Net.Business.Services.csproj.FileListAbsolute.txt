@@ -29,6 +29,8 @@ D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Microsoft.EntityFramew
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Microsoft.Identity.Client.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
@@ -51,6 +53,7 @@ D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Microsoft.Win32.Regist
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\NuGet.Frameworks.dll
+D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Scrutor.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\SkiaSharp.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\SpreadsheetLight.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
@@ -75,6 +78,7 @@ D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.DirectoryServic
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.Drawing.Common.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.IO.Packaging.dll
+D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.IO.Pipelines.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.IO.Ports.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.Management.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.Memory.Data.dll
@@ -92,6 +96,8 @@ D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.ServiceModel.Se
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.ServiceModel.Syndication.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.ServiceProcess.ServiceController.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.Speech.dll
+D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.Text.Json.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.Threading.AccessControl.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.Web.Services.Description.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\System.Windows.Extensions.dll
@@ -219,15 +225,18 @@ D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\runtimes\win\lib\net6.
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.ServiceProcess.ServiceController.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Speech.dll
+D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Threading.AccessControl.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Net.Business.DTO.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Net.Business.Entities.dll
+D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Net.BusinessLogic.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Net.Connection.Attributes.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Net.Connection.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Net.CrossCotting.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Net.Data.dll
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Net.Business.DTO.pdb
+D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Net.BusinessLogic.pdb
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Net.Connection.pdb
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Net.Data.pdb
 D:\Fil\Web\BackEnd\Net.Business.Services\bin\Debug\net8.0\Net.Business.Entities.pdb

@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {
+    "net8.0": {
       "DocumentFormat.OpenXml/2.11.3": {
         "type": "package",
         "dependencies": {
@@ -1569,7 +1569,7 @@
       },
       "Net.Business.Entities/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
+        "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "Microsoft.AspNetCore.Http.Features": "3.1.32",
           "Microsoft.EntityFrameworkCore.Abstractions": "6.0.0",
@@ -1584,7 +1584,7 @@
       },
       "Net.Connection.Attributes/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
+        "framework": ".NETCoreApp,Version=v8.0",
         "compile": {
           "bin/placeholder/Net.Connection.Attributes.dll": {}
         },
@@ -1594,7 +1594,7 @@
       },
       "Net.CrossCotting/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
+        "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "3.1.32",
           "Net.Business.Entities": "1.0.0",
@@ -5247,7 +5247,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net6.0": [
+    "net8.0": [
       "Microsoft.Data.SqlClient >= 2.1.7",
       "Microsoft.Extensions.Configuration.Abstractions >= 3.1.32",
       "Net.Connection.Attributes >= 1.0.0",
@@ -5276,15 +5276,15 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net6.0"
+        "net8.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "projectReferences": {
             "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj": {
               "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj"
@@ -5308,8 +5308,8 @@
       "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
-      "net6.0": {
-        "targetAlias": "net6.0",
+      "net8.0": {
+        "targetAlias": "net8.0",
         "dependencies": {
           "Microsoft.Data.SqlClient": {
             "target": "Package",
@@ -5336,7 +5336,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

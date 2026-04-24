@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.Users.Entities;
 namespace Net.Business.Entities.SAPBusinessOne
 {
     public class DeliveryNotesEntity
@@ -152,7 +153,7 @@ namespace Net.Business.Entities.SAPBusinessOne
 
 
         // 🔗 1 → N (ODLN → DLN1)
-        public List<DeliveryNotes1Entity> Lines { get; set; } = new List<DeliveryNotes1Entity>();
+        public List<DeliveryNotes1Entity> Lines { get; set; } = [];
     }
 
     public class DeliveryNotes1Entity
@@ -206,36 +207,34 @@ namespace Net.Business.Entities.SAPBusinessOne
     public class DeliveryNotesByFechaEntity
     {
         public DateTime FechaEmision { get; set; }
-        public string Tipo { get; set; }
-        public string Serie { get; set; }
-        public string Numero { get; set; }
+        public string? Tipo { get; set; }
+        public string? Serie { get; set; }
+        public string? Numero { get; set; }
 
-        public string ClienteTipoDocumento { get; set; }
-        public string ClienteNumeroDocumento { get; set; }
-        public string ClienteDenominacion { get; set; }
+        public string? ClienteTipoDocumento { get; set; }
+        public string? ClienteNumeroDocumento { get; set; }
+        public string? ClienteDenominacion { get; set; }
+        public string? Detalle { get; set; }
+        public decimal? PesoBruto { get; set; }
+        public string? PesoUnidadMedida { get; set; }
+        public DateTime? FechaTraslado { get; set; }
+        public string? TransportistaDocumentoTipo { get; set; }
+        public string? TransportistaDocumentoNumero { get; set; }
+        public string? TransportistaDenominacion { get; set; }
+        public string? TransportistaPlacaNumero { get; set; }
 
-        public string Detalle { get; set; }
-        public decimal PesoBruto { get; set; }
-        public string PesoUnidadMedida { get; set; }
-        public DateTime FechaTraslado { get; set; }
+        public string? ConductorDocumentoTipo { get; set; }
+        public string? ConductorDocumentoNumero { get; set; }
+        public string? ConductorNombre { get; set; }
+        public string? ConductorApellidos { get; set; }
+        public string? ConductorLicenciaNumero { get; set; }
 
-        public string TransportistaDocumentoTipo { get; set; }
-        public string TransportistaDocumentoNumero { get; set; }
-        public string TransportistaDenominacion { get; set; }
-        public string TransportistaPlacaNumero { get; set; }
+        public string? PuntoPartidaUbigeo { get; set; }
+        public string? PuntoPartidaDireccion { get; set; }
+        public string? PuntoLlegadaUbigeo { get; set; }
+        public string? PuntoLlegadaDireccion { get; set; }
 
-        public string ConductorDocumentoTipo { get; set; }
-        public string ConductorDocumentoNumero { get; set; }
-        public string ConductorNombre { get; set; }
-        public string ConductorApellidos { get; set; }
-        public string ConductorLicenciaNumero { get; set; }
-
-        public string PuntoPartidaUbigeo { get; set; }
-        public string PuntoPartidaDireccion { get; set; }
-        public string PuntoLlegadaUbigeo { get; set; }
-        public string PuntoLlegadaDireccion { get; set; }
-
-        public string Observaciones { get; set; }
-        public string EstadoSunat { get; set; }
+        public string? Observaciones { get; set; }
+        public string? EstadoSunat { get; set; }
     }
 }

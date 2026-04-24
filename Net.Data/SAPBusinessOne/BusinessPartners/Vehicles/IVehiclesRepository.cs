@@ -1,11 +1,13 @@
-﻿using Net.Business.Entities;
+﻿using Net.CrossCotting;
 using System.Threading.Tasks;
-using Net.Business.Entities.SAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Vehicle.Filter;
+using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Vehicles.Create;
+using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Vehicle.Entities;
 namespace Net.Data.SAPBusinessOne
 {
     public interface IVehiclesRepository
     {
-        Task<ResultadoTransaccionEntity<VehiclesEntity>> GetListByFilter(VehiclesFilterEntity value);
-        Task<ResultadoTransaccionEntity<VehiclesEntity>> SetCreate(VehiclesCreateEntity value);
+        Task<ResultadoTransaccionResponse<VehiclesEntity>> GetListByFilter(VehiclesFilterEntity value);
+        Task<ResultadoTransaccionResponse<VehiclesEntity>> SetCreate(VehiclesCreateEntity value);
     }
 }

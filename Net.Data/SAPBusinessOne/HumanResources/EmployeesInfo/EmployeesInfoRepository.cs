@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Net.Business.Entities.SAPBusinessOne;
@@ -20,9 +20,9 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<EmployeesInfoQueryEntity>> GetList()
+        public async Task<ResultadoTransaccionResponse<EmployeesInfoQueryEntity>> GetList()
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<EmployeesInfoQueryEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<EmployeesInfoQueryEntity>();
 
             try
             {
@@ -50,9 +50,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<EmployeesInfoQueryEntity>> GetById(EmployeesInfoEntity value)
+        public async Task<ResultadoTransaccionResponse<EmployeesInfoQueryEntity>> GetById(EmployeesInfoEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<EmployeesInfoQueryEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<EmployeesInfoQueryEntity>();
 
             try
             {

@@ -101,15 +101,15 @@
   },
   {
     "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Approvals.ApprovalRequestsController",
-    "Method": "GetApprovalStatusReport",
-    "RelativePath": "api/ApprovalRequests/GetApprovalStatusReport",
+    "Method": "GetListApprovalStatusReport",
+    "RelativePath": "api/ApprovalRequests/GetListApprovalStatusReport",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.ApprovalStatusReportFilterRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Approvals.ApprovalRequests.Filter.ApprovalStatusReportFilterRequestDto",
         "IsRequired": true
       }
     ],
@@ -1368,7 +1368,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.DeliveryNotesCancelRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Sales.DeliveryNotes.Cancel.DeliveryNotesCancelRequestDto",
         "IsRequired": true
       }
     ],
@@ -1385,16 +1385,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
+        "StatusCode": 200
       }
     ]
   },
@@ -1408,7 +1399,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.DeliveryNotesCloseRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Sales.DeliveryNotes.Close.DeliveryNotesCloseRequestDto",
         "IsRequired": true
       }
     ],
@@ -1425,16 +1416,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
+        "StatusCode": 200
       }
     ]
   },
@@ -1448,7 +1430,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.DeliveryNotesCreateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Sales.DeliveryNotes.Create.DeliveryNotesCreateRequestDto",
         "IsRequired": true
       }
     ],
@@ -1465,12 +1447,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 201
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 500
+        "StatusCode": 200
       }
     ]
   },
@@ -1484,7 +1461,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.DeliveryNotesUpdateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Sales.DeliveryNotes.Update.DeliveryNotesUpdateRequestDto",
         "IsRequired": true
       }
     ],
@@ -1501,16 +1478,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
+        "StatusCode": 200
       }
     ]
   },
@@ -1753,7 +1721,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.DocumentSeriesConfigurationCreateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Create.DocumentSeriesConfigurationCreateRequestDto",
         "IsRequired": true
       }
     ],
@@ -1770,12 +1738,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 201
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 500
+        "StatusCode": 200
       }
     ]
   },
@@ -1880,6 +1843,42 @@
   },
   {
     "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Drafts.DraftsController",
+    "Method": "GetListDraftsDocumentReport",
+    "RelativePath": "api/Drafts/GetListDraftsDocumentReport",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Drafts.Filter.DraftsDocumentReportFilterRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 201
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 500
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Drafts.DraftsController",
     "Method": "GetStatusByDocEntry",
     "RelativePath": "api/Drafts/GetStatusByDocEntry/{docEntry}",
     "HttpMethod": "GET",
@@ -1936,9 +1935,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.DraftsCreateRequestDto",
-        "IsRequired": true
+        "Name": "value",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "files",
+        "Type": "System.Collections.Generic.IList\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -1954,26 +1958,21 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 201
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 500
+        "StatusCode": 200
       }
     ]
   },
   {
     "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Drafts.DraftsController",
-    "Method": "SetResend",
-    "RelativePath": "api/Drafts/SetResend",
+    "Method": "SetSaveDraftToDocument",
+    "RelativePath": "api/Drafts/SetSaveDraftToDocument",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.DraftsResendRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Drafts.CreateToDocument.DraftsCreateToDocumentRequestDto",
         "IsRequired": true
       }
     ],
@@ -1990,12 +1989,43 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 201
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Net.Business.Services.Controllers.SAPBusinessOne.Drafts.DraftsController",
+    "Method": "SetUpdate",
+    "RelativePath": "api/Drafts/SetUpdate",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "files",
+        "Type": "System.Collections.Generic.IList\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
       },
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 500
+        "StatusCode": 200
       }
     ]
   },
@@ -2054,7 +2084,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.DriversCreateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.BusinessPartners.Drivers.Create.DriversCreateRequestDto",
         "IsRequired": true
       }
     ],
@@ -2071,12 +2101,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 201
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 500
+        "StatusCode": 200
       }
     ]
   },
@@ -2100,27 +2125,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -2150,52 +2175,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -2603,27 +2628,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -2653,52 +2678,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -2773,27 +2798,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -2823,52 +2848,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -3012,27 +3037,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -3062,52 +3087,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -3490,8 +3515,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "value",
-        "Type": "Net.Business.DTO.SAPBusinessOne.InventoryTransferRequestCloseRequestDto",
+        "Name": "dto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Close.InventoryTransferRequestCloseRequestDto",
         "IsRequired": true
       }
     ],
@@ -3508,16 +3533,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
+        "StatusCode": 200
       }
     ]
   },
@@ -3531,7 +3547,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.InventoryTransferRequestCreateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Create.InventoryTransferRequestCreateRequestDto",
         "IsRequired": true
       }
     ],
@@ -3548,12 +3564,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 201
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 500
+        "StatusCode": 200
       }
     ]
   },
@@ -3567,7 +3578,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.InventoryTransferRequestUpdateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Update.InventoryTransferRequestUpdateRequestDto",
         "IsRequired": true
       }
     ],
@@ -3584,16 +3595,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
+        "StatusCode": 200
       }
     ]
   },
@@ -3755,7 +3757,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.InvoicesCancelRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Sales.Invoices.Cancel.InvoicesCancelRequestDto",
         "IsRequired": true
       }
     ],
@@ -3772,16 +3774,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
+        "StatusCode": 200
       }
     ]
   },
@@ -3795,7 +3788,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.InvoicesCreateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Sales.Invoices.Create.InvoicesCreateRequestDto",
         "IsRequired": true
       }
     ],
@@ -3812,12 +3805,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 201
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 500
+        "StatusCode": 200
       }
     ]
   },
@@ -3831,7 +3819,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.InvoicesUpdateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Sales.Invoices.Update.InvoicesUpdateRequestDto",
         "IsRequired": true
       }
     ],
@@ -3848,16 +3836,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
+        "StatusCode": 200
       }
     ]
   },
@@ -3951,27 +3930,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -4001,52 +3980,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -4121,27 +4100,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -4171,52 +4150,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -4291,27 +4270,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -4341,52 +4320,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -4461,27 +4440,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -4511,52 +4490,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -4631,27 +4610,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -4681,52 +4660,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -4801,27 +4780,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -4851,52 +4830,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -4971,27 +4950,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -5021,52 +5000,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -6342,27 +6321,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -6392,52 +6371,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -6512,27 +6491,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -6562,52 +6541,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -6682,27 +6661,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -6732,52 +6711,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -6861,27 +6840,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -6911,52 +6890,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -7193,27 +7172,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -7243,52 +7222,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -7363,27 +7342,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -7413,52 +7392,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -7533,27 +7512,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -7583,52 +7562,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -7767,27 +7746,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -7817,52 +7796,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -7937,27 +7916,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -7987,52 +7966,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -8510,27 +8489,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -8560,52 +8539,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -8680,27 +8659,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -8730,52 +8709,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -8850,27 +8829,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -8900,52 +8879,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -9029,27 +9008,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -9079,52 +9058,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -9199,27 +9178,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -9249,52 +9228,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -9594,27 +9573,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -9644,52 +9623,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -9773,27 +9752,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -9823,52 +9802,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -9952,27 +9931,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -10002,52 +9981,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -10568,8 +10547,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "value",
-        "Type": "Net.Business.DTO.SAPBusinessOne.OrdersCloseRequestDto",
+        "Name": "dto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Sales.Orders.Close.OrdersCloseRequestDto",
         "IsRequired": true
       }
     ],
@@ -10586,16 +10565,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
+        "StatusCode": 200
       }
     ]
   },
@@ -10632,16 +10602,6 @@
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 200
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 201
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 500
       }
     ]
   },
@@ -10654,9 +10614,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.OrdersUpdateRequestDto",
-        "IsRequired": true
+        "Name": "value",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "files",
+        "Type": "System.Collections.Generic.IList\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -10672,16 +10637,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
+        "StatusCode": 200
       }
     ]
   },
@@ -12204,7 +12160,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.SAPBusinessOne.PickingCopyToFindDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Find.PickingCopyToFindDto",
         "IsRequired": true
       }
     ],
@@ -12240,7 +12196,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.SAPBusinessOne.PickingCopyToFindDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Find.PickingCopyToFindDto",
         "IsRequired": true
       }
     ],
@@ -12276,7 +12232,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.SAPBusinessOne.PickingCopyToFindDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Find.PickingCopyToFindDto",
         "IsRequired": true
       }
     ],
@@ -12312,7 +12268,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.SAPBusinessOne.PickingCreateDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Create.PickingCreateDto",
         "IsRequired": true
       }
     ],
@@ -12348,7 +12304,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.SAPBusinessOne.PickingDeleteDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Delete.PickingDeleteDto",
         "IsRequired": true
       }
     ],
@@ -12388,7 +12344,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.SAPBusinessOne.PickingDeleteDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Delete.PickingDeleteDto",
         "IsRequired": true
       }
     ],
@@ -12428,7 +12384,7 @@
     "Parameters": [
       {
         "Name": "value",
-        "Type": "Net.Business.DTO.SAPBusinessOne.PickingReleaseDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Release.PickingReleaseDto",
         "IsRequired": true
       }
     ],
@@ -12737,8 +12693,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "value",
-        "Type": "Net.Business.DTO.SAPBusinessOne.PurchaseRequestCloseRequestDto",
+        "Name": "dto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Purchasing.PurchaseRequest.Close.PurchaseRequestCloseRequestDto",
         "IsRequired": true
       }
     ],
@@ -12755,16 +12711,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
+        "StatusCode": 200
       }
     ]
   },
@@ -12778,7 +12725,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.PurchaseRequestCreateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Purchasing.PurchaseRequest.Create.PurchaseRequestCreateRequestDto",
         "IsRequired": true
       }
     ],
@@ -12795,12 +12742,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 201
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 500
+        "StatusCode": 200
       }
     ]
   },
@@ -12814,7 +12756,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.PurchaseRequestUpdateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Purchasing.PurchaseRequest.Update.PurchaseRequestUpdateRequestDto",
         "IsRequired": true
       }
     ],
@@ -12831,16 +12773,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
+        "StatusCode": 200
       }
     ]
   },
@@ -13036,27 +12969,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -13086,52 +13019,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -13206,27 +13139,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -13256,52 +13189,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -13718,7 +13651,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.StockTransfersCreateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Create.StockTransfersCreateRequestDto",
         "IsRequired": true
       }
     ],
@@ -13735,12 +13668,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 201
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 500
+        "StatusCode": 200
       }
     ]
   },
@@ -13754,7 +13682,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.StockTransfersUpdateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Update.StockTransfersUpdateRequestDto",
         "IsRequired": true
       }
     ],
@@ -13771,16 +13699,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
+        "StatusCode": 200
       }
     ]
   },
@@ -14881,27 +14800,27 @@
       },
       {
         "Name": "Id1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Id5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -14931,52 +14850,52 @@
       },
       {
         "Name": "Val1",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val2",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val3",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val4",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Val5",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec1",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec2",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec3",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec4",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "Dec5",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -15796,7 +15715,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Net.Business.DTO.SAPBusinessOne.VehiclesCreateRequestDto",
+        "Type": "Net.Business.DTO.SAPBusinessOne.BusinessPartners.Vehicles.Create.VehiclesCreateRequestDto",
         "IsRequired": true
       }
     ],
@@ -15813,12 +15732,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 201
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 500
+        "StatusCode": 200
       }
     ]
   },

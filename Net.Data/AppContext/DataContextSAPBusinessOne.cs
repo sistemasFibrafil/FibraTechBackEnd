@@ -1,5 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Net.Business.Entities.SAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Drafts.Entities;
+using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Entities;
+using Net.Business.Entities.SAPBusinessOne.Common.Attachments2.Entities;
+using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Driver.Entities;
+using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Vehicle.Entities;
+using Net.Business.Entities.SAPBusinessOne.Approvals.ApprovalRequests.Entities;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.Users.Entities;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Entities;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Entities;
+using Net.Business.Entities.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Entities;
 namespace Net.Data.AppContext
 {
     public class DataContextSAPBusinessOne : DbContext
@@ -156,7 +166,7 @@ namespace Net.Data.AppContext
             // ========================================================================================================================================================
             // DETALLE DE CONFIGURACIÓN DE SERIES DE DOCUMENTOS
             // ========================================================================================================================================================
-            modelBuilder.Entity<DocumentSeriesConfiguration1Entity>(e =>
+            modelBuilder.Entity<DocumentSeriesConfigurationLinesEntity>(e =>
             {
                 e.ToTable("@FIB_CSD1");
                 e.HasKey(x => new { x.Code, x.LineId });
@@ -332,6 +342,34 @@ namespace Net.Data.AppContext
             {
                 entity.ToTable("FIB_SGRUPO2");
                 entity.HasKey(e => e.Code);
+            });
+
+            #endregion
+
+
+
+
+            #region <<< COMMON >>>
+
+            modelBuilder.Entity<Attachments2Entity>(entity =>
+            {
+                entity.ToTable("OATC");
+
+                entity.HasKey(e => e.AbsEntry);
+
+
+                // 🔗 OATC → ATC1
+                entity.HasMany(e => e.Lines)
+                      .WithOne()
+                      .HasForeignKey(l => l.AbsEntry)
+                      .IsRequired();
+
+            });
+            modelBuilder.Entity<Attachments2LinesEntity>(entity =>
+            {
+                entity.ToTable("ATC1");
+
+                entity.HasKey(e => new { e.AbsEntry, e.Line });
             });
 
             #endregion
@@ -542,11 +580,19 @@ namespace Net.Data.AppContext
                       .HasForeignKey(e => e.GroupNum)
                       .HasPrincipalKey(b => b.GroupNum);
 
+                // ORDR → OATC (N → 1)
+                entity.HasOne(e => e.Attachments2)
+                      .WithMany() // OATC no necesita colección
+                      .HasForeignKey(e => e.AtcEntry)
+                      .HasPrincipalKey(t => t.AbsEntry)
+                      .IsRequired(false); // LEFT JOIN
+
                 // 🔗 ORDR → RDR1
                 entity.HasMany(e => e.Lines)
                       .WithOne()
                       .HasForeignKey(l => l.DocEntry)
                       .IsRequired();
+
             });
             modelBuilder.Entity<Orders1Entity>(entity =>
             {
@@ -1168,7 +1214,7 @@ namespace Net.Data.AppContext
         public DbSet<DocumentNumberingSeriesEntity> DocumentNumberingSeries { get; set; }
         public DbSet<DocumentNumberingSeries1Entity> DocumentNumberingSeries1 { get; set; }
         public DbSet<DocumentSeriesConfigurationEntity> DocumentSeriesConfiguration { get; set; }
-        public DbSet<DocumentSeriesConfiguration1Entity> DocumentSeriesConfiguration1 { get; set; }
+        public DbSet<DocumentSeriesConfigurationLinesEntity> DocumentSeriesConfiguration1 { get; set; }
         public DbSet<DocumentNumberingSeriesSunatEntity> DocumentNumberingSeriesSunat { get; set; }
 
         #endregion
@@ -1198,6 +1244,16 @@ namespace Net.Data.AppContext
         public DbSet<PaymentTermsTypesEntity> PaymentTermsTypes { get; set; }
         public DbSet<SubGrupoArticulo2SapEntity> SubGrupoArticulo2 { get; set; }
         public DbSet<BusinessPartnerGroupsEntity> BusinessPartnerGroups { get; set; }
+
+        #endregion
+
+
+
+
+        #region <<< COMMON >>>
+
+        public DbSet<Attachments2Entity> Attachments2 { get; set; }
+        public DbSet<Attachments2LinesEntity> Attachments2Lines { get; set; }
 
         #endregion
 

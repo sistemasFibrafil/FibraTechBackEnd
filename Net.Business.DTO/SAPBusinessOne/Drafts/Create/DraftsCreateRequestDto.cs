@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.DTO.SAPBusinessOne
+using Net.Business.DTO.SAPBusinessOne.Common.Attachments2.Create;
+namespace Net.Business.DTO.SAPBusinessOne.Drafts.Create
 {
     public class DraftsCreateRequestDto
     {
-        public int DocEntry { get; set; }
         public DateTime DocDate { get; set; }
         public DateTime DocDueDate { get; set; }
         public DateTime TaxDate { get; set; }
@@ -83,10 +83,12 @@ namespace Net.Business.DTO.SAPBusinessOne
         /// TOTALES
         /// </summary>
         public double DiscPrcnt { get; set; }
-        public Double DocTotal { get; set; }
+        public double DocTotal { get; set; }
 
         public int U_UsrCreate { get; set; }
 
-        public List<DraftsResendLinesRequestDto> Lines { get; set; } = new List<DraftsResendLinesRequestDto>();
+
+        public Attachments2CreateRequestDto? Attachments2 { get; set; }
+        public List<DraftsLinesCreateRequestDto> Lines { get; set; } = [];
     }
 }

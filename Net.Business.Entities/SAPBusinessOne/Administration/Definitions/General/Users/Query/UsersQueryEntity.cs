@@ -1,9 +1,9 @@
 ﻿using System;
-namespace Net.Business.Entities.SAPBusinessOne
+namespace Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.Users.Query
 {
     public class UsersQueryEntity
     {
-        public Int16 UserId { get; set; }
+        public short UserId { get; set; }
         public string? UserCode { get; set; }
         public string? UserName { get; set; }
         public short? Groups { get; set; }

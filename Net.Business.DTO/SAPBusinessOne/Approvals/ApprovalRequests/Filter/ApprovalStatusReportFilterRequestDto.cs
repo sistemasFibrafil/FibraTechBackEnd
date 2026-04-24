@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Net.Business.DTO.SAPBusinessOne
+namespace Net.Business.DTO.SAPBusinessOne.Approvals.ApprovalRequests.Filter
 {
     public class ApprovalStatusReportFilterRequestDto
     {

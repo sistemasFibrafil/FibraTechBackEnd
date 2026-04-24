@@ -1,4 +1,4 @@
-﻿namespace Net.Business.DTO.SAPBusinessOne
+﻿namespace Net.Business.DTO.SAPBusinessOne.Sales.DeliveryNotes.Cancel
 {
     public class DeliveryNotesCancelRequestDto
     {

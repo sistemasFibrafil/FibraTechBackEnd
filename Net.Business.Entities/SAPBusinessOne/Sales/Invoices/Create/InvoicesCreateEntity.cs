@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.Entities.SAPBusinessOne
+namespace Net.Business.Entities.SAPBusinessOne.Sales.Invoices.Create
 {
     public class InvoicesCreateEntity
     {
@@ -92,6 +92,6 @@ namespace Net.Business.Entities.SAPBusinessOne
         public double DocTotal { get; set; }
 
         public int U_UsrCreate { get; set; }
-        public List<Invoices1CreateEntity> Lines { get; set; } = new List<Invoices1CreateEntity>();
+        public List<Invoices1CreateEntity> Lines { get; set; } = [];
     }
 }

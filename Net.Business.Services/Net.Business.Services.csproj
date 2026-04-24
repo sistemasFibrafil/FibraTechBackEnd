@@ -18,11 +18,13 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.12.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Scrutor" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Net.Business.DTO\Net.Business.DTO.csproj" />
+    <ProjectReference Include="..\Net.BusinessLogic\Net.BusinessLogic.csproj" />
     <ProjectReference Include="..\Net.Connection\Net.Connection.csproj" />
     <ProjectReference Include="..\Net.Data\Net.Data.csproj" />
   </ItemGroup>
@@ -35,7 +37,6 @@
 
   <ItemGroup>
     <Folder Include="logos\" />
-    <Folder Include="Mappers\SAPBusinessOne\Administration\Definitions\BusinessPartners\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

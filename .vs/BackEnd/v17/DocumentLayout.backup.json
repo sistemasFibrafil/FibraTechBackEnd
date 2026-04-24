@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "D:\\Fil\\Web\\BackEnd\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0B99A372-705B-44E3-8548-E0EB2700DC71}|Net.Business.Services\\Net.Business.Services.csproj|d:\\fil\\web\\backend\\net.business.services\\controllers\\sapbusinessone\\sales\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B99A372-705B-44E3-8548-E0EB2700DC71}|Net.Business.Services\\Net.Business.Services.csproj|solutionrelative:net.business.services\\controllers\\sapbusinessone\\sales\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|d:\\fil\\web\\backend\\net.data\\sapbusinessone\\drafts\\draftsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|solutionrelative:net.data\\sapbusinessone\\drafts\\draftsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{797E3CAD-736E-4BEE-9201-07E11253DBE1}|Net.BusinessLogic\\Net.BusinessLogic.csproj|d:\\fil\\web\\backend\\net.businesslogic\\services\\sapbusinessone\\draft\\draftservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{797E3CAD-736E-4BEE-9201-07E11253DBE1}|Net.BusinessLogic\\Net.BusinessLogic.csproj|solutionrelative:net.businesslogic\\services\\sapbusinessone\\draft\\draftservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0B99A372-705B-44E3-8548-E0EB2700DC71}|Net.Business.Services\\Net.Business.Services.csproj|d:\\fil\\web\\backend\\net.business.services\\controllers\\sapbusinessone\\drafts\\draftscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -15,8 +19,12 @@
       "RelativeMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|solutionrelative:net.data\\sapbusinessone\\sales\\orders\\ordersrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|d:\\fil\\web\\backend\\net.data\\appcontext\\datacontextsapbusinessone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|solutionrelative:net.data\\appcontext\\datacontextsapbusinessone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|d:\\fil\\web\\backend\\net.data\\sapbusinessone\\approvals\\approvalrequests\\approvalrequestsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35F91D64-F317-4A3F-A032-127E8597FE02}|Net.Data\\Net.Data.csproj|solutionrelative:net.data\\sapbusinessone\\approvals\\approvalrequests\\approvalrequestsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B4A2102-0841-40F8-9D89-7362ADF64AC5}|Net.Business.Entities\\Net.Business.Entities.csproj|d:\\fil\\web\\backend\\net.business.entities\\sapbusinessone\\drafts\\query\\draftsqueryentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B4A2102-0841-40F8-9D89-7362ADF64AC5}|Net.Business.Entities\\Net.Business.Entities.csproj|solutionrelative:net.business.entities\\sapbusinessone\\drafts\\query\\draftsqueryentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,54 +54,80 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DataContextSAPBusinessOne.cs",
-              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Data\\AppContext\\DataContextSAPBusinessOne.cs",
-              "RelativeDocumentMoniker": "Net.Data\\AppContext\\DataContextSAPBusinessOne.cs",
-              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Data\\AppContext\\DataContextSAPBusinessOne.cs",
-              "RelativeToolTip": "Net.Data\\AppContext\\DataContextSAPBusinessOne.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAYwGgAAAA5AAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "ApprovalRequestsRepository.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Data\\SAPBusinessOne\\Approvals\\ApprovalRequests\\ApprovalRequestsRepository.cs",
+              "RelativeDocumentMoniker": "Net.Data\\SAPBusinessOne\\Approvals\\ApprovalRequests\\ApprovalRequestsRepository.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Data\\SAPBusinessOne\\Approvals\\ApprovalRequests\\ApprovalRequestsRepository.cs",
+              "RelativeToolTip": "Net.Data\\SAPBusinessOne\\Approvals\\ApprovalRequests\\ApprovalRequestsRepository.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAwDYAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T15:11:36.7Z",
+              "WhenOpened": "2026-04-24T14:47:35.095Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DraftsController.cs",
-              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\Controllers\\SAPBusinessOne\\Drafts\\DraftsController.cs",
-              "RelativeDocumentMoniker": "Net.Business.Services\\Controllers\\SAPBusinessOne\\Drafts\\DraftsController.cs",
-              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\Controllers\\SAPBusinessOne\\Drafts\\DraftsController.cs",
-              "RelativeToolTip": "Net.Business.Services\\Controllers\\SAPBusinessOne\\Drafts\\DraftsController.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAAAEcAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "DraftsQueryEntity.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\SAPBusinessOne\\Drafts\\Query\\DraftsQueryEntity.cs",
+              "RelativeDocumentMoniker": "Net.Business.Entities\\SAPBusinessOne\\Drafts\\Query\\DraftsQueryEntity.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\SAPBusinessOne\\Drafts\\Query\\DraftsQueryEntity.cs",
+              "RelativeToolTip": "Net.Business.Entities\\SAPBusinessOne\\Drafts\\Query\\DraftsQueryEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T14:13:30.537Z",
+              "WhenOpened": "2026-04-24T14:31:50.999Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "OrdersRepository.cs",
-              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Data\\SAPBusinessOne\\Sales\\Orders\\OrdersRepository.cs",
-              "RelativeDocumentMoniker": "Net.Data\\SAPBusinessOne\\Sales\\Orders\\OrdersRepository.cs",
-              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Data\\SAPBusinessOne\\Sales\\Orders\\OrdersRepository.cs",
-              "RelativeToolTip": "Net.Data\\SAPBusinessOne\\Sales\\Orders\\OrdersRepository.cs",
-              "ViewState": "AgIAAA8HAAAAAAAAAAAuwLcHAAAJAAAAAAAAAA==",
+              "Title": "DraftsController.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\Controllers\\SAPBusinessOne\\Drafts\\DraftsController.cs",
+              "RelativeDocumentMoniker": "Net.Business.Services\\Controllers\\SAPBusinessOne\\Drafts\\DraftsController.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\Controllers\\SAPBusinessOne\\Drafts\\DraftsController.cs",
+              "RelativeToolTip": "Net.Business.Services\\Controllers\\SAPBusinessOne\\Drafts\\DraftsController.cs",
+              "ViewState": "AgIAAHMAAAAAAAAAAADwv4cAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T14:13:30.615Z",
+              "WhenOpened": "2026-04-23T02:48:47.549Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DraftService.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.BusinessLogic\\Services\\SAPBusinessOne\\Draft\\DraftService.cs",
+              "RelativeDocumentMoniker": "Net.BusinessLogic\\Services\\SAPBusinessOne\\Draft\\DraftService.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.BusinessLogic\\Services\\SAPBusinessOne\\Draft\\DraftService.cs",
+              "RelativeToolTip": "Net.BusinessLogic\\Services\\SAPBusinessOne\\Draft\\DraftService.cs",
+              "ViewState": "AgIAACUBAAAAAAAAAAAmwDABAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-23T02:52:28.02Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "OrdersController.cs",
-              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\Controllers\\SAPBusinessOne\\Sales\\OrdersController.cs",
-              "RelativeDocumentMoniker": "Net.Business.Services\\Controllers\\SAPBusinessOne\\Sales\\OrdersController.cs",
-              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\Controllers\\SAPBusinessOne\\Sales\\OrdersController.cs",
-              "RelativeToolTip": "Net.Business.Services\\Controllers\\SAPBusinessOne\\Sales\\OrdersController.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAIwBsAAAAFAAAAAAAAAA==",
+              "Title": "DraftsRepository.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Data\\SAPBusinessOne\\Drafts\\DraftsRepository.cs",
+              "RelativeDocumentMoniker": "Net.Data\\SAPBusinessOne\\Drafts\\DraftsRepository.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Data\\SAPBusinessOne\\Drafts\\DraftsRepository.cs",
+              "RelativeToolTip": "Net.Data\\SAPBusinessOne\\Drafts\\DraftsRepository.cs",
+              "ViewState": "AgIAAH0DAAAAAAAAAAAmwA0EAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T14:42:45.163Z",
+              "WhenOpened": "2026-04-23T03:29:48.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OrdersRepository.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Data\\SAPBusinessOne\\Sales\\Orders\\OrdersRepository.cs",
+              "RelativeDocumentMoniker": "Net.Data\\SAPBusinessOne\\Sales\\Orders\\OrdersRepository.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Data\\SAPBusinessOne\\Sales\\Orders\\OrdersRepository.cs",
+              "RelativeToolTip": "Net.Data\\SAPBusinessOne\\Sales\\Orders\\OrdersRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T01:01:45.838Z",
               "EditorCaption": ""
             }
           ]

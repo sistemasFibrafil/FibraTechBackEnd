@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.Entities.SAPBusinessOne
+namespace Net.Business.Entities.SAPBusinessOne.Purchasing.PurchaseRequest.Update
 {
     public class PurchaseRequestUpdateEntity
     {
@@ -10,9 +10,9 @@ namespace Net.Business.Entities.SAPBusinessOne
         public DateTime TaxDate { get; set; }
         public DateTime ReqDate { get; set; }
 
-        public string DocType { get; set; } = string.Empty;
+        public string? DocType { get; set; }
         public int ReqType { get; set; }
-        public string Requester { get; set; } = string.Empty;
+        public string? Requester { get; set; }
         public string? ReqName { get; set; }
         public short Branch { get; set; }
         public short Department { get; set; }
@@ -22,6 +22,6 @@ namespace Net.Business.Entities.SAPBusinessOne
         public string? Comments { get; set; }
 
         public int U_UsrUpdate { get; set; }
-        public List<PurchaseRequest1UpdateEntity> Lines { get; set; } = new List<PurchaseRequest1UpdateEntity>();
+        public List<PurchaseRequest1UpdateEntity> Lines { get; set; } = [];
     }
 }

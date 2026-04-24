@@ -6,13 +6,16 @@ using System.Linq;
 using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Net.Business.Entities.Sap;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 using Net.Business.Entities.SAPBusinessOne;
 using Net.Connection.ConnectionSAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Sales.DeliveryNotes.Close;
+using Net.Business.Entities.SAPBusinessOne.Sales.DeliveryNotes.Create;
+using Net.Business.Entities.SAPBusinessOne.Sales.DeliveryNotes.Update;
+using Net.Business.Entities.SAPBusinessOne.Sales.DeliveryNotes.Cancel;
 namespace Net.Data.SAPBusinessOne
 {
     public class DeliveryNotesRepository : RepositoryBase<DeliveryNotesEntity>, IDeliveryNotesRepository
@@ -35,9 +38,9 @@ namespace Net.Data.SAPBusinessOne
 
         #region <<< CONSULTAS >>>
 
-        public async Task<ResultadoTransaccionEntity<DeliveryNotesQueryEntity>> GetListByFilter(DeliveryNotesFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<DeliveryNotesQueryEntity>> GetListByFilter(DeliveryNotesFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<DeliveryNotesQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<DeliveryNotesQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -134,9 +137,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<DeliveryNotesQueryEntity>> GetByDocEntry(int docEntry)
+        public async Task<ResultadoTransaccionResponse<DeliveryNotesQueryEntity>> GetByDocEntry(int docEntry)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<DeliveryNotesQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<DeliveryNotesQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -345,9 +348,9 @@ namespace Net.Data.SAPBusinessOne
 
         #region <<< OPERACIONES >>>
 
-        public async Task<ResultadoTransaccionEntity<DeliveryNotesEntity>> SetCreate(DeliveryNotesCreateEntity value)
+        public async Task<ResultadoTransaccionResponse<DeliveryNotesEntity>> SetCreate(DeliveryNotesCreateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<DeliveryNotesEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<DeliveryNotesEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -632,9 +635,9 @@ namespace Net.Data.SAPBusinessOne
                 return resultTransaccion;
             });
         }
-        public async Task<ResultadoTransaccionEntity<DeliveryNotesEntity>> SetUpdate(DeliveryNotesUpdateEntity value)
+        public async Task<ResultadoTransaccionResponse<DeliveryNotesEntity>> SetUpdate(DeliveryNotesUpdateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<DeliveryNotesEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<DeliveryNotesEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -782,93 +785,9 @@ namespace Net.Data.SAPBusinessOne
                 return resultTransaccion;
             });
         }
-        public async Task<ResultadoTransaccionEntity<DeliveryNotesEntity>> SetClose(DeliveryNotesCloseEntity value)
+        public async Task<ResultadoTransaccionResponse<DeliveryNotesEntity>> SetCancel(DeliveryNotesCancelEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<DeliveryNotesEntity>
-            {
-                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
-                NombreAplicacion = _aplicacionName
-            };
-
-            Recordset rs = null;
-            Documents deliveryNotes = null;
-
-            return await Task.Run(() =>
-            {
-                try
-                {
-                    // Conexión a SAP
-                    var company = _companyProviderSap.GetCompany();
-
-
-                    // Iniciar transacción
-                    if (!company.InTransaction)
-                        company.StartTransaction();
-
-
-                    deliveryNotes = company.GetBusinessObject(BoObjectTypes.oDeliveryNotes);
-
-
-                    #region <<< CERRAR >>>
-
-                    if (!deliveryNotes.GetByKey(value.DocEntry))
-                    {
-                        throw new Exception("No existe la entrega.");
-                    }
-
-
-                    var regClose = deliveryNotes.Close();
-
-
-                    if(regClose != 0)
-                    {
-                        company.GetLastError(out int errorCode, out string errorMessage);
-                        throw new Exception($"Mensaje: {errorCode} - {errorMessage}.");
-                    }
-
-                    #endregion
-
-
-                    #region <<< ACTUALIZAR UDF CON SQL >>>
-
-                    rs = company.GetBusinessObject(BoObjectTypes.BoRecordset);
-
-                    rs.DoQuery($@"
-                        UPDATE ODLN
-                        SET 
-                            U_UsrClose = '{value.U_UsrClose}'
-                        WHERE DocEntry = {value.DocEntry}
-                    ");
-
-                    #endregion
-
-
-                    // Confima la transacción
-                    if (company.InTransaction)
-                        company.EndTransaction(BoWfTransOpt.wf_Commit);
-
-
-                    resultTransaccion.IdRegistro = 0;
-                    resultTransaccion.ResultadoCodigo = 0;
-                    resultTransaccion.ResultadoDescripcion = "Entrega cerrada con éxito ..!";
-                }
-                catch (Exception ex)
-                {
-                    resultTransaccion.IdRegistro = -1;
-                    resultTransaccion.ResultadoCodigo = -1;
-                    resultTransaccion.ResultadoDescripcion = ex.Message.ToString();
-                }
-                finally
-                {
-                    _companyProviderSap.LiberarObjetosCOM(deliveryNotes);
-                }
-
-                return resultTransaccion;
-            });
-        }
-        public async Task<ResultadoTransaccionEntity<DeliveryNotesEntity>> SetCancel(DeliveryNotesCancelEntity value)
-        {
-            var resultTransaccion = new ResultadoTransaccionEntity<DeliveryNotesEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<DeliveryNotesEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -1002,15 +921,99 @@ namespace Net.Data.SAPBusinessOne
                 return resultTransaccion;
             });
         }
+        public async Task<ResultadoTransaccionResponse<DeliveryNotesEntity>> SetClose(DeliveryNotesCloseEntity value)
+        {
+            var resultTransaccion = new ResultadoTransaccionResponse<DeliveryNotesEntity>
+            {
+                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
+                NombreAplicacion = _aplicacionName
+            };
+
+            Recordset rs = null;
+            Documents deliveryNotes = null;
+
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    // Conexión a SAP
+                    var company = _companyProviderSap.GetCompany();
+
+
+                    // Iniciar transacción
+                    if (!company.InTransaction)
+                        company.StartTransaction();
+
+
+                    deliveryNotes = company.GetBusinessObject(BoObjectTypes.oDeliveryNotes);
+
+
+                    #region <<< CERRAR >>>
+
+                    if (!deliveryNotes.GetByKey(value.DocEntry))
+                    {
+                        throw new Exception("No existe la entrega.");
+                    }
+
+
+                    var regClose = deliveryNotes.Close();
+
+
+                    if(regClose != 0)
+                    {
+                        company.GetLastError(out int errorCode, out string errorMessage);
+                        throw new Exception($"Mensaje: {errorCode} - {errorMessage}.");
+                    }
+
+                    #endregion
+
+
+                    #region <<< ACTUALIZAR UDF CON SQL >>>
+
+                    rs = company.GetBusinessObject(BoObjectTypes.BoRecordset);
+
+                    rs.DoQuery($@"
+                        UPDATE ODLN
+                        SET 
+                            U_UsrClose = '{value.U_UsrClose}'
+                        WHERE DocEntry = {value.DocEntry}
+                    ");
+
+                    #endregion
+
+
+                    // Confima la transacción
+                    if (company.InTransaction)
+                        company.EndTransaction(BoWfTransOpt.wf_Commit);
+
+
+                    resultTransaccion.IdRegistro = 0;
+                    resultTransaccion.ResultadoCodigo = 0;
+                    resultTransaccion.ResultadoDescripcion = "Entrega cerrada con éxito ..!";
+                }
+                catch (Exception ex)
+                {
+                    resultTransaccion.IdRegistro = -1;
+                    resultTransaccion.ResultadoCodigo = -1;
+                    resultTransaccion.ResultadoDescripcion = ex.Message.ToString();
+                }
+                finally
+                {
+                    _companyProviderSap.LiberarObjetosCOM(deliveryNotes);
+                }
+
+                return resultTransaccion;
+            });
+        }
 
         #endregion
 
 
         #region <<< IMPRESIONES >>>
 
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetPrintNationalDocEntry(int docEntry)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetPrintNationalDocEntry(int docEntry)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -1200,9 +1203,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetPrintExportDocEntry(int docEntry)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetPrintExportDocEntry(int docEntry)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

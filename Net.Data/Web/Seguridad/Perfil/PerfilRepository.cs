@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Net.Business.Entities.Web;
 using System.Collections.Generic;
@@ -31,9 +31,9 @@ namespace Net.Data.Web
             _aplicacionName = GetType().Name;
         }
 
-        public async Task<ResultadoTransaccionEntity<PerilEntity>> GetList()
+        public async Task<ResultadoTransaccionResponse<PerilEntity>> GetList()
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<PerilEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<PerilEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

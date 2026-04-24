@@ -22,15 +22,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {
               "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj": {
                 "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj"
@@ -51,8 +51,8 @@
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
@@ -75,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -97,15 +97,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {
               "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj": {
                 "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj"
@@ -126,8 +126,8 @@
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
@@ -154,7 +154,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -188,6 +188,9 @@
             "projectReferences": {
               "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj": {
                 "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj"
+              },
+              "D:\\Fil\\Web\\BackEnd\\Net.BusinessLogic\\Net.BusinessLogic.csproj": {
+                "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.BusinessLogic\\Net.BusinessLogic.csproj"
               },
               "D:\\Fil\\Web\\BackEnd\\Net.Connection\\Net.Connection.csproj": {
                 "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Connection\\Net.Connection.csproj"
@@ -234,6 +237,10 @@
               "target": "Package",
               "version": "[3.1.4, )"
             },
+            "Scrutor": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.5.1, )"
@@ -262,6 +269,94 @@
         }
       }
     },
+    "D:\\Fil\\Web\\BackEnd\\Net.BusinessLogic\\Net.BusinessLogic.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Fil\\Web\\BackEnd\\Net.BusinessLogic\\Net.BusinessLogic.csproj",
+        "projectName": "Net.BusinessLogic",
+        "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.BusinessLogic\\Net.BusinessLogic.csproj",
+        "packagesPath": "C:\\Users\\nflores\\.nuget\\packages\\",
+        "outputPath": "D:\\Fil\\Web\\BackEnd\\Net.BusinessLogic\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\nflores\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj": {
+                "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj"
+              },
+              "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj": {
+                "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj"
+              },
+              "D:\\Fil\\Web\\BackEnd\\Net.CrossCotting\\Net.CrossCotting.csproj": {
+                "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.CrossCotting\\Net.CrossCotting.csproj"
+              },
+              "D:\\Fil\\Web\\BackEnd\\Net.Data\\Net.Data.csproj": {
+                "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Data\\Net.Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.12.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.12.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -280,15 +375,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -305,8 +400,8 @@
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "imports": [
             "net461",
             "net462",
@@ -323,7 +418,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -345,15 +440,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {
               "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj": {
                 "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Connection.Attributes\\Net.Connection.Attributes.csproj"
@@ -377,8 +472,8 @@
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.Data.SqlClient": {
               "target": "Package",
@@ -405,7 +500,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -427,15 +522,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {
               "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj": {
                 "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj"
@@ -456,8 +551,8 @@
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
@@ -492,7 +587,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -514,15 +609,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {
               "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj": {
                 "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.Entities\\Net.Business.Entities.csproj"
@@ -549,8 +644,8 @@
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
@@ -613,7 +708,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

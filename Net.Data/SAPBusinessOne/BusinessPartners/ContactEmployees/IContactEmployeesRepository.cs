@@ -1,11 +1,11 @@
-﻿using Net.Business.Entities;
+﻿using Net.CrossCotting;
 using System.Threading.Tasks;
 using Net.Business.Entities.SAPBusinessOne;
 namespace Net.Data.SAPBusinessOne
 {
     public interface IContactEmployeesRepository
     {
-        Task<ResultadoTransaccionEntity<ContactEmployeesQueryEntity>> GetListByFilter(ContactEmployeesFilterEntity value);
-        Task<ResultadoTransaccionEntity<ContactEmployeesQueryEntity>> GetById(ContactEmployeesFindEntity value);
+        Task<ResultadoTransaccionResponse<ContactEmployeesQueryEntity>> GetListByFilter(ContactEmployeesFilterEntity value);
+        Task<ResultadoTransaccionResponse<ContactEmployeesQueryEntity>> GetById(ContactEmployeesFindEntity value);
     }
 }

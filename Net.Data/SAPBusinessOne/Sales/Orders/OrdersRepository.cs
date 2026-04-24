@@ -1,25 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.IO;
+using SAPbobsCOM;
+using System.Data;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.ExtendedProperties;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Spreadsheet;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Net.Business.Entities;
-using Net.Business.Entities.Sap;
-using Net.Business.Entities.SAPBusinessOne;
 using Net.Connection;
-using Net.Connection.ConnectionSAPBusinessOne;
 using Net.CrossCotting;
 using Net.Data.AppContext;
-using SAPbobsCOM;
+using System.Data.SqlClient;
+using Net.Business.Entities;
+using System.Threading.Tasks;
+using DocumentFormat.OpenXml;
+using Net.Business.Entities.Sap;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.Extensions.Configuration;
+using Net.Business.Entities.SAPBusinessOne;
+using Net.Connection.ConnectionSAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Sales.Orders.Close;
+using Net.Business.Entities.SAPBusinessOne.Sales.Orders.Create;
+using Net.Business.Entities.SAPBusinessOne.Sales.Orders.Update;
+using Net.Business.Entities.SAPBusinessOne.Common.Attachments2.Query;
 namespace Net.Data.SAPBusinessOne
 {
     public class OrdersRepository : RepositoryBase<OrdersEntity>, IOrdersRepository
@@ -58,9 +61,9 @@ namespace Net.Data.SAPBusinessOne
 
         #region <<< CONSULTAS >>>
 
-        public async Task<ResultadoTransaccionEntity<OrdersOpenQueryEntity>> GetListOpen()
+        public async Task<ResultadoTransaccionResponse<OrdersOpenQueryEntity>> GetListOpen()
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OrdersOpenQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OrdersOpenQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -97,9 +100,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdersQueryEntity>> GetListByFilter(OrdersFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdersQueryEntity>> GetListByFilter(OrdersFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OrdersQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OrdersQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -169,9 +172,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdersQueryEntity>> GetByDocEntry(int docEntry)
+        public async Task<ResultadoTransaccionResponse<OrdersQueryEntity>> GetByDocEntry(int docEntry)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OrdersQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OrdersQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -295,6 +298,23 @@ namespace Net.Data.SAPBusinessOne
                     VatSum = adminInfo.MaMainCurncy == n.DocCur ? n.VatSum : n.VatSumSy,
                     DocTotal = adminInfo.MaMainCurncy == n.DocCur ? n.DocTotal : n.DocTotalSy,
 
+
+                    // 🔹 ANEXOS
+                    Attachments2 = n.Attachments2 == null ? null : new Attachments2QueryEntity
+                    {
+                        AbsEntry = n.Attachments2.AbsEntry,
+                        Lines = n.Attachments2.Lines.Select(a => new Attachments2LinesQueryEntity
+                        {
+                            AbsEntry = a.AbsEntry,
+                            Line = a.Line,
+                            SrcPath = a.srcPath,
+                            TrgtPath = a.trgtPath,
+                            FileName = a.FileName,
+                            FileExt = a.FileExt,
+                            Date = a.Date
+                        }).ToList()
+                    },
+
                     // 🔹 LÍNEAS EMBEBIDAS
                     Lines = n.Lines.Select(s => new Orders1QueryEntity
                     {
@@ -348,9 +368,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdersQueryEntity>> GetToCopy(int docEntry)
+        public async Task<ResultadoTransaccionResponse<OrdersQueryEntity>> GetToCopy(int docEntry)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OrdersQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OrdersQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -543,10 +563,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdersFechaQueryEntity>> GetListSeguimientoByFilter(OrdersSeguimientoFindEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdersFechaQueryEntity>> GetListSeguimientoByFilter(OrdersSeguimientoFindEntity value)
         {
             var response = new List<OrdersFechaQueryEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<OrdersFechaQueryEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<OrdersFechaQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -592,10 +612,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetSeguimientoByFilterExcel(OrdersSeguimientoFindEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetSeguimientoByFilterExcel(OrdersSeguimientoFindEntity value)
         {
             var ms = new MemoryStream();
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
             resultTransaccion.NombreMetodo = _metodoName;
@@ -708,10 +728,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdersFechaQueryEntity>> GetListSeguimientoDetalladoDireccionFiscalByFilter(OrdersSeguimientoFindEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdersFechaQueryEntity>> GetListSeguimientoDetalladoDireccionFiscalByFilter(OrdersSeguimientoFindEntity value)
         {
             var response = new List<OrdersFechaQueryEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<OrdersFechaQueryEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<OrdersFechaQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -758,10 +778,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetSeguimientoDetalladoDireccionFiscalByFilterExcel(OrdersSeguimientoFindEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetSeguimientoDetalladoDireccionFiscalByFilterExcel(OrdersSeguimientoFindEntity value)
         {
             var ms = new MemoryStream();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
             resultadoTransaccion.NombreMetodo = _metodoName;
@@ -944,10 +964,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdersFechaQueryEntity>> GetListSeguimientoDetalladoDireccionDespachoByFilter(OrdersSeguimientoFindEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdersFechaQueryEntity>> GetListSeguimientoDetalladoDireccionDespachoByFilter(OrdersSeguimientoFindEntity value)
         {
             var response = new List<OrdersFechaQueryEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<OrdersFechaQueryEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<OrdersFechaQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -994,10 +1014,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetSeguimientoDetalladoDireccionDespachoByFilterExcel(OrdersSeguimientoFindEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetSeguimientoDetalladoDireccionDespachoByFilterExcel(OrdersSeguimientoFindEntity value)
         {
             var ms = new MemoryStream();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
             resultadoTransaccion.NombreMetodo = _metodoName;
@@ -1180,10 +1200,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdersFechaQueryEntity>> GetListOrdenVentaPendienteStockAlmacenProduccionByFecha(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdersFechaQueryEntity>> GetListOrdenVentaPendienteStockAlmacenProduccionByFecha(FilterRequestEntity value)
         {
             var response = new List<OrdersFechaQueryEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<OrdersFechaQueryEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<OrdersFechaQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -1225,10 +1245,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetOrdenVentaPendienteStockAlmacenProduccionExcelByFecha(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetOrdenVentaPendienteStockAlmacenProduccionExcelByFecha(FilterRequestEntity value)
         {
             var ms = new MemoryStream();
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
             resultTransaccion.NombreMetodo = _metodoName;
@@ -1391,10 +1411,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdersFechaQueryEntity>> GetListOrdenVentaProgramacionByFecha(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdersFechaQueryEntity>> GetListOrdenVentaProgramacionByFecha(FilterRequestEntity value)
         {
             var response = new List<OrdersFechaQueryEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<OrdersFechaQueryEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<OrdersFechaQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -1436,10 +1456,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetOrdenVentaProgramacionExcelByFecha(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetOrdenVentaProgramacionExcelByFecha(FilterRequestEntity value)
         {
             var ms = new MemoryStream();
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
             resultTransaccion.NombreMetodo = _metodoName;
@@ -1527,10 +1547,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdersSodimacQueryEntity>> GetListOrdenVentaSodimacPendienteByFiltro(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdersSodimacQueryEntity>> GetListOrdenVentaSodimacPendienteByFiltro(FilterRequestEntity value)
         {
             var response = new List<OrdersSodimacQueryEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<OrdersSodimacQueryEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<OrdersSodimacQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -1570,10 +1590,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdersSodimacQueryEntity>> GetOrdenVentaSodimacPendienteById(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdersSodimacQueryEntity>> GetOrdenVentaSodimacPendienteById(FilterRequestEntity value)
         {
             var response = new OrdersSodimacQueryEntity();
-            var resultTransaccion = new ResultadoTransaccionEntity<OrdersSodimacQueryEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<OrdersSodimacQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -1613,10 +1633,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<OrdersFechaQueryEntity>> GetListOrdenVentaPreliminarPendienteByFecha(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdersFechaQueryEntity>> GetListOrdenVentaPreliminarPendienteByFecha(FilterRequestEntity value)
         {
             var response = new List<OrdersFechaQueryEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<OrdersFechaQueryEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<OrdersFechaQueryEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -1660,10 +1680,10 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetListOrdenVentaPreliminarPendienteExcelByFecha(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetListOrdenVentaPreliminarPendienteExcelByFecha(FilterRequestEntity value)
         {
             var ms = new MemoryStream();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
             resultadoTransaccion.NombreMetodo = _metodoName;
@@ -1756,15 +1776,16 @@ namespace Net.Data.SAPBusinessOne
 
         #region <<< OPERACIONES >>>
 
-        public async Task<ResultadoTransaccionEntity<OrdersEntity>> SetCreate(OrdersCreateEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdersEntity>> SetCreate(OrdersCreateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OrdersEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OrdersEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
             };
 
             Documents orders = null;
+            Attachments2 attachments = null;
             var aplicaAprobacion = false;
 
             return await Task.Run(() =>
@@ -1936,21 +1957,53 @@ namespace Net.Data.SAPBusinessOne
                     #endregion
 
 
-                    if (orders.GetApprovalTemplates() == 0)
+                    #region <<< APROBACIÓN >>>
+
+                    bool requiereAprobacion = orders.GetApprovalTemplates() == 0;
+
+                    if (requiereAprobacion)
                     {
                         orders.Document_ApprovalRequests.SetCurrentLine(0);
                         orders.Document_ApprovalRequests.Remarks = "Orden de Venta creada desde FibraTech";
                     }
 
+                    #endregion
 
-                    var reg = orders.Add();
+
+                    #region <<< ATTACHMENTS >>>
+
+                    if (value.Attachments2?.Lines?.Count > 0)
+                    {
+                        attachments = company.GetBusinessObject(BoObjectTypes.oAttachments2);
+
+                        foreach (var item in value.Attachments2.Lines)
+                        {
+                            attachments.Lines.Add();
+                            attachments.Lines.SourcePath = item.SrcPath;
+                            attachments.Lines.FileName = item.FileName;
+                            attachments.Lines.FileExtension = item.FileExt;
+                            attachments.Lines.Override = BoYesNoEnum.tYES;
+                        }
+
+                        if (attachments.Add() != 0)
+                        {
+                            company.GetLastError(out int errorCode, out string errorMessage);
+                            throw new Exception($"Código: {errorCode}. Mensaje: {errorMessage}.");
+                        }
+
+                        // 🔥 IMPORTANTE: SIEMPRE antes del Add (SAP 9.2)
+                        orders.AttachmentEntry = int.Parse(company.GetNewObjectKey());
+                    }
+
+                    #endregion
 
 
-                    if (reg != 0)
+                    if (orders.Add() != 0)
                     {
                         company.GetLastError(out int errorCode, out string errorMessage);
                         throw new Exception($"Código: {errorCode}. Mensaje: {errorMessage}.");
                     }
+
 
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
@@ -1968,60 +2021,25 @@ namespace Net.Data.SAPBusinessOne
                     {
                         _companyProviderSap.DisconnectCompany();
                     }
-                    _companyProviderSap.LiberarObjetosCOM(orders);
+                    _companyProviderSap.LiberarObjetosCOM(orders, attachments);
                 }
 
                 return resultTransaccion;
             });
         }
-
-        //public int CrearAnexo(string rutaArchivo)
-        //{
-        //    SAPbobsCOM.Attachments2 oAnexo = (SAPbobsCOM.Attachments2)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oAttachments2);
-
-        //    string fileName = System.IO.Path.GetFileNameWithoutExtension(rutaArchivo);
-        //    string fileExtension = System.IO.Path.GetExtension(rutaArchivo).Replace(".", "");
-        //    string sourcePath = System.IO.Path.GetDirectoryName(rutaArchivo);
-
-        //    oAnexo.Lines.SourcePath = sourcePath;
-        //    oAnexo.Lines.FileName = fileName;
-        //    oAnexo.Lines.FileExtension = fileExtension;
-        //    oAnexo.Lines.Override = SAPbobsCOM.BoYesNoEnum.tYES;
-
-        //    if (oAnexo.Add() == 0)
-        //    {
-        //        return int.Parse(oCompany.GetNewObjectKey());
-        //    }
-        //    else
-        //    {
-        //        throw new Exception($"Error creando anexo: {oCompany.GetLastErrorDescription()}");
-        //    }
-        //}
-
-        //public void VincularAnexoAOrden(int docEntryOrden, int atchEntry)
-        //{
-        //    SAPbobsCOM.Documents oOrder = (SAPbobsCOM.Documents)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oOrders);
-
-        //    if (oOrder.GetByKey(docEntryOrden))
-        //    {
-        //        oOrder.AttachmentEntry = atchEntry;
-
-        //        if (oOrder.Update() != 0)
-        //        {
-        //            throw new Exception($"Error vinculando: {oCompany.GetLastErrorDescription()}");
-        //        }
-        //    }
-        //}
-
-        public async Task<ResultadoTransaccionEntity<OrdersEntity>> SetUpdate(OrdersUpdateEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdersEntity>> SetUpdate(OrdersUpdateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OrdersEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OrdersEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
             };
 
             Documents orders = null;
+            Attachments2 attachments = null;
+            Attachments2 newAttachment = null;
+            Attachments2 oldAttachment = null;
+
 
             return await Task.Run(() =>
             {
@@ -2031,7 +2049,7 @@ namespace Net.Data.SAPBusinessOne
                     var company = _companyProviderSap.GetCompany();
 
 
-                    // Se crea el objeto de orden de venta
+                    // 🔹 Se crea el objeto de orden de venta
                     orders = company.GetBusinessObject(BoObjectTypes.oOrders);
 
                     // 🔹 Validar existencia de la orden de venta
@@ -2174,33 +2192,34 @@ namespace Net.Data.SAPBusinessOne
                         for (int i = 0; i < orders.Lines.Count; i++)
                         {
                             orders.Lines.SetCurrentLine(i);
-                            if (orders.Lines.LineNum == line.LineNum)
+
+                            if (orders.Lines.LineNum != line.LineNum)
+                                continue;
+
+                            if (isItem)
                             {
-                                if (isItem)
-                                {
-                                    orders.Lines.ItemCode = line.ItemCode;
-                                    orders.Lines.WarehouseCode = line.WhsCode;
-                                    orders.Lines.Quantity = line.Quantity;
-                                }
-
-                                if (isService)
-                                {
-                                    orders.Lines.AccountCode = line.AcctCode;
-                                }
-
-                                orders.Lines.ItemDescription = line.Dscription;
-                                orders.Lines.Currency = line.Currency;
-                                orders.Lines.UnitPrice = line.PriceBefDi;
-                                orders.Lines.DiscountPercent = line.DiscPrcnt;
-                                orders.Lines.Price = line.Price;
-
-                                orders.Lines.TaxCode = line.TaxCode;
-                                orders.Lines.LineTotal = line.LineTotal;
-
-                                orders.Lines.UserFields.Fields.Item("U_FIB_LinStPkg").Value = line.U_FIB_LinStPkg;
-                                orders.Lines.UserFields.Fields.Item("U_FIB_OpQtyPkg").Value = line.U_FIB_OpQtyPkg;
-                                orders.Lines.UserFields.Fields.Item("U_tipoOpT12").Value = line.U_tipoOpT12;
+                                orders.Lines.ItemCode = line.ItemCode;
+                                orders.Lines.WarehouseCode = line.WhsCode;
+                                orders.Lines.Quantity = line.Quantity;
                             }
+
+                            if (isService)
+                            {
+                                orders.Lines.AccountCode = line.AcctCode;
+                            }
+
+                            orders.Lines.ItemDescription = line.Dscription;
+                            orders.Lines.Currency = line.Currency;
+                            orders.Lines.UnitPrice = line.PriceBefDi;
+                            orders.Lines.DiscountPercent = line.DiscPrcnt;
+                            orders.Lines.Price = line.Price;
+
+                            orders.Lines.TaxCode = line.TaxCode;
+                            orders.Lines.LineTotal = line.LineTotal;
+
+                            orders.Lines.UserFields.Fields.Item("U_FIB_LinStPkg").Value = line.U_FIB_LinStPkg;
+                            orders.Lines.UserFields.Fields.Item("U_FIB_OpQtyPkg").Value = line.U_FIB_OpQtyPkg;
+                            orders.Lines.UserFields.Fields.Item("U_tipoOpT12").Value = line.U_tipoOpT12;
                         }
                     }
 
@@ -2213,6 +2232,7 @@ namespace Net.Data.SAPBusinessOne
                             if (orders.Lines.LineNum == line.LineNum)
                             {
                                 orders.Lines.Delete();
+                                break;
                             }
                         }
                     }
@@ -2220,10 +2240,36 @@ namespace Net.Data.SAPBusinessOne
                     #endregion
 
 
-                    var reg = orders.Update();
+                    #region <<< ATTACHMENTS >>>
+
+                    // SIEMPRE SE CREA UN NUEVO ANEXO
+                    if (value.Attachments2?.Lines?.Count > 0)
+                    {
+                        attachments = company.GetBusinessObject(BoObjectTypes.oAttachments2);
+
+                        foreach (var item in value.Attachments2.Lines)
+                        {
+                            attachments.Lines.Add();
+                            attachments.Lines.SourcePath = item.SrcPath;
+                            attachments.Lines.FileName = item.FileName;
+                            attachments.Lines.FileExtension = item.FileExt;
+                            attachments.Lines.Override = BoYesNoEnum.tYES;
+                        }
+
+                        if (attachments.Add() != 0)
+                        {
+                            company.GetLastError(out int errorCode, out string errorMessage);
+                            throw new Exception($"Código: {errorCode}. Mensaje: {errorMessage}.");
+                        }
+
+                        // 🔥 IMPORTANTE: SIEMPRE antes del Add (SAP 9.2)
+                        orders.AttachmentEntry = int.Parse(company.GetNewObjectKey());
+                    }
+
+                    #endregion
 
 
-                    if (reg != 0)
+                    if (orders.Update() != 0)
                     {
                         company.GetLastError(out int errorCode, out string errorMessage);
                         throw new Exception($"Código: {errorCode}. Mensaje: {errorMessage}.");
@@ -2241,15 +2287,15 @@ namespace Net.Data.SAPBusinessOne
                 }
                 finally
                 {
-                    _companyProviderSap.LiberarObjetosCOM(orders);
+                    _companyProviderSap.LiberarObjetosCOM(orders, oldAttachment, newAttachment);
                 }
 
                 return resultTransaccion;
             });
         }
-        public async Task<ResultadoTransaccionEntity<OrdersEntity>> SetClose(OrdersCloseEntity value)
+        public async Task<ResultadoTransaccionResponse<OrdersEntity>> SetClose(OrdersCloseEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OrdersEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OrdersEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -2331,9 +2377,9 @@ namespace Net.Data.SAPBusinessOne
 
         #region <<< IMPRESIONES >>>
 
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetPrintNationalDocEntry(int docEntry)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetPrintNationalDocEntry(int docEntry)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -2557,9 +2603,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetPrintExportPlantaDocEntry(int docEntry)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetPrintExportPlantaDocEntry(int docEntry)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -2708,9 +2754,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetPrintExportClienteDocEntry(int docEntry)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetPrintExportClienteDocEntry(int docEntry)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

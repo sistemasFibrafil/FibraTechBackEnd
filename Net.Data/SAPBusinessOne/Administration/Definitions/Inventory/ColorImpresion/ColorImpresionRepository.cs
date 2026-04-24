@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Net.Business.Entities.SAPBusinessOne;
@@ -19,9 +19,9 @@ namespace Net.Data.SAPBusinessOne
             _db = db;
         }
 
-        public async Task<ResultadoTransaccionEntity<ColorImpresionEntity>> GetList()
+        public async Task<ResultadoTransaccionResponse<ColorImpresionEntity>> GetList()
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<ColorImpresionEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<ColorImpresionEntity>();
 
             try
             {
@@ -42,9 +42,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<ColorImpresionEntity>> GetListByFiltro(ColorImpresionEntity value)
+        public async Task<ResultadoTransaccionResponse<ColorImpresionEntity>> GetListByFiltro(ColorImpresionEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<ColorImpresionEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<ColorImpresionEntity>();
 
             try
             {

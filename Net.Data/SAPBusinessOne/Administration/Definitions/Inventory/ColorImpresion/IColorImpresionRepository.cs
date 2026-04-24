@@ -1,11 +1,11 @@
-﻿using Net.Business.Entities;
+﻿using Net.CrossCotting;
 using System.Threading.Tasks;
 using Net.Business.Entities.SAPBusinessOne;
 namespace Net.Data.SAPBusinessOne
 {
     public interface IColorImpresionRepository
     {
-        Task<ResultadoTransaccionEntity<ColorImpresionEntity>> GetList();
-        Task<ResultadoTransaccionEntity<ColorImpresionEntity>> GetListByFiltro(ColorImpresionEntity value);
+        Task<ResultadoTransaccionResponse<ColorImpresionEntity>> GetList();
+        Task<ResultadoTransaccionResponse<ColorImpresionEntity>> GetListByFiltro(ColorImpresionEntity value);
     }
 }

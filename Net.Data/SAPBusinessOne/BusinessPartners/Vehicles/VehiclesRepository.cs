@@ -3,12 +3,14 @@ using AutoMapper;
 using System.Data;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
-using Net.Business.Entities.SAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Vehicle.Filter;
+using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Vehicles.Create;
+using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Vehicle.Entities;
 namespace Net.Data.SAPBusinessOne
 {
     public class VehiclesRepository : RepositoryBase<VehiclesEntity>, IVehiclesRepository
@@ -30,9 +32,9 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<VehiclesEntity>> GetListByFilter(VehiclesFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<VehiclesEntity>> GetListByFilter(VehiclesFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<VehiclesEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<VehiclesEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -84,9 +86,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<VehiclesEntity>> SetCreate(VehiclesCreateEntity value)
+        public async Task<ResultadoTransaccionResponse<VehiclesEntity>> SetCreate(VehiclesCreateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<VehiclesEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<VehiclesEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

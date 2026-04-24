@@ -1,0 +1,25 @@
+﻿namespace Net.Business.DTO.SAPBusinessOne.Drafts.CreateToDocument
+{
+    public class DraftsLinesCreateToDocumentRequestDto
+    {
+        public string? ItemCode { get; set; }
+        public string? Dscription { get; set; }
+        public string? AcctCode { get; set; }
+        public string? WhsCode { get; set; }
+
+        public string? UnitMsr { get; set; }
+        public double Quantity { get; set; }
+
+        public string? Currency { get; set; }
+        public double PriceBefDi { get; set; }
+        public double DiscPrcnt { get; set; }
+        public double Price { get; set; }
+
+        public string? TaxCode { get; set; }
+        public double LineTotal { get; set; }
+
+        public string? U_FIB_LinStPkg { get; set; }
+        public double U_FIB_OpQtyPkg { get; set; }
+        public string? U_tipoOpT12 { get; set; }
+    }
+}

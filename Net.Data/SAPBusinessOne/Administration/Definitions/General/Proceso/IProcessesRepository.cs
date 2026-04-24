@@ -1,11 +1,11 @@
-﻿using Net.Business.Entities;
+﻿using Net.CrossCotting;
 using System.Threading.Tasks;
 using Net.Business.Entities.SAPBusinessOne;
 namespace Net.Data.SAPBusinessOne
 {
     public interface IProcessesRepository
     {
-        Task<ResultadoTransaccionEntity<ProcessesEntity>> GetList();
-        Task<ResultadoTransaccionEntity<ProcessesEntity>> GetListByFiltro(ProcessesEntity value);
+        Task<ResultadoTransaccionResponse<ProcessesEntity>> GetList();
+        Task<ResultadoTransaccionResponse<ProcessesEntity>> GetListByFiltro(ProcessesEntity value);
     }
 }

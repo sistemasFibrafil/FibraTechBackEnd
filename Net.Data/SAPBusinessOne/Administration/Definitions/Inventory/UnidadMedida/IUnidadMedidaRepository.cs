@@ -1,11 +1,11 @@
-﻿using Net.Business.Entities;
+﻿using Net.CrossCotting;
 using System.Threading.Tasks;
 using Net.Business.Entities.SAPBusinessOne;
 namespace Net.Data.SAPBusinessOne
 {
     public interface IUnidadMedidaRepository
     {
-        Task<ResultadoTransaccionEntity<UnidadMedidaEntity>> GetList();
-        Task<ResultadoTransaccionEntity<UnidadMedidaEntity>> GetListByFiltro(UnidadMedidaEntity value);
+        Task<ResultadoTransaccionResponse<UnidadMedidaEntity>> GetList();
+        Task<ResultadoTransaccionResponse<UnidadMedidaEntity>> GetListByFiltro(UnidadMedidaEntity value);
     }
 }

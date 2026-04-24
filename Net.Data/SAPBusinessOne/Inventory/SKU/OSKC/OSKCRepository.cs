@@ -7,7 +7,6 @@ using Net.Connection;
 using Net.CrossCotting;
 using System.Reflection;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using DocumentFormat.OpenXml;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -80,9 +79,9 @@ namespace Net.Data.SAPBusinessOne
         /// <summary>
         /// Crea un nuevo registro de configuración de SKU (@FIB_OSKC).
         /// </summary>
-        public Task<ResultadoTransaccionEntity<OSKCEntity>> SetCreate(OSKCEntity value)
+        public Task<ResultadoTransaccionResponse<OSKCEntity>> SetCreate(OSKCEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OSKCEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OSKCEntity>
             {
                 NombreMetodo = MethodBase.GetCurrentMethod().Name,
                 NombreAplicacion = _aplicacionName
@@ -125,9 +124,9 @@ namespace Net.Data.SAPBusinessOne
         /// <summary>
         /// Actualiza un registro de configuración de SKU (@FIB_OSKC).
         /// </summary>
-        public Task<ResultadoTransaccionEntity<OSKCEntity>> SetUpdate(OSKCEntity value)
+        public Task<ResultadoTransaccionResponse<OSKCEntity>> SetUpdate(OSKCEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OSKCEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OSKCEntity>
             {
                 NombreMetodo = MethodBase.GetCurrentMethod().Name,
                 NombreAplicacion = _aplicacionName
@@ -173,9 +172,9 @@ namespace Net.Data.SAPBusinessOne
         /// <summary>
         /// Elimina un registro de configuración de SKU (@FIB_OSKC).
         /// </summary>
-        public Task<ResultadoTransaccionEntity<OSKCEntity>> SetDelete(OSKCEntity value)
+        public Task<ResultadoTransaccionResponse<OSKCEntity>> SetDelete(OSKCEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OSKCEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OSKCEntity>
             {
                 NombreMetodo = MethodBase.GetCurrentMethod().Name,
                 NombreAplicacion = _aplicacionName
@@ -214,9 +213,9 @@ namespace Net.Data.SAPBusinessOne
             return Task.FromResult(resultTransaccion);
         }
 
-        public async Task<ResultadoTransaccionEntity<OSKCEntity>> GetListByDateRange(OSKCEntity value)
+        public async Task<ResultadoTransaccionResponse<OSKCEntity>> GetListByDateRange(OSKCEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OSKCEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OSKCEntity>
             {
                 NombreMetodo = regex.Match(MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -253,9 +252,9 @@ namespace Net.Data.SAPBusinessOne
         /// <summary>
         /// Obtiene una configuración de SKU por su código único.
         /// </summary>
-        public async Task<ResultadoTransaccionEntity<OSKCEntity>> GetByCode(OSKCEntity value)
+        public async Task<ResultadoTransaccionResponse<OSKCEntity>> GetByCode(OSKCEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OSKCEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OSKCEntity>
             {
                 NombreMetodo = MethodBase.GetCurrentMethod().Name,
                 NombreAplicacion = _aplicacionName
@@ -291,9 +290,9 @@ namespace Net.Data.SAPBusinessOne
         /// <summary>
         /// Obtiene una lista de configuraciones de SKU según un filtro de texto.
         /// </summary>
-        public async Task<ResultadoTransaccionEntity<OSKCEntity>> GetListByFiltro(OSKCEntity value)
+        public async Task<ResultadoTransaccionResponse<OSKCEntity>> GetListByFiltro(OSKCEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OSKCEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OSKCEntity>
             {
                 NombreMetodo = MethodBase.GetCurrentMethod().Name,
                 NombreAplicacion = _aplicacionName
@@ -327,10 +326,10 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetOSKCExcel(OSKCEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetOSKCExcel(OSKCEntity value)
         {
             var ms = new MemoryStream();
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
             {
                 NombreMetodo = regex.Match(MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

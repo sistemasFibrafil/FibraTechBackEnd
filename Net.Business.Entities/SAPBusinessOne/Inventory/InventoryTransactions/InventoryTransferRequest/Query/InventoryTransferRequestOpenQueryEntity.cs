@@ -1,4 +1,4 @@
-﻿namespace Net.Business.Entities.SAPBusinessOne
+﻿namespace Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Query
 {
     public class InventoryTransferRequestOpenQueryEntity
     {

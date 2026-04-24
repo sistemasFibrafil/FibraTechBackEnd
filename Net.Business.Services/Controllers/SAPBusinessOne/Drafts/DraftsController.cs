@@ -1,11 +1,17 @@
 ﻿using Net.Data;
+using Newtonsoft.Json;
+using Net.CrossCotting;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Net.Business.DTO.SAPBusinessOne;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
-using Net.Business.Services.Mappers.SAPBusinessOne;
-using Net.Business.Services.Mappers.SAPBusinessOne.Draft.Resend;
+using Net.Business.DTO.SAPBusinessOne.Drafts.Filter;
+using Net.Business.DTO.SAPBusinessOne.Drafts.Create;
+using Net.Business.DTO.SAPBusinessOne.Drafts.Update;
+using Net.BusinessLogic.Interfaces.SAPBusinessOne.Draft;
+using Net.BusinessLogic.Mappers.SAPBusinessOne.Drafts.Filter;
+using Net.Business.DTO.SAPBusinessOne.Drafts.CreateToDocument;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Drafts
 {
     [ApiController]
@@ -13,12 +19,32 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Drafts
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiExplorerSettings(GroupName = "ApiFibrafil")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public class DraftsController(IRepositoryWrapper repository) : ControllerBase
+    public class DraftsController
+        (
+            IRepositoryWrapper repository,
+            IDraftService draftService
+        ) : ControllerBase
     {
+        private readonly IDraftService _draftService = draftService;
         private readonly IRepositoryWrapper _repository = repository;
 
 
         #region <<< CONSULTAS >>>
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetListDraftsDocumentReport([FromBody] DraftsDocumentReportFilterRequestDto dto)
+        {
+            var entity = DraftsDocumentReportFilterMapper.ToEntity(dto);
+            var result = await _repository.Drafts.GetListDraftsDocumentReport(entity);
+
+            if (result.ResultadoCodigo == -1)
+                return BadRequest(result);
+
+            return Ok(result.dataList);
+        }
 
         [HttpGet("{docEntry}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -59,33 +85,62 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Drafts
         #region <<< OPERACIONES >>>
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> SetCreate([FromBody] DraftsCreateRequestDto dto)
+        public async Task<IActionResult> SetCreate([FromForm] string value, [FromForm] IList<IFormFile> files)
         {
-            var entity = DraftsCreateMapper.ToEntity(dto);
-            var result = await _repository.Drafts.SetCreate(entity);
+            var dto = JsonConvert.DeserializeObject<DraftsCreateRequestDto>(value);
+
+            if (dto == null)
+            {
+                return BadRequest(ResponseHelper.Error<object>("Datos inválidos"));
+            }
+
+            var result = await _draftService.SetCreate(dto, files);
 
             if (result.ResultadoCodigo == -1)
+            {
                 return BadRequest(result);
+            }
 
-            return NoContent();
+            return Ok(result);
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> SetResend([FromBody] DraftsResendRequestDto dto)
+        public async Task<IActionResult> SetSaveDraftToDocument([FromBody] DraftsCreateToDocumentRequestDto dto)
         {
-            var entity = DraftsResendMapper.ToEntity(dto);
-            var result = await _repository.Drafts.SetResend(entity);
+            var result = await _draftService.SetSaveDraftToDocument(dto);
 
             if (result.ResultadoCodigo == -1)
+            {
                 return BadRequest(result);
+            }
 
-            return NoContent();
+            return Ok(result);
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> SetUpdate([FromForm] string value, [FromForm] IList<IFormFile> files)
+        {
+            var dto = JsonConvert.DeserializeObject<DraftsUpdateRequestDto>(value);
+
+            if (dto == null)
+            {
+                return BadRequest(ResponseHelper.Error<object>("Datos inválidos"));
+            }
+
+            var result = await _draftService.SetUpdate(dto, files);
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
         }
 
         #endregion

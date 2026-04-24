@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
-using Net.Business.Services.Mappers.SAPBusinessOne;
+using Net.Business.DTO.SAPBusinessOne.Approvals.ApprovalRequests.Filter;
+using Net.BusinessLogic.Mappers.SAPBusinessOne.Approvals.ApprovalRequests.Filter;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Approvals
 {
     [ApiController]
@@ -25,10 +25,10 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Approvals
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetApprovalStatusReport([FromBody] ApprovalStatusReportFilterRequestDto dto)
+        public async Task<IActionResult> GetListApprovalStatusReport([FromBody] ApprovalStatusReportFilterRequestDto dto)
         {
             var entity = ApprovalStatusReportFilterMapper.ToEntity(dto);
-            var result = await _repository.ApprovalRequests.GetApprovalStatusReport(entity);
+            var result = await _repository.ApprovalRequests.GetListApprovalStatusReport(entity);
 
             if (result.ResultadoCodigo == -1)
                 return BadRequest(result);

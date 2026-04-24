@@ -2,12 +2,12 @@
 using System.Data;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
-using Net.Business.Entities.SAPBusinessOne;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
+using Net.Business.Entities.SAPBusinessOne;
 namespace Net.Data.SAPBusinessOne
 {
     public class SalesPersonsRepository : RepositoryBase<SalesPersonsEntity>, ISalesPersonsRepository
@@ -25,9 +25,9 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<SalesPersonsEntity>> GetList()
+        public async Task<ResultadoTransaccionResponse<SalesPersonsEntity>> GetList()
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<SalesPersonsEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<SalesPersonsEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -59,9 +59,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<SalesPersonsEntity>> GetById(int id)
+        public async Task<ResultadoTransaccionResponse<SalesPersonsEntity>> GetById(int id)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<SalesPersonsEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<SalesPersonsEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -92,9 +92,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<SalesPersonsEntity>> GetListByFiltro(SalesPersonsEntity value)
+        public async Task<ResultadoTransaccionResponse<SalesPersonsEntity>> GetListByFiltro(SalesPersonsEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<SalesPersonsEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<SalesPersonsEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

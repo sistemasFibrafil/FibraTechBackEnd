@@ -8,7 +8,6 @@ using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
 using System.Data.SqlClient;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +15,11 @@ using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
 using Net.Business.Entities.SAPBusinessOne;
 using Net.Connection.ConnectionSAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Query;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Filter;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Create;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Update;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Entities;
 namespace Net.Data.SAPBusinessOne
 {
     public class StockTransfersRepository : RepositoryBase<StockTransfersEntity>, IStockTransfersRepository
@@ -44,9 +48,9 @@ namespace Net.Data.SAPBusinessOne
 
         #region <<< CONSULTAS >>>
 
-        public async Task<ResultadoTransaccionEntity<TransferenciaStockQueryEntity>> GetListByFilter(TransferenciaStockFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<TransferenciaStockQueryEntity>> GetListByFilter(TransferenciaStockFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TransferenciaStockQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<TransferenciaStockQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -126,9 +130,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<TransferenciaStockQueryEntity>> GetByDocEntry(int docEntry)
+        public async Task<ResultadoTransaccionResponse<TransferenciaStockQueryEntity>> GetByDocEntry(int docEntry)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TransferenciaStockQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<TransferenciaStockQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -224,9 +228,9 @@ namespace Net.Data.SAPBusinessOne
 
         #region <<< OPERACIONES >>>
 
-        public async Task<ResultadoTransaccionEntity<StockTransfersEntity>> SetCreate(StockTransfersCreateEntity value)
+        public async Task<ResultadoTransaccionResponse<StockTransfersEntity>> SetCreate(StockTransfersCreateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<StockTransfersEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<StockTransfersEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -458,9 +462,9 @@ namespace Net.Data.SAPBusinessOne
                 return resultTransaccion;
             });
         }
-        public async Task<ResultadoTransaccionEntity<StockTransfersEntity>> SetUpdate(StockTransfersUpdateEntity value)
+        public async Task<ResultadoTransaccionResponse<StockTransfersEntity>> SetUpdate(StockTransfersUpdateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<StockTransfersEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<StockTransfersEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -604,11 +608,11 @@ namespace Net.Data.SAPBusinessOne
 
         #region <<< IMPRESIONES >>>
 
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetFormatoPdfByDocEntry(int id)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetFormatoPdfByDocEntry(int id)
         {
             var header = new StockTransfersPrintEntity();
             var linea = new List<StockTransfers1PrintEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

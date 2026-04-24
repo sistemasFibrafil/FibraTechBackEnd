@@ -3,12 +3,14 @@ using AutoMapper;
 using System.Data;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
-using Net.Business.Entities.SAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Driver.Filter;
+using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Driver.Create;
+using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Driver.Entities;
 namespace Net.Data.SAPBusinessOne
 {
     public class DriversRepository : RepositoryBase<DriversEntity>, IDriversRepository
@@ -30,9 +32,9 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<DriversEntity>> GetListByFilter(DriversFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<DriversEntity>> GetListByFilter(DriversFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<DriversEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<DriversEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -85,9 +87,9 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<DriversEntity>> SetCreate(DriversCreateEntity value)
+        public async Task<ResultadoTransaccionResponse<DriversEntity>> SetCreate(DriversCreateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<DriversEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<DriversEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

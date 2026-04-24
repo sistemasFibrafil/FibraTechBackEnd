@@ -2,8 +2,8 @@
 using AutoMapper;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -30,9 +30,9 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<CargaSaldoInicialEntity>> GetListByFilter(CargaSaldoInicialFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<CargaSaldoInicialEntity>> GetListByFilter(CargaSaldoInicialFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<CargaSaldoInicialEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<CargaSaldoInicialEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

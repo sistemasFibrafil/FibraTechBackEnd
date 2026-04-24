@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Net.Business.Entities.SAPBusinessOne
+namespace Net.Business.Entities.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Query
 {
     public class DocumentSeriesConfigurationQueryEntity
     {

@@ -2,9 +2,11 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
-using Net.Business.Services.Mappers.SAPBusinessOne;
+using Net.BusinessLogic.Interfaces.SAPBusinessOne.BusinessPartners;
+using Net.Business.DTO.SAPBusinessOne.BusinessPartners.Vehicles.Filter;
+using Net.Business.DTO.SAPBusinessOne.BusinessPartners.Vehicles.Create;
+using Net.BusinessLogic.Mappers.SAPBusinessOne.BusinessPartners.Vehicles.Filter;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners
 {
     [ApiController]
@@ -12,9 +14,15 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiExplorerSettings(GroupName = "ApiFibrafil")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public class VehiclesController(IRepositoryWrapper repository) : ControllerBase
+    public class VehiclesController
+        (
+            IRepositoryWrapper repository,
+            IVehiclesService vehiclesService
+        ) : ControllerBase
     {
         private readonly IRepositoryWrapper _repository = repository;
+        private readonly IVehiclesService _vehicles = vehiclesService;
+
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -31,18 +39,18 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> SetCreate([FromBody] VehiclesCreateRequestDto dto)
         {
-            var entity = VehiclesCreateMapper.ToEntity(dto);
-            var result = await _repository.Vehicles.SetCreate(entity);
+            var result = await _vehicles.SetCreate(dto);
 
             if (result.ResultadoCodigo == -1)
+            {
                 return BadRequest(result);
+            }
 
-            return NoContent();
+            return Ok(result);
         }
     }
 }

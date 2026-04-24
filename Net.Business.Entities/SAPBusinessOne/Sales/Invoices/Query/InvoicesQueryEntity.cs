@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Entities;
 namespace Net.Business.Entities.SAPBusinessOne
 {
     public class InvoicesQueryEntity

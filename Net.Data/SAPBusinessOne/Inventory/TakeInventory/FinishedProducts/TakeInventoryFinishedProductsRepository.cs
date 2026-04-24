@@ -7,7 +7,6 @@ using Net.CrossCotting;
 using Net.Data.AppContext;
 using System.Transactions;
 using System.Data.SqlClient;
-using Net.Business.Entities;
 using DocumentFormat.OpenXml;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -18,6 +17,8 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.Extensions.Configuration;
 using Net.Business.Entities.SAPBusinessOne;
 using Net.Connection.ConnectionSAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Entities;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Query;
 namespace Net.Data.SAPBusinessOne
 {
     public class TakeInventoryFinishedProductsRepository : RepositoryBase<TakeInventoryFinishedProductsEntity>, ITakeInventoryFinishedProductsRepository
@@ -41,9 +42,9 @@ namespace Net.Data.SAPBusinessOne
             _aplicacionName = GetType().Name;
         }
 
-        public async Task<ResultadoTransaccionEntity<TakeInventoryFinishedProductsQueryEntity>> GetListByFilter(TakeInventoryFinishedProductsFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<TakeInventoryFinishedProductsQueryEntity>> GetListByFilter(TakeInventoryFinishedProductsFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TakeInventoryFinishedProductsQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<TakeInventoryFinishedProductsQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -145,10 +146,10 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetSummaryItemExcelByFilter(TakeInventoryFinishedProductsFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetSummaryItemExcelByFilter(TakeInventoryFinishedProductsFilterEntity value)
         {
             var ms = new MemoryStream();
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -302,10 +303,10 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<TakeInventoryFinishedProductsQueryEntity>> GetSummaryUserByFilter(TakeInventoryFinishedProductsFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<TakeInventoryFinishedProductsQueryEntity>> GetSummaryUserByFilter(TakeInventoryFinishedProductsFilterEntity value)
         {
             var list = new List<TakeInventoryFinishedProductsQueryEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<TakeInventoryFinishedProductsQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<TakeInventoryFinishedProductsQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -411,10 +412,10 @@ namespace Net.Data.SAPBusinessOne
             };
         }
 
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetSummaryUserExcelByFilter(TakeInventoryFinishedProductsFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetSummaryUserExcelByFilter(TakeInventoryFinishedProductsFilterEntity value)
         {
             var ms = new MemoryStream(); // ❗ YA NO usar "using"
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -531,10 +532,10 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }        
 
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetDetailedExcelByFilter(TakeInventoryFinishedProductsFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetDetailedExcelByFilter(TakeInventoryFinishedProductsFilterEntity value)
         {
             var ms = new MemoryStream();
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -683,9 +684,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }        
 
-        public async Task<ResultadoTransaccionEntity<TakeInventoryFinishedProducts1Entity>> GetListByItemCode(TakeInventoryFinishedProductsModalFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<TakeInventoryFinishedProducts1Entity>> GetListByItemCode(TakeInventoryFinishedProductsModalFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TakeInventoryFinishedProducts1Entity>
+            var resultTransaccion = new ResultadoTransaccionResponse<TakeInventoryFinishedProducts1Entity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -728,9 +729,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<TakeInventoryFinishedProductsQueryEntity>> GetListCurrentDate(TakeInventoryFinishedProductsFindEntity value)
+        public async Task<ResultadoTransaccionResponse<TakeInventoryFinishedProductsQueryEntity>> GetListCurrentDate(TakeInventoryFinishedProductsFindEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TakeInventoryFinishedProductsQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<TakeInventoryFinishedProductsQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -780,10 +781,10 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<InventoryTransferRequestQueryEntity>> GetToCopy(TakeInventoryFinishedProductsToCopyFindEntity value)
+        public async Task<ResultadoTransaccionResponse<InventoryTransferRequestQueryEntity>> GetToCopy(TakeInventoryFinishedProductsToCopyFindEntity value)
         {
             var data = new InventoryTransferRequestQueryEntity();
-            var resultTransaccion = new ResultadoTransaccionEntity<InventoryTransferRequestQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<InventoryTransferRequestQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -914,9 +915,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<TakeInventoryFinishedProductsQueryEntity>> SetCreate(TakeInventoryFinishedProductsCreateEntity value)
+        public async Task<ResultadoTransaccionResponse<TakeInventoryFinishedProductsQueryEntity>> SetCreate(TakeInventoryFinishedProductsCreateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TakeInventoryFinishedProductsQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<TakeInventoryFinishedProductsQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -999,9 +1000,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<TakeInventoryFinishedProducts1Entity>> SetDeleteLine(TakeInventoryFinishedProducts1DeleteEntity value)
+        public async Task<ResultadoTransaccionResponse<TakeInventoryFinishedProducts1Entity>> SetDeleteLine(TakeInventoryFinishedProducts1DeleteEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TakeInventoryFinishedProducts1Entity>
+            var resultTransaccion = new ResultadoTransaccionResponse<TakeInventoryFinishedProducts1Entity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -1070,9 +1071,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<TakeInventoryFinishedProductsEntity>> SetDelete(TakeInventoryFinishedProductsDeleteEntity value)
+        public async Task<ResultadoTransaccionResponse<TakeInventoryFinishedProductsEntity>> SetDelete(TakeInventoryFinishedProductsDeleteEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<TakeInventoryFinishedProductsEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<TakeInventoryFinishedProductsEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

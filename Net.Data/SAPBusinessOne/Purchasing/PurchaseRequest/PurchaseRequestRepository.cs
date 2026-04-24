@@ -5,7 +5,6 @@ using System.Linq;
 using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +13,9 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Net.Business.Entities.SAPBusinessOne;
 using Net.Connection.ConnectionSAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Purchasing.PurchaseRequest.Close;
+using Net.Business.Entities.SAPBusinessOne.Purchasing.PurchaseRequest.Create;
+using Net.Business.Entities.SAPBusinessOne.Purchasing.PurchaseRequest.Update;
 namespace Net.Data.SAPBusinessOne
 {
     public class PurchaseRequestRepository : RepositoryBase<PurchaseRequestEntity>, IPurchaseRequestRepository
@@ -36,9 +38,9 @@ namespace Net.Data.SAPBusinessOne
 
         #region <<< CONSULTAS >>>
 
-        public async Task<ResultadoTransaccionEntity<PurchaseRequestQueryEntity>> GetListByFilter(PurchaseRequestFilterEntity value)
+        public async Task<ResultadoTransaccionResponse<PurchaseRequestQueryEntity>> GetListByFilter(PurchaseRequestFilterEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<PurchaseRequestQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<PurchaseRequestQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -94,9 +96,9 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<PurchaseRequestQueryEntity>> GetByDocEntry(int docEntry)
+        public async Task<ResultadoTransaccionResponse<PurchaseRequestQueryEntity>> GetByDocEntry(int docEntry)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<PurchaseRequestQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<PurchaseRequestQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -192,80 +194,11 @@ namespace Net.Data.SAPBusinessOne
         #endregion
 
 
-        #region <<< EXPORTACIONES >>>
-
-        public Task<ResultadoTransaccionEntity<MemoryStream>> GetDownloadFormat()
-        {
-            var ms = new MemoryStream();
-            var resultTransaccion = new ResultadoTransaccionEntity<MemoryStream>
-            {
-                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
-                NombreAplicacion = _aplicacionName
-            };
-
-            try
-            {
-                using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
-                {
-                    WorkbookPart workbookPart = document.AddWorkbookPart();
-                    workbookPart.Workbook = new Workbook();
-
-                    WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
-                    worksheetPart.Worksheet = new Worksheet();
-
-                    Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
-                    Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Formato" };
-                    sheets.Append(sheet);
-
-                    workbookPart.Workbook.Save();
-
-                    SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
-
-                    //Cabecera
-                    Row row = new Row();
-                    row.Append(
-                        ExportToExcel.ConstructCell("Código", CellValues.String),
-                        ExportToExcel.ConstructCell("Descripción", CellValues.String),
-                        ExportToExcel.ConstructCell("Proveedor", CellValues.String),
-                        ExportToExcel.ConstructCell("Fecha necesaria", CellValues.String),
-                        ExportToExcel.ConstructCell("Cuenta mayor", CellValues.String),
-                        ExportToExcel.ConstructCell("Nombre de la cuenta de mayor", CellValues.String),
-                        ExportToExcel.ConstructCell("Centro de costo", CellValues.String),
-                        ExportToExcel.ConstructCell("Almacén", CellValues.String),
-                        ExportToExcel.ConstructCell("Tipo de operación", CellValues.String),
-                        ExportToExcel.ConstructCell("Tipo de compra", CellValues.String),
-                        ExportToExcel.ConstructCell("UM", CellValues.String),
-                        ExportToExcel.ConstructCell("Cantidad", CellValues.String)
-                    );
-                    sheetData.AppendChild(row);
-
-                    worksheetPart.Worksheet.Save();
-                    document.Close();
-                }
-
-                resultTransaccion.IdRegistro = 0;
-                resultTransaccion.ResultadoCodigo = 0;
-                resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
-            }
-            catch (Exception ex)
-            {
-                resultTransaccion.IdRegistro = -1;
-                resultTransaccion.ResultadoCodigo = -1;
-                resultTransaccion.ResultadoDescripcion = ex.Message.ToString();
-            }
-
-            return Task.FromResult(resultTransaccion);
-        }
-
-        #endregion
-
-
         #region <<< OPERACIONES >>>
 
-        public async Task<ResultadoTransaccionEntity<PurchaseRequestEntity>> SetCreate(PurchaseRequestCreateEntity value)
+        public async Task<ResultadoTransaccionResponse<PurchaseRequestEntity>> SetCreate(PurchaseRequestCreateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<PurchaseRequestEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<PurchaseRequestEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -382,9 +315,9 @@ namespace Net.Data.SAPBusinessOne
             });
         }
 
-        public async Task<ResultadoTransaccionEntity<PurchaseRequestEntity>> SetUpdate(PurchaseRequestUpdateEntity value)
+        public async Task<ResultadoTransaccionResponse<PurchaseRequestEntity>> SetUpdate(PurchaseRequestUpdateEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<PurchaseRequestEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<PurchaseRequestEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -539,9 +472,9 @@ namespace Net.Data.SAPBusinessOne
             });
         }
 
-        public async Task<ResultadoTransaccionEntity<PurchaseRequestEntity>> SetClose(PurchaseRequestCloseEntity value)
+        public async Task<ResultadoTransaccionResponse<PurchaseRequestEntity>> SetClose(PurchaseRequestCloseEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<PurchaseRequestEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<PurchaseRequestEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -605,6 +538,75 @@ namespace Net.Data.SAPBusinessOne
 
                 return resultTransaccion;
             });
+        }
+
+        #endregion
+
+
+        #region <<< EXPORTACIONES >>>
+
+        public Task<ResultadoTransaccionResponse<MemoryStream>> GetDownloadFormat()
+        {
+            var ms = new MemoryStream();
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
+            {
+                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
+                NombreAplicacion = _aplicacionName
+            };
+
+            try
+            {
+                using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
+                {
+                    WorkbookPart workbookPart = document.AddWorkbookPart();
+                    workbookPart.Workbook = new Workbook();
+
+                    WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                    worksheetPart.Worksheet = new Worksheet();
+
+                    Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+                    Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Formato" };
+                    sheets.Append(sheet);
+
+                    workbookPart.Workbook.Save();
+
+                    SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+
+                    //Cabecera
+                    Row row = new Row();
+                    row.Append(
+                        ExportToExcel.ConstructCell("Código", CellValues.String),
+                        ExportToExcel.ConstructCell("Descripción", CellValues.String),
+                        ExportToExcel.ConstructCell("Proveedor", CellValues.String),
+                        ExportToExcel.ConstructCell("Fecha necesaria", CellValues.String),
+                        ExportToExcel.ConstructCell("Cuenta mayor", CellValues.String),
+                        ExportToExcel.ConstructCell("Nombre de la cuenta de mayor", CellValues.String),
+                        ExportToExcel.ConstructCell("Centro de costo", CellValues.String),
+                        ExportToExcel.ConstructCell("Almacén", CellValues.String),
+                        ExportToExcel.ConstructCell("Tipo de operación", CellValues.String),
+                        ExportToExcel.ConstructCell("Tipo de compra", CellValues.String),
+                        ExportToExcel.ConstructCell("UM", CellValues.String),
+                        ExportToExcel.ConstructCell("Cantidad", CellValues.String)
+                    );
+                    sheetData.AppendChild(row);
+
+                    worksheetPart.Worksheet.Save();
+                    document.Close();
+                }
+
+                resultTransaccion.IdRegistro = 0;
+                resultTransaccion.ResultadoCodigo = 0;
+                resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
+                resultTransaccion.data = ms;
+            }
+            catch (Exception ex)
+            {
+                resultTransaccion.IdRegistro = -1;
+                resultTransaccion.ResultadoCodigo = -1;
+                resultTransaccion.ResultadoDescripcion = ex.Message.ToString();
+            }
+
+            return Task.FromResult(resultTransaccion);
         }
 
         #endregion

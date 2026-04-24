@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Net.Business.Entities.SAPBusinessOne
+using Net.Business.Entities.SAPBusinessOne.Common.Attachments2.Create;
+namespace Net.Business.Entities.SAPBusinessOne.Drafts.Create
 {
     public class DraftsCreateEntity
     {
-        public int DocEntry { get; set; }
         public DateTime DocDate { get; set; }
         public DateTime DocDueDate { get; set; }
         public DateTime TaxDate { get; set; }
@@ -87,6 +87,8 @@ namespace Net.Business.Entities.SAPBusinessOne
 
         public int U_UsrCreate { get; set; }
 
-        public List<DraftsCreateLinesEntity> Lines { get; set; } = new List<DraftsCreateLinesEntity>();
+
+        public Attachments2CreateEntity? Attachments2 { get; set; } = null;
+        public List<DraftsLinesCreateEntity> Lines { get; set; } = [];
     }
 }

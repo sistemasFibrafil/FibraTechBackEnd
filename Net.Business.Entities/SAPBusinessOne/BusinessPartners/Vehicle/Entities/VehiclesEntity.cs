@@ -1,4 +1,4 @@
-﻿namespace Net.Business.Entities.SAPBusinessOne
+﻿namespace Net.Business.Entities.SAPBusinessOne.BusinessPartners.Vehicle.Entities
 {
     public class VehiclesEntity
     {

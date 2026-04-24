@@ -1,8 +1,8 @@
 ﻿using System;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
 using System.Threading.Tasks;
-using Net.Business.Entities;
 using Microsoft.EntityFrameworkCore;
 using Net.Business.Entities.SAPBusinessOne;
 namespace Net.Data.SAPBusinessOne
@@ -19,9 +19,9 @@ namespace Net.Data.SAPBusinessOne
             _aplicacionName = GetType().Name;
         }
 
-        public async Task<ResultadoTransaccionEntity<LongitudAnchoEntity>> GetList()
+        public async Task<ResultadoTransaccionResponse<LongitudAnchoEntity>> GetList()
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<LongitudAnchoEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<LongitudAnchoEntity>
             {
                 NombreAplicacion = _aplicacionName,
                 NombreMetodo = nameof(GetList)

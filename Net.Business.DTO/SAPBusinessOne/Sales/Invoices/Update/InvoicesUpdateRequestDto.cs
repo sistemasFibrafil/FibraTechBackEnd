@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Net.Business.DTO.SAPBusinessOne
+namespace Net.Business.DTO.SAPBusinessOne.Sales.Invoices.Update
 {
     public class InvoicesUpdateRequestDto
     {

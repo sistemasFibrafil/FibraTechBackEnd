@@ -2,9 +2,11 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
-using Net.Business.Services.Mappers.SAPBusinessOne;
+using Net.Business.DTO.SAPBusinessOne.Administration.Definitions.General.Users.Find;
+using Net.Business.DTO.SAPBusinessOne.Administration.Definitions.General.Users.Filter;
+using Net.BusinessLogic.Mappers.SAPBusinessOne.Administration.Definitions.General.Users.Find;
+using Net.BusinessLogic.Mappers.SAPBusinessOne.Administration.Definitions.General.Users.Filter;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General
 {
     [ApiController]

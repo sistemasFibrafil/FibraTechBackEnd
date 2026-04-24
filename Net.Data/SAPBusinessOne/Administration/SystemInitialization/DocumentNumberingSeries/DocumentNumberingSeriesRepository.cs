@@ -1,9 +1,8 @@
 ﻿using System;
-using AutoMapper;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -26,9 +25,9 @@ namespace Net.Data.SAPBusinessOne
             _aplicacionName = GetType().Name;
         }
 
-        public async Task<ResultadoTransaccionEntity<DocumentNumberingSeries1Entity>> GetNumero(DocumentNumberingSeriesFindEntity value)
+        public async Task<ResultadoTransaccionResponse<DocumentNumberingSeries1Entity>> GetNumero(DocumentNumberingSeriesFindEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<DocumentNumberingSeries1Entity>
+            var resultTransaccion = new ResultadoTransaccionResponse<DocumentNumberingSeries1Entity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

@@ -2,7 +2,6 @@
 using System.Data;
 using Net.Connection;
 using Net.CrossCotting;
-using Net.Business.Entities;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -35,10 +34,10 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<BusinessPartnerSectorsEntity>> GetList()
+        public async Task<ResultadoTransaccionResponse<BusinessPartnerSectorsEntity>> GetList()
         {
             var response = new List<BusinessPartnerSectorsEntity>();
-            var resultadoTran = new ResultadoTransaccionEntity<BusinessPartnerSectorsEntity>();
+            var resultadoTran = new ResultadoTransaccionResponse<BusinessPartnerSectorsEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 

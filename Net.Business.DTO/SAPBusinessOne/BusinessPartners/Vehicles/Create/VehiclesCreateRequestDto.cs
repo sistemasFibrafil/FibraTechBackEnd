@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-namespace Net.Business.DTO.SAPBusinessOne
+namespace Net.Business.DTO.SAPBusinessOne.BusinessPartners.Vehicles.Create
 {
     public class VehiclesCreateRequestDto
     {
         public string? CardCode { get; set; }
-        public List<VehiclesCreate1RequestDto> Lines { get; set; } = new List<VehiclesCreate1RequestDto>();
+        public List<VehiclesLinesCreateRequestDto> Lines { get; set; } = [];
     }
 }

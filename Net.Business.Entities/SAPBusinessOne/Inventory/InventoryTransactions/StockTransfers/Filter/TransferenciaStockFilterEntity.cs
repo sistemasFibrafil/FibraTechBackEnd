@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Net.Business.Entities.SAPBusinessOne
+namespace Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Filter
 {
     public class TransferenciaStockFilterEntity
     {

@@ -48,10 +48,10 @@ namespace Net.Data.Web
         }
 
 
-        public async Task<ResultadoTransaccionEntity<SopEntity>> GetListByFiltro(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<SopEntity>> GetListByFiltro(FilterRequestEntity value)
         {
             var response = new List<SopEntity>();
-            var resultTransaccion = new ResultadoTransaccionEntity<SopEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<SopEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -94,10 +94,10 @@ namespace Net.Data.Web
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<SopEntity>> GetById(int id)
+        public async Task<ResultadoTransaccionResponse<SopEntity>> GetById(int id)
         {
             var response = new SopEntity();
-            var resultTransaccion = new ResultadoTransaccionEntity<SopEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<SopEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -149,9 +149,9 @@ namespace Net.Data.Web
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<SopEntity>> SetCreate(SopEntity value)
+        public async Task<ResultadoTransaccionResponse<SopEntity>> SetCreate(SopEntity value)
         {
-            var resultadoTransaccion = new ResultadoTransaccionEntity<SopEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<SopEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -254,9 +254,9 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<SopEntity>> SetUpdate(SopEntity value)
+        public async Task<ResultadoTransaccionResponse<SopEntity>> SetUpdate(SopEntity value)
         {
-            var resultadoTransaccion = new ResultadoTransaccionEntity<SopEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<SopEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -390,9 +390,9 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<SopEntity>> SetDelete(SopEntity value)
+        public async Task<ResultadoTransaccionResponse<SopEntity>> SetDelete(SopEntity value)
         {
-            var resultadoTransaccion = new ResultadoTransaccionEntity<SopEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<SopEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -428,9 +428,9 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<SopDetalleEntity>> SetDeleteDetalle(SopDetalleEntity value)
+        public async Task<ResultadoTransaccionResponse<SopDetalleEntity>> SetDeleteDetalle(SopDetalleEntity value)
         {
-            var resultadoTransaccion = new ResultadoTransaccionEntity<SopDetalleEntity>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<SopDetalleEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
@@ -467,10 +467,10 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<MemoryStream>> GetSopExcelById(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetSopExcelById(FilterRequestEntity value)
         {
             var ms = new MemoryStream();
-            var resultadoTransaccion = new ResultadoTransaccionEntity<MemoryStream>();
+            var resultadoTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
             resultadoTransaccion.NombreMetodo = _metodoName;
@@ -518,7 +518,7 @@ namespace Net.Data.Web
                     ExportToExcel.ConstructCell("Fecha de entrega PP", CellValues.String));
                     sheetData.AppendChild(row);
 
-                    var objectGetList = await GetById(value.Id1);
+                    var objectGetList = await GetById(value.Id1 ?? 0);
 
                     //Contenido
                     foreach (var item in objectGetList.data.Linea)

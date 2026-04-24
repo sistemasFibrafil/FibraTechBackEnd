@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using Net.Business.Entities.SAPBusinessOne.Common.Attachments2.Entities;
 namespace Net.Business.Entities.SAPBusinessOne
 {
     public class OrdersEntity
     {
         public int DocEntry { get; set; }
         public int DocNum { get; set; }
-        public string ObjType { get; set; } = string.Empty;
-        public string DocType { get; set; } = string.Empty;
-        public string CANCELED { get; set; } = string.Empty;
-        public string DocStatus { get; set; } = string.Empty;
-        public string WddStatus { get; set; } = string.Empty;
+        public string? ObjType { get; set; }
+        public string? DocType { get; set; }
+        public string? CANCELED { get; set; }
+        public string? DocStatus { get; set; }
+        public string? WddStatus { get; set; }
 
+        public DateTime CreateDate { get; set; }
         public DateTime DocDate { get; set; }
         public DateTime DocDueDate { get; set; }
         public DateTime TaxDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
         public short DocTime { get; set; }
+        public short UserSign { get; set; }
 
         public string? U_FIB_DocStPkg { get; set; }
         public string? U_FIB_IsPkg { get; set; }
@@ -24,7 +28,7 @@ namespace Net.Business.Entities.SAPBusinessOne
         /// <summary>
         /// SOCIO DE NEGOCIO
         /// </summary>
-        public string CardCode { get; set; } = string.Empty;
+        public string? CardCode { get; set; }
         public string? CardName { get; set; }
         public short GroupCode { get; set; }
         public int? CntctCode { get; set; }
@@ -76,6 +80,12 @@ namespace Net.Business.Entities.SAPBusinessOne
 
 
         /// <summary>
+        /// Anexos
+        /// </summary>
+        public int? AtcEntry { get; set; }
+
+
+        /// <summary>
         /// SALES EMPLLOYEE
         /// </summary>
         public int SlpCode { get; set; }
@@ -115,7 +125,11 @@ namespace Net.Business.Entities.SAPBusinessOne
         public PaymentTermsTypesEntity? PaymentTermsTypes { get; set; } = null;
 
 
+        // 🔗 1 → N (ORDR → OCTG)
+        public Attachments2Entity? Attachments2 { get; set; } = null;
+
+
         // 🔗 1 → N (ORDR → RDR1)
-        public ICollection<Orders1Entity> Lines { get; set; } = new List<Orders1Entity>();
+        public ICollection<Orders1Entity> Lines { get; set; } = [];
     }
 }

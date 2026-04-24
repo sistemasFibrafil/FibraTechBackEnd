@@ -1,5 +1,5 @@
 ﻿using Net.Connection;
-using Net.Business.Entities;
+using Net.CrossCotting;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Net.Business.Entities.Web;
@@ -7,7 +7,7 @@ namespace Net.Data.Web
 {
     public interface IPerfilRepository : IRepositoryBase<PerilEntity>
     {
-        Task<ResultadoTransaccionEntity<PerilEntity>> GetList();
+        Task<ResultadoTransaccionResponse<PerilEntity>> GetList();
         Task<IEnumerable<PerilEntity>> GetAll(PerilEntity entidad);
         Task<PerilEntity> GetById(PerilEntity entidad);
         Task<int> Create(PerilEntity entidad);

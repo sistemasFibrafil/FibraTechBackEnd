@@ -1,4 +1,4 @@
-﻿namespace Net.Business.Entities.SAPBusinessOne
+﻿namespace Net.Business.Entities.SAPBusinessOne.BusinessPartners.Driver.Entities
 {
     public class DriversEntity
     {

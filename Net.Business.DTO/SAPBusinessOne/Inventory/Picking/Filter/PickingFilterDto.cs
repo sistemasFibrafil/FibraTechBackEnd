@@ -1,6 +1,6 @@
 ﻿using System;
-using Net.Business.Entities.SAPBusinessOne;
-namespace Net.Business.DTO.SAPBusinessOne
+using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Filter;
+namespace Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Filter
 {
     public class PickingFilterDto
     {

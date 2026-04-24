@@ -1,4 +1,4 @@
-﻿namespace Net.Business.DTO.SAPBusinessOne
+﻿namespace Net.Business.DTO.SAPBusinessOne.Administration.Definitions.General.Users.Filter
 {
     public class UsersFilterRequestDto
     {

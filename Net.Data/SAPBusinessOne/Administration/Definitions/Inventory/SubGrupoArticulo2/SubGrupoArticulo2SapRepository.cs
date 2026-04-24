@@ -1,7 +1,7 @@
 ﻿using System;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
@@ -26,9 +26,9 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<SubGrupoArticulo2SapEntity>> GetList()
+        public async Task<ResultadoTransaccionResponse<SubGrupoArticulo2SapEntity>> GetList()
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<SubGrupoArticulo2SapEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<SubGrupoArticulo2SapEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 

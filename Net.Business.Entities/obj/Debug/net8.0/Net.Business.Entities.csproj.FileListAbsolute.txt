@@ -1,0 +1,16 @@
+D:\Fil\Web\BackEnd\Net.Business.Entities\bin\Debug\net8.0\Net.Business.Entities.deps.json
+D:\Fil\Web\BackEnd\Net.Business.Entities\bin\Debug\net8.0\Net.Business.Entities.dll
+D:\Fil\Web\BackEnd\Net.Business.Entities\bin\Debug\net8.0\Net.Business.Entities.pdb
+D:\Fil\Web\BackEnd\Net.Business.Entities\bin\Debug\net8.0\Net.Connection.Attributes.dll
+D:\Fil\Web\BackEnd\Net.Business.Entities\bin\Debug\net8.0\Net.Connection.Attributes.pdb
+D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Debug\net8.0\Net.Business.Entities.csproj.AssemblyReference.cache
+D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Debug\net8.0\Net.Business.Entities.GeneratedMSBuildEditorConfig.editorconfig
+D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Debug\net8.0\Net.Business.Entities.AssemblyInfoInputs.cache
+D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Debug\net8.0\Net.Business.Entities.AssemblyInfo.cs
+D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Debug\net8.0\Net.Business.Entities.csproj.CoreCompileInputs.cache
+D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Debug\net8.0\Net.Business.Entities.sourcelink.json
+D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Debug\net8.0\Net.Busi.CBE4B0EA.Up2Date
+D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Debug\net8.0\Net.Business.Entities.dll
+D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Debug\net8.0\refint\Net.Business.Entities.dll
+D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Debug\net8.0\Net.Business.Entities.pdb
+D:\Fil\Web\BackEnd\Net.Business.Entities\obj\Debug\net8.0\ref\Net.Business.Entities.dll

@@ -3,8 +3,8 @@ using AutoMapper;
 using SAPbobsCOM;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
-using Net.Business.Entities;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -69,9 +69,9 @@ namespace Net.Data.SAPBusinessOne
         /// <summary>
         /// Crea un nuevo registro OSKP y un nuevo artículo en SAP.
         /// </summary>
-        public Task<ResultadoTransaccionEntity<OSKPEntity>> SetCreate(OSKPEntity value)
+        public Task<ResultadoTransaccionResponse<OSKPEntity>> SetCreate(OSKPEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OSKPEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OSKPEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -167,9 +167,9 @@ namespace Net.Data.SAPBusinessOne
         /// <summary>
         /// Actualiza un registro OSKP existente en SAP.
         /// </summary>
-        public Task<ResultadoTransaccionEntity<OSKPEntity>> SetUpdate(OSKPEntity value)
+        public Task<ResultadoTransaccionResponse<OSKPEntity>> SetUpdate(OSKPEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OSKPEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OSKPEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -246,9 +246,9 @@ namespace Net.Data.SAPBusinessOne
         /// <summary>
         /// Elimina un registro OSKP de SAP.
         /// </summary>
-        public Task<ResultadoTransaccionEntity<OSKPEntity>> SetDelete(OSKPEntity value)
+        public Task<ResultadoTransaccionResponse<OSKPEntity>> SetDelete(OSKPEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OSKPEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OSKPEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -291,9 +291,9 @@ namespace Net.Data.SAPBusinessOne
         /// <summary>
         /// Obtiene una lista de registros OSKP filtrados por nombre de artículo o cliente.
         /// </summary>
-        public async Task<ResultadoTransaccionEntity<OSKPEntity>> GetListByFiltro(OSKPEntity value)
+        public async Task<ResultadoTransaccionResponse<OSKPEntity>> GetListByFiltro(OSKPEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OSKPEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OSKPEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -330,9 +330,9 @@ namespace Net.Data.SAPBusinessOne
         /// <summary>
         /// Obtiene un registro OSKP por su DocEntry, incluyendo sus líneas.
         /// </summary>
-        public async Task<ResultadoTransaccionEntity<OSKPEntity>> GetByDocEntry(OSKPEntity value)
+        public async Task<ResultadoTransaccionResponse<OSKPEntity>> GetByDocEntry(OSKPEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<OSKPEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<OSKPEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

@@ -1,17 +1,17 @@
 ﻿using System.IO;
-using Net.Business.Entities;
+using Net.CrossCotting;
 using System.Threading.Tasks;
 using Net.Business.Entities.SAPBusinessOne;
 namespace Net.Data.SAPBusinessOne
 {
     public interface IOSKCRepository
     {
-        Task<ResultadoTransaccionEntity<OSKCEntity>> SetCreate(OSKCEntity value);
-        Task<ResultadoTransaccionEntity<OSKCEntity>> SetUpdate(OSKCEntity value);
-        Task<ResultadoTransaccionEntity<OSKCEntity>> SetDelete(OSKCEntity value);
-        Task<ResultadoTransaccionEntity<OSKCEntity>> GetListByDateRange(OSKCEntity value);
-        Task<ResultadoTransaccionEntity<OSKCEntity>> GetByCode(OSKCEntity value);
-        Task<ResultadoTransaccionEntity<OSKCEntity>> GetListByFiltro(OSKCEntity value);
-        Task<ResultadoTransaccionEntity<MemoryStream>> GetOSKCExcel(OSKCEntity value);
+        Task<ResultadoTransaccionResponse<OSKCEntity>> SetCreate(OSKCEntity value);
+        Task<ResultadoTransaccionResponse<OSKCEntity>> SetUpdate(OSKCEntity value);
+        Task<ResultadoTransaccionResponse<OSKCEntity>> SetDelete(OSKCEntity value);
+        Task<ResultadoTransaccionResponse<OSKCEntity>> GetListByDateRange(OSKCEntity value);
+        Task<ResultadoTransaccionResponse<OSKCEntity>> GetByCode(OSKCEntity value);
+        Task<ResultadoTransaccionResponse<OSKCEntity>> GetListByFiltro(OSKCEntity value);
+        Task<ResultadoTransaccionResponse<MemoryStream>> GetOSKCExcel(OSKCEntity value);
     }
 }

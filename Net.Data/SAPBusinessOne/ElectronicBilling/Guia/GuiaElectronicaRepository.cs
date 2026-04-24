@@ -44,10 +44,10 @@ namespace Net.Data.SAPBusinessOne
         }
 
 
-        public async Task<ResultadoTransaccionEntity<GuiaElectronicaSapEntity>> SetEnviar(FilterRequestEntity value)
+        public async Task<ResultadoTransaccionResponse<GuiaElectronicaSapEntity>> SetEnviar(FilterRequestEntity value)
         {
             var guia = new Invoice();
-            var resultTransaccion = new ResultadoTransaccionEntity<GuiaElectronicaSapEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<GuiaElectronicaSapEntity>();
 
             _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
 
