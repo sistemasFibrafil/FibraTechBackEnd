@@ -30,7 +30,7 @@ namespace Net.Business.Services.Controllers.Web.Gestion.Definiciones.General
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
     }
 }

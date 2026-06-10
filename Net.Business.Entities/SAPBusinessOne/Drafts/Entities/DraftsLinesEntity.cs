@@ -1,12 +1,14 @@
-﻿namespace Net.Business.Entities.SAPBusinessOne
+﻿using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.OperationsTypes.Entities;
+
+namespace Net.Business.Entities.SAPBusinessOne
 {
     public class DraftsLinesEntity
     {
         public int DocEntry { get; set; }
         public int LineNum { get; set; }
 
-        public string LineStatus { get; set; } = string.Empty;
-        public string ObjType { get; set; } = string.Empty;
+        public string? LineStatus { get; set; }
+        public string? ObjType { get; set; }
         public int BaseType { get; set; }
         public int? BaseEntry { get; set; }
         public int? BaseLine { get; set; }
@@ -33,6 +35,7 @@
         public string? U_FIB_LinStPkg { get; set; }
         public string? U_FIB_FromPkg { get; set; }
         public decimal? U_FIB_OpQtyPkg { get; set; }
+        public string? U_S_PartAranc1 { get; set; }
         public string? U_tipoOpT12 { get; set; }
 
 
@@ -45,6 +48,6 @@
 
 
         // 🔗 N → 1 (RDR1 → TipoOperacion)
-        public OperationTypeEntity OperationType { get; set; } = null!;
+        public OperationsTypesEntity OperationType { get; set; } = null!;
     }
 }

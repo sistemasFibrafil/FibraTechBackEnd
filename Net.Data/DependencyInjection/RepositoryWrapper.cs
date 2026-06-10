@@ -7,23 +7,28 @@ using Net.Data.AppContext;
 using Net.Data.SAPBusinessOne;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
-using Net.Connection.ConnectionSAPBusinessOne;
 using Net.Data.SAPBusinessOne.Administration;
+using Net.Connection.ConnectionSAPBusinessOne;
+using Net.Data.SAPBusinessOne.BusinessPartners.Ubigeo;
+using Net.Data.SAPBusinessOne.Administration.Definitions.General.Departments;
+using Net.Data.SAPBusinessOne.Administration.Definitions.BusinessPartners.States;
+using Net.Data.SAPBusinessOne.Administration.Definitions.BusinessPartners.Countries;
+using Net.Data.SAPBusinessOne.Administration.Definitions.BusinessPartners.BusinessPartnerGroupsUserTable;
 namespace Net.Data
 {
-    public class RepositoryWrapper : IRepositoryWrapper
+    public class RepositoryWrapper(IConnectionSQL repoContext, IOptions<ParametrosTokenConfig> tokenConfig, IConfiguration configuration, IHttpClientFactory clientFactory, DataContextSeguridad dbSeguridad, DataContextSAPBusinessOne dbSapBusinessOne, DataContextProfil dbProfil, IMapper mapper, CompanyProviderSAPBusinessOne companyProviderSap) : IRepositoryWrapper
     {
-        private readonly IMapper _mapper;
-        private readonly IConnectionSQL _repoContext;
-        private readonly IConfiguration _configuration;
-        private readonly IHttpClientFactory _clientFactory;
+        private readonly IMapper _mapper = mapper;
+        private readonly IConnectionSQL _repoContext = repoContext;
+        private readonly IConfiguration _configuration = configuration;
+        private readonly IHttpClientFactory _clientFactory = clientFactory;
 
-        private readonly DataContextProfil _dbProfil;
-        private readonly DataContextSeguridad _dbSeguridad;
-        private readonly DataContextSAPBusinessOne _dbSAPBusinessOne;
+        private readonly DataContextProfil _dbProfil = dbProfil;
+        private readonly DataContextSeguridad _dbSeguridad = dbSeguridad;
+        private readonly DataContextSAPBusinessOne _dbSAPBusinessOne = dbSapBusinessOne;
 
-        private readonly IOptions<ParametrosTokenConfig> _tokenConfig;
-        private readonly CompanyProviderSAPBusinessOne _companyProviderSap;
+        private readonly IOptions<ParametrosTokenConfig> _tokenConfig = tokenConfig;
+        private readonly CompanyProviderSAPBusinessOne _companyProviderSap = companyProviderSap;
 
 
         // =================================================================
@@ -93,10 +98,13 @@ namespace Net.Data
         private IUsersRepository _users;
         private IStatusRepository _status;
         private ITiempoRepository _tiempo;
+        private IStatesRepository _states;
+        private IUbigeoRepository _ubigeo;
         private ILocationRepository _location;
         private IBranchesRepository _branches;
         private IProcessesRepository _proceso;
         private ITaxGroupsRepository _taxGroups;
+        private ICountriesRepository _countries;
         private ITiempoVidaRepository _tiempoVida;
         private IWarehousesRepository _warehouses;
         private IItemGroupsRepository _itemGroups;
@@ -104,19 +112,17 @@ namespace Net.Data
         private IUnidadMedidaRepository _unidadMedida;
         private ITipoLaminadoRepository _tipoLaminado;
         private ISalesPersonsRepository _salesPersons;
-        private IOperationTypeRepository _operationType;
+        private IOperationsTypesRepository _operationsTypes;
         private ICurrencyCodesRepository _currencyCodes;
         private ILongitudAnchoRepository _longitudAncho;
         private IColorImpresionRepository _colorImpresion;
         private ISubGrupoArticuloRepository _subGrupoArticulo;
         private IPaymentTermsTypesRepository _paymentTermsTypes;
         private ISubGrupoArticulo2Repository _subGrupoArticulo2;
-        private ICountriesRepository _countries;
-        private IStatesRepository _states;
-        private IUbigeoRepository _ubigeo;
         private IBusinessPartnerGroupsRepository _businessPartnerGroups;
         private IBusinessPartnerSectorsRepository _businessPartnerSectors;
-        private IDivisionRepository _division;
+        private IBusinessPartnerDivisionsRepository _businessPartnerDivisions;
+        private IBusinessPartnerGroupsUserTableRepository _businessPartnerGroupsUserTable;
 
         #endregion
 
@@ -231,25 +237,6 @@ namespace Net.Data
 
 
 
-        public RepositoryWrapper(IConnectionSQL repoContext, IOptions<ParametrosTokenConfig> tokenConfig, IConfiguration configuration, IHttpClientFactory clientFactory, DataContextSeguridad dbSeguridad, DataContextSAPBusinessOne dbSapBusinessOne, DataContextProfil dbProfil, IMapper mapper, CompanyProviderSAPBusinessOne companyProviderSap)
-        {
-            _mapper = mapper;
-
-            _dbProfil = dbProfil;
-            _dbSeguridad = dbSeguridad;
-            _dbSAPBusinessOne = dbSapBusinessOne;
-
-            _repoContext = repoContext;
-            _configuration = configuration;
-            _clientFactory = clientFactory;
-
-            _tokenConfig = tokenConfig;
-            _companyProviderSap = companyProviderSap;
-        }
-
-
-
-
         // =================================================================
         // =================================================================
         // WEB
@@ -261,10 +248,7 @@ namespace Net.Data
         {
             get
             {
-                if (_sop == null)
-                {
-                    _sop = new SopRepository(_repoContext, _configuration);
-                }
+                _sop ??= new SopRepository(_repoContext, _configuration);
                 return _sop;
             }
         }
@@ -272,10 +256,7 @@ namespace Net.Data
         {
             get
             {
-                if (_menu == null)
-                {
-                    _menu = new MenuRepository(_repoContext);
-                }
+                _menu ??= new MenuRepository(_repoContext);
                 return _menu;
             }
         }
@@ -283,10 +264,7 @@ namespace Net.Data
         {
             get
             {
-                if (_opcion == null)
-                {
-                    _opcion = new OpcionRepository(_repoContext);
-                }
+                _opcion ??= new OpcionRepository(_repoContext);
                 return _opcion;
             }
         }
@@ -294,10 +272,7 @@ namespace Net.Data
         {
             get
             {
-                if (_perfil == null)
-                {
-                    _perfil = new PerfilRepository(_repoContext, _dbSeguridad);
-                }
+                _perfil ??= new PerfilRepository(_repoContext, _dbSeguridad);
                 return _perfil;
             }
         }
@@ -305,10 +280,7 @@ namespace Net.Data
         {
             get
             {
-                if (_usuario == null)
-                {
-                    _usuario = new UsuarioRepository(_repoContext, _configuration, _tokenConfig, _dbSAPBusinessOne, _dbSeguridad, _companyProviderSap);
-                }
+                _usuario ??= new UsuarioRepository(_repoContext, _tokenConfig, _dbSAPBusinessOne, _dbSeguridad, _companyProviderSap, _mapper);
                 return _usuario;
             }
         }
@@ -316,10 +288,7 @@ namespace Net.Data
         {
             get
             {
-                if (_dataBase == null)
-                {
-                    _dataBase = new DataBaseRepository(_repoContext);
-                }
+                _dataBase ??= new DataBaseRepository(_repoContext);
                 return _dataBase;
             }
         }
@@ -327,10 +296,7 @@ namespace Net.Data
         {
             get
             {
-                if (_auditoria == null)
-                {
-                    _auditoria = new AuditoriaRepository(_repoContext);
-                }
+                _auditoria ??= new AuditoriaRepository(_repoContext);
                 return _auditoria;
             }
         }
@@ -338,10 +304,7 @@ namespace Net.Data
         {
             get
             {
-                if (_pickingList == null)
-                {
-                    _pickingList = new PickingListRepository(_repoContext, _configuration);
-                }
+                _pickingList ??= new PickingListRepository(_repoContext, _configuration);
                 return _pickingList;
             }
         }
@@ -349,10 +312,7 @@ namespace Net.Data
         {
             get
             {
-                if (_logisticUser == null)
-                {
-                    _logisticUser = new LogisticUserRepository(_repoContext, _dbSeguridad, _mapper);
-                }
+                _logisticUser ??= new LogisticUserRepository(_repoContext, _dbSeguridad, _mapper);
                 return _logisticUser;
             }
         }
@@ -360,10 +320,7 @@ namespace Net.Data
         {
             get
             {
-                if (_opcionxPerfil == null)
-                {
-                    _opcionxPerfil = new OpcionxPerfilRepository(_repoContext);
-                }
+                _opcionxPerfil ??= new OpcionxPerfilRepository(_repoContext);
                 return _opcionxPerfil;
             }
         }
@@ -371,10 +328,7 @@ namespace Net.Data
         {
             get
             {
-                if (_parametroSistema == null)
-                {
-                    _parametroSistema = new ParametroSistemaRepository(_repoContext);
-                }
+                _parametroSistema ??= new ParametroSistemaRepository(_repoContext);
                 return _parametroSistema;
             }
         }
@@ -382,10 +336,7 @@ namespace Net.Data
         {
             get
             {
-                if (_parametroConexion == null)
-                {
-                    _parametroConexion = new ParametroConexionRepository(_repoContext);
-                }
+                _parametroConexion ??= new ParametroConexionRepository(_repoContext);
                 return _parametroConexion;
             }
         }
@@ -393,10 +344,7 @@ namespace Net.Data
         {
             get
             {
-                if (_ordenVentaSodimac == null)
-                {
-                    _ordenVentaSodimac = new OrdenVentaSodimacRepository(_repoContext, _configuration);
-                }
+                _ordenVentaSodimac ??= new OrdenVentaSodimacRepository(_repoContext, _configuration);
                 return _ordenVentaSodimac;
             }
         }
@@ -404,10 +352,7 @@ namespace Net.Data
         {
             get
             {
-                if (_takeInventoryFinishedProducts == null)
-                {
-                    _takeInventoryFinishedProducts = new TakeInventoryFinishedProductsRepository(_repoContext, _configuration, _dbSeguridad, _dbSAPBusinessOne, _companyProviderSap);
-                }
+                _takeInventoryFinishedProducts ??= new TakeInventoryFinishedProductsRepository(_repoContext, _configuration, _dbSeguridad, _dbSAPBusinessOne, _companyProviderSap);
                 return _takeInventoryFinishedProducts;
             }
         }
@@ -428,10 +373,7 @@ namespace Net.Data
         {
             get
             {
-                if (_userDefinedFields == null)
-                {
-                    _userDefinedFields = new UserDefinedFieldsRepository(_repoContext, _dbSAPBusinessOne);
-                }
+                _userDefinedFields ??= new UserDefinedFieldsRepository(_repoContext, _dbSAPBusinessOne);
                 return _userDefinedFields;
             }
         }
@@ -447,10 +389,7 @@ namespace Net.Data
         {
             get
             {
-                if (_exchangeRates == null)
-                {
-                    _exchangeRates = new ExchangeRatesRepository(_repoContext, _dbSAPBusinessOne);
-                }
+                _exchangeRates ??= new ExchangeRatesRepository(_repoContext, _dbSAPBusinessOne);
                 return _exchangeRates;
             }
         }
@@ -466,10 +405,7 @@ namespace Net.Data
         {
             get
             {
-                if (_tipoDocumentoSunat == null)
-                {
-                    _tipoDocumentoSunat = new DocumentTypeSunatRepository(_repoContext, _dbSAPBusinessOne);
-                }
+                _tipoDocumentoSunat ??= new DocumentTypeSunatRepository(_repoContext, _dbSAPBusinessOne);
                 return _tipoDocumentoSunat;
             }
         }
@@ -477,10 +413,7 @@ namespace Net.Data
         {
             get
             {
-                if (_numeracionDocumento == null)
-                {
-                    _numeracionDocumento = new DocumentNumberingSeriesRepository(_repoContext, _dbSAPBusinessOne);
-                }
+                _numeracionDocumento ??= new DocumentNumberingSeriesRepository(_repoContext, _dbSAPBusinessOne);
                 return _numeracionDocumento;
             }
         }
@@ -488,10 +421,7 @@ namespace Net.Data
         {
             get
             {
-                if (_documentSeriesConfiguration == null)
-                {
-                    _documentSeriesConfiguration = new DocumentSeriesConfigurationRepository(_repoContext, _dbSAPBusinessOne, _dbSeguridad, _companyProviderSap);
-                }
+                _documentSeriesConfiguration ??= new DocumentSeriesConfigurationRepository(_repoContext, _dbSAPBusinessOne, _dbSeguridad, _companyProviderSap);
                 return _documentSeriesConfiguration;
             }
         }
@@ -499,10 +429,7 @@ namespace Net.Data
         {
             get
             {
-                if (_documentNumberingSeriesSunat == null)
-                {
-                    _documentNumberingSeriesSunat = new DocumentNumberingSeriesSunatRepository(_repoContext, _dbSAPBusinessOne);
-                }
+                _documentNumberingSeriesSunat ??= new DocumentNumberingSeriesSunatRepository(_repoContext, _dbSAPBusinessOne);
                 return _documentNumberingSeriesSunat;
             }
         }
@@ -520,10 +447,7 @@ namespace Net.Data
         {
             get
             {
-                if (_users == null)
-                {
-                    _users = new UsersRepository(_repoContext, _dbSAPBusinessOne);
-                }
+                _users ??= new UsersRepository(_repoContext, _dbSAPBusinessOne);
                 return _users;
             }
         }
@@ -531,10 +455,7 @@ namespace Net.Data
         {
             get
             {
-                if (_status == null)
-                {
-                    _status = new StatusRepository(_repoContext);
-                }
+                _status ??= new StatusRepository(_repoContext);
                 return _status;
             }
         }
@@ -542,230 +463,15 @@ namespace Net.Data
         {
             get
             {
-                if (_tiempo == null)
-                {
-                    _tiempo = new TiempoRepository(_repoContext);
-                }
+                _tiempo ??= new TiempoRepository(_repoContext);
                 return _tiempo;
-            }
-        }
-        public ILocationRepository Location
-        {
-            get
-            {
-                if (_location == null)
-                {
-                    _location = new LocationRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _location;
-            }
-        }
-        public IBranchesRepository Branches
-        {
-            get
-            {
-                if (_branches == null)
-                {
-                    _branches = new BranchesRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _branches;
-            }
-        }
-        public IProcessesRepository Processes
-        {
-            get
-            {
-                if (_proceso == null)
-                {
-                    _proceso = new ProcesoRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _proceso;
-            }
-        }
-        public ITaxGroupsRepository TaxGroups
-        {
-            get
-            {
-                if (_taxGroups == null)
-                {
-                    _taxGroups = new TaxGroupsRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _taxGroups;
-            }
-        }
-        public ITiempoVidaRepository TiempoVida
-        {
-            get
-            {
-                if (_tiempoVida == null)
-                {
-                    _tiempoVida = new TiempoVidaRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _tiempoVida;
-            }
-        }
-        public IWarehousesRepository Warehouses
-        {
-            get
-            {
-                if (_warehouses == null)
-                {
-                    _warehouses = new WarehousesRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _warehouses;
-            }
-        }
-        public IItemGroupsRepository ItemGroups
-        {
-            get
-            {
-                if (_itemGroups == null)
-                {
-                    _itemGroups = new ItemGroupsRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _itemGroups;
-            }
-        }
-        public IDepartmentsRepository Departments
-        {
-            get
-            {
-                if (_departments == null)
-                {
-                    _departments = new DepartmentsRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _departments;
-            }
-        }
-        public IUnidadMedidaRepository UnidadMedida
-        {
-            get
-            {
-                if (_unidadMedida == null)
-                {
-                    _unidadMedida = new UnidadMedidaRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _unidadMedida;
-            }
-        }
-        public ITipoLaminadoRepository TipoLaminado
-        {
-            get
-            {
-                if (_tipoLaminado == null)
-                {
-                    _tipoLaminado = new TipoLaminadoRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _tipoLaminado;
-            }
-        }
-        public ISalesPersonsRepository SalesPersons
-        {
-            get
-            {
-                if (_salesPersons == null)
-                {
-                    _salesPersons = new SalesPersonsRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _salesPersons;
-            }
-        }
-        public IOperationTypeRepository OperationType
-        {
-            get
-            {
-                if (_operationType == null)
-                {
-                    _operationType = new OperationTypeRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _operationType;
-            }
-        }
-        public ICurrencyCodesRepository CurrencyCodes
-        {
-            get
-            {
-                if (_currencyCodes == null)
-                {
-                    _currencyCodes = new CurrencyCodesRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _currencyCodes;
-            }
-        }
-        public ILongitudAnchoRepository LongitudAncho
-        {
-            get
-            {
-                if (_longitudAncho == null)
-                {
-                    _longitudAncho = new LongitudAnchoRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _longitudAncho;
-            }
-        }
-        public IColorImpresionRepository ColorImpresion
-        {
-            get
-            {
-                if (_colorImpresion == null)
-                {
-                    _colorImpresion = new ColorImpresionRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _colorImpresion;
-            }
-        }
-        public ISubGrupoArticuloRepository SubGrupoArticulo
-        {
-            get
-            {
-                if (_subGrupoArticulo == null)
-                {
-                    _subGrupoArticulo = new SubGrupoArticuloRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _subGrupoArticulo;
-            }
-        }
-        public IPaymentTermsTypesRepository PaymentTermsTypes
-        {
-            get
-            {
-                if (_paymentTermsTypes == null)
-                {
-                    _paymentTermsTypes = new PaymentTermsTypesRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _paymentTermsTypes;
-            }
-        }
-        public ISubGrupoArticulo2Repository SubGrupoArticulo2
-        {
-            get
-            {
-                if (_subGrupoArticulo2 == null)
-                {
-                    _subGrupoArticulo2 = new SubGrupoArticulo2SapRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _subGrupoArticulo2;
-            }
-        }
-        public ICountriesRepository Countries
-        {
-            get
-            {
-                if (_countries == null)
-                {
-                    _countries = new CountriesRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _countries;
             }
         }
         public IStatesRepository States
         {
             get
             {
-                if (_states == null)
-                {
-                    _states = new StatesRepository(_repoContext, _dbSAPBusinessOne);
-                }
+                _states ??= new StatesRepository(_repoContext, _dbSAPBusinessOne);
                 return _states;
             }
         }
@@ -773,21 +479,169 @@ namespace Net.Data
         {
             get
             {
-                if (_ubigeo == null)
-                {
-                    _ubigeo = new UbigeoRepository(_repoContext, _dbSAPBusinessOne);
-                }
+                _ubigeo ??= new UbigeoRepository(_repoContext, _dbSAPBusinessOne);
                 return _ubigeo;
             }
         }
+        public ILocationRepository Location
+        {
+            get
+            {
+                _location ??= new LocationRepository(_repoContext, _dbSAPBusinessOne);
+                return _location;
+            }
+        }
+        public IBranchesRepository Branches
+        {
+            get
+            {
+                _branches ??= new BranchesRepository(_repoContext, _dbSAPBusinessOne);
+                return _branches;
+            }
+        }
+        public IProcessesRepository Processes
+        {
+            get
+            {
+                _proceso ??= new ProcesoRepository(_repoContext, _dbSAPBusinessOne);
+                return _proceso;
+            }
+        }
+        public ITaxGroupsRepository TaxGroups
+        {
+            get
+            {
+                _taxGroups ??= new TaxGroupsRepository(_repoContext, _dbSAPBusinessOne);
+                return _taxGroups;
+            }
+        }
+        public ICountriesRepository Countries
+        {
+            get
+            {
+                _countries ??= new CountriesRepository(_repoContext, _dbSAPBusinessOne);
+                return _countries;
+            }
+        }
+        public ITiempoVidaRepository TiempoVida
+        {
+            get
+            {
+                _tiempoVida ??= new TiempoVidaRepository(_repoContext, _dbSAPBusinessOne);
+                return _tiempoVida;
+            }
+        }
+        public IWarehousesRepository Warehouses
+        {
+            get
+            {
+                _warehouses ??= new WarehousesRepository(_repoContext, _dbSAPBusinessOne);
+                return _warehouses;
+            }
+        }
+        public IItemGroupsRepository ItemGroups
+        {
+            get
+            {
+                _itemGroups ??= new ItemGroupsRepository(_repoContext, _dbSAPBusinessOne);
+                return _itemGroups;
+            }
+        }
+        public IDepartmentsRepository Departments
+        {
+            get
+            {
+                _departments ??= new DepartmentsRepository(_repoContext, _dbSAPBusinessOne);
+                return _departments;
+            }
+        }
+        public IUnidadMedidaRepository UnidadMedida
+        {
+            get
+            {
+                _unidadMedida ??= new UnidadMedidaRepository(_repoContext, _dbSAPBusinessOne);
+                return _unidadMedida;
+            }
+        }
+        public ITipoLaminadoRepository TipoLaminado
+        {
+            get
+            {
+                _tipoLaminado ??= new TipoLaminadoRepository(_repoContext, _dbSAPBusinessOne);
+                return _tipoLaminado;
+            }
+        }
+        public ISalesPersonsRepository SalesPersons
+        {
+            get
+            {
+                _salesPersons ??= new SalesPersonsRepository(_repoContext, _dbSAPBusinessOne);
+                return _salesPersons;
+            }
+        }
+        public IOperationsTypesRepository OperationsTypes
+        {
+            get
+            {
+                _operationsTypes ??= new OperationsTypesRepository(_repoContext, _dbSAPBusinessOne);
+                return _operationsTypes;
+            }
+        }
+        public ICurrencyCodesRepository CurrencyCodes
+        {
+            get
+            {
+                _currencyCodes ??= new CurrencyCodesRepository(_repoContext, _dbSAPBusinessOne);
+                return _currencyCodes;
+            }
+        }
+        public ILongitudAnchoRepository LongitudAncho
+        {
+            get
+            {
+                _longitudAncho ??= new LongitudAnchoRepository(_repoContext, _dbSAPBusinessOne);
+                return _longitudAncho;
+            }
+        }
+        public IColorImpresionRepository ColorImpresion
+        {
+            get
+            {
+                _colorImpresion ??= new ColorImpresionRepository(_repoContext, _dbSAPBusinessOne);
+                return _colorImpresion;
+            }
+        }
+        public ISubGrupoArticuloRepository SubGrupoArticulo
+        {
+            get
+            {
+                _subGrupoArticulo ??= new SubGrupoArticuloRepository(_repoContext, _dbSAPBusinessOne);
+                return _subGrupoArticulo;
+            }
+        }
+        public IPaymentTermsTypesRepository PaymentTermsTypes
+        {
+            get
+            {
+                _paymentTermsTypes ??= new PaymentTermsTypesRepository(_repoContext, _dbSAPBusinessOne);
+                return _paymentTermsTypes;
+            }
+        }
+        public ISubGrupoArticulo2Repository SubGrupoArticulo2
+        {
+            get
+            {
+                _subGrupoArticulo2 ??= new SubGrupoArticulo2SapRepository(_repoContext, _dbSAPBusinessOne);
+                return _subGrupoArticulo2;
+            }
+        }
+        
+        
         public IBusinessPartnerGroupsRepository BusinessPartnerGroups
         {
             get
             {
-                if (_businessPartnerGroups == null)
-                {
-                    _businessPartnerGroups = new BusinessPartnerGroupsRepository(_repoContext, _dbSAPBusinessOne);
-                }
+                _businessPartnerGroups ??= new BusinessPartnerGroupsRepository(_repoContext, _dbSAPBusinessOne);
                 return _businessPartnerGroups;
             }
         }
@@ -795,22 +649,24 @@ namespace Net.Data
         {
             get
             {
-                if (_businessPartnerSectors == null)
-                {
-                    _businessPartnerSectors = new BusinessPartnerSectorsRepository(_repoContext, _dbSAPBusinessOne);
-                }
+                _businessPartnerSectors ??= new BusinessPartnerSectorsRepository(_repoContext, _dbSAPBusinessOne);
                 return _businessPartnerSectors;
             }
         }
-        public IDivisionRepository Division
+        public IBusinessPartnerDivisionsRepository BusinessPartnerDivisions
         {
             get
             {
-                if (_division == null)
-                {
-                    _division = new DivisionRepository(_repoContext, _dbSAPBusinessOne);
-                }
-                return _division;
+                _businessPartnerDivisions ??= new BusinessPartnerDivisionsRepository(_repoContext, _dbSAPBusinessOne);
+                return _businessPartnerDivisions;
+            }
+        }
+        public IBusinessPartnerGroupsUserTableRepository BusinessPartnerGroupsUserTable
+        {
+            get
+            {
+                _businessPartnerGroupsUserTable ??= new BusinessPartnerGroupsUserTableRepository(_repoContext, _dbSAPBusinessOne);
+                return _businessPartnerGroupsUserTable;
             }
         }
         #endregion
@@ -824,10 +680,7 @@ namespace Net.Data
         {
             get
             {
-                if (_approvalRequests == null)
-                {
-                    _approvalRequests = new ApprovalRequestsRepository(_repoContext, _configuration, _dbSAPBusinessOne, _companyProviderSap);
-                }
+                _approvalRequests ??= new ApprovalRequestsRepository(_repoContext, _configuration, _dbSAPBusinessOne, _companyProviderSap);
                 return _approvalRequests;
             }
         }
@@ -843,10 +696,7 @@ namespace Net.Data
         {
             get
             {
-                if (_costCenters == null)
-                {
-                    _costCenters = new CostCentersRepository(_repoContext, _dbSAPBusinessOne);
-                }
+                _costCenters ??= new CostCentersRepository(_repoContext, _dbSAPBusinessOne);
                 return _costCenters;
             }
         }
@@ -854,10 +704,7 @@ namespace Net.Data
         {
             get
             {
-                if (_chartOfAccounts == null)
-                {
-                    _chartOfAccounts = new ChartOfAccountsRepository(_repoContext, _dbSAPBusinessOne);
-                }
+                _chartOfAccounts ??= new ChartOfAccountsRepository(_repoContext, _dbSAPBusinessOne);
                 return _chartOfAccounts;
             }
         }
@@ -873,10 +720,7 @@ namespace Net.Data
         {
             get
             {
-                if (_drafts == null)
-                {
-                    _drafts = new DraftsRepository(_repoContext, _dbSAPBusinessOne, _companyProviderSap);
-                }
+                _drafts ??= new DraftsRepository(_repoContext, _dbSAPBusinessOne, _companyProviderSap);
                 return _drafts;
             }
         }
@@ -892,10 +736,7 @@ namespace Net.Data
         {
             get
             {
-                if (_orders == null)
-                {
-                    _orders = new OrdersRepository(_repoContext, _configuration, _dbSAPBusinessOne, _companyProviderSap);
-                }
+                _orders ??= new OrdersRepository(_repoContext, _configuration, _dbSAPBusinessOne, _companyProviderSap);
                 return _orders;
             }
         }
@@ -903,10 +744,7 @@ namespace Net.Data
         {
             get
             {
-                if (_invoices == null)
-                {
-                    _invoices = new InvoicesRepository(_repoContext, _configuration, _dbSAPBusinessOne, _companyProviderSap);
-                }
+                _invoices ??= new InvoicesRepository(_repoContext, _configuration, _dbSAPBusinessOne, _companyProviderSap);
                 return _invoices;
             }
         }
@@ -914,10 +752,7 @@ namespace Net.Data
         {
             get
             {
-                if (_deliveryNotes == null)
-                {
-                    _deliveryNotes = new DeliveryNotesRepository(_repoContext, _dbSAPBusinessOne, _companyProviderSap);
-                }
+                _deliveryNotes ??= new DeliveryNotesRepository(_repoContext, _dbSAPBusinessOne, _companyProviderSap);
                 return _deliveryNotes;
             }
         }
@@ -925,10 +760,7 @@ namespace Net.Data
         {
             get
             {
-                if (_facturaVenta == null)
-                {
-                    _facturaVenta = new FacturaVentaSapRepository(_repoContext, _configuration);
-                }
+                _facturaVenta ??= new FacturaVentaSapRepository(_repoContext, _configuration);
                 return _facturaVenta;
             }
         }
@@ -936,10 +768,7 @@ namespace Net.Data
         {
             get
             {
-                if (_guiaElectronica == null)
-                {
-                    _guiaElectronica = new GuiaElectronicaRepository(_repoContext, _configuration);
-                }
+                _guiaElectronica ??= new GuiaElectronicaRepository(_repoContext, _configuration);
                 return _guiaElectronica;
             }
         }
@@ -947,10 +776,7 @@ namespace Net.Data
         {
             get
             {
-                if (_facturacionElectronica == null)
-                {
-                    _facturacionElectronica = new FacturacionElectronicaRepositoy(_repoContext, _configuration);
-                }
+                _facturacionElectronica ??= new FacturacionElectronicaRepositoy(_repoContext, _configuration);
                 return _facturacionElectronica;
             }
         }
@@ -965,10 +791,7 @@ namespace Net.Data
         {
             get
             {
-                if (_purchaseRequest == null)
-                {
-                    _purchaseRequest = new PurchaseRequestRepository(_repoContext, _dbSAPBusinessOne, _companyProviderSap);
-                }
+                _purchaseRequest ??= new PurchaseRequestRepository(_repoContext, _dbSAPBusinessOne, _companyProviderSap);
                 return _purchaseRequest;
             }
         }
@@ -984,10 +807,7 @@ namespace Net.Data
         {
             get
             {
-                if (_drivers == null)
-                {
-                    _drivers = new DriversRepository(_repoContext, _dbSAPBusinessOne, _mapper);
-                }
+                _drivers ??= new DriversRepository(_repoContext, _dbSAPBusinessOne, _mapper);
                 return _drivers;
             }
         }
@@ -995,10 +815,7 @@ namespace Net.Data
         {
             get
             {
-                if (_vehicles == null)
-                {
-                    _vehicles = new VehiclesRepository(_repoContext, _dbSAPBusinessOne, _mapper);
-                }
+                _vehicles ??= new VehiclesRepository(_repoContext, _dbSAPBusinessOne, _mapper);
                 return _vehicles;
             }
         }
@@ -1006,10 +823,7 @@ namespace Net.Data
         {
             get
             {
-                if (_addresses == null)
-                {
-                    _addresses = new AddressesRepository(_repoContext, _dbSAPBusinessOne, _companyProviderSap);
-                }
+                _addresses ??= new AddressesRepository(_repoContext, _dbSAPBusinessOne, _companyProviderSap);
                 return _addresses;
             }
         }
@@ -1025,10 +839,7 @@ namespace Net.Data
         {
             get
             {
-                if (_contactEmployees == null)
-                {
-                    _contactEmployees = new ContactEmployeesRepository(_repoContext, _dbSAPBusinessOne, _companyProviderSap);
-                }
+                _contactEmployees ??= new ContactEmployeesRepository(_repoContext, _dbSAPBusinessOne, _companyProviderSap);
                 return _contactEmployees;
             }
         }
@@ -1062,10 +873,7 @@ namespace Net.Data
         {
             get
             {
-                if (_OSKP == null)
-                {
-                    _OSKP = new OSKPRepository(_repoContext, _configuration, _dbSAPBusinessOne, _mapper, _companyProviderSap);
-                }
+                _OSKP ??= new OSKPRepository(_repoContext, _configuration, _dbSAPBusinessOne, _mapper, _companyProviderSap);
                 return _OSKP;
             }
         }
@@ -1073,10 +881,7 @@ namespace Net.Data
         {
             get
             {
-                if (_OSKC == null)
-                {
-                    _OSKC = new OSKCRepository(_repoContext, _configuration, _dbSAPBusinessOne, _mapper, _companyProviderSap);
-                }
+                _OSKC ??= new OSKCRepository(_repoContext, _configuration, _dbSAPBusinessOne, _mapper, _companyProviderSap);
                 return _OSKC;
             }
         }
@@ -1084,10 +889,7 @@ namespace Net.Data
         {
             get
             {
-                if (_items == null)
-                {
-                    _items = new ItemsRepository(_repoContext, _configuration, _dbSAPBusinessOne, _companyProviderSap);
-                }
+                _items ??= new ItemsRepository(_repoContext, _configuration, _dbSAPBusinessOne, _companyProviderSap);
                 return _items;
             }
         }
@@ -1095,10 +897,7 @@ namespace Net.Data
         {
             get
             {
-                if (_picking == null)
-                {
-                    _picking = new PickingRepository(_repoContext, _configuration, _dbSAPBusinessOne, _dbProfil, _companyProviderSap);
-                }
+                _picking ??= new PickingRepository(_repoContext, _configuration, _dbSAPBusinessOne, _dbProfil, _companyProviderSap);
                 return _picking;
             }
         }
@@ -1106,10 +905,7 @@ namespace Net.Data
         {
             get
             {
-                if (_stockTransfers == null)
-                {
-                    _stockTransfers = new StockTransfersRepository(_repoContext, _configuration, _dbSAPBusinessOne, _mapper, _companyProviderSap);
-                }
+                _stockTransfers ??= new StockTransfersRepository(_repoContext, _configuration, _dbSAPBusinessOne, _mapper, _companyProviderSap);
                 return _stockTransfers;
             }
         }
@@ -1117,10 +913,7 @@ namespace Net.Data
         {
             get
             {
-                if (_cargaSaldoInicial == null)
-                {
-                    _cargaSaldoInicial = new CargaSaldoInicialRepository(_repoContext, _configuration, _dbSAPBusinessOne, _mapper);
-                }
+                _cargaSaldoInicial ??= new CargaSaldoInicialRepository(_repoContext, _configuration, _dbSAPBusinessOne, _mapper);
                 return _cargaSaldoInicial;
             }
         }
@@ -1128,10 +921,7 @@ namespace Net.Data
         {
             get
             {
-                if (_inventoryTransferRequest == null)
-                {
-                    _inventoryTransferRequest = new InventoryTransferRequestRepository(_repoContext, _configuration, _dbSAPBusinessOne, _companyProviderSap);
-                }
+                _inventoryTransferRequest ??= new InventoryTransferRequestRepository(_repoContext, _configuration, _dbSAPBusinessOne, _companyProviderSap);
                 return _inventoryTransferRequest;
             }
         }
@@ -1139,10 +929,7 @@ namespace Net.Data
         {
             get
             {
-                if (_takeInventorySpareParts == null)
-                {
-                    _takeInventorySpareParts = new TakeInventorySparePartsRepository(_repoContext, _configuration, _dbSeguridad, _dbSAPBusinessOne, _companyProviderSap);
-                }
+                _takeInventorySpareParts ??= new TakeInventorySparePartsRepository(_repoContext, _configuration, _dbSeguridad, _dbSAPBusinessOne, _companyProviderSap);
                 return _takeInventorySpareParts;
             }
         }
@@ -1150,10 +937,7 @@ namespace Net.Data
         {
             get
             {
-                if (_priceList == null)
-                {
-                    _priceList = new PriceListRepository(_repoContext, _dbSAPBusinessOne);
-                }
+                _priceList ??= new PriceListRepository(_repoContext, _dbSAPBusinessOne);
                 return _priceList;
             }
         }
@@ -1185,10 +969,7 @@ namespace Net.Data
         {
             get
             {
-                if (_ordenFabricacion == null)
-                {
-                    _ordenFabricacion = new OrdenFabricacionSapRepository(_repoContext, _configuration);
-                }
+                _ordenFabricacion ??= new OrdenFabricacionSapRepository(_repoContext, _configuration);
                 return _ordenFabricacion;
             }
         }

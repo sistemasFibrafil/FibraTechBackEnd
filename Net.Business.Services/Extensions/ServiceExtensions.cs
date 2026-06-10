@@ -2,14 +2,24 @@
 using Net.Connection;
 using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
-using Net.BusinessLogic.Services.Common;
 using Microsoft.Extensions.Configuration;
-using Net.BusinessLogic.Interfaces.Common;
+using Net.Business.Logic.Services.Common;
+using Net.Business.Logic.Interfaces.Common;
 using Microsoft.Extensions.DependencyInjection;
-using Net.BusinessLogic.Services.SAPBusinessOne.Draft;
-using Net.BusinessLogic.Services.SAPBusinessOne.Sales;
-using Net.BusinessLogic.Interfaces.SAPBusinessOne.Draft;
-using Net.BusinessLogic.Interfaces.SAPBusinessOne.Sales;
+using Net.Business.Logic.Services.SAPBusinessOne.Draft;
+using Net.Business.Logic.Services.SAPBusinessOne.Sales;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.Draft;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.Sales;
+using Net.Business.Logic.Services.SAPBusinessOne.Inventory;
+using Net.Business.Logic.Services.SAPBusinessOne.Purchasing;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.Inventory;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.Purchasing;
+using Net.Business.Logic.Services.SAPBusinessOne.BusinessPartners;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.BusinessPartners;
+using Net.Business.Logic.Services.SAPBusinessOne.Inventory.InventoryTransactions;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.Inventory.InventoryTransactions;
+using Net.Business.Logic.Services.SAPBusinessOne.Administration.SystemInitialization;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.Administration.SystemInitialization;
 namespace Net.Business.Services
 {
     public static class ServiceExtensions
@@ -42,8 +52,24 @@ namespace Net.Business.Services
 
         public static void ConfigureBusinessLogicServices(this IServiceCollection services)
         {
+            services.AddScoped<IDocumentSeriesConfigurationService, DocumentSeriesConfigurationService>();
+
+            services.AddScoped<IItemsService, ItemsService>();
+            services.AddScoped<IStockTransfersService, StockTransfersService>();
+            services.AddScoped<IInventoryTransferRequestService, InventoryTransferRequestService>();
+
+            services.AddScoped<IPurchaseRequestService, PurchaseRequestService>();
+
             services.AddScoped<IOrdersService, OrdersService>();
+            services.AddScoped<IInvoicesService, InvoicesService>();
+            services.AddScoped<IDeliveryNotesService, DeliveryNotesService>();
+            
             services.AddScoped<IDraftService, DraftService>();
+
+            services.AddScoped<IUbigeoService, UbigeoService>();
+            services.AddScoped<IDriversService, DriversService>();
+            services.AddScoped<IVehiclesService, VehiclesService>();
+
             services.AddScoped<IFileService, FileService>();
         }
 

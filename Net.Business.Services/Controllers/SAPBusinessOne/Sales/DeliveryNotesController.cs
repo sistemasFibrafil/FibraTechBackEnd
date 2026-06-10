@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
-using Net.BusinessLogic.Interfaces.SAPBusinessOne.Sales;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.Sales;
 using Net.Business.DTO.SAPBusinessOne.Sales.DeliveryNotes.Close;
 using Net.Business.DTO.SAPBusinessOne.Sales.DeliveryNotes.Create;
 using Net.Business.DTO.SAPBusinessOne.Sales.DeliveryNotes.Update;
@@ -39,7 +39,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
             if (result.ResultadoCodigo == -1)
                 return BadRequest(result);
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet("{docEntry}")]
@@ -53,7 +53,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
             if (result.ResultadoCodigo == -1)
                 return BadRequest(result);
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         #endregion
@@ -138,7 +138,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
 
             var nombreArchivo = string.Format("Entrega Nacional - {0}", DateTime.Now.ToString("dd-MM-yyyy").ToString());
 
-            var pdf = File(objectGetById.data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
+            var pdf = File(objectGetById.Data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
 
             return pdf;
         }
@@ -153,7 +153,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
 
             var nombreArchivo = string.Format("Entrega Exportacion - {0}", DateTime.Now.ToString("dd-MM-yyyy").ToString());
 
-            var pdf = File(objectGetById.data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
+            var pdf = File(objectGetById.Data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
 
             return pdf;
         }

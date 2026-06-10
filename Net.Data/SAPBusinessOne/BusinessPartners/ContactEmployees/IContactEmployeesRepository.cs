@@ -1,16 +1,17 @@
-using Net.Business.Entities;
 using System.Threading.Tasks;
+using Net.Business.Entities;
 using Net.Business.Entities.SAPBusinessOne;
+using Net.CrossCotting;
 namespace Net.Data.SAPBusinessOne
 {
     public interface IContactEmployeesRepository
     {
-        Task<ResultadoTransaccionEntity<ContactEmployeesQueryEntity>> GetByCode(ContactEmployeesFindEntity value);
-        Task<ResultadoTransaccionEntity<ContactEmployeesQueryEntity>> GetListByFilter(ContactEmployeesFilterEntity value);
-        Task<ResultadoTransaccionEntity<ContactEmployeesQueryEntity>> GetById(ContactEmployeesFindEntity value);
-        Task<ResultadoTransaccionEntity<ContactEmployeesQueryEntity>> GetByCardCode(string cardCode);
-        Task<ResultadoTransaccionEntity<ContactEmployeesQueryEntity>> SetCreate(ContactEmployeesEntity value);
-        Task<ResultadoTransaccionEntity<ContactEmployeesQueryEntity>> SetUpdate(ContactEmployeesEntity value);
-        Task<ResultadoTransaccionEntity<ContactEmployeesQueryEntity>> SetDelete(int cntctCode);
+        Task<ResultadoTransaccionResponse<ContactEmployeesQueryEntity>> GetByCode(ContactEmployeesFindEntity value);
+        Task<ResultadoTransaccionResponse<ContactEmployeesQueryEntity>> GetListByFilter(ContactEmployeesFilterEntity value);
+        Task<ResultadoTransaccionResponse<ContactEmployeesQueryEntity>> GetById(ContactEmployeesFindEntity value);
+        Task<ResultadoTransaccionResponse<ContactEmployeesQueryEntity>> GetByCardCode(string cardCode);
+        Task<ResultadoTransaccionResponse<ContactEmployeesQueryEntity>> SetCreate(ContactEmployeesEntity value);
+        Task<ResultadoTransaccionResponse<ContactEmployeesQueryEntity>> SetUpdate(ContactEmployeesEntity value);
+        Task<ResultadoTransaccionResponse<ContactEmployeesQueryEntity>> SetDelete(int cntctCode);
     }
 }

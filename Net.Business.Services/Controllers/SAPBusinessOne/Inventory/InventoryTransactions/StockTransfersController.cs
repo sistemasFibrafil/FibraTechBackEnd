@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
-using Net.BusinessLogic.Interfaces.SAPBusinessOne.Inventory.InventoryTransactions;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.Inventory.InventoryTransactions;
 using Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Create;
 using Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Update;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions
@@ -37,7 +37,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTr
             if (result.ResultadoCodigo == -1)
                 return BadRequest(result);
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet("{id}")]
@@ -51,7 +51,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTr
             if (result.ResultadoCodigo == -1)
                 return BadRequest(result);
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         #endregion
@@ -94,17 +94,17 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTr
 
         #region <<< IMPRESIONES >>>
 
-        [HttpGet("{id}")]
+        [HttpGet("{docEntry}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesDefaultResponseType]
-        public async Task<FileContentResult> GetFormatoPdfByDocEntry(int id)
+        public async Task<FileContentResult> GetFormatoPdfByDocEntry(int docEntry)
         {
-            var objectGetById = await _repository.StockTransfers.GetFormatoPdfByDocEntry(id);
+            var objectGetById = await _repository.StockTransfers.GetFormatoPdfByDocEntry(docEntry);
 
             var nombreArchivo = string.Format("Transferencia de stock - {0}", DateTime.Now.ToString("dd-MM-yyyy").ToString());
 
-            var pdf = File(objectGetById.data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
+            var pdf = File(objectGetById.Data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
 
             return pdf;
         }

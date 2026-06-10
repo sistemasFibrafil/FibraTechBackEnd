@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
-using Net.BusinessLogic.Interfaces.SAPBusinessOne.BusinessPartners;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.BusinessPartners;
 using Net.Business.DTO.SAPBusinessOne.BusinessPartners.Vehicles.Filter;
 using Net.Business.DTO.SAPBusinessOne.BusinessPartners.Vehicles.Create;
-using Net.BusinessLogic.Mappers.SAPBusinessOne.BusinessPartners.Vehicles.Filter;
+using Net.Business.Logic.Mappers.SAPBusinessOne.BusinessPartners.Vehicles.Filter;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners
 {
     [ApiController]
@@ -35,7 +35,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners
             if (result.ResultadoCodigo == -1)
                 return BadRequest(result);
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpPost]

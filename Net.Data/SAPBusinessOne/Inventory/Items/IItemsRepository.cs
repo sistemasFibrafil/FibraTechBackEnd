@@ -2,13 +2,15 @@
 using Net.CrossCotting;
 using Net.Business.Entities;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Net.Business.Entities.SAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Inventory.Items.Update;
 namespace Net.Data.SAPBusinessOne
 {
     public interface IItemsRepository
     {
         Task<ResultadoTransaccionResponse<ItemsEntity>> GetListByFilter(ItemsFilterEntity value);
-        Task<ResultadoTransaccionResponse<ItemsQueryEntity>> GetListByCode(ItemsFindByListCodeEntity value);
+        Task<ResultadoTransaccionResponse<ItemsQueryEntity>> GetListByCode(ItemsFindByCodeEntity value);
         Task<ResultadoTransaccionResponse<ItemsStockGeneralViewEntity>> GetListStockGeneralSummary(ItemsStockGeneralViewFilterEntity value);
         Task<ResultadoTransaccionResponse<MemoryStream>> GetStockGeneralSummaryExcel(ItemsStockGeneralViewFilterEntity value);
         Task<ResultadoTransaccionResponse<ItemsStockGeneralViewEntity>> GetListStockGeneralDetailed(ItemsStockGeneralViewFilterEntity value);
@@ -24,5 +26,6 @@ namespace Net.Data.SAPBusinessOne
         Task<ResultadoTransaccionResponse<ArticuloForSodimacBySkuItemEntity>> GetArticuloForOrdenVentaSodimacBySku(ArticuloSodimacBySkuEntity value);
         Task<ResultadoTransaccionResponse<ArticuloDocumentoEntity>> GetArticuloVentaByCode(FilterRequestEntity value);
         Task<ResultadoTransaccionResponse<ItemsEntity>> SetCreateMassive(ItemsCreateMassiveEntity value);
+        Task<ResultadoTransaccionResponse<ItemsEntity>> SetUpdateMassive(List<ItemsUpdateMassiveEntity> value);
     }
 }

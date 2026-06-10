@@ -1,4 +1,6 @@
-﻿namespace Net.Business.Entities.SAPBusinessOne
+﻿using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.OperationsTypes.Entities;
+
+namespace Net.Business.Entities.SAPBusinessOne
 {
     public class Invoices1Entity
     {
@@ -49,6 +51,6 @@
 
 
         // 🔗 N → 1 (INV1 → TipoOperacion)
-        public OperationTypeEntity? OperationType { get; set; } = null!;
+        public OperationsTypesEntity? OperationType { get; set; } = null!;
     }
 }

@@ -31,7 +31,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
                 return NotFound(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet("{id}")]
@@ -47,7 +47,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
                 return NotFound(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         [HttpGet]
@@ -62,7 +62,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
                 return NotFound(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
     }
 }

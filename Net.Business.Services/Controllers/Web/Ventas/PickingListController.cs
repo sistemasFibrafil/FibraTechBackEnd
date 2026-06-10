@@ -29,7 +29,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
 
             var nombreArchivo = string.Format("Picking List - {0}", DateTime.Now.ToString("dd-MM-yyyy").ToString());
 
-            var pdf = File(objectGetById.data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
+            var pdf = File(objectGetById.Data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
 
             return pdf;
         }

@@ -10,11 +10,13 @@ namespace Net.Connection.ConnectionSAPBusinessOne
         private static readonly object _lock = new();
         private readonly IConnectionSAPBusinessOne _connection;
         private readonly ConnectionSapEntity _connectionConfig;
+        private readonly ConnectionSapEntity _connectionAutorizacionConfig;
 
-        public CompanyProviderSAPBusinessOne(IConnectionSAPBusinessOne connection, ConnectionSapEntity config)
+        public CompanyProviderSAPBusinessOne(IConnectionSAPBusinessOne connection, ConnectionSapEntity config, ConnectionSapEntity connectionAutorizacionConfig)
         {
             _connection = connection;
             _connectionConfig = config;
+            _connectionAutorizacionConfig = connectionAutorizacionConfig;
         }
 
         public Company GetCompany()
@@ -33,17 +35,34 @@ namespace Net.Connection.ConnectionSAPBusinessOne
             }
         }
 
-        public Company GetCompanyAuth()
+        //public Company GetCompanyAuth()
+        //{
+        //    lock (_lock)
+        //    {
+        //        if (_company != null && _company.Connected) _company.Disconnect();
+        //        if (_company == null || !_company.Connected)
+        //        {
+        //            ConnectionSapEntity con = _connectionConfig;
+        //            con.UserName = "ccIndirect";
+        //            con.Password = "12345.@";
+        //            var result = _connection.ConnectToCompany(con);
+        //            if (result != "0")
+        //                throw new Exception($"Error al conectar SAP Business One: {result}");
+
+        //            _company = RepositoryBaseSAPBusinessOne.RepositoryBaseSAPBusinessOne.oCompany;
+        //        }
+        //        return _company;
+        //    }
+        //}
+
+        public Company GetCompanyAutorizacion()
         {
             lock (_lock)
             {
                 if (_company != null && _company.Connected) _company.Disconnect();
                 if (_company == null || !_company.Connected)
                 {
-                    ConnectionSapEntity connectionSapEntity2 = _connectionConfig;
-                    connectionSapEntity2.UserName = "indirectcc";
-                    connectionSapEntity2.Password = "1234";
-                    var result = _connection.ConnectToCompany(connectionSapEntity2);
+                    var result = _connection.ConnectToCompany(_connectionAutorizacionConfig);
                     if (result != "0")
                         throw new Exception($"Error al conectar SAP Business One: {result}");
 

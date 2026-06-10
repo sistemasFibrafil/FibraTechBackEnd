@@ -8,6 +8,7 @@ namespace Net.Data.SAPBusinessOne
         Task<ResultadoTransaccionResponse<WarehousesQueryEntity>> GetListByInactive(WarehousesEntity value);
         Task<ResultadoTransaccionResponse<WarehousesQueryEntity>> GetListProduccion();
         Task<ResultadoTransaccionResponse<WarehousesQueryEntity>> GetListByItem(WarehousesByItemFilterEntity value);
+        Task<ResultadoTransaccionResponse<WarehousesQueryEntity>> GetByCode(string code);
         Task<ResultadoTransaccionResponse<WarehousesQueryEntity>> GetListByWhsCodeAndItemCode(WarehousesByItemFindEntity value);
     }
 }

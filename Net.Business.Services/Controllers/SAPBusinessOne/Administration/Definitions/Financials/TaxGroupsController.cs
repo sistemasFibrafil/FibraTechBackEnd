@@ -6,11 +6,11 @@ using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.Financials
 {
-    [Route("api/[controller]/[action]")]
     [ApiController]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ApiExplorerSettings(GroupName = "ApiFibrafil")]
+    [Route("api/[controller]/[action]")]
     [Authorize(AuthenticationSchemes = "Bearer")]
+    [ApiExplorerSettings(GroupName = "ApiFibrafil")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class TaxGroupsController : ControllerBase
     {
         private readonly IRepositoryWrapper _repository;
@@ -31,7 +31,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
                 return BadRequest(resutl);
             }
 
-            return Ok(resutl.dataList);
+            return Ok(resutl.DataList);
         }
 
         [HttpGet]
@@ -46,7 +46,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
                 return BadRequest(resutl);
             }
 
-            return Ok(resutl.dataList);
+            return Ok(resutl.DataList);
         }
 
         [HttpGet]
@@ -62,7 +62,22 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
                 return BadRequest(resutl);
             }
 
-            return Ok(resutl.data);
+            return Ok(resutl.Data);
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetByCode([FromQuery] string code)
+        {
+            var resutl = await _repository.TaxGroups.GetByCode(code);
+
+            if (resutl.ResultadoCodigo == -1)
+            {
+                return BadRequest(resutl);
+            }
+
+            return Ok(resutl.Data);
         }
     }
 }

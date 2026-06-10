@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using Net.Business.DTO.SAPBusinessOne.Administration.Definitions.General.Users.Find;
 using Net.Business.DTO.SAPBusinessOne.Administration.Definitions.General.Users.Filter;
-using Net.BusinessLogic.Mappers.SAPBusinessOne.Administration.Definitions.General.Users.Find;
-using Net.BusinessLogic.Mappers.SAPBusinessOne.Administration.Definitions.General.Users.Filter;
+using Net.Business.Logic.Mappers.SAPBusinessOne.Administration.Definitions.General.Users.Find;
+using Net.Business.Logic.Mappers.SAPBusinessOne.Administration.Definitions.General.Users.Filter;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General
 {
     [ApiController]
@@ -34,7 +34,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
                 return NotFound(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
@@ -48,7 +48,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
             if (result.ResultadoCodigo == -1)
                 return BadRequest(result);
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
@@ -62,7 +62,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
             if (result.ResultadoCodigo == -1)
                 return NotFound(result);
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
     }
 }

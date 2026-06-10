@@ -1,18 +1,20 @@
 using System;
 using System.Linq;
 using Net.Connection;
+using Net.CrossCotting;
 using Net.Data.AppContext;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 using Net.Business.Entities.SAPBusinessOne;
-
 namespace Net.Data.SAPBusinessOne
 {
     public class BusinessPartnerSectorsRepository : RepositoryBase<BusinessPartnerSectorsEntity>, IBusinessPartnerSectorsRepository
     {
-        private string _aplicacionName;
+        private readonly string _aplicacionName;
         private readonly Regex regex = new Regex(@"<(\w+)>.*");
+
+        // PARAMETROS DE COXIÓN
         private readonly DataContextSAPBusinessOne _db;
 
         public BusinessPartnerSectorsRepository(IConnectionSQL context, DataContextSAPBusinessOne db)
@@ -35,13 +37,18 @@ namespace Net.Data.SAPBusinessOne
             {
                 var list = await _db.BusinessPartnerSectors
                 .AsNoTracking()
-                .OrderBy(x => x.Codigo)
+                .OrderBy(x => x.Name)
+                .Select(n => new BusinessPartnerSectorsEntity
+                {
+                    Code = n.Code,
+                    Name = n.Name
+                })
                 .ToListAsync();
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
-                resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.Users.Entities;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.OperationsTypes.Entities;
 namespace Net.Business.Entities.SAPBusinessOne
 {
     public class DeliveryNotesEntity
@@ -19,6 +20,7 @@ namespace Net.Business.Entities.SAPBusinessOne
         public short UserSign { get; set; }
 
         public string? U_FIB_FromPkg { get; set; }
+        public string? U_FIB_ESTADOSUNAT { get; set; }
 
         public string? U_BPP_MDTD { get; set; }
         public string? U_BPP_MDSD { get; set; }
@@ -201,7 +203,7 @@ namespace Net.Business.Entities.SAPBusinessOne
 
 
         // 🔗 N → 1 (DLN1 → TipoOperacion)
-        public OperationTypeEntity? OperationType { get; set; } = null;
+        public OperationsTypesEntity? OperationType { get; set; } = null;
     }
 
     public class DeliveryNotesByFechaEntity

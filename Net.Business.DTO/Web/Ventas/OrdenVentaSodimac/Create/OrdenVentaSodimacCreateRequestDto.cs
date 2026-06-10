@@ -8,16 +8,16 @@ namespace Net.Business.DTO.Web
         public int Id { get; set; }
         public int DocEntry { get; set; }
         public int DocNum { get; set; }
-        public string NumOrdenCompra { get; set; }
-        public string DocStatus { get; set; }
+        public string? NumOrdenCompra { get; set; }
+        public string? DocStatus { get; set; }
         public DateTime DocDate { get; set; }
         public DateTime DocDueDate { get; set; }
         public DateTime TaxDate { get; set; }
-        public string CardCode { get; set; }
-        public string CardName { get; set; }
+        public string? CardCode { get; set; }
+        public string? CardName { get; set; }
         public int CntctCode { get; set; } = 0;
-        public string CntctName { get; set; } = null;
-        public string Address { get; set; } = null;
+        public string? CntctName { get; set; }
+        public string? Address { get; set; }
         public int? IdUsuarioCreate { get; set; } = null;
         public List<OrdenVentaDetalleSodimacCreateRequestDto> Item { get; set; } = new List<OrdenVentaDetalleSodimacCreateRequestDto>();
 
@@ -69,12 +69,12 @@ namespace Net.Business.DTO.Web
         public int Line2 { get; set; }
         public int NumLocal { get; set; }
         public bool IsOriente { get; set; } = false;
-        public string LineStatus { get; set; }
-        public string ItemCode { get; set; }
-        public string Sku { get; set; }
-        public string Dscription { get; set; }
-        public string DscriptionLarga { get; set; }
-        public string Ean { get; set; } = null;
+        public string? LineStatus { get; set; }
+        public string? ItemCode { get; set; }
+        public string? Sku { get; set; }
+        public string? Dscription { get; set; }
+        public string? DscriptionLarga { get; set; }
+        public string? Ean { get; set; } = null;
         public decimal Quantity { get; set; }
     }
 }

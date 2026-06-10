@@ -62,12 +62,8 @@ namespace Net.Business.DTO.SAPBusinessOne.Sales.Orders.Create
         public double U_FIB_TFLETE { get; set; }
         public double U_FIB_IMPSEG { get; set; }
         public string? U_FIB_PUERTO { get; set; }
-
-
-        /// <summary>
-        /// OTROS
-        /// </summary>
-        public string? U_STR_TVENTA { get; set; }
+        public string? U_FIB_NEMBA { get; set; }
+        public string? U_FIB_DEMBA { get; set; }
 
 
         /// <summary>
@@ -88,7 +84,7 @@ namespace Net.Business.DTO.SAPBusinessOne.Sales.Orders.Create
         public int U_UsrCreate { get; set; }
 
 
-        public Attachments2CreateRequestDto? Attachments2 { get; set; }
+        public Attachments2CreateRequestDto? Attachments2 { get; set; } = null;
         public List<OrdersLinesCreateRequestDto> Lines { get; set; } = [];
     }
 }

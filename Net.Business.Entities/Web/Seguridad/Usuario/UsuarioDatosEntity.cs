@@ -23,6 +23,10 @@ namespace Net.Business.Entities.Web
         public string? MainCurncy { get; set; }
         public string? SysCurrncy { get; set; }
         public string? DfltWhs { get; set; }
+        // Código empleado por defecto para el sistema
+        public short DfltSlp { get; set; }
+        // Condición de pago por defecto para clientes
+        public short DfCustTerm { get; set; }
         public string? AttachPath { get; set; }
         public string? WhsCodeSpaPar { get; set; }
         public int CodGrpSuppNat { get; set; }

@@ -46,7 +46,7 @@ namespace Net.Data.SAPBusinessOne
             try
             {
                 var list = await _db.Invoices
-                .Where(n => n.isIns == "Y" && n.DocType == "I" && n.InvntSttus == "O" && n.U_FIB_DocStPkg == "O" && n.U_FIB_IsPkg == "Y")
+                .Where(n => n.isIns == "Y" && n.DocType == "I" && n.InvntSttus == "O" && n.U_FIB_DocStPkg == "O")
                 .Select(s => new InvoicesOpenQueryEntity
                 {
                     DocEntry = s.DocEntry,
@@ -63,7 +63,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -175,7 +175,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -359,7 +359,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -431,11 +431,6 @@ namespace Net.Data.SAPBusinessOne
                     invoices.UserFields.Fields.Item("U_BPP_MDCD").Value = value.U_BPP_MDCD;
 
                     // ===========================================================================================
-                    // PICKING
-                    // ===========================================================================================
-                    invoices.UserFields.Fields.Item("U_FIB_IsPkg").Value = value.U_FIB_IsPkg;
-
-                    // ===========================================================================================
                     // SOCIO DE NEGOCIO
                     // ===========================================================================================
                     invoices.CardCode = value.CardCode;
@@ -475,11 +470,6 @@ namespace Net.Data.SAPBusinessOne
                     invoices.UserFields.Fields.Item("U_FIB_TFLETE").Value = value.U_FIB_TFLETE;
                     invoices.UserFields.Fields.Item("U_FIB_IMPSEG").Value = value.U_FIB_IMPSEG;
                     invoices.UserFields.Fields.Item("U_FIB_PUERTO").Value = value.U_FIB_PUERTO;
-
-                    // ===========================================================================================
-                    // OTROS
-                    // ===========================================================================================
-                    invoices.UserFields.Fields.Item("U_STR_TVENTA").Value = value.U_STR_TVENTA;
 
                     // ===========================================================================================
                     // PIE
@@ -672,11 +662,6 @@ namespace Net.Data.SAPBusinessOne
                     invoices.UserFields.Fields.Item("U_FIB_TFLETE").Value = value.U_FIB_TFLETE;
                     invoices.UserFields.Fields.Item("U_FIB_IMPSEG").Value = value.U_FIB_IMPSEG;
                     invoices.UserFields.Fields.Item("U_FIB_PUERTO").Value = value.U_FIB_PUERTO;
-                    
-                    // ===========================================================================================
-                    // OTROS
-                    // ===========================================================================================
-                    invoices.UserFields.Fields.Item("U_STR_TVENTA").Value = value.U_STR_TVENTA;
                     
                     // ===========================================================================================
                     // PIE

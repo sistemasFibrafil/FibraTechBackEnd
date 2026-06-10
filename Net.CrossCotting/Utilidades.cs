@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Globalization;
+using Net.Business.Entities;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
-using Net.Business.Entities;
 namespace Net.CrossCotting
 {
     public static class Utilidades
@@ -38,6 +38,9 @@ namespace Net.CrossCotting
             //_catalog = EncriptaHelper.EncryptStringAES(configuration[string.Format("{0}:Catalog", _entorno)]);
             //_user = EncriptaHelper.EncryptStringAES(configuration[string.Format("{0}:User", _entorno)]);
             //_password = EncriptaHelper.EncryptStringAES(configuration[string.Format("{0}:Password", _entorno)]);
+            //_user = EncriptaHelper.EncryptStringAES("PROFIL_TEST_020626");
+            //_user = EncriptaHelper.EncryptStringAES("ccIndirect");
+            //_password = EncriptaHelper.EncryptStringAES("12345.@");
 
             _source = EncriptaHelper.DecryptStringAES(configuration[string.Format("{0}:Source", _entorno)]);
             _catalog = EncriptaHelper.DecryptStringAES(configuration[string.Format("{0}:Catalog", _entorno)]);

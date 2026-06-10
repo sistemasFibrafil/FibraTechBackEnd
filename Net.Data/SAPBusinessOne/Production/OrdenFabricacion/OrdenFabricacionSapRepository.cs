@@ -73,7 +73,7 @@ namespace Net.Data.SAPBusinessOne
                     ResultTransaccion.IdRegistro = 0;
                     ResultTransaccion.ResultadoCodigo = 0;
                     ResultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    ResultTransaccion.dataList = response;
+                    ResultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -132,7 +132,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGetList = await GetListOrdenFabricacionBySede(value);
 
                     //Contenido
-                    foreach (var item in objectGetList.dataList)
+                    foreach (var item in objectGetList.DataList)
                     {
                         row = new Row();
 
@@ -158,7 +158,7 @@ namespace Net.Data.SAPBusinessOne
                 ResultTransaccion.IdRegistro = 0;
                 ResultTransaccion.ResultadoCodigo = 0;
                 ResultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                ResultTransaccion.data = ms;
+                ResultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -204,7 +204,7 @@ namespace Net.Data.SAPBusinessOne
                     ResultTransaccion.IdRegistro = 0;
                     ResultTransaccion.ResultadoCodigo = 0;
                     ResultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    ResultTransaccion.dataList = response;
+                    ResultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -284,7 +284,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGetList = await GetListOrdenFabricacionGeneralBySede(value);
 
                     //Contenido
-                    foreach (var item in objectGetList.dataList)
+                    foreach (var item in objectGetList.DataList)
                     {
                         row = new Row();
                         row.Append(
@@ -331,7 +331,7 @@ namespace Net.Data.SAPBusinessOne
                 ResultTransaccion.IdRegistro = 0;
                 ResultTransaccion.ResultadoCodigo = 0;
                 ResultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                ResultTransaccion.data = ms;
+                ResultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {

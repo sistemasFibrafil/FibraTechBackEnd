@@ -71,6 +71,8 @@ namespace Net.Business.Entities.SAPBusinessOne
         public decimal? U_FIB_TFLETE { get; set; }
         public decimal? U_FIB_IMPSEG { get; set; }
         public string? U_FIB_PUERTO { get; set; }
+        public string? U_FIB_NEMBA { get; set; }
+        public string? U_FIB_DEMBA { get; set; }
         public string? U_STR_FEMB { get; set; }
 
         /// <summary>
@@ -125,11 +127,11 @@ namespace Net.Business.Entities.SAPBusinessOne
         public PaymentTermsTypesEntity? PaymentTermsTypes { get; set; } = null;
 
 
-        // 🔗 1 → N (ORDR → OCTG)
+        // 🔗 1 → N (ORDR → ODRF)
         public Attachments2Entity? Attachments2 { get; set; } = null;
 
 
         // 🔗 1 → N (ORDR → RDR1)
-        public ICollection<Orders1Entity> Lines { get; set; } = [];
+        public ICollection<OrdersLinesEntity> Lines { get; set; } = [];
     }
 }

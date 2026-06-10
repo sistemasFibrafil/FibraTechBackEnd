@@ -31,7 +31,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTr
                 return BadRequest(objectGetAll);
             }
 
-            return Ok(objectGetAll.dataList);
+            return Ok(objectGetAll.DataList);
         }
     }
 }

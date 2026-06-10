@@ -55,7 +55,7 @@ namespace Net.Data.SAPBusinessOne
                 .Select(x => new WarehousesQueryEntity
                 {
                     WhsCode = x.WhsCode,
-                    FullDescr = x.WhsCode + " - " + x.WhsName
+                    WhsName = x.WhsName
                 })
                 .OrderBy(x => x.WhsCode)
                 .ToListAsync();
@@ -64,7 +64,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -90,7 +90,7 @@ namespace Net.Data.SAPBusinessOne
                 .Select(n => new WarehousesQueryEntity
                 {
                     WhsCode = n.WhsCode,
-                    FullDescr = n.WhsCode + " - " + n.WhsName
+                    WhsName = n.WhsName
                 })
                 .OrderBy(x => x.WhsCode)
                 .ToListAsync();
@@ -99,7 +99,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
 
             }
             catch (Exception ex)
@@ -168,7 +168,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -178,7 +178,41 @@ namespace Net.Data.SAPBusinessOne
             }
 
             return resultTransaccion;
-        }        
+        }
+        public async Task<ResultadoTransaccionResponse<WarehousesQueryEntity>> GetByCode(string code)
+        {
+            var resultTransaccion = new ResultadoTransaccionResponse<WarehousesQueryEntity>
+            {
+                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
+                NombreAplicacion = _aplicacionName
+            };
+
+            try
+            {
+                var data = await _db.Warehouses
+                .Where(n => n.WhsCode == code)
+                .Select(n => new WarehousesQueryEntity
+                {
+                    WhsCode = n.WhsCode,
+                    WhsName = n.WhsName
+                })
+                .FirstOrDefaultAsync();
+
+
+                resultTransaccion.IdRegistro = 0;
+                resultTransaccion.ResultadoCodigo = 0;
+                resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
+                resultTransaccion.Data = data;
+            }
+            catch (Exception ex)
+            {
+                resultTransaccion.IdRegistro = -1;
+                resultTransaccion.ResultadoCodigo = -1;
+                resultTransaccion.ResultadoDescripcion = ex.Message.ToString();
+            }
+
+            return resultTransaccion;
+        }
         public async Task<ResultadoTransaccionResponse<WarehousesQueryEntity>> GetListByWhsCodeAndItemCode(WarehousesByItemFindEntity value)
         {
             var resultTransaccion = new ResultadoTransaccionResponse<WarehousesQueryEntity>
@@ -237,7 +271,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {

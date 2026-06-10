@@ -6,8 +6,9 @@ namespace Net.Business.Entities.SAPBusinessOne
     {
         public int DocEntry { get; set; }
         public int DocNum { get; set; }
-        public string ObjType { get; set; } = string.Empty;
-        public string DocStatus { get; set; } = string.Empty;
+        public string? ObjType { get; set; }
+        public string? Canceled { get; set; }
+        public string? DocStatus { get; set; }
         public DateTime DocDate { get; set; }
         public DateTime DocDueDate { get; set; }
         public DateTime TaxDate { get; set; }
@@ -23,6 +24,6 @@ namespace Net.Business.Entities.SAPBusinessOne
         public int? OwnerCode { get; set; }
         public string? Comments { get; set; }
 
-        public List<PurchaseRequest1QueryEntity> Lines { get; set; } = new List<PurchaseRequest1QueryEntity>();
+        public List<PurchaseRequestLinesQueryEntity> Lines { get; set; } = [];
     }
 }

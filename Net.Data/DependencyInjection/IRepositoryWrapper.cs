@@ -1,6 +1,11 @@
 using Net.Data.Web;
 using Net.Data.SAPBusinessOne;
 using Net.Data.SAPBusinessOne.Administration;
+using Net.Data.SAPBusinessOne.BusinessPartners.Ubigeo;
+using Net.Data.SAPBusinessOne.Administration.Definitions.General.Departments;
+using Net.Data.SAPBusinessOne.Administration.Definitions.BusinessPartners.States;
+using Net.Data.SAPBusinessOne.Administration.Definitions.BusinessPartners.Countries;
+using Net.Data.SAPBusinessOne.Administration.Definitions.BusinessPartners.BusinessPartnerGroupsUserTable;
 namespace Net.Data
 {
     public interface IRepositoryWrapper
@@ -71,10 +76,13 @@ namespace Net.Data
         IUsersRepository Users { get; }
         IStatusRepository Status { get; }
         ITiempoRepository Tiempo { get; }
+        IStatesRepository States { get; }
+        IUbigeoRepository Ubigeo { get; }
         ILocationRepository Location { get; }
         IBranchesRepository Branches { get; }
         IProcessesRepository Processes { get; }
         ITaxGroupsRepository TaxGroups { get; }
+        ICountriesRepository Countries { get; }
         ITiempoVidaRepository TiempoVida { get; }
         IWarehousesRepository Warehouses { get; }
         IItemGroupsRepository ItemGroups { get; }
@@ -82,19 +90,17 @@ namespace Net.Data
         IUnidadMedidaRepository UnidadMedida { get; }
         ITipoLaminadoRepository TipoLaminado { get; }
         ISalesPersonsRepository SalesPersons { get; }
-        IOperationTypeRepository OperationType { get; }
+        IOperationsTypesRepository OperationsTypes { get; }
         ICurrencyCodesRepository CurrencyCodes { get; }
         ILongitudAnchoRepository LongitudAncho { get; }
         IColorImpresionRepository ColorImpresion { get; }
         ISubGrupoArticuloRepository SubGrupoArticulo { get; }
         IPaymentTermsTypesRepository PaymentTermsTypes { get; }
         ISubGrupoArticulo2Repository SubGrupoArticulo2 { get; }
-        ICountriesRepository Countries { get; }
-        IStatesRepository States { get; }
-        IUbigeoRepository Ubigeo { get; }
         IBusinessPartnerGroupsRepository BusinessPartnerGroups { get; }
         IBusinessPartnerSectorsRepository BusinessPartnerSectors { get; }
-        IDivisionRepository Division { get; }
+        IBusinessPartnerDivisionsRepository BusinessPartnerDivisions { get; }
+        IBusinessPartnerGroupsUserTableRepository BusinessPartnerGroupsUserTable { get; }
 
         #endregion
 

@@ -41,7 +41,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -75,7 +75,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {

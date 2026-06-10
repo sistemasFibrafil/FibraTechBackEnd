@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
 using Net.Business.Entities.SAPBusinessOne;
 using Net.Connection.ConnectionSAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Sales.Orders.Query;
 using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Find;
 using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Query;
 using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Filter;
@@ -118,7 +119,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -161,7 +162,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -224,7 +225,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
 
             }
             catch (Exception ex)
@@ -276,7 +277,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -362,7 +363,7 @@ namespace Net.Data.SAPBusinessOne
                 )
                 .OrderBy(x => x.DocEntry)
                 .ThenBy(x => x.LineNum)
-                .Select(x => new InventoryTransferRequest1QueryEntity
+                .Select(x => new InventoryTransferRequestLinesQueryEntity
                 {
                     DocEntry = x.DocEntry,
                     LineNum = x.LineNum,
@@ -386,7 +387,7 @@ namespace Net.Data.SAPBusinessOne
                     U_FIB_PesoKg = x.U_FIB_PesoKg ?? 0
                 })
                 .ToListAsync()
-                : new List<InventoryTransferRequest1QueryEntity>();
+                : new List<InventoryTransferRequestLinesQueryEntity>();
 
                 // ==========================
                 // 3️⃣ LÍNEAS CON PAQUETE (PICKING)
@@ -407,7 +408,7 @@ namespace Net.Data.SAPBusinessOne
                             Type = s.ObjType,
                             Line = s.LineNum.ToString()
                         }
-                    join t in _dbSap.OperationType.AsNoTracking()
+                    join t in _dbSap.OperationsTypes.AsNoTracking()
                         on s.U_tipoOpT12 equals t.Code into tj
                     from t in tj.DefaultIfEmpty()
                     where p.U_Status == "O"
@@ -431,7 +432,7 @@ namespace Net.Data.SAPBusinessOne
                         s.U_tipoOpT12
                     }
                     into g
-                    select new InventoryTransferRequest1QueryEntity
+                    select new InventoryTransferRequestLinesQueryEntity
                     {
                         DocEntry = g.Key.DocEntry,
                         LineNum = g.Key.LineNum,
@@ -454,7 +455,7 @@ namespace Net.Data.SAPBusinessOne
                 .OrderBy(x => x.DocEntry)
                 .ThenBy(x => x.LineNum)
                 .ToListAsync()
-                : new List<InventoryTransferRequest1QueryEntity>();
+                : new List<InventoryTransferRequestLinesQueryEntity>();
 
                 // ==========================
                 // 4️⃣ RESULTADO FINAL
@@ -500,7 +501,7 @@ namespace Net.Data.SAPBusinessOne
 
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -669,7 +670,7 @@ namespace Net.Data.SAPBusinessOne
                     from c in cj.DefaultIfEmpty()
 
                         // 🏷️ LEFT JOIN TipoOperacion
-                    join t in _dbSap.OperationType.AsNoTracking() on s.U_tipoOpT12 equals t.Code into tj
+                    join t in _dbSap.OperationsTypes.AsNoTracking() on s.U_tipoOpT12 equals t.Code into tj
                     from t in tj.DefaultIfEmpty()
 
                         // 📦 LEFT JOIN Items (OITM)
@@ -721,7 +722,7 @@ namespace Net.Data.SAPBusinessOne
                     }
                     into g
 
-                    select new Orders1QueryEntity
+                    select new OrdersLinesQueryEntity
                     {
                         DocEntry = g.Key.DocEntry,
                         LineNum = g.Key.LineNum,
@@ -766,7 +767,7 @@ namespace Net.Data.SAPBusinessOne
                 .OrderBy(x => x.DocEntry)
                 .ThenBy(x => x.LineNum)
                 .ToListAsync()
-                : new List<Orders1QueryEntity>();
+                : new List<OrdersLinesQueryEntity>();
 
 
                 // ==========================
@@ -812,7 +813,7 @@ namespace Net.Data.SAPBusinessOne
 
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -981,7 +982,7 @@ namespace Net.Data.SAPBusinessOne
                     from c in cj.DefaultIfEmpty()
 
                         // 🏷️ LEFT JOIN TipoOperacion
-                    join t in _dbSap.OperationType.AsNoTracking() on s.U_tipoOpT12 equals t.Code into tj
+                    join t in _dbSap.OperationsTypes.AsNoTracking() on s.U_tipoOpT12 equals t.Code into tj
                     from t in tj.DefaultIfEmpty()
 
                         // 📦 LEFT JOIN Items (OITM)
@@ -1124,7 +1125,7 @@ namespace Net.Data.SAPBusinessOne
 
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -1345,7 +1346,7 @@ namespace Net.Data.SAPBusinessOne
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
                 resultTransaccion.ResultadoDescripcion = "Realizado con éxito.";
 
                 return resultTransaccion;
@@ -2553,7 +2554,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Se generó correctamente el archivos";
-                resultTransaccion.data = file;
+                resultTransaccion.Data = file;
             }
             catch (Exception ex)
             {

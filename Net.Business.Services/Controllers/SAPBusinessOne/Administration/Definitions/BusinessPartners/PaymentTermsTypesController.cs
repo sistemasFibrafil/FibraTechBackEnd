@@ -31,7 +31,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
                 return BadRequest(objectGetList);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(objectGetList.DataList);
         }
 
         [HttpGet("{groupNum}")]
@@ -47,7 +47,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
     }
 }

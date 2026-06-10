@@ -10,11 +10,12 @@ using Net.Business.Entities;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Net.Business.Entities.SAPBusinessOne;
 using Net.Connection.ConnectionSAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Inventory.Items.Update;
 namespace Net.Data.SAPBusinessOne
 {
     public class ItemsRepository : RepositoryBase<ItemsEntity>, IItemsRepository
@@ -99,7 +100,7 @@ namespace Net.Data.SAPBusinessOne
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
             }
             catch (Exception ex)
@@ -112,7 +113,7 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionResponse<ItemsQueryEntity>> GetListByCode(ItemsFindByListCodeEntity value)
+        public async Task<ResultadoTransaccionResponse<ItemsQueryEntity>> GetListByCode(ItemsFindByCodeEntity value)
         {
             var resultTransaccion = new ResultadoTransaccionResponse<ItemsQueryEntity>
             {
@@ -121,7 +122,7 @@ namespace Net.Data.SAPBusinessOne
             };
 
             var quantity = 1m;
-            string[] warehouse = Array.Empty<string>();
+            string[] warehouse = [];
             var businessPartners = new BusinessPartnersEntity();
 
             try
@@ -155,11 +156,11 @@ namespace Net.Data.SAPBusinessOne
 
 
                 // 🔹 Tipo de operación (puede ser null)
-                var operationType = await _db.OperationType.AsNoTracking().FirstOrDefaultAsync(t => t.Code == value.OperationTypeCode);
+                var operationType = await _db.OperationsTypes.AsNoTracking().FirstOrDefaultAsync(t => t.Code == value.OperationTypeCode);
 
 
                 // Si es almacén de producción
-                if (!string.IsNullOrEmpty(value.WarehouseProduction) && value.WarehouseProduction != "N")
+                if (!string.IsNullOrEmpty(value.WarehouseType) && value.WarehouseType == "P")
                 {
                     warehouse = await _db.Warehouses
                     .Where(n => n.U_FIB_ALMPRO == "Y")
@@ -169,7 +170,7 @@ namespace Net.Data.SAPBusinessOne
                 }
 
                 // Si es almacén de logística
-                if (!string.IsNullOrEmpty(value.WarehouseLogistics) && value.WarehouseLogistics != "N")
+                if (!string.IsNullOrEmpty(value.WarehouseType) && value.WarehouseType == "L")
                 {
                     warehouse = await _db.Warehouses
                     .Where(n => n.U_FIB_ALMLOG == "Y")
@@ -177,6 +178,29 @@ namespace Net.Data.SAPBusinessOne
                     .AsNoTracking()
                     .ToArrayAsync();
                 }
+
+
+                var isProductionWarehouse =
+                !string.IsNullOrEmpty(value.WarehouseType) &&
+                value.WarehouseType == "P";
+
+
+                string dfltWH = await _db.AdminInfo
+                .AsNoTracking()
+                .Select(x => x.DfltWhs)
+                .FirstOrDefaultAsync();
+
+
+                var defaultWarehouse = await _db.Warehouses
+                .AsNoTracking()
+                .Where(x => x.WhsCode == dfltWH)
+                .Select(x => new
+                {
+                    x.WhsCode,
+                    AcctCode = x.BalInvntAc,
+                    FormatCode = string.Concat(x.ChartOfAccounts.Segment_0, "-", x.ChartOfAccounts.Segment_1, "-", x.ChartOfAccounts.Segment_2),
+                    x.ChartOfAccounts.AcctName
+                }).FirstOrDefaultAsync();
 
 
                 var list = await _db.Items
@@ -203,21 +227,21 @@ namespace Net.Data.SAPBusinessOne
                     Quantity = quantity,
 
                     // 🔹 Datos ya existentes
-                    DfltWH = x.Item.DfltWH,
-                    AcctCode = x.Item.DefaultWarehouse != null ? x.Item.DefaultWarehouse.BalInvntAc : "",
-                    FormatCode = x.Item.DefaultWarehouse != null &&
-                                 x.Item.DefaultWarehouse.ChartOfAccounts != null
-                                 ? string.Concat
+                    DfltWH = isProductionWarehouse
+                             ? defaultWarehouse.WhsCode
+                             : x.Item.DfltWH ?? defaultWarehouse.WhsCode,
+                    AcctCode = x.Item.DfltWH != null ? x.Item.DefaultWarehouse.BalInvntAc : defaultWarehouse.AcctCode,
+                    FormatCode = x.Item.DfltWH != null ?
+                                 string.Concat
                                  (
                                      x.Item.DefaultWarehouse.ChartOfAccounts.Segment_0, "-",
                                      x.Item.DefaultWarehouse.ChartOfAccounts.Segment_1, "-",
                                      x.Item.DefaultWarehouse.ChartOfAccounts.Segment_2
                                  )
-                                 : "",
-                    AcctName = x.Item.DefaultWarehouse != null &&
-                               x.Item.DefaultWarehouse.ChartOfAccounts != null
-                               ? x.Item.DefaultWarehouse.ChartOfAccounts.AcctName
-                               : "",
+                                 : defaultWarehouse.FormatCode,
+                    AcctName = x.Item.DfltWH != null ?
+                               x.Item.DefaultWarehouse.ChartOfAccounts.AcctName
+                               : defaultWarehouse.AcctName,
 
                     BuyUnitMsr = x.Item.BuyUnitMsr,
                     SalUnitMsr = x.Item.SalUnitMsr,
@@ -227,21 +251,19 @@ namespace Net.Data.SAPBusinessOne
                              .Sum(w => (decimal?)w.OnHand) ?? 0,
 
                     U_tipoOpT12 = operationType != null ? operationType.Code : "",
-                    U_tipoOpT12Nam = operationType != null ? operationType.FullDescription : ""
+                    U_tipoOpT12Nam = operationType != null ? operationType.Code + " - " + operationType.U_descrp : ""
                 })
                 .ToListAsync();
 
 
 
                 // 🔹 Ordena respetando el orden de entrada
-                list = list
-                .OrderBy(x => orderMap.TryGetValue(x.ItemCode, out var idx) ? idx : int.MaxValue)
-                .ToList();
+                list = [.. list.OrderBy(x => orderMap.TryGetValue(x.ItemCode, out var idx) ? idx : int.MaxValue)];
 
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
             }
             catch (Exception ex)
@@ -327,7 +349,7 @@ namespace Net.Data.SAPBusinessOne
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
             }
             catch (Exception ex)
@@ -387,7 +409,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGetList = await GetListStockGeneralSummary(value);
 
                     //Contenido
-                    foreach (var item in objectGetList.dataList)
+                    foreach (var item in objectGetList.DataList)
                     {
                         row = new DocumentFormat.OpenXml.Spreadsheet.Row();
                         row.Append
@@ -413,7 +435,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -493,7 +515,7 @@ namespace Net.Data.SAPBusinessOne
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
             }
             catch (Exception ex)
@@ -555,7 +577,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGetList = await GetListStockGeneralDetailed(value);
 
                     //Contenido
-                    foreach (var item in objectGetList.dataList)
+                    foreach (var item in objectGetList.DataList)
                     {
                         row = new DocumentFormat.OpenXml.Spreadsheet.Row();
                         row.Append
@@ -583,7 +605,7 @@ namespace Net.Data.SAPBusinessOne
                 resultadoTransaccion.IdRegistro = 0;
                 resultadoTransaccion.ResultadoCodigo = 0;
                 resultadoTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultadoTransaccion.data = ms;
+                resultadoTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -630,7 +652,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -687,7 +709,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGetList = await GetListArticuloVentaByGrupoSubGrupoEstado(value);
 
                     //Contenido
-                    foreach (var item in objectGetList.dataList)
+                    foreach (var item in objectGetList.DataList)
                     {
                         row = new DocumentFormat.OpenXml.Spreadsheet.Row();
                         row.Append(
@@ -710,7 +732,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -756,7 +778,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -815,7 +837,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGetList = await GetListArticuloVentaStockByGrupoSubGrupo(value);
 
                     //Contenido
-                    foreach (var item in objectGetList.dataList)
+                    foreach (var item in objectGetList.DataList)
                     {
                         row = new DocumentFormat.OpenXml.Spreadsheet.Row();
                         row.Append(
@@ -840,7 +862,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -892,7 +914,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -953,7 +975,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGetList = await GetListArticuloByGrupoSubGrupoFiltro(value);
 
                     //Contenido
-                    foreach (var item in objectGetList.dataList)
+                    foreach (var item in objectGetList.DataList)
                     {
                         row = new DocumentFormat.OpenXml.Spreadsheet.Row();
                         row.Append(
@@ -980,7 +1002,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -1029,7 +1051,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -1103,7 +1125,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGetList = await GetListMovimientoStockByFechaSede(value);
 
                     //Contenido
-                    foreach (var item in objectGetList.dataList)
+                    foreach (var item in objectGetList.DataList)
                     {
                         row = new DocumentFormat.OpenXml.Spreadsheet.Row();
                         row.Append(
@@ -1143,7 +1165,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -1221,7 +1243,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", value.Linea.Count);
-                    resultTransaccion.dataList = value.Linea;
+                    resultTransaccion.DataList = value.Linea;
                 }
             }
             catch (Exception ex)
@@ -1269,7 +1291,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                    resultTransaccion.data = response;
+                    resultTransaccion.Data = response;
                 }
             }
             catch (Exception ex)
@@ -1365,58 +1387,58 @@ namespace Net.Data.SAPBusinessOne
                     // Se crea el objeto de la items
                     items = company.GetBusinessObject(BoObjectTypes.oItems);
 
-                    foreach (var articulo in value.Lines)
+                    foreach (var item in value.Lines)
                     {
-                        items.ItemCode = articulo.ItemCode;
-                        items.ItemName = articulo.ItemName;
-                        items.ItemsGroupCode = articulo.ItmsGrpCod;
+                        items.ItemCode = item.ItemCode;
+                        items.ItemName = item.ItemName;
+                        items.ItemsGroupCode = item.ItmsGrpCod;
 
-                        if (articulo.InvntItem == "Y")
+                        if (item.InvntItem == "Y")
                             items.InventoryItem = BoYesNoEnum.tYES;
                         else
                             items.InventoryItem = BoYesNoEnum.tNO;
-                        if (articulo.SellItem == "Y")
+                        if (item.SellItem == "Y")
                             items.SalesItem = BoYesNoEnum.tYES;
                         else
                             items.SalesItem = BoYesNoEnum.tNO;
-                        if (articulo.PrchseItem == "Y")
+                        if (item.PrchseItem == "Y")
                             items.PurchaseItem = BoYesNoEnum.tYES;
                         else
                             items.PurchaseItem = BoYesNoEnum.tNO;
-                        if (articulo.WTLiable == "Y")
+                        if (item.WTLiable == "Y")
                             items.WTLiable = BoYesNoEnum.tYES;
                         else
                             items.WTLiable = BoYesNoEnum.tNO;
-                        if (articulo.VatLiable == "Y")
+                        if (item.VatLiable == "Y")
                             items.VatLiable = BoYesNoEnum.tYES;
                         else
                             items.VatLiable = BoYesNoEnum.tNO;
-                        if (articulo.IndirctTax == "Y")
+                        if (item.IndirctTax == "Y")
                             items.IndirectTax = BoYesNoEnum.tYES;
                         else
                             items.IndirectTax = BoYesNoEnum.tNO;
 
-                        items.SalesUnit = articulo.SalUnitMsr;
-                        items.PurchaseUnit = articulo.BuyUnitMsr;
-                        items.InventoryUOM = articulo.InvntryUom;
+                        items.SalesUnit = item.SalUnitMsr;
+                        items.PurchaseUnit = item.BuyUnitMsr;
+                        items.InventoryUOM = item.InvntryUom;
 
-                        items.DefaultWarehouse = articulo.DfltWH;
+                        items.DefaultWarehouse = item.DfltWH;
 
-                        items.ArTaxCode = articulo.TaxCodeAR;
+                        items.ArTaxCode = item.TaxCodeAR;
 
-                        if (articulo.U_FIB_ItemCode != null) items.UserFields.Fields.Item("U_FIB_ItemCode").Value = articulo.U_FIB_ItemCode;
-                        if (articulo.U_FIB_ItemName != null) items.UserFields.Fields.Item("U_FIB_ItemName").Value = articulo.U_FIB_ItemName;
-                        if (articulo.U_BPP_TIPEXIST != null) items.UserFields.Fields.Item("U_BPP_TIPEXIST").Value = articulo.U_BPP_TIPEXIST;
-                        if (articulo.U_BPP_TIPUNMED != null) items.UserFields.Fields.Item("U_BPP_TIPUNMED").Value = articulo.U_BPP_TIPUNMED;
-                        if (articulo.U_S_PartAranc1 != null) items.UserFields.Fields.Item("U_S_PartAranc1").Value = articulo.U_S_PartAranc1;
-                        if (articulo.U_S_PartAranc2 != null) items.UserFields.Fields.Item("U_S_PartAranc2").Value = articulo.U_S_PartAranc2;
-                        if (articulo.U_FIB_ECU != null) items.UserFields.Fields.Item("U_FIB_ECU").Value = articulo.U_FIB_ECU;
-                        if (articulo.U_S_CCosto != null) items.UserFields.Fields.Item("U_S_CCosto").Value = articulo.U_S_CCosto;
-                        if (articulo.U_FIB_PESO != null) items.UserFields.Fields.Item("U_FIB_PESO").Value = Convert.ToDouble(articulo.U_FIB_PESO);
-                        if (articulo.U_FIB_SGRUP != null) items.UserFields.Fields.Item("U_FIB_SGRUP").Value = articulo.U_FIB_SGRUP;
-                        if (articulo.U_FIB_SGRUPO2 != null) items.UserFields.Fields.Item("U_FIB_SGRUPO2").Value = articulo.U_FIB_SGRUPO2;
-                        if (articulo.U_FIB_LINNEG != null) items.UserFields.Fields.Item("U_FIB_LINNEG").Value = articulo.U_FIB_LINNEG;
-                        items.UserFields.Fields.Item("U_UsrCreate").Value = articulo.U_UsrCreate;
+                        if (item.U_FIB_ItemCode != null) items.UserFields.Fields.Item("U_FIB_ItemCode").Value = item.U_FIB_ItemCode;
+                        if (item.U_FIB_ItemName != null) items.UserFields.Fields.Item("U_FIB_ItemName").Value = item.U_FIB_ItemName;
+                        if (item.U_BPP_TIPEXIST != null) items.UserFields.Fields.Item("U_BPP_TIPEXIST").Value = item.U_BPP_TIPEXIST;
+                        if (item.U_BPP_TIPUNMED != null) items.UserFields.Fields.Item("U_BPP_TIPUNMED").Value = item.U_BPP_TIPUNMED;
+                        if (item.U_S_PartAranc1 != null) items.UserFields.Fields.Item("U_S_PartAranc1").Value = item.U_S_PartAranc1;
+                        if (item.U_S_PartAranc2 != null) items.UserFields.Fields.Item("U_S_PartAranc2").Value = item.U_S_PartAranc2;
+                        if (item.U_FIB_ECU != null) items.UserFields.Fields.Item("U_FIB_ECU").Value = item.U_FIB_ECU;
+                        if (item.U_S_CCosto != null) items.UserFields.Fields.Item("U_S_CCosto").Value = item.U_S_CCosto;
+                        if (item.U_FIB_PESO != null) items.UserFields.Fields.Item("U_FIB_PESO").Value = Convert.ToDouble(item.U_FIB_PESO);
+                        if (item.U_FIB_SGRUP != null) items.UserFields.Fields.Item("U_FIB_SGRUP").Value = item.U_FIB_SGRUP;
+                        if (item.U_FIB_SGRUPO2 != null) items.UserFields.Fields.Item("U_FIB_SGRUPO2").Value = item.U_FIB_SGRUPO2;
+                        if (item.U_FIB_LINNEG != null) items.UserFields.Fields.Item("U_FIB_LINNEG").Value = item.U_FIB_LINNEG;
+                        items.UserFields.Fields.Item("U_UsrCreate").Value = item.U_UsrCreate;
 
                         var regItem = items.Add();
 
@@ -1424,7 +1446,7 @@ namespace Net.Data.SAPBusinessOne
                         {
                             resultTransaccion.IdRegistro = 0;
                             resultTransaccion.ResultadoCodigo = 0;
-                            resultTransaccion.ResultadoDescripcion = "Artículo registrado con éxito.";
+                            resultTransaccion.ResultadoDescripcion = "Artículos actualizados con éxito.";
                         }
                         else
                         {
@@ -1504,6 +1526,101 @@ namespace Net.Data.SAPBusinessOne
                 finally
                 {
                     _companyProviderSap.LiberarObjetosCOM(items, entrada, salida);
+                }
+
+                return resultTransaccion;
+            });
+        }
+
+        public async Task<ResultadoTransaccionResponse<ItemsEntity>> SetUpdateMassive(List<ItemsUpdateMassiveEntity> value)
+        {
+            var resultTransaccion = new ResultadoTransaccionResponse<ItemsEntity>
+            {
+                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
+                NombreAplicacion = _aplicacionName
+            };
+
+            Items items = null;
+            Company company = null;
+
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    // Conexión a SAP
+                    company = _companyProviderSap.GetCompany();
+
+
+                    // Empieza la transacción en SAP
+                    if (!company.InTransaction) company.StartTransaction();
+
+
+                    
+                    #region <<< ACTUALIZACIÓN DE ARTÍCULOS >>>
+
+
+                    // Se crea el objeto de la items
+                    items = company.GetBusinessObject(BoObjectTypes.oItems);
+
+                    foreach (var item in value)
+                    {
+                        items.ItemCode = item.ItemCode;
+                        //if (!string.IsNullOrWhiteSpace(item.ItemName)) items.ItemName = item.ItemName;
+
+                        //if (item.ItmsGrpCod != 0) items.ItemsGroupCode = item.ItmsGrpCod;
+
+                        //if (!string.IsNullOrWhiteSpace(item.U_BPP_TIPEXIST)) items.UserFields.Fields.Item("U_BPP_TIPEXIST").Value = item.U_BPP_TIPEXIST;
+                        //if (!string.IsNullOrWhiteSpace(item.U_BPP_TIPUNMED)) items.UserFields.Fields.Item("U_BPP_TIPUNMED").Value = item.U_BPP_TIPUNMED;
+
+                        //if (!string.IsNullOrWhiteSpace(item.U_S_PartAranc1)) items.UserFields.Fields.Item("U_S_PartAranc1").Value = item.U_S_PartAranc1;
+                        //if (!string.IsNullOrWhiteSpace(item.U_S_PartAranc2)) items.UserFields.Fields.Item("U_S_PartAranc2").Value = item.U_S_PartAranc2;
+                        //if (!string.IsNullOrWhiteSpace(item.U_FIB_ECU)) items.UserFields.Fields.Item("U_FIB_ECU").Value = item.U_FIB_ECU;
+
+                        //if (!string.IsNullOrWhiteSpace(item.U_S_CCosto)) items.UserFields.Fields.Item("U_S_CCosto").Value = item.U_S_CCosto;
+                        
+                        //if (item.U_FIB_PESO != 0) items.UserFields.Fields.Item("U_FIB_PESO").Value = Convert.ToDouble(item.U_FIB_PESO);
+
+                        //if (!string.IsNullOrWhiteSpace(item.U_FIB_SGRUP)) items.UserFields.Fields.Item("U_FIB_SGRUP").Value = item.U_FIB_SGRUP;
+                        //if (!string.IsNullOrWhiteSpace(item.U_FIB_SGRUPO2)) items.UserFields.Fields.Item("U_FIB_SGRUPO2").Value = item.U_FIB_SGRUPO2;
+                        if (!string.IsNullOrWhiteSpace(item.U_FIB_LINNEG)) items.UserFields.Fields.Item("U_FIB_LINNEG").Value = item.U_FIB_LINNEG;
+
+                        //items.UserFields.Fields.Item("U_UsrUpdate").Value = item.U_UsrUpdate;
+
+                        var regItem = items.Update();
+
+                        if (regItem == 0)
+                        {
+                            resultTransaccion.IdRegistro = 0;
+                            resultTransaccion.ResultadoCodigo = 0;
+                            resultTransaccion.ResultadoDescripcion = "Artículos actualizados con éxito.";
+                        }
+                        else
+                        {
+                            company.GetLastError(out int errorCode, out string errorMessage);
+                            throw new Exception($"Código: {errorCode}. Mensaje: {errorMessage}.");
+                        }
+                    }
+
+                    #endregion                    
+
+
+                    // Se finaliza la transacción en SAP
+                    if (company.InTransaction) company.EndTransaction(BoWfTransOpt.wf_Commit);
+                }
+                catch (Exception ex)
+                {
+                    if (company != null && company.Connected)
+                    {
+                        if (company.InTransaction) company.EndTransaction(BoWfTransOpt.wf_RollBack);
+                    }
+
+                    resultTransaccion.IdRegistro = -1;
+                    resultTransaccion.ResultadoCodigo = -1;
+                    resultTransaccion.ResultadoDescripcion = ex.Message.ToString();
+                }
+                finally
+                {
+                    _companyProviderSap.LiberarObjetosCOM(items);
                 }
 
                 return resultTransaccion;

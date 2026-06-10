@@ -46,7 +46,7 @@ namespace Net.Data.SAPBusinessOne
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
-                resultTransaccion.dataList = _mapper.Map<List<CargaSaldoInicialEntity>>(list);
+                resultTransaccion.DataList = _mapper.Map<List<CargaSaldoInicialEntity>>(list);
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
             }
             catch (Exception ex)

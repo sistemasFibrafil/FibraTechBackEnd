@@ -1,0 +1,2 @@
+Este archivo se carga automáticamente debido a que SAP Business One no permite eliminar todos los anexos desde FIBRATECH. 
+Su propósito es servir como archivo placeholder para permitir la eliminación del resto de archivos adjuntos.

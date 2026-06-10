@@ -1,14 +1,17 @@
 ﻿using System;
 using Net.Data;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
-using Net.BusinessLogic.Interfaces.SAPBusinessOne.Inventory.InventoryTransactions;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.Inventory.InventoryTransactions;
 using Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Close;
 using Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Filter;
 using Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Create;
 using Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Update;
+using Net.Business.DTO.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Validate;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTransactions
 {
     [ApiController]
@@ -40,7 +43,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTr
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet("{docEntry}")]
@@ -56,7 +59,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTr
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         [HttpGet()]
@@ -71,7 +74,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTr
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet("{docEntry}")]
@@ -87,7 +90,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTr
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         [HttpGet()]
@@ -102,13 +105,28 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTr
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         #endregion
 
 
         #region <<< OPERACIONES >>>
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> SetValidateLinesExcel([FromBody] List<InventoryTransferRequestLinesValidateRequestDto> dto)
+        {
+            var result = await _inventoryTransferRequestService.SetValidateLinesExcel(dto);
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result.DataList);
+        }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -158,19 +176,45 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.InventoryTr
         #endregion
 
 
-        #region <<< IMPRESIONES >>>
+        #region <<< EXPORTACIONES >>>
 
-        [HttpGet("{id}")]
+        [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesDefaultResponseType]
-        public async Task<FileContentResult> GetFormatoPdfByDocEntry(int id)
+        public async Task<IActionResult> GetDownloadItemsTemplate()
         {
-            var objectGetById = await _repository.InventoryTransferRequest.GetFormatoPdfByDocEntry(id);
+            try
+            {
+                var objectGetFile = await _repository.InventoryTransferRequest.GetDownloadItemsTemplate();
+
+                objectGetFile.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectGetFile.Data.ToArray();
+
+                return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        #endregion
+
+
+        #region <<< IMPRESIONES >>>
+
+        [HttpGet("{docEntry}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesDefaultResponseType]
+        public async Task<FileContentResult> GetFormatoPdfByDocEntry(int docEntry)
+        {
+            var objectGetById = await _repository.InventoryTransferRequest.GetFormatoPdfByDocEntry(docEntry);
 
             var nombreArchivo = string.Format("Solicitud de traslado - {0}", DateTime.Now.ToString("dd-MM-yyyy").ToString());
 
-            var pdf = File(objectGetById.data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
+            var pdf = File(objectGetById.Data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
 
             return pdf;
         }

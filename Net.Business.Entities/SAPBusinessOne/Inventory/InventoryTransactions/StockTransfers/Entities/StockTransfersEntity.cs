@@ -9,6 +9,8 @@ namespace Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.S
         public int DocNum { get; set; }
         public string DocStatus { get; set; } = string.Empty;
         public string? U_FIB_FromPkg { get; set; }
+        public string? U_FIB_ESTADOSUNAT { get; set; }
+
         public string? U_BPP_MDTD { get; set; }
         public string? U_BPP_MDSD { get; set; }
         public string? U_BPP_MDCD { get; set; }

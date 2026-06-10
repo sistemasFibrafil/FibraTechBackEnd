@@ -112,6 +112,7 @@ namespace Net.Data.SAPBusinessOne
                     Filler = n.Filler,
                     ToWhsCode = n.ToWhsCode,
                     U_FIB_FromPkg = n.U_FIB_FromPkg,
+                    U_FIB_EstadoSunat = n.U_FIB_ESTADOSUNAT ?? "0"
 
                 })
                 .OrderByDescending(x => x.DocEntry).ToListAsync();
@@ -119,7 +120,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -211,7 +212,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -608,7 +609,7 @@ namespace Net.Data.SAPBusinessOne
 
         #region <<< IMPRESIONES >>>
 
-        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetFormatoPdfByDocEntry(int id)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetFormatoPdfByDocEntry(int docEntry)
         {
             var header = new StockTransfersPrintEntity();
             var linea = new List<StockTransfers1PrintEntity>();
@@ -628,7 +629,7 @@ namespace Net.Data.SAPBusinessOne
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 0;
-                        cmd.Parameters.Add(new SqlParameter("@DocEntry", id));
+                        cmd.Parameters.Add(new SqlParameter("@DocEntry", docEntry));
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
@@ -707,7 +708,7 @@ namespace Net.Data.SAPBusinessOne
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 0;
-                        cmd.Parameters.Add(new SqlParameter("@DocEntry", id));
+                        cmd.Parameters.Add(new SqlParameter("@DocEntry", docEntry));
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
@@ -915,7 +916,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = "Se generó correctamente el archivo.s";
-                    resultTransaccion.data = file;
+                    resultTransaccion.Data = file;
                 }
             }
             catch (Exception ex)

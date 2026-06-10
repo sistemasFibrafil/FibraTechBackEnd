@@ -2,6 +2,7 @@
 using Net.CrossCotting;
 using System.Threading.Tasks;
 using Net.Business.Entities.SAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Sales.Orders.Query;
 using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Find;
 using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Query;
 using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Filter;

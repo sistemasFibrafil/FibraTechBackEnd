@@ -6,7 +6,7 @@ namespace Net.Business.Entities.SAPBusinessOne
     {
         public string ItemCode { get; set; } = string.Empty;
         public string? ItemName { get; set; }
-        public short ItmsGrpCod { get; set; }
+        public short? ItmsGrpCod { get; set; }
         public string? InvntItem { get; set; }
         public string? SellItem { get; set; }
         public string? PrchseItem { get; set; }
@@ -19,7 +19,7 @@ namespace Net.Business.Entities.SAPBusinessOne
         public string? InvntryUom { get; set; }
         public decimal? SalPackUn { get; set; }
         public string? DfltWH { get; set; }
-        public decimal OnHand { get; set; }
+        public decimal? OnHand { get; set; }
         public string? TaxCodeAR { get; set; }
         public string? U_FIB_ItemCode { get; set; }
         public string? U_FIB_ItemName { get; set; }
@@ -29,7 +29,7 @@ namespace Net.Business.Entities.SAPBusinessOne
         public string? U_S_PartAranc2 { get; set; }
         public string? U_FIB_ECU { get; set; }
         public string? U_S_CCosto { get; set; }
-        public decimal U_FIB_PESO { get; set; }
+        public decimal? U_FIB_PESO { get; set; }
         public string? U_FIB_SGRUP { get; set; }
         public string? U_FIB_SGRUPO2 { get; set; }
         public string? U_FIB_LINNEG { get; set; }
@@ -40,11 +40,11 @@ namespace Net.Business.Entities.SAPBusinessOne
 
 
         // 🔹 Relación 1:N — un Items tiene muchos ItemWarehouseInfo
-        public ICollection<ItemWarehouseInfoEntity> ItemWarehouseInfo { get; set; } = new List<ItemWarehouseInfoEntity>();
+        public ICollection<ItemWarehouseInfoEntity> ItemWarehouseInfo { get; set; } = [];
 
 
         // 🔹 Relación 1:N con ITM1
-        public ICollection<PriceListsEntity> PriceLists { get; set; } = new List<PriceListsEntity>();
+        public ICollection<PriceListsEntity> PriceLists { get; set; } = [];
     }
 
     public class ArticuloReporteEntity

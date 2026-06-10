@@ -134,7 +134,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -291,7 +291,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -366,7 +366,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                    resultTransaccion.dataList = list;
+                    resultTransaccion.DataList = list;
                 }
             }
             catch (Exception ex)
@@ -473,7 +473,7 @@ namespace Net.Data.SAPBusinessOne
                 //------------------------------------------------------
                 //  COLUMNAS DINÁMICAS (sin cambiar su nombre)
                 //------------------------------------------------------
-                var dynamicCols = data.dataList
+                var dynamicCols = data.DataList
                     .SelectMany(r => r.DynamicColumns.Keys)
                     .Distinct()
                     .OrderBy(x => x)
@@ -488,7 +488,7 @@ namespace Net.Data.SAPBusinessOne
                 //------------------------------------------------------
                 //  CONTENIDO
                 //------------------------------------------------------
-                foreach (var item in data.dataList)
+                foreach (var item in data.DataList)
                 {
                     var row = new Row();
 
@@ -520,7 +520,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -672,7 +672,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -717,7 +717,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -769,7 +769,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -846,7 +846,7 @@ namespace Net.Data.SAPBusinessOne
 
 
                 // Se obtiene el tipo de operación por defecto "11"
-                var tipoOperacion = await _dbSap.OperationType.Where(t => t.Code == "11").FirstOrDefaultAsync();
+                var tipoOperacion = await _dbSap.OperationsTypes.Where(t => t.Code == "11").FirstOrDefaultAsync();
 
 
                 var list = await query
@@ -863,7 +863,7 @@ namespace Net.Data.SAPBusinessOne
                     SumQty = g.Sum(x => x.Quantity),
                     SumKg = g.Sum(x => x.WeightKg)
                 })
-                .Select(x => new InventoryTransferRequest1QueryEntity
+                .Select(x => new InventoryTransferRequestLinesQueryEntity
                 {
                     ItemCode = x.Key.ItemCode,
                     Dscription = x.Key.Dscription,
@@ -903,7 +903,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -980,7 +980,7 @@ namespace Net.Data.SAPBusinessOne
                             resultTransaccion.IdRegistro = 0;
                             resultTransaccion.ResultadoCodigo = 0;
                             resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                            resultTransaccion.dataList = list;
+                            resultTransaccion.DataList = list;
                         }
                         catch (Exception ex)
                         {

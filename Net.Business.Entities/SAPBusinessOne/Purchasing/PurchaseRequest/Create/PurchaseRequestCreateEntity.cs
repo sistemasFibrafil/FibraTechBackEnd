@@ -26,6 +26,6 @@ namespace Net.Business.Entities.SAPBusinessOne.Purchasing.PurchaseRequest.Create
         public string? Comments { get; set; }
 
         public int U_UsrCreate { get; set; }
-        public List<PurchaseRequest1CreateEntity> Lines { get; set; } = [];
+        public List<PurchaseRequestLinesCreateEntity> Lines { get; set; } = [];
     }
 }

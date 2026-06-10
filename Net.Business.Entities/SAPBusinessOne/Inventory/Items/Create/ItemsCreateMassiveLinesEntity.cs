@@ -27,7 +27,7 @@
         public string? U_S_PartAranc2 { get; set; }
         public string? U_FIB_ECU { get; set; }
         public string? U_S_CCosto { get; set; }
-        public decimal U_FIB_PESO { get; set; }
+        public decimal? U_FIB_PESO { get; set; }
         public string? U_FIB_SGRUP { get; set; }
         public string? U_FIB_SGRUPO2 { get; set; }
         public string? U_FIB_LINNEG { get; set; }

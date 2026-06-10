@@ -1,4 +1,5 @@
-﻿using Net.Data;
+﻿using System;
+using Net.Data;
 using Newtonsoft.Json;
 using Net.CrossCotting;
 using System.Threading.Tasks;
@@ -6,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
-using Net.Business.DTO.SAPBusinessOne.Drafts.Filter;
 using Net.Business.DTO.SAPBusinessOne.Drafts.Create;
+using Net.Business.DTO.SAPBusinessOne.Drafts.Filter;
 using Net.Business.DTO.SAPBusinessOne.Drafts.Update;
-using Net.BusinessLogic.Interfaces.SAPBusinessOne.Draft;
-using Net.BusinessLogic.Mappers.SAPBusinessOne.Drafts.Filter;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.Draft;
+using Net.Business.Logic.Mappers.SAPBusinessOne.Drafts.Filter;
 using Net.Business.DTO.SAPBusinessOne.Drafts.CreateToDocument;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Drafts
 {
@@ -43,7 +44,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Drafts
             if (result.ResultadoCodigo == -1)
                 return BadRequest(result);
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet("{docEntry}")]
@@ -59,7 +60,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Drafts
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
 
@@ -76,7 +77,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Drafts
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         #endregion
@@ -109,9 +110,16 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Drafts
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> SetSaveDraftToDocument([FromBody] DraftsCreateToDocumentRequestDto dto)
+        public async Task<IActionResult> SetSaveDraftToDocument([FromForm] string value, [FromForm] IList<IFormFile> files)
         {
-            var result = await _draftService.SetSaveDraftToDocument(dto);
+            var dto = JsonConvert.DeserializeObject<DraftsCreateToDocumentRequestDto>(value);
+
+            if (dto == null)
+            {
+                return BadRequest(ResponseHelper.Error<object>("Datos inválidos"));
+            }
+
+            var result = await _draftService.SetSaveDraftToDocument(dto, files);
 
             if (result.ResultadoCodigo == -1)
             {
@@ -141,6 +149,56 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Drafts
             }
 
             return Ok(result);
+        }
+
+        #endregion
+
+
+        #region <<< IMPRESIONES >>>
+
+        [HttpGet("{docEntry}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesDefaultResponseType]
+        public async Task<FileContentResult> GetPrintNationalDocEntry(int docEntry)
+        {
+            var result = await _repository.Drafts.GetPrintNationalDocEntry(docEntry);
+
+            var nombreArchivo = string.Format("Orden de compra nacional - {0}", DateTime.Now.ToString("dd-MM-yyyy").ToString());
+
+            var pdf = File(result.Data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
+
+            return pdf;
+        }
+
+        [HttpGet("{docEntry}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesDefaultResponseType]
+        public async Task<FileContentResult> GetPrintExportPlantaDocEntry(int docEntry)
+        {
+            var result = await _repository.Drafts.GetPrintExportPlantaDocEntry(docEntry);
+
+            var nombreArchivo = string.Format("Orden de compra exportacion - planta - {0}", DateTime.Now.ToString("dd-MM-yyyy").ToString());
+
+            var pdf = File(result.Data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
+
+            return pdf;
+        }
+
+        [HttpGet("{docEntry}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesDefaultResponseType]
+        public async Task<FileContentResult> GetPrintExportClienteDocEntry(int docEntry)
+        {
+            var result = await _repository.Drafts.GetPrintExportClienteDocEntry(docEntry);
+
+            var nombreArchivo = string.Format("Orden de compra exportacion - cliente - {0}", DateTime.Now.ToString("dd-MM-yyyy").ToString());
+
+            var pdf = File(result.Data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
+
+            return pdf;
         }
 
         #endregion

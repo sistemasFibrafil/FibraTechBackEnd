@@ -31,7 +31,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Financials.CostAccoun
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
     }
 }

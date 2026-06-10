@@ -33,7 +33,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.ElectronicBilling
                 return BadRequest(objectGetList);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(objectGetList.DataList);
         }
 
         [HttpPut]

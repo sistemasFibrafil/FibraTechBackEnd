@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using SAPbobsCOM;
 using System.Data;
 using System.Linq;
 using Net.Connection;
@@ -8,22 +9,20 @@ using Net.Data.AppContext;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml;
 using System.Collections.Generic;
+using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.Extensions.Configuration;
 using Net.Business.Entities.SAPBusinessOne;
-using Microsoft.Extensions.Options;
-using Net.Business.Entities.Web;
 using Net.Connection.ConnectionSAPBusinessOne;
-using SAPbobsCOM;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.BusinessPartners.BusinessPartnerGroups;
 namespace Net.Data.SAPBusinessOne
 {
     public class BusinessPartnersRepository : RepositoryBase<BusinessPartnersEntity>, IBusinessPartnersRepository
     {
-        private string _metodoName;
-        private string _aplicacionName;
+        private readonly string _aplicacionName;
         private readonly Regex regex = new Regex(@"<(\w+)>.*");
 
         // PARAMETROS DE COXIÓN
@@ -31,19 +30,18 @@ namespace Net.Data.SAPBusinessOne
         private readonly DataContextSAPBusinessOne _db;
         private readonly CompanyProviderSAPBusinessOne _companyProviderSap;
 
-        // STORED PROCEDURE
-        const string DB_ESQUEMA = "";
         public BusinessPartnersRepository(IConnectionSQL context, IOptions<ParametrosTokenConfig> tokenConfig, IConfiguration configuration, DataContextSAPBusinessOne db, CompanyProviderSAPBusinessOne companyProviderSap)
             : base(context)
         {
             _db = db;
-            _companyProviderSap = companyProviderSap;
             _aplicacionName = GetType().Name;
-            _metodoName = "";
+            _companyProviderSap = companyProviderSap;
             _cnxSap = Utilidades.GetCon(configuration, "EntornoConnectionSap:Entorno");
         }
 
 
+
+        #region <<< CONSULTAS >>>
 
         public async Task<ResultadoTransaccionResponse<BusinessPartnersQueryEntity>> GetListByFilter(BusinessPartnersFilterEntity value)
         {
@@ -68,11 +66,13 @@ namespace Net.Data.SAPBusinessOne
                 
                 if (!string.IsNullOrWhiteSpace(value.SearchText))
                 {
-                    var bPartner = value.SearchText.Trim();
+                    var filter = value.SearchText.Trim();
+
                     query = query.Where(n =>
-                    n.CardCode.Contains(bPartner) ||
-                    n.LicTradNum.Contains(bPartner) ||
-                    n.CardName.Contains(bPartner));
+                        EF.Functions.Like(n.CardCode, $"%{filter}%") ||
+                        EF.Functions.Like(n.LicTradNum, $"%{filter}%") ||
+                        EF.Functions.Like(n.CardName, $"%{filter}%")
+                    );
                 }
 
 
@@ -92,7 +92,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -134,11 +134,13 @@ namespace Net.Data.SAPBusinessOne
 
                 if (!string.IsNullOrWhiteSpace(value.BusinessPartner))
                 {
-                    var bPartner = value.BusinessPartner.Trim();
-                    query = query.Where(n => 
-                    n.CardCode.Contains(bPartner) ||
-                    n.LicTradNum.Contains(bPartner) ||
-                    n.CardName.Contains(bPartner));
+                    var filter = value.BusinessPartner.Trim();
+
+                    query = query.Where(n =>
+                        EF.Functions.Like(n.CardCode, $"%{filter}%") ||
+                        EF.Functions.Like(n.LicTradNum, $"%{filter}%") ||
+                        EF.Functions.Like(n.CardName, $"%{filter}%")
+                    );
                 }
 
 
@@ -165,7 +167,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -195,9 +197,17 @@ namespace Net.Data.SAPBusinessOne
                     LicTradNum = p.LicTradNum,
                     CardName = p.CardName,
                     CardType = p.CardType,
+                    GroupCode = p.GroupCode,
+                    GroupsLines = _db.BusinessPartnerGroups
+                                    .Where(c => c.GroupType == p.CardType)
+                                    .Select(c => new BusinessPartnerGroupsEntity
+                                    {
+                                        GroupCode = c.GroupCode,
+                                        GroupName = c.GroupName
+                                    })
+                                    .ToList(),
                     Currency = p.Currency,
-
-                    LinesCurrency = _db.CurrencyCodes
+                    CurrencyCodesLines = _db.CurrencyCodes
                                     .Where(c => p.Currency == "##" || c.CurrCode == p.Currency)
                                     .Select(c => new CurrencyCodesEntity
                                     {
@@ -206,82 +216,27 @@ namespace Net.Data.SAPBusinessOne
                                     })
                                     .ToList(),
 
-                    SlpCode = p.SlpCode,
-                    SlpName = p.SalesPersons.SlpName,
-                    BillToDef = p.BillToDef,
-
-                    LinesPayAddress = _db.Addresses
-                                        .Where(a => a.CardCode == p.CardCode && a.AdresType == "B")
-                                        .OrderBy(a => a.LineNum)
-                                        .Select(a => new AddressesEntity
-                                        {
-                                            CardCode = a.CardCode,
-                                            AdresType = a.AdresType,
-                                            Address = a.Address,
-                                            Street = a.Street,
-                                            Country  = a.Country,
-                                            GlblLocNum = a.GlblLocNum,
-                                            City = a.City,
-                                            County = a.County,
-                                            State = a.State,
-                                            LineNum = a.LineNum,
-                                            TaxCode = a.TaxCode
-                                        })
-                                        .ToList(),
-
-                    ShipToDef = p.ShipToDef,
-
-                    LinesShipAddress = _db.Addresses
-                                        .Where(a => a.CardCode == p.CardCode && a.AdresType == "S")
-                                        .OrderBy(a => a.LineNum)
-                                        .Select(a => new AddressesEntity
-                                        {
-                                            CardCode = a.CardCode,
-                                            AdresType = a.AdresType,
-                                            Address = a.Address,
-                                            Street = a.Street,
-                                            Country = a.Country,
-                                            GlblLocNum = a.GlblLocNum,
-                                            City = a.City,
-                                            County = a.County,
-                                            State = a.State,
-                                            LineNum = a.LineNum,
-                                            TaxCode = a.TaxCode
-                                        })
-                                        .ToList(),
-
-                    GroupNum = p.GroupNum,
-                    GroupCode = p.GroupCode,
-                    GroupName = p.BusinessPartnerGroups.GroupName,
-                    ListNum = p.ListNum,
-
-                    Phone1 = p.Phone1,
-                    EmailAddress = p.E_Mail,
-                    Cellular = p.Cellular,
-                    CreditLine = p.CreditLine ?? 0,
                     U_BPP_BPTD = p.U_BPP_BPTD,
                     U_BPP_BPTP = p.U_BPP_BPTP,
-                    U_BPP_BPNO = p.U_BPP_BPNO,
-                    U_BPP_BPAP = p.U_BPP_BPAP,
-                    U_BPP_BPAM = p.U_BPP_BPAM,
-                    U_BPP_BPAT = p.U_BPP_BPAT,
                     U_FIB_Divi = p.U_FIB_Divi,
                     U_FIB_Sector = p.U_FIB_Sector,
-                    U_FIB_EMAIL2 = p.U_FIB_Email2,
-                    U_FIB_EMAIL3 = p.U_FIB_Email3,
-                    Notes = p.Notes,
+
+                    Phone1 = p.Phone1,
+                    Phone2 = p.Phone2,
+                    Cellular = p.Cellular,
+                    Email = p.E_Mail,
                     ValidFor = p.ValidFor,
+                    SlpCode = p.SlpCode,
+                    SlpName = p.SalesPersons.SlpName,
+                    Notes = p.Notes,
 
                     // Propiedad primaria de contacto
                     CntctCode = _db.ContactEmployees
                                 .Where(c => c.CardCode == p.CardCode && c.Name == p.CntctPrsn)
                                 .Select(c => (int?)c.CntctCode)
                                 .FirstOrDefault() ?? 0,
-
                     CntctPrsn = p.CntctPrsn,
-
-                    // Lista completa de personas de contacto
-                    ContactEmployees = _db.ContactEmployees
+                    ContactEmployeesLines = _db.ContactEmployees
                                         .Where(c => c.CardCode == p.CardCode)
                                         .Select(c => new ContactEmployeesQueryEntity
                                         {
@@ -295,16 +250,75 @@ namespace Net.Data.SAPBusinessOne
                                             Tel1 = c.Tel1,
                                             Cellolar = c.Cellolar,
                                             E_MailL = c.E_MailL,
-                                            Position = c.Position
+                                            Position = c.Position,
+                                            Default = c.Name == p.CntctPrsn ? "X" : ""
                                         })
-                                        .ToList()
+                                        .ToList(),
+
+                    // Direcciones
+                    BillToDef = p.BillToDef,
+                    PayAddressLines = _db.Addresses
+                                        .Where(a => a.CardCode == p.CardCode && a.AdresType == "B")
+                                        .OrderBy(a => a.LineNum)
+                                        .Select(a => new AddressesQueryEntity
+                                        {
+                                            LineNum = a.LineNum,
+                                            CardCode = a.CardCode,
+                                            AdresType = a.AdresType,
+                                            Address = a.Address,
+                                            Street = a.Street,
+                                            Country  = a.Country,
+                                            GlblLocNum = a.GlblLocNum,
+                                            City = a.City,
+                                            County = a.County,
+                                            State = a.State,
+                                            TaxCode = a.TaxCode,
+                                            Default = a.Address == p.BillToDef ? "X" : ""
+                                        })
+                                        .ToList(),
+                    ShipToDef = p.ShipToDef,
+                    ShipAddressLines = _db.Addresses
+                                        .Where(a => a.CardCode == p.CardCode && a.AdresType == "S")
+                                        .OrderBy(a => a.LineNum)
+                                        .Select(a => new AddressesQueryEntity
+                                        {
+                                            LineNum = a.LineNum,
+                                            CardCode = a.CardCode,
+                                            AdresType = a.AdresType,
+                                            Address = a.Address,
+                                            Street = a.Street,
+                                            Country = a.Country,
+                                            GlblLocNum = a.GlblLocNum,
+                                            City = a.City,
+                                            County = a.County,
+                                            State = a.State,
+                                            TaxCode = a.TaxCode,
+                                            Default = a.Address == p.ShipToDef ? "X" : ""
+                                        })
+                                        .ToList(),
+
+                    
+                    // Condiciones de pago
+                    GroupNum = p.GroupNum,
+                    GroupName = p.BusinessPartnerGroups.GroupName,
+                    ListNum = p.ListNum,
+                    CreditLine = p.CreditLine ?? 0,
+                    DebtLine = p.DebtLine ?? 0,                    
+
+                    // Otros
+                    U_BPP_BPAT = p.U_BPP_BPAT,
+                    U_FIB_EMAIL2 = p.U_FIB_EMAIL2,
+                    U_FIB_EMAIL3 = p.U_FIB_EMAIL3,
+                    U_BPP_BPNO = p.U_BPP_BPNO,
+                    U_BPP_BPAP = p.U_BPP_BPAP,
+                    U_BPP_BPAM = p.U_BPP_BPAM
                 })
                 .FirstOrDefaultAsync();
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -333,7 +347,7 @@ namespace Net.Data.SAPBusinessOne
                     CardCode = p.CardCode,
                     LicTradNum = p.LicTradNum,
                     CardName = p.CardName,
-                    LinesVehicles = p.LinesVehicles.Select(s => new VehiclesQueryEntity
+                    VehiclesLines = p.LinesVehicles.Select(s => new VehiclesQueryEntity
                     {
                         Code = s.Code,
                         Name = s.Name,
@@ -352,7 +366,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -381,7 +395,7 @@ namespace Net.Data.SAPBusinessOne
                     CardCode = p.CardCode,
                     LicTradNum = p.LicTradNum,
                     CardName = p.CardName,
-                    LinesDrivers = p.LinesDrivers.Select(s => new DriversQueryEntity
+                    DriversLines = p.LinesDrivers.Select(s => new DriversQueryEntity
                     {
                         Code = s.Code,
                         Name = s.Name,
@@ -398,7 +412,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -517,7 +531,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -595,7 +609,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -608,24 +622,24 @@ namespace Net.Data.SAPBusinessOne
         }
         public async Task<ResultadoTransaccionResponse<MemoryStream>> GetClienteBySectorStatusExcel(BusinessPartnersSectorStatusFilterEntity value)
         {
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
+            {
+                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
+                NombreAplicacion = _aplicacionName
+            };
+
             var ms = new MemoryStream();
-            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>();
-
-            _metodoName = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value.ToString();
-
-            resultTransaccion.NombreMetodo = _metodoName;
-            resultTransaccion.NombreAplicacion = _aplicacionName;
 
             try
             {
                 var objectGetCliente = await GetListClienteBySectorStatus(value);
                 var objectGetClienteContacto = await GetLitClienteContactoBySectorStatus(value);
-                ms = GetArchivoClienteBySectorStatusExcel(objectGetCliente.dataList.ToList(), objectGetClienteContacto.dataList.ToList());
+                ms = GetArchivoClienteBySectorStatusExcel(objectGetCliente.DataList.ToList(), objectGetClienteContacto.DataList.ToList());
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -639,6 +653,7 @@ namespace Net.Data.SAPBusinessOne
         private MemoryStream GetArchivoClienteBySectorStatusExcel(List<BusinessPartnersViewEntity> value1, List<BusinessPartnersViewEntity> value2)
         {
             var ms = new MemoryStream();
+
             using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
             {
                 WorkbookPart workbookPart = document.AddWorkbookPart();
@@ -787,353 +802,9 @@ namespace Net.Data.SAPBusinessOne
                 sheetData.Append(row);
             }
         }
-
-        public async Task<ResultadoTransaccionEntity<BusinessPartnersQueryEntity>> SetCreate(BusinessPartnersCreateEntity value)
+        public async Task<ResultadoTransaccionResponse<BusinessPartnersQueryEntity>> GetByRUC(string ruc)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<BusinessPartnersQueryEntity>
-            {
-                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
-                NombreAplicacion = _aplicacionName
-            };
-
-            BusinessPartners bp = null;
-
-            return await Task.Run(() =>
-            {
-                try
-                {
-                    var company = _companyProviderSap.GetCompany();
-                    bp = company.GetBusinessObject(BoObjectTypes.oBusinessPartners);
-
-                    if (!string.IsNullOrEmpty(value.CardCode)) bp.CardCode = value.CardCode;
-                    bp.CardName = value.CardName;
-
-                    if (!string.IsNullOrEmpty(value.CardType))
-                    {
-                        bp.CardType = value.CardType == "S" ? BoCardTypes.cSupplier : value.CardType == "L" ? BoCardTypes.cLid : BoCardTypes.cCustomer;
-                    }
-                    if (value.GroupCode.HasValue) bp.GroupCode = value.GroupCode.Value;
-                    if (!string.IsNullOrEmpty(value.LicTradNum)) bp.FederalTaxID = value.LicTradNum;
-                    if (!string.IsNullOrEmpty(value.Phone1)) bp.Phone1 = value.Phone1;
-                    if (!string.IsNullOrEmpty(value.Cellular)) bp.Cellular = value.Cellular;
-                    if (!string.IsNullOrEmpty(value.EmailAddress)) bp.EmailAddress = value.EmailAddress;
-                    if (!string.IsNullOrEmpty(value.Address)) bp.Address = value.Address;
-                    if (value.SlpCode.HasValue && value.SlpCode > 0) bp.SalesPersonCode = value.SlpCode.Value;
-                    if (value.GroupNum.HasValue) bp.PayTermsGrpCode = value.GroupNum.Value;
-                    if (value.CreditLine.HasValue) bp.CreditLimit = (double)value.CreditLine.Value;
-                    if (value.DebitLine.HasValue) bp.MaxCommitment = (double)value.DebitLine.Value;
-                    if (!string.IsNullOrEmpty(value.CntctPrsn)) bp.ContactPerson = value.CntctPrsn;
-                    if (!string.IsNullOrEmpty(value.Currency)) bp.Currency = value.Currency;
-                    if (!string.IsNullOrEmpty(value.Notes)) bp.Notes = value.Notes;
-                    if (!string.IsNullOrEmpty(value.ValidFor)) bp.Valid = value.ValidFor == "Y" ? BoYesNoEnum.tYES : BoYesNoEnum.tNO;
-
-                    // UDFs
-                    string currentField = "";
-                    try {
-                    currentField = "U_BPP_BPAT"; if (!string.IsNullOrEmpty(value.U_BPP_BPAT)) bp.UserFields.Fields.Item("U_BPP_BPAT").Value = value.U_BPP_BPAT;
-                    currentField = "U_BPP_BPTD"; if (!string.IsNullOrEmpty(value.U_BPP_BPTD)) bp.UserFields.Fields.Item("U_BPP_BPTD").Value = value.U_BPP_BPTD;
-                    currentField = "U_BPP_BPTP"; if (!string.IsNullOrEmpty(value.U_BPP_BPTP)) bp.UserFields.Fields.Item("U_BPP_BPTP").Value = value.U_BPP_BPTP;
-                    currentField = "U_BPP_BPNO"; if (!string.IsNullOrEmpty(value.U_BPP_BPNO)) bp.UserFields.Fields.Item("U_BPP_BPNO").Value = value.U_BPP_BPNO;
-                    currentField = "U_BPP_BPAP"; if (!string.IsNullOrEmpty(value.U_BPP_BPAP)) bp.UserFields.Fields.Item("U_BPP_BPAP").Value = value.U_BPP_BPAP;
-                    currentField = "U_BPP_BPAM"; if (!string.IsNullOrEmpty(value.U_BPP_BPAM)) bp.UserFields.Fields.Item("U_BPP_BPAM").Value = value.U_BPP_BPAM;
-                    currentField = "U_FIB_Divi"; if (!string.IsNullOrEmpty(value.U_FIB_Divi)) bp.UserFields.Fields.Item("U_FIB_Divi").Value = value.U_FIB_Divi;
-                    currentField = "U_FIB_Sector"; if (!string.IsNullOrEmpty(value.U_FIB_Sector)) bp.UserFields.Fields.Item("U_FIB_Sector").Value = value.U_FIB_Sector;
-                    currentField = "U_FIB_EMAIL2"; if (!string.IsNullOrEmpty(value.U_FIB_Email2)) bp.UserFields.Fields.Item("U_FIB_EMAIL2").Value = value.U_FIB_Email2;
-                    currentField = "U_FIB_EMAIL3"; if (!string.IsNullOrEmpty(value.U_FIB_Email3)) bp.UserFields.Fields.Item("U_FIB_EMAIL3").Value = value.U_FIB_Email3;
-
-
-                    } catch (Exception ex) { throw new Exception($"Error en campo {currentField} de la tabla OCRD: {ex.Message}"); }
-
-                    // Direcciones
-                    if (value.Addresses != null)
-                    {
-                        int addrCount = 0;
-                        foreach (var addr in value.Addresses)
-                        {
-                            if (addrCount > 0) bp.Addresses.Add();
-                            bp.Addresses.AddressName = addr.AddressName;
-                            bp.Addresses.AddressType = addr.AddressType == "S" ? BoAddressType.bo_ShipTo : BoAddressType.bo_BillTo;
-                            bp.Addresses.Street = addr.Street;
-                            bp.Addresses.Block = addr.Block;
-                            bp.Addresses.City = addr.City;
-                            bp.Addresses.ZipCode = addr.ZipCode;
-                            bp.Addresses.County = addr.County;
-                            bp.Addresses.State = addr.State;
-                            bp.Addresses.Country = addr.Country;
-                            bp.Addresses.BuildingFloorRoom = addr.BuildingFloorRoom;
-                            if (!string.IsNullOrEmpty(addr.GlblLocNum)) bp.Addresses.GlobalLocationNumber = addr.GlblLocNum;
-                            if (!string.IsNullOrEmpty(addr.TaxCode)) bp.Addresses.TaxCode = addr.TaxCode;
-                            addrCount++;
-                        }
-                    }
-
-                    // Contactos
-                    if (value.ContactEmployees != null)
-                    {
-                        int contactCount = 0;
-                        foreach (var contact in value.ContactEmployees)
-                        {
-                            if (contactCount > 0) bp.ContactEmployees.Add();
-                            bp.ContactEmployees.Name = contact.Name;
-                            bp.ContactEmployees.FirstName = contact.FirstName;
-                            bp.ContactEmployees.MiddleName = contact.MiddleName;
-                            bp.ContactEmployees.LastName = contact.LastName;
-                            bp.ContactEmployees.Title = contact.Title;
-                            bp.ContactEmployees.Position = contact.Position;
-                            bp.ContactEmployees.Address = contact.Address;
-                            bp.ContactEmployees.Phone1 = contact.Phone1;
-                            bp.ContactEmployees.Phone2 = contact.Phone2;
-                            bp.ContactEmployees.MobilePhone = contact.MobilePhone;
-                            bp.ContactEmployees.E_Mail = contact.E_Mail;
-                            contactCount++;
-                        }
-                    }
-
-                    int reg = bp.Add();
-
-                    if (reg == 0)
-                    {
-                        resultTransaccion.IdRegistro = 0;
-                        resultTransaccion.ResultadoCodigo = 0;
-                        resultTransaccion.ResultadoDescripcion = company.GetNewObjectKey();
-                    }
-                    else
-                    {
-                        company.GetLastError(out int errorCode, out string errorMessage);
-                        throw new Exception($"Error SAP {errorCode}: {errorMessage}");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    resultTransaccion.IdRegistro = -1;
-                    resultTransaccion.ResultadoCodigo = -1;
-                    resultTransaccion.ResultadoDescripcion = ex.Message;
-                }
-                finally
-                {
-                    _companyProviderSap.LiberarObjetosCOM(bp);
-                }
-
-                return resultTransaccion;
-            });
-        }
-
-        public async Task<ResultadoTransaccionEntity<BusinessPartnersQueryEntity>> SetUpdate(BusinessPartnersUpdateEntity value)
-        {
-            var resultTransaccion = new ResultadoTransaccionEntity<BusinessPartnersQueryEntity>
-            {
-                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
-                NombreAplicacion = _aplicacionName
-            };
-
-            BusinessPartners bp = null;
-
-            return await Task.Run(() =>
-            {
-                try
-                {
-                    var company = _companyProviderSap.GetCompany();
-                    bp = company.GetBusinessObject(BoObjectTypes.oBusinessPartners);
-
-                    if (!bp.GetByKey(value.CardCode))
-                    {
-                        company.GetLastError(out int errCode, out string errMsg);
-                        throw new Exception($"No se encontró el socio de negocio {value.CardCode}. Error SAP {errCode}: {errMsg}");
-                    }
-
-                    if (!string.IsNullOrEmpty(value.CardName)) bp.CardName = value.CardName;
-
-                    if (!string.IsNullOrEmpty(value.CardType))
-                    {
-                        bp.CardType = value.CardType == "S" ? BoCardTypes.cSupplier : value.CardType == "L" ? BoCardTypes.cLid : BoCardTypes.cCustomer;
-                    }
-                    if (value.GroupCode.HasValue) bp.GroupCode = value.GroupCode.Value;
-                    if (!string.IsNullOrEmpty(value.LicTradNum)) bp.FederalTaxID = value.LicTradNum;
-                    if (!string.IsNullOrEmpty(value.Phone1)) bp.Phone1 = value.Phone1;
-                    if (!string.IsNullOrEmpty(value.Cellular)) bp.Cellular = value.Cellular;
-                    if (!string.IsNullOrEmpty(value.EmailAddress)) bp.EmailAddress = value.EmailAddress;
-                    if (!string.IsNullOrEmpty(value.Address)) bp.Address = value.Address;
-                    if (value.SlpCode.HasValue && value.SlpCode > 0) bp.SalesPersonCode = value.SlpCode.Value;
-                    if (value.GroupNum.HasValue) bp.PayTermsGrpCode = value.GroupNum.Value;
-                    if (value.CreditLine.HasValue) bp.CreditLimit = (double)value.CreditLine.Value;
-                    if (value.DebitLine.HasValue) bp.MaxCommitment = (double)value.DebitLine.Value;
-                    if (!string.IsNullOrEmpty(value.CntctPrsn)) bp.ContactPerson = value.CntctPrsn;
-                    if (!string.IsNullOrEmpty(value.Currency)) bp.Currency = value.Currency;
-                    if (!string.IsNullOrEmpty(value.Notes)) bp.Notes = value.Notes;
-                    if (!string.IsNullOrEmpty(value.ValidFor)) bp.Valid = value.ValidFor == "Y" ? BoYesNoEnum.tYES : BoYesNoEnum.tNO;
-
-                    // UDFs
-                    string currentField = "";
-                    try {
-                    currentField = "U_BPP_BPAT"; if (!string.IsNullOrEmpty(value.U_BPP_BPAT)) bp.UserFields.Fields.Item("U_BPP_BPAT").Value = value.U_BPP_BPAT;
-                    currentField = "U_BPP_BPTD"; if (!string.IsNullOrEmpty(value.U_BPP_BPTD)) bp.UserFields.Fields.Item("U_BPP_BPTD").Value = value.U_BPP_BPTD;
-                    currentField = "U_BPP_BPTP"; if (!string.IsNullOrEmpty(value.U_BPP_BPTP)) bp.UserFields.Fields.Item("U_BPP_BPTP").Value = value.U_BPP_BPTP;
-                    currentField = "U_BPP_BPNO"; if (!string.IsNullOrEmpty(value.U_BPP_BPNO)) bp.UserFields.Fields.Item("U_BPP_BPNO").Value = value.U_BPP_BPNO;
-                    currentField = "U_BPP_BPAP"; if (!string.IsNullOrEmpty(value.U_BPP_BPAP)) bp.UserFields.Fields.Item("U_BPP_BPAP").Value = value.U_BPP_BPAP;
-                    currentField = "U_BPP_BPAM"; if (!string.IsNullOrEmpty(value.U_BPP_BPAM)) bp.UserFields.Fields.Item("U_BPP_BPAM").Value = value.U_BPP_BPAM;
-                    currentField = "U_FIB_Divi"; if (!string.IsNullOrEmpty(value.U_FIB_Divi)) bp.UserFields.Fields.Item("U_FIB_Divi").Value = value.U_FIB_Divi;
-                    currentField = "U_FIB_Sector"; if (!string.IsNullOrEmpty(value.U_FIB_Sector)) bp.UserFields.Fields.Item("U_FIB_Sector").Value = value.U_FIB_Sector;
-                    currentField = "U_FIB_EMAIL2"; if (!string.IsNullOrEmpty(value.U_FIB_Email2)) bp.UserFields.Fields.Item("U_FIB_EMAIL2").Value = value.U_FIB_Email2;
-                    currentField = "U_FIB_EMAIL3"; if (!string.IsNullOrEmpty(value.U_FIB_Email3)) bp.UserFields.Fields.Item("U_FIB_EMAIL3").Value = value.U_FIB_Email3;
-
-                    } catch (Exception ex) { throw new Exception($"Error en campo {currentField} de la tabla OCRD: {ex.Message}"); }
-
-                    // Direcciones
-                    if (value.Addresses != null)
-                    {
-                        foreach (var addr in value.Addresses)
-                        {
-                            bool found = false;
-                            var targetedType = addr.AddressType == "S" ? BoAddressType.bo_ShipTo : BoAddressType.bo_BillTo;
-
-                            for (int i = 0; i < bp.Addresses.Count; i++)
-                            {
-                                bp.Addresses.SetCurrentLine(i);
-                                if (bp.Addresses.AddressName == addr.AddressName && bp.Addresses.AddressType == targetedType)
-                                {
-                                    found = true;
-                                    break;
-                                }
-                            }
-
-                            if (!found)
-                            {
-                                bp.Addresses.Add();
-                                bp.Addresses.AddressName = addr.AddressName;
-                                bp.Addresses.AddressType = targetedType;
-                            }
-
-                            bp.Addresses.Street = addr.Street;
-                            bp.Addresses.Block = addr.Block;
-                            bp.Addresses.City = addr.City;
-                            bp.Addresses.ZipCode = addr.ZipCode;
-                            bp.Addresses.County = addr.County;
-                            bp.Addresses.State = addr.State;
-                            bp.Addresses.Country = addr.Country;
-                            bp.Addresses.BuildingFloorRoom = addr.BuildingFloorRoom;
-                            if (!string.IsNullOrEmpty(addr.GlblLocNum)) bp.Addresses.GlobalLocationNumber = addr.GlblLocNum;
-                            if (!string.IsNullOrEmpty(addr.TaxCode)) bp.Addresses.TaxCode = addr.TaxCode;
-                        }
-                    }
-
-                    // Contactos
-                    if (value.ContactEmployees != null)
-                    {
-                        foreach (var contact in value.ContactEmployees)
-                        {
-                            bool found = false;
-                            for (int i = 0; i < bp.ContactEmployees.Count; i++)
-                            {
-                                bp.ContactEmployees.SetCurrentLine(i);
-                                if (bp.ContactEmployees.Name == contact.Name)
-                                {
-                                    found = true;
-                                    break;
-                                }
-                            }
-
-                            if (!found)
-                            {
-                                bp.ContactEmployees.Add();
-                                bp.ContactEmployees.Name = contact.Name;
-                            }
-
-                            bp.ContactEmployees.FirstName = contact.FirstName;
-                            bp.ContactEmployees.MiddleName = contact.MiddleName;
-                            bp.ContactEmployees.LastName = contact.LastName;
-                            bp.ContactEmployees.Title = contact.Title;
-                            bp.ContactEmployees.Position = contact.Position;
-                            bp.ContactEmployees.Address = contact.Address;
-                            bp.ContactEmployees.Phone1 = contact.Phone1;
-                            bp.ContactEmployees.Phone2 = contact.Phone2;
-                            bp.ContactEmployees.MobilePhone = contact.MobilePhone;
-                            bp.ContactEmployees.E_Mail = contact.E_Mail;
-                        }
-                    }
-
-                    int reg = bp.Update();
-
-                    if (reg == 0)
-                    {
-                        resultTransaccion.IdRegistro = 0;
-                        resultTransaccion.ResultadoCodigo = 0;
-                        resultTransaccion.ResultadoDescripcion = "Actualizado con éxito.";
-                    }
-                    else
-                    {
-                        company.GetLastError(out int errorCode, out string errorMessage);
-                        throw new Exception($"Error SAP {errorCode}: {errorMessage}");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    resultTransaccion.IdRegistro = -1;
-                    resultTransaccion.ResultadoCodigo = -1;
-                    resultTransaccion.ResultadoDescripcion = ex.Message;
-                }
-                finally
-                {
-                    _companyProviderSap.LiberarObjetosCOM(bp);
-                }
-
-                return resultTransaccion;
-            });
-        }
-
-        public async Task<ResultadoTransaccionEntity<BusinessPartnersQueryEntity>> SetDelete(string cardCode)
-        {
-            var resultTransaccion = new ResultadoTransaccionEntity<BusinessPartnersQueryEntity>
-            {
-                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
-                NombreAplicacion = _aplicacionName
-            };
-
-            BusinessPartners bp = null;
-
-            return await Task.Run(() =>
-            {
-                try
-                {
-                    var company = _companyProviderSap.GetCompany();
-                    bp = company.GetBusinessObject(BoObjectTypes.oBusinessPartners);
-
-                    if (!bp.GetByKey(cardCode))
-                    {
-                        throw new Exception($"No se encontró el socio de negocio {cardCode}");
-                    }
-
-                    int reg = bp.Remove();
-
-                    if (reg == 0)
-                    {
-                        resultTransaccion.IdRegistro = 0;
-                        resultTransaccion.ResultadoCodigo = 0;
-                        resultTransaccion.ResultadoDescripcion = "Registro eliminado con éxito.";
-                    }
-                    else
-                    {
-                        company.GetLastError(out int errorCode, out string errorMessage);
-                        throw new Exception($"Error SAP {errorCode}: {errorMessage}");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    resultTransaccion.IdRegistro = -1;
-                    resultTransaccion.ResultadoCodigo = -1;
-                    resultTransaccion.ResultadoDescripcion = ex.Message;
-                }
-                finally
-                {
-                    _companyProviderSap.LiberarObjetosCOM(bp);
-                }
-
-                return resultTransaccion;
-            });
-        }
-
-        public async Task<ResultadoTransaccionEntity<BusinessPartnersQueryEntity>> GetByRUC(string ruc)
-        {
-            var resultTransaccion = new ResultadoTransaccionEntity<BusinessPartnersQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<BusinessPartnersQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -1163,7 +834,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                    resultTransaccion.data = data;
+                    resultTransaccion.Data = data;
                 }
             }
             catch (Exception ex)
@@ -1175,5 +846,430 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
+
+        #endregion
+
+
+        #region <<< OPERACIONES >>>
+
+        public async Task<ResultadoTransaccionResponse<BusinessPartnersQueryEntity>> SetCreate(BusinessPartnersCreateEntity value)
+        {
+            var resultTransaccion = new ResultadoTransaccionResponse<BusinessPartnersQueryEntity>
+            {
+                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
+                NombreAplicacion = _aplicacionName
+            };
+
+            SAPbobsCOM.BusinessPartners businessPartners = null;
+
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    var company = _companyProviderSap.GetCompany();
+
+                    businessPartners = company.GetBusinessObject(BoObjectTypes.oBusinessPartners);
+
+                    businessPartners.CardCode = value.CardCode;
+                    businessPartners.CardName = value.CardName;
+                    if (!string.IsNullOrEmpty(value.CardType))
+                    {
+                        businessPartners.CardType = value.CardType == "S" ? BoCardTypes.cSupplier : value.CardType == "L" ? BoCardTypes.cLid : BoCardTypes.cCustomer;
+                    }
+                    businessPartners.GroupCode = value.GroupCode;
+                    businessPartners.FederalTaxID = value.LicTradNum;
+                    businessPartners.Currency = value.Currency;
+
+                    businessPartners.UserFields.Fields.Item("U_BPP_BPTP").Value = value.U_BPP_BPTP;
+                    businessPartners.UserFields.Fields.Item("U_BPP_BPTD").Value = value.U_BPP_BPTD;
+                    businessPartners.UserFields.Fields.Item("U_FIB_Divi").Value = value.U_FIB_Divi;
+                    businessPartners.UserFields.Fields.Item("U_FIB_Sector").Value = value.U_FIB_Sector;
+
+                    businessPartners.Phone1 = value.Phone1;
+                    businessPartners.Phone2 = value.Phone2;
+                    businessPartners.Cellular = value.Cellular;
+                    businessPartners.EmailAddress = value.Email;
+                    businessPartners.Valid = value.ValidFor == "Y" ? BoYesNoEnum.tYES : BoYesNoEnum.tNO;
+                    businessPartners.SalesPersonCode = value.SlpCode;
+                    businessPartners.Notes = value.Notes;
+
+
+                    businessPartners.ContactPerson = value.CntctPrsn;
+
+                    businessPartners.BilltoDefault = value.BillToDef;
+                    businessPartners.Address = value.Address;
+                    businessPartners.ShipToDefault = value.ShipToDef;
+                    businessPartners.MailAddress = value.MailAddres;
+
+                    businessPartners.PayTermsGrpCode = value.GroupNum;
+                    businessPartners.CreditLimit = (double)value.CreditLine;
+                    businessPartners.MaxCommitment = (double)value.DebitLine;
+                    businessPartners.PriceListNum = value.ListNum;
+
+                    businessPartners.UserFields.Fields.Item("U_BPP_BPAT").Value = value.U_BPP_BPAT;
+                    businessPartners.UserFields.Fields.Item("U_FIB_EMAIL2").Value = value.U_FIB_EMAIL2;
+                    businessPartners.UserFields.Fields.Item("U_FIB_EMAIL3").Value = value.U_FIB_EMAIL3;
+                    businessPartners.UserFields.Fields.Item("U_BPP_BPNO").Value = value.U_BPP_BPNO;
+                    businessPartners.UserFields.Fields.Item("U_BPP_BPAP").Value = value.U_BPP_BPAP;
+                    businessPartners.UserFields.Fields.Item("U_BPP_BPAM").Value = value.U_BPP_BPAM;
+
+
+
+                    #region <<< DIRECCIONES >>>
+
+                    for (int i = 0; i < value.AddressesLines.Count; i++)
+                    {
+                        var addr = value.AddressesLines[i];
+
+                        businessPartners.Addresses.AddressName = addr.Address;
+                        businessPartners.Addresses.AddressType = addr.AdresType == "S"
+                            ? BoAddressType.bo_ShipTo
+                            : BoAddressType.bo_BillTo;
+
+                        businessPartners.Addresses.Street = addr.Street;
+                        businessPartners.Addresses.City = addr.City;
+                        businessPartners.Addresses.County = addr.County;
+                        businessPartners.Addresses.State = addr.State;
+                        businessPartners.Addresses.Country = addr.Country;
+                        businessPartners.Addresses.GlobalLocationNumber = addr.GlblLocNum;
+                        businessPartners.Addresses.TaxCode = addr.TaxCode;
+
+                        businessPartners.Addresses.Add();
+                    }
+
+                    #endregion
+
+
+
+                    #region <<< CONTACTOS >>>
+
+                    for (int i = 0; i < value.ContactEmployeesLines.Count; i++)
+                    {
+                        var contact = value.ContactEmployeesLines[i];
+
+                        businessPartners.ContactEmployees.Name = contact.Name;
+                        businessPartners.ContactEmployees.FirstName = contact.FirstName;
+                        businessPartners.ContactEmployees.MiddleName = contact.MiddleName;
+                        businessPartners.ContactEmployees.LastName = contact.LastName;
+                        businessPartners.ContactEmployees.Title = contact.Title;
+                        businessPartners.ContactEmployees.Position = contact.Position;
+                        businessPartners.ContactEmployees.Address = contact.Address;
+                        businessPartners.ContactEmployees.Phone1 = contact.Phone1;
+                        businessPartners.ContactEmployees.Phone2 = contact.Phone2;
+                        businessPartners.ContactEmployees.MobilePhone = contact.MobilePhone;
+                        businessPartners.ContactEmployees.E_Mail = contact.E_MailL;
+
+                        if (i < value.ContactEmployeesLines.Count - 1)
+                            businessPartners.ContactEmployees.Add();
+                    }
+
+                    #endregion
+
+
+
+                    if (businessPartners.Add() != 0)
+                    {
+                        company.GetLastError(out int errorCode, out string errorMessage);
+                        throw new Exception($"Código: {errorCode}. Mensaje: {errorMessage}.");
+                    }
+
+
+                    resultTransaccion.IdRegistro = 0;
+                    resultTransaccion.ResultadoCodigo = 0;
+                    resultTransaccion.ResultadoDescripcion = "El socio de negocio ha sido registrado con éxito.";
+                }
+                catch (Exception ex)
+                {
+                    resultTransaccion.IdRegistro = -1;
+                    resultTransaccion.ResultadoCodigo = -1;
+                    resultTransaccion.ResultadoDescripcion = ex.Message;
+                }
+                finally
+                {
+                    _companyProviderSap.LiberarObjetosCOM(businessPartners);
+                }
+
+                return resultTransaccion;
+            });
+        }
+
+        public async Task<ResultadoTransaccionResponse<BusinessPartnersQueryEntity>> SetUpdate(BusinessPartnersUpdateEntity value)
+        {
+            var resultTransaccion = new ResultadoTransaccionResponse<BusinessPartnersQueryEntity>
+            {
+                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
+                NombreAplicacion = _aplicacionName
+            };
+
+            SAPbobsCOM.BusinessPartners businessPartners = null;
+
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    var company = _companyProviderSap.GetCompany();
+
+                    businessPartners = company.GetBusinessObject(BoObjectTypes.oBusinessPartners);
+
+                    if (!businessPartners.GetByKey(value.CardCode))
+                    {
+                        throw new Exception("No existe el socio de negocio.");
+                    }
+
+                    businessPartners.CardName = value.CardName;
+                    if (!string.IsNullOrEmpty(value.CardType))
+                    {
+                        businessPartners.CardType = value.CardType == "S" ? BoCardTypes.cSupplier : value.CardType == "L" ? BoCardTypes.cLid : BoCardTypes.cCustomer;
+                    }
+                    businessPartners.GroupCode = value.GroupCode;
+                    businessPartners.FederalTaxID = value.LicTradNum;
+                    businessPartners.Currency = value.Currency;
+
+                    businessPartners.UserFields.Fields.Item("U_BPP_BPTP").Value = value.U_BPP_BPTP;
+                    businessPartners.UserFields.Fields.Item("U_BPP_BPTD").Value = value.U_BPP_BPTD;
+                    businessPartners.UserFields.Fields.Item("U_FIB_Divi").Value = value.U_FIB_Divi;
+                    businessPartners.UserFields.Fields.Item("U_FIB_Sector").Value = value.U_FIB_Sector;
+
+                    businessPartners.Phone1 = value.Phone1;
+                    businessPartners.Phone2 = value.Phone2;
+                    businessPartners.Cellular = value.Cellular;
+                    businessPartners.EmailAddress = value.Email;
+                    businessPartners.Valid = value.ValidFor == "Y" ? BoYesNoEnum.tYES : BoYesNoEnum.tNO;
+                    businessPartners.SalesPersonCode = value.SlpCode;
+                    businessPartners.Notes = value.Notes;
+
+                    businessPartners.ContactPerson = value.CntctPrsn;
+
+                    businessPartners.BilltoDefault = value.BillToDef;
+                    businessPartners.Address = value.Address;
+                    businessPartners.ShipToDefault = value.ShipToDef;
+                    businessPartners.MailAddress = value.MailAddres;
+
+                    businessPartners.PayTermsGrpCode = value.GroupNum;
+                    businessPartners.CreditLimit = (double)value.CreditLine;
+                    businessPartners.MaxCommitment = (double)value.DebitLine;
+                    businessPartners.PriceListNum = value.ListNum;
+
+                    businessPartners.UserFields.Fields.Item("U_BPP_BPAT").Value = value.U_BPP_BPAT;
+                    businessPartners.UserFields.Fields.Item("U_FIB_EMAIL2").Value = value.U_FIB_EMAIL2;
+                    businessPartners.UserFields.Fields.Item("U_FIB_EMAIL3").Value = value.U_FIB_EMAIL3;
+                    businessPartners.UserFields.Fields.Item("U_BPP_BPNO").Value = value.U_BPP_BPNO;
+                    businessPartners.UserFields.Fields.Item("U_BPP_BPAP").Value = value.U_BPP_BPAP;
+                    businessPartners.UserFields.Fields.Item("U_BPP_BPAM").Value = value.U_BPP_BPAM;
+
+
+
+                    #region <<< DIRECCIONES >>>
+
+                    var newAddresses = value.AddressesLines.Where(d => d.Record == 1).ToList();
+
+                    // NUEVO: SE AGREGA NUEVO ITEM
+                    for (int i = 0; i < newAddresses.Count; i++)
+                    {
+                        var line = newAddresses[i];
+
+                        businessPartners.Addresses.AddressName = line.Address;
+                        businessPartners.Addresses.AddressType = line.AdresType == "S"
+                            ? BoAddressType.bo_ShipTo
+                            : BoAddressType.bo_BillTo;
+
+                        businessPartners.Addresses.Street = line.Street;
+                        businessPartners.Addresses.City = line.City;
+                        businessPartners.Addresses.County = line.County;
+                        businessPartners.Addresses.State = line.State;
+                        businessPartners.Addresses.Country = line.Country;
+                        businessPartners.Addresses.GlobalLocationNumber = line.GlblLocNum;
+                        businessPartners.Addresses.TaxCode = line.TaxCode;
+
+                        businessPartners.Addresses.Add();
+                    }
+
+                    // EXISTE: SE MODIFICA EL ITEM
+                    foreach (var line in value.AddressesLines.Where(d => d.Record == 2))
+                    {
+                        if (line.LineNum < 0 || line.LineNum >= businessPartners.Addresses.Count)
+                            continue;
+
+                        businessPartners.Addresses.SetCurrentLine(line.LineNum);
+
+                        businessPartners.Addresses.AddressName = line.Address;
+                        businessPartners.Addresses.AddressType = line.AdresType == "S"
+                            ? BoAddressType.bo_ShipTo
+                            : BoAddressType.bo_BillTo;
+
+                        businessPartners.Addresses.Street = line.Street;
+                        businessPartners.Addresses.City = line.City;
+                        businessPartners.Addresses.County = line.County;
+                        businessPartners.Addresses.State = line.State;
+                        businessPartners.Addresses.Country = line.Country;
+                        businessPartners.Addresses.GlobalLocationNumber = line.GlblLocNum;
+                        businessPartners.Addresses.TaxCode = line.TaxCode;
+                    }
+
+                    // EXISTE: SE ELIMINA EL ITEM
+                    foreach (var line in value.AddressesLines.Where(x => x.Record == 3).OrderByDescending(x => x.LineNum))
+                    {
+                        if (line.LineNum < 0 || line.LineNum >= businessPartners.Addresses.Count)
+                            continue;
+
+                        businessPartners.Addresses.SetCurrentLine(line.LineNum);
+                        businessPartners.Addresses.Delete();
+                    }
+
+                    #endregion
+
+
+
+                    #region <<< CONTACTOS >>>
+
+                    // NUEVO: SE AGREGA NUEVO ITEM
+                    var newContactsLines = value.ContactEmployeesLines.Where(c => c.Record == 1).ToList();
+
+                    bool hasExistingContacts = businessPartners.ContactEmployees.Count > 0;
+
+                    for (int i = 0; i < newContactsLines.Count; i++)
+                    {
+                        var line = newContactsLines[i];
+
+                        if (hasExistingContacts || i > 0)
+                        {
+                            businessPartners.ContactEmployees.Add();
+                        }
+
+                        businessPartners.ContactEmployees.Name = line.Name;
+                        businessPartners.ContactEmployees.FirstName = line.FirstName;
+                        businessPartners.ContactEmployees.MiddleName = line.MiddleName;
+                        businessPartners.ContactEmployees.LastName = line.LastName;
+                        businessPartners.ContactEmployees.Title = line.Title;
+                        businessPartners.ContactEmployees.Position = line.Position;
+                        businessPartners.ContactEmployees.Address = line.Address;
+                        businessPartners.ContactEmployees.Phone1 = line.Phone1;
+                        businessPartners.ContactEmployees.Phone2 = line.Phone2;
+                        businessPartners.ContactEmployees.MobilePhone = line.MobilePhone;
+                        businessPartners.ContactEmployees.E_Mail = line.E_MailL;
+                    }
+
+                    // EXISTE: SE MODIFICA EL ITEM
+                    foreach (var line in value.ContactEmployeesLines.Where(x => x.Record == 2))
+                    {
+                        for (int i = 0; i < businessPartners.ContactEmployees.Count; i++)
+                        {
+                            businessPartners.ContactEmployees.SetCurrentLine(i);
+
+                            if (businessPartners.ContactEmployees.InternalCode != line.CntctCode)
+                                continue;
+
+                            businessPartners.ContactEmployees.Name = line.Name;
+                            businessPartners.ContactEmployees.FirstName = line.FirstName;
+                            businessPartners.ContactEmployees.MiddleName = line.MiddleName;
+                            businessPartners.ContactEmployees.LastName = line.LastName;
+                            businessPartners.ContactEmployees.Title = line.Title;
+                            businessPartners.ContactEmployees.Position = line.Position;
+                            businessPartners.ContactEmployees.Address = line.Address;
+                            businessPartners.ContactEmployees.Phone1 = line.Phone1;
+                            businessPartners.ContactEmployees.Phone2 = line.Phone2;
+                            businessPartners.ContactEmployees.MobilePhone = line.MobilePhone;
+                            businessPartners.ContactEmployees.E_Mail = line.E_MailL;
+
+                            break;
+                        }
+                    }
+
+                    // EXISTE: SE ELIMINA EL ITEM
+                    foreach (var line in value.ContactEmployeesLines.Where(x => x.Record == 3))
+                    {
+                        for (int i = 0; i < businessPartners.ContactEmployees.Count; i++)
+                        {
+                            businessPartners.ContactEmployees.SetCurrentLine(i);
+
+                            if (businessPartners.ContactEmployees.InternalCode != line.CntctCode)
+                                continue;
+
+                            businessPartners.ContactEmployees.Delete();
+                            break;
+                        }
+                    }
+
+                    #endregion
+
+
+
+                    if (businessPartners.Update() != 0)
+                    {
+                        company.GetLastError(out int errorCode, out string errorMessage);
+                        throw new Exception($"Código: {errorCode}. Mensaje: {errorMessage}.");
+                    }
+
+                    resultTransaccion.IdRegistro = 0;
+                    resultTransaccion.ResultadoCodigo = 0;
+                    resultTransaccion.ResultadoDescripcion = "El socio de negocio ha sido actualizado con éxito.";
+                }
+                catch (Exception ex)
+                {
+                    resultTransaccion.IdRegistro = -1;
+                    resultTransaccion.ResultadoCodigo = -1;
+                    resultTransaccion.ResultadoDescripcion = ex.Message;
+                }
+                finally
+                {
+                    _companyProviderSap.LiberarObjetosCOM(businessPartners);
+                }
+
+                return resultTransaccion;
+            });
+        }
+
+        public async Task<ResultadoTransaccionResponse<BusinessPartnersQueryEntity>> SetDelete(string cardCode)
+        {
+            var resultTransaccion = new ResultadoTransaccionResponse<BusinessPartnersQueryEntity>
+            {
+                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
+                NombreAplicacion = _aplicacionName
+            };
+
+            SAPbobsCOM.BusinessPartners businessPartners = null;
+
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    var company = _companyProviderSap.GetCompany();
+                    businessPartners = company.GetBusinessObject(BoObjectTypes.oBusinessPartners);
+
+                    if (!businessPartners.GetByKey(cardCode))
+                    {
+                        throw new Exception("No existe el socio de negocio.");
+                    }
+
+                    int reg = businessPartners.Remove();
+
+                    if (reg == 0)
+                    {
+                        resultTransaccion.IdRegistro = 0;
+                        resultTransaccion.ResultadoCodigo = 0;
+                        resultTransaccion.ResultadoDescripcion = "Registro eliminado con éxito.";
+                    }
+                    else
+                    {
+                        company.GetLastError(out int errorCode, out string errorMessage);
+                        throw new Exception($"Error SAP {errorCode}: {errorMessage}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    resultTransaccion.IdRegistro = -1;
+                    resultTransaccion.ResultadoCodigo = -1;
+                    resultTransaccion.ResultadoDescripcion = ex.Message;
+                }
+                finally
+                {
+                    _companyProviderSap.LiberarObjetosCOM(businessPartners);
+                }
+
+                return resultTransaccion;
+            });
+        }
+
+        #endregion
     }
 }

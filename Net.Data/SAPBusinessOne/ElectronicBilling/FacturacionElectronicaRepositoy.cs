@@ -85,7 +85,7 @@ namespace Net.Data.SAPBusinessOne
                         resultTransaccion.IdRegistro = 0;
                         resultTransaccion.ResultadoCodigo = 0;
                         resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                        resultTransaccion.dataList = response;
+                        resultTransaccion.DataList = response;
                     }
 
                     conn.Close();

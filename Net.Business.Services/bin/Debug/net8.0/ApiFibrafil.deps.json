@@ -14,7 +14,7 @@
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.4",
           "Net.Business.DTO": "1.0.0",
-          "Net.BusinessLogic": "1.0.0",
+          "Net.Business.Logic": "1.0.0",
           "Net.Connection": "1.0.0",
           "Net.Data": "1.0.0",
           "Scrutor": "7.0.0",
@@ -2670,7 +2670,7 @@
           }
         }
       },
-      "Net.BusinessLogic/1.0.0": {
+      "Net.Business.Logic/1.0.0": {
         "dependencies": {
           "FluentValidation": "11.12.0",
           "FluentValidation.DependencyInjectionExtensions": "11.12.0",
@@ -2680,7 +2680,7 @@
           "Net.Data": "1.0.0"
         },
         "runtime": {
-          "Net.BusinessLogic.dll": {
+          "Net.Business.Logic.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -4337,7 +4337,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Net.BusinessLogic/1.0.0": {
+    "Net.Business.Logic/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

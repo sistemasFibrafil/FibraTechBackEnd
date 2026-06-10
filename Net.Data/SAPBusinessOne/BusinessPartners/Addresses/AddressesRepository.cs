@@ -1,10 +1,14 @@
 using System;
+using SAPbobsCOM;
 using System.Data;
 using System.Linq;
 using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
-using SAPbobsCOM;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
+using Net.Business.Entities.SAPBusinessOne;
 using Net.Connection.ConnectionSAPBusinessOne;
 namespace Net.Data.SAPBusinessOne
 {
@@ -45,7 +49,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -85,7 +89,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -96,35 +100,35 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<AddressesEntity>> SetCreate(AddressesEntity value)
+        public async Task<ResultadoTransaccionResponse<AddressesEntity>> SetCreate(AddressesEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<AddressesEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<AddressesEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
             };
 
-            BusinessPartners bp = null;
+            SAPbobsCOM.BusinessPartners businessPartners = null;
 
             return await Task.Run(() =>
             {
                 try
                 {
                     var company = _companyProviderSap.GetCompany();
-                    bp = company.GetBusinessObject(BoObjectTypes.oBusinessPartners);
+                    businessPartners = company.GetBusinessObject(BoObjectTypes.oBusinessPartners);
 
-                    if (!bp.GetByKey(value.CardCode))
+                    if (!businessPartners.GetByKey(value.CardCode))
                     {
                         company.GetLastError(out int errCode, out string errMsg);
                         throw new Exception($"No se encontró el socio de negocio {value.CardCode}. Error SAP {errCode}: {errMsg}");
                     }
 
                     // Agregar nueva dirección
-                    bp.Addresses.AddressName = value.Address;
-                    bp.Addresses.AddressType = value.AdresType == "S" ? BoAddressType.bo_ShipTo : BoAddressType.bo_BillTo;
-                    bp.Addresses.Street = value.Street;
+                    businessPartners.Addresses.AddressName = value.Address;
+                    businessPartners.Addresses.AddressType = value.AdresType == "S" ? BoAddressType.bo_ShipTo : BoAddressType.bo_BillTo;
+                    businessPartners.Addresses.Street = value.Street;
 
-                    int reg = bp.Update();
+                    int reg = businessPartners.Update();
 
                     if (reg == 0)
                     {
@@ -146,31 +150,31 @@ namespace Net.Data.SAPBusinessOne
                 }
                 finally
                 {
-                    _companyProviderSap.LiberarObjetosCOM(bp);
+                    _companyProviderSap.LiberarObjetosCOM(businessPartners);
                 }
 
                 return resultTransaccion;
             });
         }
 
-        public async Task<ResultadoTransaccionEntity<AddressesEntity>> SetUpdate(AddressesEntity value)
+        public async Task<ResultadoTransaccionResponse<AddressesEntity>> SetUpdate(AddressesEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<AddressesEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<AddressesEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
             };
 
-            BusinessPartners bp = null;
+            SAPbobsCOM.BusinessPartners businessPartners = null;
 
             return await Task.Run(() =>
             {
                 try
                 {
                     var company = _companyProviderSap.GetCompany();
-                    bp = company.GetBusinessObject(BoObjectTypes.oBusinessPartners);
+                    businessPartners = company.GetBusinessObject(BoObjectTypes.oBusinessPartners);
 
-                    if (!bp.GetByKey(value.CardCode))
+                    if (!businessPartners.GetByKey(value.CardCode))
                     {
                         company.GetLastError(out int errCode, out string errMsg);
                         throw new Exception($"No se encontró el socio de negocio {value.CardCode}. Error SAP {errCode}: {errMsg}");
@@ -178,13 +182,13 @@ namespace Net.Data.SAPBusinessOne
 
                     // Buscar y actualizar dirección
                     bool found = false;
-                    for (int i = 0; i < bp.Addresses.Count; i++)
+                    for (int i = 0; i < businessPartners.Addresses.Count; i++)
                     {
-                        bp.Addresses.SetCurrentLine(i);
-                        if (bp.Addresses.AddressName == value.Address)
+                        businessPartners.Addresses.SetCurrentLine(i);
+                        if (businessPartners.Addresses.AddressName == value.Address)
                         {
                             found = true;
-                            if (!string.IsNullOrEmpty(value.Street)) bp.Addresses.Street = value.Street;
+                            if (!string.IsNullOrEmpty(value.Street)) businessPartners.Addresses.Street = value.Street;
                             break;
                         }
                     }
@@ -194,7 +198,7 @@ namespace Net.Data.SAPBusinessOne
                         throw new Exception($"No se encontró la dirección {value.Address}");
                     }
 
-                    int reg = bp.Update();
+                    int reg = businessPartners.Update();
 
                     if (reg == 0)
                     {
@@ -216,31 +220,31 @@ namespace Net.Data.SAPBusinessOne
                 }
                 finally
                 {
-                    _companyProviderSap.LiberarObjetosCOM(bp);
+                    _companyProviderSap.LiberarObjetosCOM(businessPartners);
                 }
 
                 return resultTransaccion;
             });
         }
 
-        public async Task<ResultadoTransaccionEntity<AddressesEntity>> SetDelete(string cardCode, string address)
+        public async Task<ResultadoTransaccionResponse<AddressesEntity>> SetDelete(string cardCode, string address)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<AddressesEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<AddressesEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
             };
 
-            BusinessPartners bp = null;
+            SAPbobsCOM.BusinessPartners businessPartners = null;
 
             return await Task.Run(() =>
             {
                 try
                 {
                     var company = _companyProviderSap.GetCompany();
-                    bp = company.GetBusinessObject(BoObjectTypes.oBusinessPartners);
+                    businessPartners = company.GetBusinessObject(BoObjectTypes.oBusinessPartners);
 
-                    if (!bp.GetByKey(cardCode))
+                    if (!businessPartners.GetByKey(cardCode))
                     {
                         company.GetLastError(out int errCode, out string errMsg);
                         throw new Exception($"No se encontró el socio de negocio {cardCode}. Error SAP {errCode}: {errMsg}");
@@ -258,7 +262,7 @@ namespace Net.Data.SAPBusinessOne
                 }
                 finally
                 {
-                    _companyProviderSap.LiberarObjetosCOM(bp);
+                    _companyProviderSap.LiberarObjetosCOM(businessPartners);
                 }
 
                 return resultTransaccion;

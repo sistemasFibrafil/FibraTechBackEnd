@@ -59,7 +59,40 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
+            }
+            catch (Exception ex)
+            {
+                resultTransaccion.IdRegistro = -1;
+                resultTransaccion.ResultadoCodigo = -1;
+                resultTransaccion.ResultadoDescripcion = ex.Message.ToString();
+            }
+
+            return resultTransaccion;
+        }
+
+        public async Task<ResultadoTransaccionResponse<ChartOfAccountsQueryEntity>> GetByFormatCode(string formatCode)
+        {
+            var resultTransaccion = new ResultadoTransaccionResponse<ChartOfAccountsQueryEntity>();
+
+            try
+            {
+                var data = await _db.ChartOfAccounts
+                .AsNoTracking()
+                .Where(x => (x.Segment_0 + "-" + x.Segment_1 + "-" + x.Segment_2) == formatCode)
+                .Select(x => new ChartOfAccountsQueryEntity
+                {
+                    AcctCode = x.AcctCode,
+                    FormatCode = x.Segment_0 + "-" + x.Segment_1 + "-" + x.Segment_2,
+                    AcctName = x.AcctName
+                })
+                .FirstOrDefaultAsync();
+
+
+                resultTransaccion.IdRegistro = 0;
+                resultTransaccion.ResultadoCodigo = 0;
+                resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {

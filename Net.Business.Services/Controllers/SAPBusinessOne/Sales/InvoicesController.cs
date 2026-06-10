@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
-using Net.BusinessLogic.Interfaces.SAPBusinessOne.Sales;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.Sales;
 using Net.Business.DTO.SAPBusinessOne.Sales.Invoices.Create;
 using Net.Business.DTO.SAPBusinessOne.Sales.Invoices.Update;
 using Net.Business.DTO.SAPBusinessOne.Sales.Invoices.Cancel;
@@ -39,7 +39,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
@@ -54,7 +54,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet("{docEntry}")]
@@ -70,7 +70,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         #endregion

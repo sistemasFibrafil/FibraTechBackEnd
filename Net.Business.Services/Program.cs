@@ -18,7 +18,9 @@ using Microsoft.Extensions.Configuration;
 using Net.Connection.ConnectionSAPBusinessOne;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Net.BusinessLogic.Validators.SAPBusinessOne.Sales.Orders.Create;
+using Net.Business.Logic.Validators.SAPBusinessOne.Sales.Orders.Create;
+using Net.Business.DTO.SAPBusinessOne.Purchasing.PurchaseRequest.Validate;
+using Net.Business.Logic.Validators.SAPBusinessOne.Purchasing.PurchaseRequest.Validate.Items;
 
 
 // ===============================
@@ -96,6 +98,7 @@ builder.Services.AddControllers();
 // ===============================
 
 builder.Services.AddValidatorsFromAssemblyContaining<OrdersCreateRequestDtoValidator>();
+builder.Services.AddScoped<IValidator<List<PurchaseRequestLinesItemsValidateRequestDto>>, PurchaseRequestLinesItemsValidateRequestDtoValidator>();
 
 
 // ===============================
@@ -185,12 +188,24 @@ builder.Services.AddDbContext<DataContextProfil>(opt =>
 // ===============================
 
 var connSapDi = Utilidades.GetConSap(configuration, "EntornoConnectionSapDiApi:Entorno");
+var connSapDiAutorizacion = Utilidades.GetConSap(configuration, "EntornoConnectionSapDiApiAutorizacion:Entorno");
 
 builder.Services.AddSingleton<IConnectionSAPBusinessOne, ConnectionSAPBusinessOne>();
+
 builder.Services.AddSingleton(provider =>
     new CompanyProviderSAPBusinessOne(
         provider.GetRequiredService<IConnectionSAPBusinessOne>(),
-        connSapDi
+        connSapDi,
+        connSapDiAutorizacion
+    )
+);
+
+
+builder.Services.AddSingleton(provider =>
+    new CompanyProviderSAPBusinessOne(
+        provider.GetRequiredService<IConnectionSAPBusinessOne>(),
+        connSapDi,
+        connSapDiAutorizacion
     )
 );
 

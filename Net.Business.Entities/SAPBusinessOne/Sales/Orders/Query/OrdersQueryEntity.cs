@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Net.Business.Entities.SAPBusinessOne.Common.Attachments2.Entities;
 using Net.Business.Entities.SAPBusinessOne.Common.Attachments2.Query;
 using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Entities;
-namespace Net.Business.Entities.SAPBusinessOne
+namespace Net.Business.Entities.SAPBusinessOne.Sales.Orders.Query
 {
     public class OrdersQueryEntity
     {
@@ -81,6 +80,8 @@ namespace Net.Business.Entities.SAPBusinessOne
         public decimal? U_FIB_TFLETE { get; set; }
         public decimal? U_FIB_IMPSEG { get; set; }
         public string? U_FIB_PUERTO { get; set; }
+        public string? U_FIB_NEMBA { get; set; }
+        public string? U_FIB_DEMBA { get; set; }
         public string? U_STR_FEMB { get; set; }
 
 
@@ -109,64 +110,14 @@ namespace Net.Business.Entities.SAPBusinessOne
         public decimal DocTotalSy { get; set; }
 
 
-        // 🔗 1 → N (ORDR → OATC)
+        // 🔗 1 → N (ORDR → ODRF)
         public Attachments2QueryEntity? Attachments2 { get; set; } = null;
 
 
         // 🔗 1 → N (ORDR → RDR1)
-        public List<Orders1QueryEntity> Lines { get; set; } = [];
+        public List<OrdersLinesQueryEntity> Lines { get; set; } = [];
 
         // 🔗 1 → N (ORDR → @FIB_OPKG)
         public List<PickingEntity> PickingLines { get; set; } = [];
-    }
-
-    public class Orders1QueryEntity
-    {
-        public int DocEntry { get; set; }
-        public int LineNum { get; set; }
-        public string? LineStatus { get; set; }
-        public string? ObjType { get; set; }
-        public int BaseType { get; set; }
-        public int? BaseEntry { get; set; }
-        public int? BaseLine { get; set; }
-
-        public string? U_FIB_LinStPkg { get; set; }
-        public string? U_FIB_FromPkg { get; set; }
-
-        public string? ItemCode { get; set; }
-        public string? Dscription { get; set; }
-        public string? AcctCode { get; set; }
-        public string? FormatCode { get; set; }
-        public string? AcctName { get; set; }
-        public string? WhsCode { get; set; }
-
-        public string? UnitMsr { get; set; }
-        public decimal? OnHand { get; set; }
-        public decimal Quantity { get; set; }
-        public decimal OpenQty { get; set; }
-        public decimal Delivered { get; set; }
-        public decimal? U_FIB_OpQtyPkg { get; set; }
-        public decimal? U_FIB_NBulto { get; set; }
-        public decimal? U_FIB_PesoKg { get; set; }
-
-        public string? Currency { get; set; }
-        public decimal? PriceBefDi { get; set; }
-        public decimal? DiscPrcnt { get; set; }
-        public decimal Price { get; set; }
-        public string? TaxCode { get; set; }
-        public decimal? VatPrcnt { get; set; }
-        public decimal? VatSum { get; set; }
-        public string? U_tipoOpT12 { get; set; }
-        public string? U_tipoOpT12Nam { get; set; }
-        public decimal LineTotal { get; set; }
-
-        // 🔗 N → 1 (PRQ1 → ChartOfAccounts)
-        public ChartOfAccountsEntity ChartOfAccounts { get; set; } = null!;
-
-
-        // 🔗 N → 1 (RDR1 → TipoOperacion)
-        public OperationTypeEntity OperationType { get; set; } = null!;
-
-        public int Record { get; set; } = 2;
     }
 }

@@ -261,7 +261,7 @@ namespace Net.Data.Web
                     resultadoTransaccion.IdRegistro = 0;
                     resultadoTransaccion.ResultadoCodigo = 0;
                     resultadoTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultadoTransaccion.dataList = response;
+                    resultadoTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -316,7 +316,7 @@ namespace Net.Data.Web
                     resultadoTransaccion.IdRegistro = 0;
                     resultadoTransaccion.ResultadoCodigo = 0;
                     resultadoTransaccion.ResultadoDescripcion = "Datos obtenidos con éxito ..!";
-                    resultadoTransaccion.data = response;
+                    resultadoTransaccion.Data = response;
                 }
             }
             catch (Exception ex)
@@ -359,7 +359,7 @@ namespace Net.Data.Web
                     resultadoTransaccion.IdRegistro = 0;
                     resultadoTransaccion.ResultadoCodigo = 0;
                     resultadoTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultadoTransaccion.dataList = response;
+                    resultadoTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -403,7 +403,7 @@ namespace Net.Data.Web
                     resultadoTransaccion.IdRegistro = 0;
                     resultadoTransaccion.ResultadoCodigo = 0;
                     resultadoTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultadoTransaccion.dataList = response;
+                    resultadoTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -448,7 +448,7 @@ namespace Net.Data.Web
                     resultadoTransaccion.IdRegistro = 0;
                     resultadoTransaccion.ResultadoCodigo = 0;
                     resultadoTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultadoTransaccion.dataList = response;
+                    resultadoTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -513,7 +513,7 @@ namespace Net.Data.Web
                             resultadoTransaccion.IdRegistro = 0;
                             resultadoTransaccion.ResultadoCodigo = 0;
                             resultadoTransaccion.ResultadoDescripcion = "Registro actualizado con éxito ..!";
-                            resultadoTransaccion.data = response;
+                            resultadoTransaccion.Data = response;
 
                             transaction.Commit();
                         }
@@ -567,7 +567,7 @@ namespace Net.Data.Web
                     resultadoTransaccion.IdRegistro = 0;
                     resultadoTransaccion.ResultadoCodigo = 0;
                     resultadoTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultadoTransaccion.dataList = response;
+                    resultadoTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -666,7 +666,7 @@ namespace Net.Data.Web
                 resultadoTransaccion.IdRegistro = 0;
                 resultadoTransaccion.ResultadoCodigo = 0;
                 resultadoTransaccion.ResultadoDescripcion = "Se generó correctamente el archivo.s";
-                resultadoTransaccion.data = file;
+                resultadoTransaccion.Data = file;
 
             }
             catch (Exception ex)
@@ -763,7 +763,7 @@ namespace Net.Data.Web
                 resultadoTransaccion.IdRegistro = 0;
                 resultadoTransaccion.ResultadoCodigo = 0;
                 resultadoTransaccion.ResultadoDescripcion = "Se generó correctamente el archivo.s";
-                resultadoTransaccion.data = file;
+                resultadoTransaccion.Data = file;
 
             }
             catch (Exception ex)
@@ -809,7 +809,7 @@ namespace Net.Data.Web
                     resultadoTransaccion.IdRegistro = 0;
                     resultadoTransaccion.ResultadoCodigo = 0;
                     resultadoTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultadoTransaccion.dataList = response;
+                    resultadoTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -913,7 +913,7 @@ namespace Net.Data.Web
                 resultadoTransaccion.IdRegistro = 0;
                 resultadoTransaccion.ResultadoCodigo = 0;
                 resultadoTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultadoTransaccion.data = ms;
+                resultadoTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -957,7 +957,7 @@ namespace Net.Data.Web
                     resultadoTransaccion.IdRegistro = 0;
                     resultadoTransaccion.ResultadoCodigo = 0;
                     resultadoTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultadoTransaccion.dataList = response;
+                    resultadoTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -1126,7 +1126,7 @@ namespace Net.Data.Web
                     resultadoTransaccion.IdRegistro = 0;
                     resultadoTransaccion.ResultadoCodigo = 0;
                     resultadoTransaccion.ResultadoDescripcion = "Se generó correctamente el archivos.";
-                    resultadoTransaccion.data = file;
+                    resultadoTransaccion.Data = file;
                 }
             }
             catch (Exception ex)

@@ -11,7 +11,7 @@ namespace Net.CrossCotting
             {
                 ResultadoCodigo = 0,
                 ResultadoDescripcion = message,
-                data = data
+                Data = data
             };
         }
 
@@ -32,7 +32,7 @@ namespace Net.CrossCotting
             {
                 ResultadoCodigo = 0,
                 ResultadoDescripcion = message,
-                dataList = dataList
+                DataList = dataList
             };
         }
 
@@ -63,8 +63,8 @@ namespace Net.CrossCotting
             {
                 ResultadoCodigo = source.ResultadoCodigo,
                 ResultadoDescripcion = source.ResultadoDescripcion,
-                data = source.data,
-                dataList = source.dataList as IEnumerable<object>
+                Data = source.Data,
+                DataList = source.DataList as IEnumerable<object>
             };
         }
     }

@@ -54,12 +54,8 @@ namespace Net.Business.Entities.SAPBusinessOne.Drafts.Update
         public double U_FIB_TFLETE { get; set; }
         public double U_FIB_IMPSEG { get; set; }
         public string? U_FIB_PUERTO { get; set; }
-
-
-        /// <summary>
-        /// OTROS
-        /// </summary>
-        public string? U_STR_TVENTA { get; set; }
+        public string? U_FIB_NEMBA { get; set; }
+        public string? U_FIB_DEMBA { get; set; }
 
 
         /// <summary>

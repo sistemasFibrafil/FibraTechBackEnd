@@ -4330,7 +4330,7 @@
           "bin/placeholder/Net.Business.Entities.dll": {}
         }
       },
-      "Net.BusinessLogic/1.0.0": {
+      "Net.Business.Logic/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
@@ -4342,10 +4342,10 @@
           "Net.Data": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/Net.BusinessLogic.dll": {}
+          "bin/placeholder/Net.Business.Logic.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Net.BusinessLogic.dll": {}
+          "bin/placeholder/Net.Business.Logic.dll": {}
         }
       },
       "Net.Connection/1.0.0": {
@@ -12318,10 +12318,10 @@
       "path": "../Net.Business.Entities/Net.Business.Entities.csproj",
       "msbuildProject": "../Net.Business.Entities/Net.Business.Entities.csproj"
     },
-    "Net.BusinessLogic/1.0.0": {
+    "Net.Business.Logic/1.0.0": {
       "type": "project",
-      "path": "../Net.BusinessLogic/Net.BusinessLogic.csproj",
-      "msbuildProject": "../Net.BusinessLogic/Net.BusinessLogic.csproj"
+      "path": "../Net.Business.Logic/Net.Business.Logic.csproj",
+      "msbuildProject": "../Net.Business.Logic/Net.Business.Logic.csproj"
     },
     "Net.Connection/1.0.0": {
       "type": "project",
@@ -12352,7 +12352,7 @@
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.4",
       "Net.Business.DTO >= 1.0.0",
-      "Net.BusinessLogic >= 1.0.0",
+      "Net.Business.Logic >= 1.0.0",
       "Net.Connection >= 1.0.0",
       "Net.Data >= 1.0.0",
       "Scrutor >= 7.0.0",
@@ -12394,8 +12394,8 @@
             "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj": {
               "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.DTO\\Net.Business.DTO.csproj"
             },
-            "D:\\Fil\\Web\\BackEnd\\Net.BusinessLogic\\Net.BusinessLogic.csproj": {
-              "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.BusinessLogic\\Net.BusinessLogic.csproj"
+            "D:\\Fil\\Web\\BackEnd\\Net.Business.Logic\\Net.Business.Logic.csproj": {
+              "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Business.Logic\\Net.Business.Logic.csproj"
             },
             "D:\\Fil\\Web\\BackEnd\\Net.Connection\\Net.Connection.csproj": {
               "projectPath": "D:\\Fil\\Web\\BackEnd\\Net.Connection\\Net.Connection.csproj"
@@ -12470,7 +12470,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.315/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

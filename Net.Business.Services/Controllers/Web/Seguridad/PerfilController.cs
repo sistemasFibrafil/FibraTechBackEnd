@@ -36,7 +36,7 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
                 return NotFound();
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         /// <summary>

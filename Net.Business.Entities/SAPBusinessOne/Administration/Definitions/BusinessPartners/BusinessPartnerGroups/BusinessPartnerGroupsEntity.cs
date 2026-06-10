@@ -1,10 +1,9 @@
-﻿using System;
-namespace Net.Business.Entities.SAPBusinessOne
+﻿namespace Net.Business.Entities.SAPBusinessOne.Administration.Definitions.BusinessPartners.BusinessPartnerGroups
 {
     public class BusinessPartnerGroupsEntity
     {
-        public Int16 GroupCode { get; set; }
-        public string GroupName { get; set; }
-        public string GroupType { get; set; }
+        public short GroupCode { get; set; }
+        public string? GroupName { get; set; }
+        public string? GroupType { get; set; }
     }
 }

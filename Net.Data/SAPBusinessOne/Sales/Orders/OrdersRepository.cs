@@ -20,6 +20,7 @@ using Microsoft.Extensions.Configuration;
 using Net.Business.Entities.SAPBusinessOne;
 using Net.Connection.ConnectionSAPBusinessOne;
 using Net.Business.Entities.SAPBusinessOne.Sales.Orders.Close;
+using Net.Business.Entities.SAPBusinessOne.Sales.Orders.Query;
 using Net.Business.Entities.SAPBusinessOne.Sales.Orders.Create;
 using Net.Business.Entities.SAPBusinessOne.Sales.Orders.Update;
 using Net.Business.Entities.SAPBusinessOne.Common.Attachments2.Query;
@@ -89,7 +90,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -161,7 +162,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -284,6 +285,8 @@ namespace Net.Data.SAPBusinessOne
                     U_FIB_TFLETE = n.U_FIB_TFLETE,
                     U_FIB_IMPSEG = n.U_FIB_IMPSEG,
                     U_FIB_PUERTO = n.U_FIB_PUERTO,
+                    U_FIB_NEMBA = n.U_FIB_NEMBA,
+                    U_FIB_DEMBA = n.U_FIB_DEMBA,
 
                     U_STR_TVENTA = n.U_STR_TVENTA,
 
@@ -316,7 +319,7 @@ namespace Net.Data.SAPBusinessOne
                     },
 
                     // 🔹 LÍNEAS EMBEBIDAS
-                    Lines = n.Lines.Select(s => new Orders1QueryEntity
+                    Lines = n.Lines.Select(s => new OrdersLinesQueryEntity
                     {
                         DocEntry = s.DocEntry,
                         LineNum = s.LineNum,
@@ -348,8 +351,15 @@ namespace Net.Data.SAPBusinessOne
 
                         U_FIB_LinStPkg = s.U_FIB_LinStPkg ?? s.LineStatus,
                         U_FIB_OpQtyPkg = s.U_FIB_OpQtyPkg ?? s.OpenQty,
+                        U_S_PartAranc1 = s.U_S_PartAranc1 ?? "",
                         U_tipoOpT12 = s.U_tipoOpT12 ?? "",
-                        U_tipoOpT12Nam = s.OperationType != null ? s.OperationType.U_descrp : "",
+                        U_tipoOpT12Nam = s.OperationType != null ? (s.U_tipoOpT12 + " - " + s.OperationType.U_descrp) : "",
+
+                        ValidatedItemCode = s.ItemCode,
+                        ValidatedFormatCode = s.ChartOfAccounts != null ? s.ChartOfAccounts.Segment_0 + "-" + s.ChartOfAccounts.Segment_1 + "-" + s.ChartOfAccounts.Segment_2 : "",
+                        ValidatedWhsCode = s.WhsCode,
+                        ValidatedTaxCode = s.TaxCode,
+                        ValidatedOperationType = s.OperationType != null ? (s.U_tipoOpT12 + " - " + s.OperationType.U_descrp) : ""
                     }).ToList()
                 })
                 .FirstOrDefaultAsync();
@@ -357,7 +367,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -485,6 +495,8 @@ namespace Net.Data.SAPBusinessOne
                     U_FIB_TFLETE = n.U_FIB_TFLETE,
                     U_FIB_IMPSEG = n.U_FIB_IMPSEG,
                     U_FIB_PUERTO = n.U_FIB_PUERTO,
+                    U_FIB_NEMBA = n.U_FIB_NEMBA,
+                    U_FIB_DEMBA = n.U_FIB_DEMBA,
 
                     // Otros
                     U_STR_TVENTA = n.U_STR_TVENTA,
@@ -505,7 +517,7 @@ namespace Net.Data.SAPBusinessOne
                     // 🔹 LÍNEAS EMBEBIDAS
                     Lines = n.Lines
                     .Where(s => s.LineStatus == "O")   // ✅ SOLO líneas abiertas
-                    .Select(s => new Orders1QueryEntity
+                    .Select(s => new OrdersLinesQueryEntity
                     {
                         DocEntry = s.DocEntry,
                         LineNum = s.LineNum,
@@ -552,7 +564,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -600,7 +612,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -675,7 +687,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGetList = await GetListSeguimientoByFilter(value);
 
                     //Contenido
-                    foreach (var item in objectGetList.dataList)
+                    foreach (var item in objectGetList.DataList)
                     {
                         row = new Row();
                         row.Append(
@@ -717,7 +729,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -766,7 +778,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -876,7 +888,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGetList = await GetListSeguimientoDetalladoDireccionFiscalByFilter(value);
 
                     //Contenido
-                    foreach (var item in objectGetList.dataList)
+                    foreach (var item in objectGetList.DataList)
                     {
                         row = new Row();
                         row.Append(
@@ -953,7 +965,7 @@ namespace Net.Data.SAPBusinessOne
                 resultadoTransaccion.IdRegistro = 0;
                 resultadoTransaccion.ResultadoCodigo = 0;
                 resultadoTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultadoTransaccion.data = ms;
+                resultadoTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -1002,7 +1014,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -1112,7 +1124,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGetList = await GetListSeguimientoDetalladoDireccionDespachoByFilter(value);
 
                     //Contenido
-                    foreach (var item in objectGetList.dataList)
+                    foreach (var item in objectGetList.DataList)
                     {
                         row = new Row();
                         row.Append(
@@ -1189,7 +1201,7 @@ namespace Net.Data.SAPBusinessOne
                 resultadoTransaccion.IdRegistro = 0;
                 resultadoTransaccion.ResultadoCodigo = 0;
                 resultadoTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultadoTransaccion.data = ms;
+                resultadoTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -1233,7 +1245,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -1333,7 +1345,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGetList = await GetListOrdenVentaPendienteStockAlmacenProduccionByFecha(value);
 
                     //Contenido
-                    foreach (var item in objectGetList.dataList)
+                    foreach (var item in objectGetList.DataList)
                     {
                         row = new Row();
                         row.Append(
@@ -1400,7 +1412,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -1444,7 +1456,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -1506,7 +1518,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGetList = await GetListOrdenVentaProgramacionByFecha(value);
 
                     //Contenido
-                    foreach (var item in objectGetList.dataList)
+                    foreach (var item in objectGetList.DataList)
                     {
                         row = new Row();
                         row.Append(
@@ -1536,7 +1548,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -1578,7 +1590,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -1621,7 +1633,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = "Datos obtenidos con éxito ..!";
-                    resultTransaccion.data = response;
+                    resultTransaccion.Data = response;
                 }
             }
             catch (Exception ex)
@@ -1668,7 +1680,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -1730,7 +1742,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGetList = await GetListOrdenVentaPreliminarPendienteByFecha(value);
 
                     //Contenido
-                    foreach (var item in objectGetList.dataList)
+                    foreach (var item in objectGetList.DataList)
                     {
                         row = new Row();
                         row.Append(
@@ -1759,7 +1771,7 @@ namespace Net.Data.SAPBusinessOne
                 resultadoTransaccion.IdRegistro = 0;
                 resultadoTransaccion.ResultadoCodigo = 0;
                 resultadoTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultadoTransaccion.data = ms;
+                resultadoTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -1784,18 +1796,16 @@ namespace Net.Data.SAPBusinessOne
                 NombreAplicacion = _aplicacionName
             };
 
+            bool aprobacion = false;
+
+            Company company = null;
             Documents orders = null;
             Attachments2 attachments = null;
-            var aplicaAprobacion = false;
 
             return await Task.Run(() =>
             {
                 try
                 {
-                    // Conexión a SAP
-                    var company = _companyProviderSap.GetCompany();
-
-
                     #region <<< VALIDACIÓN DE AUTORIZACIÓN >>>
 
                     /*
@@ -1819,12 +1829,16 @@ namespace Net.Data.SAPBusinessOne
 
                         if (snBal > snCre)
                         {
-                            company = _companyProviderSap.GetCompanyAuth();
-                            aplicaAprobacion = true;
+                            company = _companyProviderSap.GetCompanyAutorizacion();
+                            aprobacion = true;
                         }
                     }
 
+                    // Si no aplica autorización, usa conexión normal
+                    company ??= _companyProviderSap.GetCompany();
+
                     #endregion
+
 
 
                     // Se crea el objeto de orden de venta
@@ -1870,7 +1884,8 @@ namespace Net.Data.SAPBusinessOne
                     // ===========================================================================================
                     // FINANZAS
                     // ===========================================================================================
-                    orders.GroupNumber = value.GroupNum;
+                    //orders.GroupNumber = value.GroupNum;
+                    orders.PaymentGroupCode = value.GroupNum;
 
                     // ===========================================================================================
                     // AGENCIA
@@ -1889,11 +1904,8 @@ namespace Net.Data.SAPBusinessOne
                     orders.UserFields.Fields.Item("U_FIB_TFLETE").Value = value.U_FIB_TFLETE;
                     orders.UserFields.Fields.Item("U_FIB_IMPSEG").Value = value.U_FIB_IMPSEG;
                     orders.UserFields.Fields.Item("U_FIB_PUERTO").Value = value.U_FIB_PUERTO;
-
-                    // ===========================================================================================
-                    // OTROS
-                    // ===========================================================================================
-                    orders.UserFields.Fields.Item("U_STR_TVENTA").Value = value.U_STR_TVENTA;
+                    orders.UserFields.Fields.Item("U_FIB_NEMBA").Value = value.U_FIB_NEMBA;
+                    orders.UserFields.Fields.Item("U_FIB_DEMBA").Value = value.U_FIB_DEMBA;
 
                     // ===========================================================================================
                     // PIE
@@ -1951,6 +1963,7 @@ namespace Net.Data.SAPBusinessOne
                         orders.Lines.UserFields.Fields.Item("U_FIB_LinStPkg").Value = line.U_FIB_LinStPkg;
                         orders.Lines.UserFields.Fields.Item("U_FIB_OpQtyPkg").Value = line.U_FIB_OpQtyPkg;
                         orders.Lines.UserFields.Fields.Item("U_tipoOpT12").Value = line.U_tipoOpT12;
+                        orders.Lines.UserFields.Fields.Item("U_S_PartAranc1").Value = line.U_S_PartAranc1;
                         orders.Lines.Add();
                     }
 
@@ -2003,6 +2016,7 @@ namespace Net.Data.SAPBusinessOne
                         company.GetLastError(out int errorCode, out string errorMessage);
                         throw new Exception($"Código: {errorCode}. Mensaje: {errorMessage}.");
                     }
+                    
 
 
                     resultTransaccion.IdRegistro = 0;
@@ -2011,13 +2025,18 @@ namespace Net.Data.SAPBusinessOne
                 }
                 catch (Exception ex)
                 {
+                    if (company != null && company.Connected)
+                    {
+                        if (company.InTransaction) company.EndTransaction(BoWfTransOpt.wf_RollBack);
+                    }
+
                     resultTransaccion.IdRegistro = -1;
                     resultTransaccion.ResultadoCodigo = -1;
                     resultTransaccion.ResultadoDescripcion = ex.Message.ToString();
                 }
                 finally
                 {
-                    if(aplicaAprobacion)
+                    if(aprobacion)
                     {
                         _companyProviderSap.DisconnectCompany();
                     }
@@ -2037,9 +2056,6 @@ namespace Net.Data.SAPBusinessOne
 
             Documents orders = null;
             Attachments2 attachments = null;
-            Attachments2 newAttachment = null;
-            Attachments2 oldAttachment = null;
-
 
             return await Task.Run(() =>
             {
@@ -2059,9 +2075,10 @@ namespace Net.Data.SAPBusinessOne
                     }
 
 
+
                     #region <<< CABECERA >>>
 
-                    if (orders.DocumentStatus == BoStatus.bost_Open)
+                    if (value.DocStatus == "O")
                     {
                         orders.DocDate = value.DocDate;
                         orders.DocDueDate = value.DocDueDate;
@@ -2074,7 +2091,7 @@ namespace Net.Data.SAPBusinessOne
                     orders.CardCode = value.CardCode;
                     orders.ContactPersonCode = value.CntctCode;
                     orders.NumAtCard = value.NumAtCard;
-                    if (orders.DocumentStatus == BoStatus.bost_Open)
+                    if (value.DocStatus == "O" && value.WddStatus == "-")
                     {
                         orders.DocCurrency = value.DocCur;
                         orders.DocRate = value.DocRate;
@@ -2083,7 +2100,7 @@ namespace Net.Data.SAPBusinessOne
                     // ===========================================================================================
                     // LOGÍSTICA
                     // ===========================================================================================
-                    if (orders.DocumentStatus == BoStatus.bost_Open && (BoApprovalRequestStatusEnum)orders.AuthorizationStatus != BoApprovalRequestStatusEnum.arsApproved)
+                    if (value.DocStatus == "O")
                     {
                         orders.PayToCode = value.PayToCode;
                         orders.Address = value.Address;
@@ -2095,23 +2112,19 @@ namespace Net.Data.SAPBusinessOne
                     // ===========================================================================================
                     // FINANZAS
                     // ===========================================================================================
-                    if (orders.DocumentStatus == BoStatus.bost_Open && (BoApprovalRequestStatusEnum)orders.AuthorizationStatus != BoApprovalRequestStatusEnum.arsApproved)
+                    if (value.DocStatus == "O" && value.WddStatus == "-")
                     {
-                        orders.GroupNumber = value.GroupNum;
+                        //orders.GroupNumber = value.GroupNum;
+                        orders.PaymentGroupCode = value.GroupNum;
                     }
 
                     // ===========================================================================================
                     // AGENCIA
                     // ===========================================================================================
-                    // Código de agencia de transporte
                     orders.UserFields.Fields.Item("U_BPP_MDCT").Value = value.U_BPP_MDCT;
-                    // RUC de la agencia de transporte
                     orders.UserFields.Fields.Item("U_BPP_MDRT").Value = value.U_BPP_MDRT;
-                    // Nombre de la agencia de transporte
                     orders.UserFields.Fields.Item("U_BPP_MDNT").Value = value.U_BPP_MDNT;
-                    // Código de dirección de la agencia de transporte
                     orders.UserFields.Fields.Item("U_FIB_CODT").Value = value.U_FIB_CODT;
-                    // Dirección de la agencia de transporte
                     orders.UserFields.Fields.Item("U_BPP_MDDT").Value = value.U_BPP_MDDT;
 
                     // ===========================================================================================
@@ -2122,11 +2135,8 @@ namespace Net.Data.SAPBusinessOne
                     orders.UserFields.Fields.Item("U_FIB_TFLETE").Value = value.U_FIB_TFLETE;
                     orders.UserFields.Fields.Item("U_FIB_IMPSEG").Value = value.U_FIB_IMPSEG;
                     orders.UserFields.Fields.Item("U_FIB_PUERTO").Value = value.U_FIB_PUERTO;
-
-                    // ===========================================================================================
-                    // OTROS
-                    // ===========================================================================================
-                    orders.UserFields.Fields.Item("U_STR_TVENTA").Value = value.U_STR_TVENTA;
+                    orders.UserFields.Fields.Item("U_FIB_NEMBA").Value = value.U_FIB_NEMBA;
+                    orders.UserFields.Fields.Item("U_FIB_DEMBA").Value = value.U_FIB_DEMBA;
 
                     // ===========================================================================================
                     // PIE
@@ -2184,6 +2194,7 @@ namespace Net.Data.SAPBusinessOne
                         orders.Lines.UserFields.Fields.Item("U_FIB_LinStPkg").Value = line.U_FIB_LinStPkg;
                         orders.Lines.UserFields.Fields.Item("U_FIB_OpQtyPkg").Value = line.U_FIB_OpQtyPkg;
                         orders.Lines.UserFields.Fields.Item("U_tipoOpT12").Value = line.U_tipoOpT12;
+                        orders.Lines.UserFields.Fields.Item("U_S_PartAranc1").Value = line.U_S_PartAranc1;
                     }
 
                     // EXISTE: SE MODIFICA EL ITEM
@@ -2220,6 +2231,7 @@ namespace Net.Data.SAPBusinessOne
                             orders.Lines.UserFields.Fields.Item("U_FIB_LinStPkg").Value = line.U_FIB_LinStPkg;
                             orders.Lines.UserFields.Fields.Item("U_FIB_OpQtyPkg").Value = line.U_FIB_OpQtyPkg;
                             orders.Lines.UserFields.Fields.Item("U_tipoOpT12").Value = line.U_tipoOpT12;
+                            orders.Lines.UserFields.Fields.Item("U_S_PartAranc1").Value = line.U_S_PartAranc1;
                         }
                     }
 
@@ -2275,6 +2287,7 @@ namespace Net.Data.SAPBusinessOne
                         throw new Exception($"Código: {errorCode}. Mensaje: {errorMessage}.");
                     }
 
+                    
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = "La orden de venta actualizada con éxito.";
@@ -2287,7 +2300,7 @@ namespace Net.Data.SAPBusinessOne
                 }
                 finally
                 {
-                    _companyProviderSap.LiberarObjetosCOM(orders, oldAttachment, newAttachment);
+                    _companyProviderSap.LiberarObjetosCOM(orders, attachments);
                 }
 
                 return resultTransaccion;
@@ -2409,7 +2422,7 @@ namespace Net.Data.SAPBusinessOne
                     // SOCIO DE NEGOCIOS
                     LicTradNum = n.BusinessPartners.LicTradNum ?? "",
                     CardName = n.CardName ?? "",
-
+                    DocCur = n.DocCur ?? "",
                     // FINANZAS
                     PymntGroup = n.PaymentTermsTypes.PymntGroup,
 
@@ -2435,7 +2448,7 @@ namespace Net.Data.SAPBusinessOne
                     // 🔹 LÍNEAS EMBEBIDAS
                     Lines = n.Lines
                     .OrderBy(s => s.LineNum)
-                    .Select(s => new Orders1QueryEntity
+                    .Select(s => new OrdersLinesQueryEntity
                     {
                         LineNum = s.LineNum,
                         ItemCode = s.ItemCode,
@@ -2443,7 +2456,7 @@ namespace Net.Data.SAPBusinessOne
                         UnitMsr = s.UnitMsr ?? "",
                         Quantity = s.Quantity,
                         Price = s.Price,
-                        LineTotal = adminInfo.MaMainCurncy == s.Currency ? s.LineTotal : s.TotalSumSy,
+                        LineTotal = adminInfo.MaMainCurncy == n.DocCur ? s.LineTotal : s.TotalSumSy,
                     }).ToList()
                 })
                 .FirstOrDefaultAsync();
@@ -2460,6 +2473,7 @@ namespace Net.Data.SAPBusinessOne
 
                     CardName = data.CardName,
                     LicTradNum = data.LicTradNum,
+                    
 
                     Address2 = data.Address2,
 
@@ -2486,7 +2500,8 @@ namespace Net.Data.SAPBusinessOne
                 // Colocamos la fuente que deseamos que tenga el documento
                 iTextSharp.text.pdf.BaseFont helvetica = iTextSharp.text.pdf.BaseFont.CreateFont(iTextSharp.text.pdf.BaseFont.HELVETICA, iTextSharp.text.pdf.BaseFont.CP1250, true);
                 iTextSharp.text.Font parrafoNormal = new iTextSharp.text.Font(helvetica, 5f, iTextSharp.text.Font.NORMAL, iTextSharp.text.BaseColor.Black);
-                iTextSharp.text.Font parrafoNegrita = new iTextSharp.text.Font(helvetica, 7f, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.Black);
+                iTextSharp.text.Font parrafoNegrita5 = new iTextSharp.text.Font(helvetica, 5.5f, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.Black);
+                iTextSharp.text.Font parrafoNegrita7 = new iTextSharp.text.Font(helvetica, 7f, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.Black);
 
                 // Define the page header
                 pageEventHelper.Header = header;
@@ -2497,7 +2512,7 @@ namespace Net.Data.SAPBusinessOne
 
                 //============================
                 //TABLA: DETALLE
-                var tbl = new iTextSharp.text.pdf.PdfPTable(new float[] { 3f, 22f, 47f, 7f, 6f, 7f, 8f }) { WidthPercentage = 100 };
+                var tbl = new iTextSharp.text.pdf.PdfPTable(new float[] { 3f, 20f, 46f, 7f, 6f, 6f, 12f }) { WidthPercentage = 100 };
                 var c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("", parrafoNormal));
                 for (int i = 0; i < data.Lines.Count; i++)
                 {
@@ -2511,16 +2526,16 @@ namespace Net.Data.SAPBusinessOne
                     tbl.AddCell(c1);
                     c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(data.Lines[i].Quantity.ToString("N2"), parrafoNormal)) { BorderWidth = 1, PaddingBottom = 4, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT };
                     tbl.AddCell(c1);
-                    c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(data.Lines[i].OpenQty.ToString("N2"), parrafoNormal)) { BorderWidth = 1, PaddingBottom = 4, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT };
+                    c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(data.Lines[i].Price.ToString("N2"), parrafoNormal)) { BorderWidth = 1, PaddingBottom = 4, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT };
                     tbl.AddCell(c1);
-                    c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(data.Lines[i].Delivered.ToString("N2"), parrafoNormal)) { BorderWidth = 1, PaddingBottom = 4, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT };
+                    c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase($"{data.DocCur} {data.Lines[i].LineTotal:N2}", parrafoNormal)) { BorderWidth = 1, PaddingBottom = 4, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT };
                     tbl.AddCell(c1);
                 }
 
                 doc.Add(tbl);
 
 
-                tbl = new iTextSharp.text.pdf.PdfPTable(new float[] { 16f, 1f, 62f, 13f, 8f }) { WidthPercentage = 100 };
+                tbl = new iTextSharp.text.pdf.PdfPTable(new float[] { 16f, 1f, 65f, 6f, 12f }) { WidthPercentage = 100 };
                 // Fila 1
                 c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Empleado del departamento de ventas", parrafoNormal)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 3 };
                 tbl.AddCell(c1);
@@ -2528,9 +2543,9 @@ namespace Net.Data.SAPBusinessOne
                 tbl.AddCell(c1);
                 c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(data.SlpName, parrafoNormal)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 3 };
                 tbl.AddCell(c1);
-                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("SubTotal", parrafoNormal)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 3 };
+                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("SubTotal", parrafoNegrita5)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 3 };
                 tbl.AddCell(c1);
-                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(data.SubTotal.ToString("N2"), parrafoNormal)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT };
+                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase($"{data.DocCur} {data.SubTotal:N2}", parrafoNegrita5)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT };
                 tbl.AddCell(c1);
 
                 // Fila 2
@@ -2540,29 +2555,29 @@ namespace Net.Data.SAPBusinessOne
                 tbl.AddCell(c1);
                 c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(data.PymntGroup, parrafoNormal)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 3 };
                 tbl.AddCell(c1);
-                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Descuento", parrafoNormal)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 3 };
+                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Impuesto", parrafoNegrita5)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 3 };
                 tbl.AddCell(c1);
-                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(data.DiscSum.ToString("N2"), parrafoNormal)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT };
+                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase($"{data.DocCur} {data.VatSum:N2}", parrafoNegrita5)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT };
                 tbl.AddCell(c1);
 
                 // Fila 3
-                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Datos de Transporte", parrafoNegrita)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 3 };
+                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Datos de Transporte", parrafoNegrita7)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 3 };
                 tbl.AddCell(c1);
                 c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("", parrafoNormal)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 3 };
                 tbl.AddCell(c1);
                 c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("", parrafoNormal)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 3 };
                 tbl.AddCell(c1);
-                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Impuesto", parrafoNormal)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 3 };
+                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Total", parrafoNegrita5)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 3 };
                 tbl.AddCell(c1);
-                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(data.VatSum.ToString("N2"), parrafoNormal)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT };
+                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase($"{data.DocCur} {data.DocTotal:N2}", parrafoNegrita5)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT };
                 tbl.AddCell(c1);
 
                 // Fila 4
                 c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(data.U_BPP_MDNT, parrafoNormal)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 3, Colspan = 3 };
                 tbl.AddCell(c1);
-                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Total", parrafoNormal)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 3 };
+                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("", parrafoNormal)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 3 };
                 tbl.AddCell(c1);
-                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(data.DocTotal.ToString("N2"), parrafoNormal)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT };
+                c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("", parrafoNormal)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT };
                 tbl.AddCell(c1);
 
                 // Fila 5
@@ -2591,8 +2606,8 @@ namespace Net.Data.SAPBusinessOne
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
-                resultTransaccion.ResultadoDescripcion = "Se generó correctamente el archivo.s";
-                resultTransaccion.data = file;
+                resultTransaccion.ResultadoDescripcion = "Se generó correctamente el archivos.";
+                resultTransaccion.Data = file;
             }
             catch (Exception ex)
             {
@@ -2649,7 +2664,7 @@ namespace Net.Data.SAPBusinessOne
                     // 🔹 LÍNEAS EMBEBIDAS
                     Lines = n.Lines
                     .OrderBy(s => s.LineNum)
-                    .Select(s => new Orders1QueryEntity
+                    .Select(s => new OrdersLinesQueryEntity
                     {
                         LineNum = s.LineNum,
                         ItemCode = s.ItemCode,
@@ -2743,7 +2758,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Se generó correctamente el archivo.s";
-                resultTransaccion.data = file;
+                resultTransaccion.Data = file;
             }
             catch (Exception ex)
             {
@@ -2777,7 +2792,7 @@ namespace Net.Data.SAPBusinessOne
                     County = a.AdminInfo1.County,
                     City = a.AdminInfo1.City,
 
-                    CountryName = a.AdminInfo1.CountryEntity.Name
+                    CountryName = a.AdminInfo1.Countries.Name
                 })
                 .FirstOrDefaultAsync();
 
@@ -2793,6 +2808,7 @@ namespace Net.Data.SAPBusinessOne
                     CardCode = n.CardCode,
                     LicTradNum = n.BusinessPartners.LicTradNum ?? "",
                     CardName = n.CardName ?? "",
+                    DocCur = n.DocCur ?? "",
                     CurrName = n.CurrencyCodes.CurrName,
 
                     // FINANZAS
@@ -2811,6 +2827,8 @@ namespace Net.Data.SAPBusinessOne
                                     .Select(u => u.Descr)
                                     .FirstOrDefault(),
                     U_FIB_PUERTO = n.U_FIB_PUERTO, // Condicion de embarque
+                    U_FIB_NEMBA = n.U_FIB_NEMBA ?? "",
+                    U_FIB_DEMBA = n.U_FIB_DEMBA ?? "",
                     U_STR_FEMB = n.U_STR_FEMB ?? "",
                     U_FIB_TFLETE = n.U_FIB_TFLETE ?? 0,
                     U_FIB_IMPSEG = n.U_FIB_IMPSEG ?? 0,
@@ -2827,7 +2845,7 @@ namespace Net.Data.SAPBusinessOne
                     // 🔹 LÍNEAS EMBEBIDAS
                     Lines = n.Lines
                     .OrderBy(s => s.LineNum)
-                    .Select(s => new Orders1QueryEntity
+                    .Select(s => new OrdersLinesQueryEntity
                     {
                         LineNum = s.LineNum,
                         ItemCode = s.ItemCode,
@@ -2835,7 +2853,7 @@ namespace Net.Data.SAPBusinessOne
                         UnitMsr = s.UnitMsr ?? "",
                         Quantity = s.Quantity,
                         Price = s.Price,
-                        LineTotal = adminInfo.MaMainCurncy == s.Currency ? s.LineTotal : s.TotalSumSy,
+                        LineTotal = adminInfo.MaMainCurncy == n.DocCur ? s.LineTotal : s.TotalSumSy,
                     }).ToList()
                 })
                 .FirstOrDefaultAsync();
@@ -2862,12 +2880,16 @@ namespace Net.Data.SAPBusinessOne
                     CardName    = data.CardName,
                     LicTradNum = data.LicTradNum,
                     DocCur = data.DocCur,
+                    CurrName = data.CurrName,
+
 
                     Address = data.Address,
                     Address2 = data.Address2,
 
                     TipoFleteDescr = data.TipoFleteDescr,
                     U_FIB_PUERTO = data.U_FIB_PUERTO,
+                    U_FIB_NEMBA = data.U_FIB_NEMBA,
+                    U_FIB_DEMBA = data.U_FIB_DEMBA,
                     U_STR_FEMB = data.U_STR_FEMB,
 
                     SlpName = data.SlpName[..Math.Min(35, data.SlpName.Length)],
@@ -2978,7 +3000,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Se generó correctamente el archivo.s";
-                resultTransaccion.data = file;
+                resultTransaccion.Data = file;
             }
             catch (Exception ex)
             {
@@ -3171,17 +3193,21 @@ namespace Net.Data.SAPBusinessOne
             */
             #region <<< TABLA DE DATOS DE CLIENTE >>>
 
-            var tblCliente = new iTextSharp.text.pdf.PdfPTable(new float[] { 7f, 93f });
+            var tblCliente = new iTextSharp.text.pdf.PdfPTable(new float[] { 6f, 2f, 92f });
             tblCliente.TotalWidth = 400;
 
             // Fila 1
-            c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("PARA:", parrafoNegrita)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 5 };
+            c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("PARA", parrafoNegrita)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 5 };
+            tblCliente.AddCell(c1);
+            c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(":", parrafoNormal)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 5 };
             tblCliente.AddCell(c1);
             c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(Header.CardName, parrafoNormal)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 5 };
             tblCliente.AddCell(c1);
 
             // Fila 2
-            c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("", parrafoNormal)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 5 };
+            c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("DE", parrafoNegrita)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 5 };
+            tblCliente.AddCell(c1);
+            c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(":", parrafoNormal)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 5 };
             tblCliente.AddCell(c1);
             c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(Header.Address2, parrafoNormal)) { BorderWidth = 0, PaddingTop = 3, PaddingBottom = 5 };
             tblCliente.AddCell(c1);
@@ -3203,7 +3229,7 @@ namespace Net.Data.SAPBusinessOne
             float startX = pageSize.GetLeft(10);
             float startY = pageSize.GetTop(150);
 
-            var tblDetail = new iTextSharp.text.pdf.PdfPTable(new float[] { 3f, 22f, 47f, 7f, 6f, 7f, 8f });
+            var tblDetail = new iTextSharp.text.pdf.PdfPTable(new float[] { 3f, 20f, 46f, 7f, 6f, 6f, 12f });
             tblDetail.TotalWidth = 575;
             tblDetail.LockedWidth = true;
 
@@ -3217,9 +3243,9 @@ namespace Net.Data.SAPBusinessOne
             tblDetail.AddCell(c1);
             c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Cantidad", parrafoNormal)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER };
             tblDetail.AddCell(c1);
-            c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Pendiente", parrafoNormal)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER };
+            c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Precio", parrafoNormal)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER };
             tblDetail.AddCell(c1);
-            c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Despachodo", parrafoNormal)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER };
+            c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Total", parrafoNormal)) { BorderWidth = 1, PaddingTop = 3, PaddingBottom = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER };
             tblDetail.AddCell(c1);
 
             tblDetail.WriteSelectedRows(0, -1, startX, startY, cb);
@@ -3272,7 +3298,7 @@ namespace Net.Data.SAPBusinessOne
             // ======================================================
             // DIBUJAR TABLA
             // ======================================================
-            tbl.WriteSelectedRows(0, -1, pageSize.GetLeft(10), pageSize.GetBottom(150), cb);
+            tbl.WriteSelectedRows(0, -1, pageSize.GetLeft(10), pageSize.GetBottom(170), cb);
         }
         public override void OnCloseDocument(iTextSharp.text.pdf.PdfWriter writer, iTextSharp.text.Document doc)
         {
@@ -3682,6 +3708,7 @@ namespace Net.Data.SAPBusinessOne
         public string CardName { get; set; }
         public string LicTradNum { get; set; }
         public string DocCur { get; set; }
+        public string CurrName { get; set; }
 
 
         /// <summary>
@@ -3696,6 +3723,8 @@ namespace Net.Data.SAPBusinessOne
         /// </summary>
         public string TipoFleteDescr { get; set; }
         public string U_FIB_PUERTO { get; set; }
+        public string? U_FIB_NEMBA { get; set; }
+        public string? U_FIB_DEMBA { get; set; }
         public string U_STR_FEMB { get; set; }
 
 
@@ -3922,7 +3951,7 @@ namespace Net.Data.SAPBusinessOne
             tblDireccion.AddCell(c1);
             c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("", parrafoNormal)) { BorderWidth = 0, PaddingLeft = 5, PaddingTop = 3, PaddingRight = 5, PaddingBottom = 3 };
             tblDireccion.AddCell(c1);
-            c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(Header.CardName, parrafoNormal)) { BorderWidth = 1, BorderWidthBottom = 0, PaddingLeft = 5, PaddingTop = 3, PaddingRight = 5, PaddingBottom = 3 };
+            c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(string.IsNullOrWhiteSpace(Header.U_FIB_NEMBA) ? Header.CardName : Header.U_FIB_NEMBA, parrafoNormal)) { BorderWidth = 1, BorderWidthBottom = 0, PaddingLeft = 5, PaddingTop = 3, PaddingRight = 5, PaddingBottom = 3 };
             tblDireccion.AddCell(c1);
 
             // Fila 3
@@ -3938,7 +3967,7 @@ namespace Net.Data.SAPBusinessOne
             tblDireccion.AddCell(c1);
             c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(" ", parrafoNormal)) { BorderWidth = 0, PaddingLeft = 5, PaddingTop = 3, PaddingRight = 5, PaddingBottom = 10, FixedHeight = alturaLinea, NoWrap = false };
             tblDireccion.AddCell(c1);
-            c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(Header.Address2, parrafoNormal)) { BorderWidth = 1, BorderWidthTop = 0, PaddingLeft = 5, PaddingTop = 3, PaddingRight = 5, PaddingBottom = 10, FixedHeight = alturaLinea, NoWrap = false };
+            c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(string.IsNullOrWhiteSpace(Header.U_FIB_DEMBA) ? Header.Address2 : Header.U_FIB_DEMBA, parrafoNormal)) { BorderWidth = 1, BorderWidthTop = 0, PaddingLeft = 5, PaddingTop = 3, PaddingRight = 5, PaddingBottom = 10, FixedHeight = alturaLinea, NoWrap = false };
             tblDireccion.AddCell(c1);
 
             // Ubicación de la tabla de la cabecera hacía la izquierda en la página
@@ -4017,7 +4046,7 @@ namespace Net.Data.SAPBusinessOne
             tblExport.AddCell(c1);
             c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(":", parrafoNormal)) { BorderWidth = 1, BorderWidthLeft = 0, BorderWidthRight = 0, PaddingTop = 3, PaddingBottom = 5 };
             tblExport.AddCell(c1);
-            c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("", parrafoNormal)) { BorderWidth = 1, BorderWidthLeft = 0, PaddingTop = 3, PaddingBottom = 5 };
+            c1 = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase($"{Header.DocCur} {Header.CurrName}", parrafoNormal)) { BorderWidth = 1, BorderWidthLeft = 0, PaddingTop = 3, PaddingBottom = 5 };
             tblExport.AddCell(c1);
 
             // Ubicación de la tabla de la cabecera hacía la derecha en la página
@@ -4116,7 +4145,7 @@ namespace Net.Data.SAPBusinessOne
             tbl.AddCell(c1);
 
             // Ubicación de la tabla TEXTO
-            tbl.WriteSelectedRows(0, -1, pageSize.GetLeft(10), pageSize.GetBottom(230), cb);
+            tbl.WriteSelectedRows(0, -1, pageSize.GetLeft(10), pageSize.GetBottom(260), cb);
 
 
             /*
@@ -4131,7 +4160,7 @@ namespace Net.Data.SAPBusinessOne
             tbl.AddCell(c1);
 
             // Ubicación de la tabla TEXTO
-            tbl.WriteSelectedRows(0, -1, pageSize.GetLeft(10), pageSize.GetBottom(140), cb);
+            tbl.WriteSelectedRows(0, -1, pageSize.GetLeft(10), pageSize.GetBottom(170), cb);
 
             /*
             ================================================

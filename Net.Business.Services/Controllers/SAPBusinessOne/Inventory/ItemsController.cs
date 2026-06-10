@@ -5,8 +5,11 @@ using Net.Business.DTO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
+using Net.Business.DTO.SAPBusinessOne.Inventory.Items.Update;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.Inventory;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
 {
     [ApiController]
@@ -14,13 +17,14 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiExplorerSettings(GroupName = "ApiFibrafil")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public class ItemsController : ControllerBase
+    public class ItemsController
+        (
+            IRepositoryWrapper repository,
+            IItemsService itemsService
+        ) : ControllerBase
     {
-        private readonly IRepositoryWrapper _repository;
-        public ItemsController(IRepositoryWrapper repository)
-        {
-            _repository = repository;
-        }
+        private readonly IRepositoryWrapper _repository = repository;
+        private readonly IItemsService _itemsService = itemsService;
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -34,13 +38,13 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetListByCode([FromQuery] ItemsFindByListCodeRequestDto value)
+        public async Task<IActionResult> GetListByCode([FromQuery] ItemsFindByCodeRequestDto value)
         {
             var result = await _repository.Items.GetListByCode(value.ReturnValue());
 
@@ -49,7 +53,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         
@@ -65,7 +69,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
@@ -77,8 +81,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
             {
                 var result = await _repository.Items.GetStockGeneralSummaryExcel(value.ReturnValue());
 
-                result.data.Seek(0, SeekOrigin.Begin);
-                var file = result.data.ToArray();
+                result.Data.Seek(0, SeekOrigin.Begin);
+                var file = result.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -100,7 +104,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
@@ -112,8 +116,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
             {
                 var result = await _repository.Items.GetStockGeneralDetailedExcel(value.ReturnValue());
 
-                result.data.Seek(0, SeekOrigin.Begin);
-                var file = result.data.ToArray();
+                result.Data.Seek(0, SeekOrigin.Begin);
+                var file = result.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -135,7 +139,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
@@ -147,8 +151,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
             {
                 var result = await _repository.Items.GetArticuloVentaExcelByGrupoSubGrupoEstado(value.ReturnValue());
 
-                result.data.Seek(0, SeekOrigin.Begin);
-                var file = result.data.ToArray();
+                result.Data.Seek(0, SeekOrigin.Begin);
+                var file = result.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -170,7 +174,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
@@ -182,8 +186,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
             {
                 var result = await _repository.Items.GetArticuloVentaStockExcelByGrupoSubGrupo(value.ReturnValue());
 
-                result.data.Seek(0, SeekOrigin.Begin);
-                var file = result.data.ToArray();
+                result.Data.Seek(0, SeekOrigin.Begin);
+                var file = result.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -205,7 +209,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
@@ -217,8 +221,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
             {
                 var result = await _repository.Items.GetListArticuloExcelByGrupoSubGrupoFiltro(value.ReturnValue());
 
-                result.data.Seek(0, SeekOrigin.Begin);
-                var file = result.data.ToArray();
+                result.Data.Seek(0, SeekOrigin.Begin);
+                var file = result.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -240,7 +244,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
@@ -253,8 +257,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
             {
                 var result = await _repository.Items.GetMovimientoStockExcelByFechaSede(value.ReturnValue());
 
-                result.data.Seek(0, SeekOrigin.Begin);
-                var file = result.data.ToArray();
+                result.Data.Seek(0, SeekOrigin.Begin);
+                var file = result.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -277,7 +281,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
@@ -292,7 +296,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         [HttpPost]
@@ -308,7 +312,22 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> SetUpdateMassive([FromBody] List<ItemsUpdateMassiveRequestDto> dto)
+        {
+            var result = await _itemsService.SetUpdateMassive(dto);
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
         }
     }
 }

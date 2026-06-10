@@ -30,7 +30,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
                 return NotFound(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
     }
 }

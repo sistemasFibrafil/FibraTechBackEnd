@@ -24,14 +24,14 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetListByInactive([FromQuery] WarehousesByInactiveFindRequestDto value)
         {
-            var objectGetList = await _repository.Warehouses.GetListByInactive(value.ReturnValue());
+            var result = await _repository.Warehouses.GetListByInactive(value.ReturnValue());
 
-            if (objectGetList.ResultadoCodigo == -1)
+            if (result.ResultadoCodigo == -1)
             {
-                return BadRequest(objectGetList);
+                return BadRequest(result);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
@@ -39,14 +39,14 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetListProduccion()
         {
-            var objectGetList = await _repository.Warehouses.GetListProduccion();
+            var result = await _repository.Warehouses.GetListProduccion();
 
-            if (objectGetList.ResultadoCodigo == -1)
+            if (result.ResultadoCodigo == -1)
             {
-                return BadRequest(objectGetList);
+                return BadRequest(result);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(result.DataList);
         }
 
 
@@ -55,14 +55,29 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetListByItem([FromQuery] WarehousesByItemFilterRequestDto value)
         {
-            var objectGetList = await _repository.Warehouses.GetListByItem(value.ReturnValue());
+            var result = await _repository.Warehouses.GetListByItem(value.ReturnValue());
 
-            if (objectGetList.ResultadoCodigo == -1)
+            if (result.ResultadoCodigo == -1)
             {
-                return BadRequest(objectGetList);
+                return BadRequest(result);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(result.DataList);
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetByCode([FromQuery] string code)
+        {
+            var result = await _repository.Warehouses.GetByCode(code);
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result.Data);
         }
 
         [HttpGet]
@@ -70,14 +85,14 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetListByWhsCodeAndItemCode([FromQuery] WarehousesByItemFindRequestDto value)
         {
-            var objectGetList = await _repository.Warehouses.GetListByWhsCodeAndItemCode(value.ReturnValue());
+            var result = await _repository.Warehouses.GetListByWhsCodeAndItemCode(value.ReturnValue());
 
-            if (objectGetList.ResultadoCodigo == -1)
+            if (result.ResultadoCodigo == -1)
             {
-                return BadRequest(objectGetList);
+                return BadRequest(result);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(result.DataList);
         }
     }
 }

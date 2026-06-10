@@ -7,12 +7,12 @@ using Net.Data.AppContext;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
-using Net.Business.Entities.SAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.BusinessPartners.BusinessPartnerGroups;
 namespace Net.Data.SAPBusinessOne
 {
     public class BusinessPartnerGroupsRepository : RepositoryBase<BusinessPartnerGroupsEntity>, IBusinessPartnerGroupsRepository
     {
-        private string _aplicacionName;
+        private readonly string _aplicacionName;
         private readonly Regex regex = new Regex(@"<(\w+)>.*");
 
         // PARAMETROS DE COXIÓN
@@ -28,7 +28,7 @@ namespace Net.Data.SAPBusinessOne
 
 
 
-        public async Task<ResultadoTransaccionResponse<BusinessPartnerGroupsEntity>> GetList(BusinessPartnerGroupsEntity value)
+        public async Task<ResultadoTransaccionResponse<BusinessPartnerGroupsEntity>> GetListByGroupType(BusinessPartnerGroupsEntity value)
         {
             var resultTransaccion = new ResultadoTransaccionResponse<BusinessPartnerGroupsEntity>
             {
@@ -40,12 +40,18 @@ namespace Net.Data.SAPBusinessOne
             {
                 var list = await _db.BusinessPartnerGroups
                 .Where(n => n.GroupType == value.GroupType)
+                .OrderBy(n => n.GroupName)
+                .Select(n => new BusinessPartnerGroupsEntity
+                {
+                    GroupCode = n.GroupCode,
+                    GroupName = n.GroupName,
+                })
                 .ToListAsync();
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {

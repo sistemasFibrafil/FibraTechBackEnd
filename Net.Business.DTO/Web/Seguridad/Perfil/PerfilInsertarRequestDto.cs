@@ -5,7 +5,7 @@ namespace Net.Business.DTO.Web
     public class PerfilInsertarRequestDto : BaseEntity
     {
         public int IdPerfil { get; set; }
-        public string DescripcionPerfil { get; set; }
+        public string? DescripcionPerfil { get; set; }
         public bool Activo { get; set; }
         public PerilEntity RetornarPeril()
         {

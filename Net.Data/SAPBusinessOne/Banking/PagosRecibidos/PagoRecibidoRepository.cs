@@ -72,7 +72,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -142,7 +142,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGetList = await GetListCobranzaCarteraVencidaByFilter(value);
 
                     //Contenido
-                    foreach (var item in objectGetList.dataList)
+                    foreach (var item in objectGetList.DataList)
                     {
                         row = new Row();
                         row.Append(
@@ -172,13 +172,13 @@ namespace Net.Data.SAPBusinessOne
                         sheetData.Append(row);
                     }
 
-                    var saldoSOL = objectGetList.dataList.Sum(x => x.SaldoSOL);
-                    var saldoUSD = objectGetList.dataList.Sum(x => x.SaldoUSD);
-                    var saldoSYS = objectGetList.dataList.Sum(x => x.SaldoSYS);
-                    var de_0_15_Dias = objectGetList.dataList.Sum(x => x.De_0_15_Dias);
-                    var de_16_30_Dias = objectGetList.dataList.Sum(x => x.De_16_30_Dias);
-                    var de_31_60_Dias = objectGetList.dataList.Sum(x => x.De_31_60_Dias);
-                    var mas_60_Dias = objectGetList.dataList.Sum(x => x.Mas_60_Dias);
+                    var saldoSOL = objectGetList.DataList.Sum(x => x.SaldoSOL);
+                    var saldoUSD = objectGetList.DataList.Sum(x => x.SaldoUSD);
+                    var saldoSYS = objectGetList.DataList.Sum(x => x.SaldoSYS);
+                    var de_0_15_Dias = objectGetList.DataList.Sum(x => x.De_0_15_Dias);
+                    var de_16_30_Dias = objectGetList.DataList.Sum(x => x.De_16_30_Dias);
+                    var de_31_60_Dias = objectGetList.DataList.Sum(x => x.De_31_60_Dias);
+                    var mas_60_Dias = objectGetList.DataList.Sum(x => x.Mas_60_Dias);
 
                     //Pie
                     row = new Row();
@@ -215,7 +215,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {

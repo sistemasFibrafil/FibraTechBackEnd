@@ -3,6 +3,6 @@
     public class InventoryTransferRequestCloseRequestDto
     {
         public int DocEntry { get; set; }
-        public int U_UsrUpdate { get; set; }
+        public int U_UsrClose { get; set; }
     }
 }

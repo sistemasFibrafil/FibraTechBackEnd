@@ -8,8 +8,8 @@ namespace Net.Business.Entities.SAPBusinessOne
     {
         [Key]
         [Column("Code")]
-        public string Codigo { get; set; }
+        public string Code { get; set; } = string.Empty;
         [Column("Name")]
-        public string Nombre { get; set; }
+        public string? Name { get; set; }
     }
 }

@@ -1,21 +1,20 @@
 ﻿using System;
 using System.IO;
+using AutoMapper;
 using System.Linq;
-using System.Text;
 using System.Data;
+using System.Text;
 using Net.Connection;
 using Net.CrossCotting;
 using Net.Data.AppContext;
-using System.Data.SqlClient;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Net.Business.Entities.Web;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using System.Text.RegularExpressions;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.Extensions.Configuration;
 using Net.Connection.ConnectionSAPBusinessOne;
 namespace Net.Data.Web
 {
@@ -24,24 +23,20 @@ namespace Net.Data.Web
         private readonly string _aplicacionName;
         private readonly Regex regex = new Regex(@"<(\w+)>.*");
 
-        private readonly DataContextSAPBusinessOne _dbSap;
+        // PARAMETROS DE COXIÓN
+        private readonly IMapper _mapper;
         private readonly DataContextSeguridad _dbSeg;
+        private readonly DataContextSAPBusinessOne _dbSap;
+
         private readonly ParametrosTokenConfig _tokenConfig;
         private readonly CompanyProviderSAPBusinessOne _companyProviderSap;
 
-        const string DB_ESQUEMA = "";
-        const string SP_INSERT = DB_ESQUEMA + "SEG_SetUsuarioInsert";
-        const string SP_UPDATE = DB_ESQUEMA + "SEG_SetUsuarioUpdate";
-        const string SP_GET_USUARIO = DB_ESQUEMA + "SEG_GetUsuarioPorUsuario";
-        const string SP_GET_USUARIO_TOKEN = DB_ESQUEMA + "SEG_GetTokenPorUsuario";
-        const string SP_UPDATE_AUTOGENERADA = DB_ESQUEMA + "SEG_SetUsuarioUpdatePassword";
-        const string SP_UPDATE_GENERAR_TOKEN = DB_ESQUEMA + "SEG_SetUsuarioUpdateToken";
-
-        public UsuarioRepository(IConnectionSQL context, IConfiguration configuration, IOptions<ParametrosTokenConfig> tokenConfig, DataContextSAPBusinessOne dbSap, DataContextSeguridad dbSeg, CompanyProviderSAPBusinessOne companyProviderSap)
+        public UsuarioRepository(IConnectionSQL context, IOptions<ParametrosTokenConfig> tokenConfig, DataContextSAPBusinessOne dbSap, DataContextSeguridad dbSeg, CompanyProviderSAPBusinessOne companyProviderSap, IMapper mapper)
             : base(context)
         {
             _dbSap = dbSap;
             _dbSeg = dbSeg;
+            _mapper = mapper;
             _tokenConfig = tokenConfig.Value;
             _aplicacionName = GetType().Name;
             _companyProviderSap = companyProviderSap;
@@ -54,7 +49,6 @@ namespace Net.Data.Web
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
             };
-
 
             try
             {
@@ -70,7 +64,7 @@ namespace Net.Data.Web
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -81,6 +75,7 @@ namespace Net.Data.Web
 
             return resultTransaccion;
         }
+
         public async Task<ResultadoTransaccionResponse<UsuarioQueryEntity>> GetListByFilter(UsuarioFilterEntity value)
         {
             var resultTransaccion = new ResultadoTransaccionResponse<UsuarioQueryEntity>
@@ -102,7 +97,7 @@ namespace Net.Data.Web
                     var filter = value.Filter.Trim();
 
                     query = query.Where(x =>
-                        EF.Functions.Like(EF.Functions.Collate(x.Clave!, GlobalVariables.CI), $"%{filter}%") ||
+                        EF.Functions.Like(EF.Functions.Collate(x.Usuario!, GlobalVariables.CI), $"%{filter}%") ||
                         EF.Functions.Like(EF.Functions.Collate(x.Nombre!, GlobalVariables.CI), $"%{filter}%") ||
                         EF.Functions.Like(EF.Functions.Collate(x.ApellidoPaterno!, GlobalVariables.CI), $"%{filter}%") ||
                         EF.Functions.Like(EF.Functions.Collate(x.ApellidoMaterno!, GlobalVariables.CI), $"%{filter}%")
@@ -128,7 +123,7 @@ namespace Net.Data.Web
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -139,6 +134,7 @@ namespace Net.Data.Web
 
             return resultTransaccion;
         }
+
         public async Task<ResultadoTransaccionResponse<UsuarioEntity>> GetById(UsuarioEntity value)
         {
             var resultTransaccion = new ResultadoTransaccionResponse<UsuarioEntity>
@@ -156,6 +152,7 @@ namespace Net.Data.Web
                     IdUsuario = u.IdUsuario,
                     IdPerfil = u.IdPerfil,
                     IdUserSap = u.IdUserSap,
+                    SlpCode = u.SlpCode,
                     Nombre = u.Nombre,
                     ApellidoPaterno = u.ApellidoPaterno,
                     ApellidoMaterno = u.ApellidoMaterno,
@@ -175,7 +172,7 @@ namespace Net.Data.Web
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -186,6 +183,7 @@ namespace Net.Data.Web
 
             return resultTransaccion;
         }
+
         private async Task<UsuarioEntity> VerificarLogin(UsuarioEntity value)
         {
             var dat = await _dbSeg.Usuario
@@ -204,6 +202,7 @@ namespace Net.Data.Web
 
             return dat;
         }
+
         public async Task<ResultadoTransaccionResponse<UsuarioAutenticarEntity>> Autenticar(UsuarioAutenticarEntity entidad)
         {
             var claveDesEncriptada = EncriptaHelper.DecryptStringAES(entidad.Clave);
@@ -286,10 +285,16 @@ namespace Net.Data.Web
                     return resultadoTransaccion;
                 }
 
-                await GenerarToken((int)user.IdUsuario, user.Email);
+                await GenerarToken(user.IdUsuario, user.Email);
             }
 
-            UsuarioAutenticarEntity UsuarioAutenticar = new UsuarioAutenticarEntity { Usuario = user.Clave.ToUpper(), Token = tokenGenerado, FlgDobleAutenticacion = (bool)_ParametroSistema.FlgDobleAutenticacion, Email = user.Email };
+            UsuarioAutenticarEntity UsuarioAutenticar = new UsuarioAutenticarEntity
+            {
+                Usuario = user.Clave.ToUpper(),
+                Token = tokenGenerado,
+                FlgDobleAutenticacion = (bool)_ParametroSistema.FlgDobleAutenticacion,
+                Email = user.Email
+            };
 
 
             // Conexión a SAP
@@ -297,10 +302,11 @@ namespace Net.Data.Web
 
             resultadoTransaccion.ResultadoCodigo = 0;
             resultadoTransaccion.ResultadoDescripcion = "Se autentico correctamente";
-            resultadoTransaccion.data = UsuarioAutenticar;
+            resultadoTransaccion.Data = UsuarioAutenticar;
             return resultadoTransaccion;
         }
-        public async Task<ResultadoTransaccionResponse<UsuarioEntity>> Create(UsuarioCreateEntity value)
+
+        public async Task<ResultadoTransaccionResponse<UsuarioEntity>> SetCreate(UsuarioCreateEntity value)
         {
             var resultTransaccion = new ResultadoTransaccionResponse<UsuarioEntity>
             {
@@ -308,61 +314,30 @@ namespace Net.Data.Web
                 NombreAplicacion = _aplicacionName
             };
 
-            using (SqlConnection conn = new SqlConnection(context.GetConnectionSQL()))
+            try
             {
-                try
-                {
-                    await conn.OpenAsync();
+                var entity = _mapper.Map<UsuarioEntity>(value);
 
-                    using (SqlCommand cmd = new SqlCommand(SP_INSERT, conn))
-                    {
-                        cmd.Parameters.Clear();
-                        cmd.CommandType = CommandType.StoredProcedure;
+                entity.Eliminado = false;
 
-                        SqlParameter oParam = new SqlParameter("@IdUsuario", value.IdUsuario);
-                        oParam.SqlDbType = SqlDbType.Int;
-                        oParam.Direction = ParameterDirection.Output;
-                        cmd.Parameters.Add(oParam);
+                await _dbSeg.Usuario.AddAsync(entity);
+                await _dbSeg.SaveChangesAsync();
 
-                        cmd.Parameters.Add(new SqlParameter("@IdPerfil", value.IdPerfil));
-                        cmd.Parameters.Add(new SqlParameter("@IdUserSap", value.IdUserSap));
-                        cmd.Parameters.Add(new SqlParameter("@Nombre", value.Nombre));
-                        cmd.Parameters.Add(new SqlParameter("@ApellidoPaterno", value.ApellidoPaterno));
-                        cmd.Parameters.Add(new SqlParameter("@ApellidoMaterno", value.ApellidoMaterno));
-                        cmd.Parameters.Add(new SqlParameter("@NroDocumento", value.NroDocumento));
-                        cmd.Parameters.Add(new SqlParameter("@NroTelefono", value.NroTelefono));
-                        cmd.Parameters.Add(new SqlParameter("@Usuario", value.Usuario));
-                        cmd.Parameters.Add(new SqlParameter("@Clave", value.Clave));
-                        cmd.Parameters.Add(new SqlParameter("@Email", value.Email));
-                        cmd.Parameters.Add(new SqlParameter("@Imagen", value.Imagen));
-                        cmd.Parameters.Add(new SqlParameter("@Firma", value.Firma));
-                        cmd.Parameters.Add(new SqlParameter("@ThemeDark", value.ThemeDark));
-                        cmd.Parameters.Add(new SqlParameter("@ThemeColor", value.ThemeColor));
-                        cmd.Parameters.Add(new SqlParameter("@TypeMenu", value.TypeMenu));
-                        cmd.Parameters.Add(new SqlParameter("@Activo", value.Activo));
-                        cmd.Parameters.Add(new SqlParameter("@RegUsuario", value.RegUsuario));
-                        cmd.Parameters.Add(new SqlParameter("@RegEstacion", value.RegEstacion));
-
-                        await cmd.ExecuteNonQueryAsync();
-
-                        value.IdUsuario = (int)cmd.Parameters["@IdUsuario"].Value;
-                    }
-
-                    resultTransaccion.IdRegistro = (int)value.IdUsuario;
-                    resultTransaccion.ResultadoCodigo = 0;
-                    resultTransaccion.ResultadoDescripcion = "Se realizo con Exito...!!!";
-                }
-                catch (Exception ex)
-                {
-                    resultTransaccion.IdRegistro = -1;
-                    resultTransaccion.ResultadoCodigo = -1;
-                    resultTransaccion.ResultadoDescripcion = ex.Message.ToString();
-                }
+                resultTransaccion.IdRegistro = 0;
+                resultTransaccion.ResultadoCodigo = 0;
+                resultTransaccion.ResultadoDescripcion = "Se realizó con éxito...!!!";
+            }
+            catch (Exception ex)
+            {
+                resultTransaccion.IdRegistro = -1;
+                resultTransaccion.ResultadoCodigo = -1;
+                resultTransaccion.ResultadoDescripcion = ex.Message;
             }
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionResponse<UsuarioEntity>> Update(UsuarioUpdateEntity value)
+        
+        public async Task<ResultadoTransaccionResponse<UsuarioEntity>> SetUpdate(UsuarioUpdateEntity value)
         {
             var resultTransaccion = new ResultadoTransaccionResponse<UsuarioEntity>
             {
@@ -370,50 +345,27 @@ namespace Net.Data.Web
                 NombreAplicacion = _aplicacionName
             };
 
-            using (SqlConnection conn = new SqlConnection(context.GetConnectionSQL()))
+            try
             {
-                try
-                {
-                    await conn.OpenAsync();
+                var entity = await _dbSeg.Usuario
+                .FirstOrDefaultAsync(x => x.IdUsuario == value.IdUsuario && x.Eliminado == false)
+                ?? throw new Exception("No se encontró el usuario.");
 
-                    using (SqlCommand cmd = new SqlCommand(SP_UPDATE, conn))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
+                var entry = _dbSeg.Entry(entity);
+                entry.CurrentValues.SetValues(value);
+                await _dbSeg.SaveChangesAsync();
 
-                        cmd.Parameters.Add(new SqlParameter("@IdUsuario", value.IdUsuario));
-                        cmd.Parameters.Add(new SqlParameter("@IdPerfil", value.IdPerfil));
-                        cmd.Parameters.Add(new SqlParameter("@IdUserSap", value.IdUserSap));
-                        cmd.Parameters.Add(new SqlParameter("@Nombre", value.Nombre));
-                        cmd.Parameters.Add(new SqlParameter("@ApellidoPaterno", value.ApellidoPaterno));
-                        cmd.Parameters.Add(new SqlParameter("@ApellidoMaterno", value.ApellidoMaterno));
-                        cmd.Parameters.Add(new SqlParameter("@NroDocumento", value.NroDocumento));
-                        cmd.Parameters.Add(new SqlParameter("@NroTelefono", value.NroTelefono));
-                        cmd.Parameters.Add(new SqlParameter("@Clave", value.Clave));
-                        cmd.Parameters.Add(new SqlParameter("@Email", value.Email));
-                        cmd.Parameters.Add(new SqlParameter("@Imagen", value.Imagen));
-                        cmd.Parameters.Add(new SqlParameter("@Firma", value.Firma));
-                        cmd.Parameters.Add(new SqlParameter("@ThemeDark", value.ThemeDark));
-                        cmd.Parameters.Add(new SqlParameter("@ThemeColor", value.ThemeColor));
-                        cmd.Parameters.Add(new SqlParameter("@TypeMenu", value.TypeMenu));
-                        cmd.Parameters.Add(new SqlParameter("@Activo", value.Activo));
-                        cmd.Parameters.Add(new SqlParameter("@RegUsuario", value.RegUsuario));
-                        cmd.Parameters.Add(new SqlParameter("@RegEstacion", value.RegEstacion));
-
-                        await cmd.ExecuteNonQueryAsync();
-                    }
-
-                    resultTransaccion.IdRegistro = 0;
-                    resultTransaccion.ResultadoCodigo = 0;
-                    resultTransaccion.ResultadoDescripcion = "Se realizÓ con éxito...!!!";
-                }
-                catch (Exception ex)
-                {
-                    resultTransaccion.IdRegistro = -1;
-                    resultTransaccion.ResultadoCodigo = -1;
-                    resultTransaccion.ResultadoDescripcion = ex.Message.ToString();
-                }
+                resultTransaccion.IdRegistro = 0;
+                resultTransaccion.ResultadoCodigo = 0;
+                resultTransaccion.ResultadoDescripcion = "Se realizó con éxito...!!!";
             }
-            
+            catch (Exception ex)
+            {
+                resultTransaccion.IdRegistro = -1;
+                resultTransaccion.ResultadoCodigo = -1;
+                resultTransaccion.ResultadoDescripcion = ex.Message;
+            }
+
             return resultTransaccion;
         }
         public async Task<ResultadoTransaccionResponse<UsuarioEntity>> Delete(UsuarioEntity value)
@@ -443,6 +395,7 @@ namespace Net.Data.Web
             
             return resultTransaccion;
         }        
+
         public async Task<ResultadoTransaccionResponse<UsuarioDatosEntity>> ObtienePermisosPorUsuario(UsuarioDatosEntity entidad)
         {
             UsuarioDatosEntity UsuarioAutenticar = null;
@@ -485,8 +438,8 @@ namespace Net.Data.Web
 
                 UsuarioAutenticar = new UsuarioDatosEntity
                 {
-                    IdUsuario = userSap == null ? 0 : user.IdUsuario,
-                    IdPerfil = userSap == null ? 0 : user.IdPerfil ?? 0,
+                    IdUsuario = user == null ? 0 : user.IdUsuario,
+                    IdPerfil = user == null ? 0 : user.IdPerfil ?? 0,
                     IdUserSap = userSap == null ? 0 : userSap.USERID,
                     UserSap = userSap == null ? "" : userSap.USER_CODE ?? "",
                     IdLocation = logisticUser == null ? 0 : logisticUser.IdLocation ?? 0,
@@ -505,19 +458,22 @@ namespace Net.Data.Web
                     MainCurncy = adminInfo.MainCurncy,
                     SysCurrncy = adminInfo.SysCurrncy,
                     DfltWhs = adminInfo.DfltWhs,
+                    DfltSlp = adminInfo.DfltSlp,
+                    DfCustTerm = adminInfo.DfCustTerm,
                     AttachPath  = attachmentsSettings == null ? "" : attachmentsSettings.AttachPath ?? "",
+
                     WhsCodeSpaPar = generalSettings == null ? "" : generalSettings.U_WhsCodeSpaPar ?? "",
                     CodGrpSuppNat = generalSettings == null ? 0 : generalSettings.U_CodGrpSuppNat ?? 0,
                     CodGrpSuppFor = generalSettings == null ? 0 : generalSettings.U_CodGrpSuppFor ?? 0,
                     CodGrpCustNat = generalSettings == null ? 0 : generalSettings.U_CodGrpCustNat ?? 0,
                     CodGrpCustFor = generalSettings == null ? 0 : generalSettings.U_CodGrpCustFor ?? 0,
-                
+
                     ListaAccesoMenu = listaAccesoMenu
                 };
 
                 resultadoTransaccion.ResultadoCodigo = 0;
                 resultadoTransaccion.ResultadoDescripcion = "Se autentico correctamente";
-                resultadoTransaccion.data = UsuarioAutenticar;
+                resultadoTransaccion.Data = UsuarioAutenticar;
             }
             catch (Exception ex)
             {
@@ -527,91 +483,139 @@ namespace Net.Data.Web
 
             return resultadoTransaccion;
         }
-        public async Task RecuperarPassword(UsuarioRecuperarPasswordEntity entidad)
+
+        public async Task RecuperarPassword(UsuarioRecuperarPasswordEntity value)
         {
-            var data = FindById(new UsuarioEntity { Clave = entidad.Usuario }, SP_GET_USUARIO);
+            var data = await _dbSeg.Usuario
+            .AsNoTracking()
+            .Where(u => u.Usuario == value.Usuario)
+            .Select(u => new UsuarioEntity
+            {
+                IdUsuario = u.IdUsuario,
+                Email = u.Email
+
+            })
+            .FirstOrDefaultAsync();
+
             var nuevaClaveAutogenerado = GenerarCodigo(6);
 
             var nuevaClaveEncriptada = EncriptaHelper.EncryptStringAES(nuevaClaveAutogenerado);
 
-            Update(new UsuarioEntity { IdUsuario = data.IdUsuario, Clave = nuevaClaveEncriptada }, SP_UPDATE_AUTOGENERADA);
+
+            var entity = new UsuarioEntity
+            {
+                IdUsuario = data.IdUsuario,
+                Clave = nuevaClaveEncriptada
+            };
+
+            _dbSeg.Usuario.Attach(entity);
+            _dbSeg.Entry(entity).Property(x => x.Clave).IsModified = true;
+            await _dbSeg.SaveChangesAsync();
+
+
             EmailSenderRepository emailSenderRepository = new EmailSenderRepository(context);
 
             string template = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"Resources\txt", "plantillaRecuperarPassword.txt"));
-            template = template.Replace("{usuario}", entidad.Usuario);
+            template = template.Replace("{usuario}", value.Usuario);
             template = template.Replace("{password}", nuevaClaveAutogenerado);
             var mensaje = template;
             await emailSenderRepository.SendEmailAsync(data.Email, "Correo Automatico - Recuperar Contraseña", mensaje);
         }
-        public async Task GenerarToken(int IdUsuario, string Email)
+
+        public async Task GenerarToken(int idUsuario, string email)
         {
-            await Task.Run(() =>
-            {
-                var nuevaClaveAutogenerado = GenerarCodigo(6);
+            var nuevaTokenAutogenerado = GenerarCodigo(6);
 
-                var nuevaClaveEncriptada = EncriptaHelper.EncryptStringAES(nuevaClaveAutogenerado);
+            var nuevaTokenEncriptada = EncriptaHelper.EncryptStringAES(nuevaTokenAutogenerado);
 
-                context.ExecuteSqlUpdate(SP_UPDATE_GENERAR_TOKEN, new UsuarioTokenEntity { IdUsuario = IdUsuario, Token = nuevaClaveEncriptada, RegUsuario = IdUsuario, RegEstacion = "Unknown" });
+            var entity = await _dbSeg.Usuario
+            .FirstOrDefaultAsync(x => x.IdUsuario == idUsuario && x.Eliminado == false)
+            ?? throw new Exception("No se encontró el usuario.");
 
-                // AQUI SE ENVIA EL TOKEN POR CORREO
-                //EmailSenderRepository emailSenderRepository = new EmailSenderRepository(context);
+            entity.Token = nuevaTokenEncriptada;
+            entity.FecExpToken = DateTime.Now;
 
-                //string template = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"Resources\txt", "generarToken.txt"));
-                //template = template.Replace("{token}", nuevaClaveAutogenerado);
-                //var mensaje = template;
-                //await emailSenderRepository.SendEmailAsync(Email, string.Format("AuthCode: {0}", nuevaClaveAutogenerado), mensaje);
-            });
+            _dbSeg.Entry(entity).Property(x => x.Token).IsModified = true;
+            _dbSeg.Entry(entity).Property(x => x.FecExpToken).IsModified = true;
+
+            await _dbSeg.SaveChangesAsync();
+
+            // AQUI SE ENVIA EL TOKEN POR CORREO
+            //EmailSenderRepository emailSenderRepository = new EmailSenderRepository(context);
+
+            //string template = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"Resources\txt", "generarToken.txt"));
+
+            //template = template.Replace("{token}", nuevaTokenAutogenerado);
+
+            //await emailSenderRepository.SendEmailAsync(email, $"AuthCode: {nuevaTokenAutogenerado}", template);
         }
+
         public async Task<ResultadoTransaccionResponse<UsuarioTokenEntity>> ValidarToken(UsuarioTokenEntity value)
         {
-            ResultadoTransaccionResponse<UsuarioTokenEntity> resultadoTransaccion = new ResultadoTransaccionResponse<UsuarioTokenEntity>();
+            var resultTransaccion = new ResultadoTransaccionResponse<UsuarioTokenEntity>
+            {
+                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
+                NombreAplicacion = _aplicacionName
+            };
 
             try
             {
+                var usuario = EncriptaHelper.DecryptStringAES(value.Usuario)?.Trim();
 
-                var usuarioDesEncriptada = EncriptaHelper.DecryptStringAES(value.Usuario);
-
-                var data = context.ExecuteSqlViewId<UsuarioTokenEntity>(SP_GET_USUARIO_TOKEN, new UsuarioEntity { Usuario = usuarioDesEncriptada.ToUpper() });
-
-                if (EncriptaHelper.DecryptStringAES(data.Token) == EncriptaHelper.DecryptStringAES(value.Token))
+                if (string.IsNullOrWhiteSpace(usuario))
                 {
-
-                    DateTime fechaActual = DateTime.Now;
-
-                    if (fechaActual < data.FecExpToken)
-                    {
-                        resultadoTransaccion.ResultadoCodigo = 0;
-                        resultadoTransaccion.ResultadoDescripcion = "OK";
-                        return resultadoTransaccion;
-                    }
-                    else
-                    {
-                        resultadoTransaccion.ResultadoCodigo = -1;
-                        resultadoTransaccion.ResultadoDescripcion = "Token Expiró";
-                        return resultadoTransaccion;
-                    }
+                    throw new Exception("Usuario inválido.");
                 }
-                else
+
+                var data = await _dbSeg.Usuario
+                .AsNoTracking()
+                .Where(u => u.Usuario == usuario)
+                .Select(u => new UsuarioTokenEntity
                 {
-                    resultadoTransaccion.ResultadoCodigo = -1;
-                    resultadoTransaccion.ResultadoDescripcion = "Token Incorrecto";
-                    return resultadoTransaccion;
+                    IdUsuario = u.IdUsuario,
+                    Usuario = u.Usuario,
+                    Token = u.Token,
+                    FecExpToken = u.FecExpToken
+                })
+                .FirstOrDefaultAsync();
+
+                if (data == null)
+                {
+                    throw new Exception("Usuario no encontrado.");
                 }
+
+                var tokenRegistrado = EncriptaHelper.DecryptStringAES(data.Token);
+                var tokenIngresado = EncriptaHelper.DecryptStringAES(value.Token);
+
+                if (tokenRegistrado != tokenIngresado)
+                {
+                    throw new Exception("Token incorrecto.");
+                }
+
+                if (DateTime.Now >= data.FecExpToken)
+                {
+                    throw new Exception("Token expiró.");
+                }
+
+                resultTransaccion.ResultadoCodigo = 0;
+                resultTransaccion.ResultadoDescripcion = "OK";
             }
             catch (Exception ex)
             {
-                resultadoTransaccion.ResultadoCodigo = -1;
-                resultadoTransaccion.ResultadoDescripcion = ex.Message;
-                return resultadoTransaccion;
+                resultTransaccion.ResultadoCodigo = -1;
+                resultTransaccion.ResultadoDescripcion = ex.Message;
             }
 
+            return resultTransaccion;
         }
-        private string GenerarCodigo(int length)
+
+        private static string GenerarCodigo(int length)
         {
-            Random random = new Random();
+            Random random = new();
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+            return new string([.. Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)])]);
         }
+
         public async Task<ResultadoTransaccionResponse<UsuarioEntity>> UpdatePassword(UsuarioUpdatePasswordEntity value)
         {
             var resultTransaccion = new ResultadoTransaccionResponse<UsuarioEntity>
@@ -620,11 +624,28 @@ namespace Net.Data.Web
                 NombreAplicacion = _aplicacionName
             };
 
-            //return Task.Run((Action)(() =>
-            //{
-            //    //Update(new UsuarioUpdatePasswordEntity { IdUsuario = entidad.IdUsuario, Clave = entidad.Clave }, SP_UPDATE_PASSWORD);
-            //}));
+            try
+            {
+                var entity = new UsuarioEntity
+                {
+                    IdUsuario = value.IdUsuario,
+                    Clave = value.Clave
+                };
 
+                _dbSeg.Usuario.Attach(entity);
+                _dbSeg.Entry(entity).Property(x => x.Clave).IsModified = true;
+                await _dbSeg.SaveChangesAsync();
+
+                resultTransaccion.IdRegistro = 0;
+                resultTransaccion.ResultadoCodigo = 0;
+                resultTransaccion.ResultadoDescripcion = "Se realizó con éxito...!!!";
+            }
+            catch (Exception ex)
+            {
+                resultTransaccion.IdRegistro = -1;
+                resultTransaccion.ResultadoCodigo = -1;
+                resultTransaccion.ResultadoDescripcion = ex.Message;
+            }
 
             return resultTransaccion;
         }

@@ -60,7 +60,7 @@ namespace Net.Data.Web
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)

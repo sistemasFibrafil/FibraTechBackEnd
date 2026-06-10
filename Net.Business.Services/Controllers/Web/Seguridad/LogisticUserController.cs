@@ -32,7 +32,7 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
                 return NotFound();
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
 

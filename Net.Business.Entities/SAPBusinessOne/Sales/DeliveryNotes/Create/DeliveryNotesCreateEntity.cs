@@ -84,7 +84,6 @@ namespace Net.Business.Entities.SAPBusinessOne.Sales.DeliveryNotes.Create
         /// <summary>
         /// OTROS
         /// </summary>
-        public string? U_STR_TVENTA { get; set; }
         public string? U_BPP_MDMT { get; set; }
         public string? U_BPP_MDOM { get; set; }
 

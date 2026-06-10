@@ -1,4 +1,5 @@
-﻿using Net.CrossCotting;
+﻿using System.IO;
+using Net.CrossCotting;
 using System.Threading.Tasks;
 using Net.Business.Entities.SAPBusinessOne.Drafts.Query;
 using Net.Business.Entities.SAPBusinessOne.Drafts.Filter;
@@ -16,5 +17,9 @@ namespace Net.Data.SAPBusinessOne
         Task<ResultadoTransaccionResponse<DraftsEntity>> SetCreate(DraftsCreateEntity value);
         Task<ResultadoTransaccionResponse<DraftsEntity>> SetSaveDraftToDocument(DraftsCreateToDocumentEntity value);
         Task<ResultadoTransaccionResponse<DraftsEntity>> SetUpdate(DraftsUpdateEntity value);
+
+        Task<ResultadoTransaccionResponse<MemoryStream>> GetPrintNationalDocEntry(int docEntry);
+        Task<ResultadoTransaccionResponse<MemoryStream>> GetPrintExportPlantaDocEntry(int docEntry);
+        Task<ResultadoTransaccionResponse<MemoryStream>> GetPrintExportClienteDocEntry(int docEntry);
     }
 }

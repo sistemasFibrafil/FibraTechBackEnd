@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Net.Business.Entities.SAPBusinessOne.Common.Attachments2.Entities;
 namespace Net.Business.Entities.SAPBusinessOne.Drafts.Entities
 {
     public class DraftsEntity
@@ -8,16 +9,20 @@ namespace Net.Business.Entities.SAPBusinessOne.Drafts.Entities
         public int DocNum { get; set; }
         public string? ObjType { get; set; }
         public string? DocType { get; set; }
+        public string? CANCELED { get; set; }
         public string? DocStatus { get; set; }
         public string? WddStatus { get; set; }
 
         public DateTime CreateDate { get; set; }
         public DateTime DocDate { get; set; }
-        public DateTime DocDueDate { get; set; }
+        public DateTime? DocDueDate { get; set; }
         public DateTime TaxDate { get; set; }
         public DateTime? UpdateDate { get; set; }
         public short DocTime { get; set; }
         public short UserSign { get; set; }
+
+        public string? U_FIB_DocStPkg { get; set; }
+        public string? U_FIB_IsPkg { get; set; }
 
 
         /// <summary>
@@ -25,12 +30,11 @@ namespace Net.Business.Entities.SAPBusinessOne.Drafts.Entities
         /// </summary>
         public string? CardCode { get; set; }
         public string? CardName { get; set; }
-        public short GroupCode { get; set; }
+        public short? GroupCode { get; set; }
         public int? CntctCode { get; set; }
         public string? NumAtCard { get; set; }
         public string? DocCur { get; set; }
         public decimal DocRate { get; set; }
-
 
         /// <summary>
         /// LOGISTICA
@@ -66,12 +70,20 @@ namespace Net.Business.Entities.SAPBusinessOne.Drafts.Entities
         public decimal? U_FIB_TFLETE { get; set; }
         public decimal? U_FIB_IMPSEG { get; set; }
         public string? U_FIB_PUERTO { get; set; }
+        public string? U_FIB_NEMBA { get; set; }
+        public string? U_FIB_DEMBA { get; set; }
         public string? U_STR_FEMB { get; set; }
 
         /// <summary>
         /// OTROS
         /// </summary>
         public string? U_STR_TVENTA { get; set; }
+
+
+        /// <summary>
+        /// Anexos
+        /// </summary>
+        public int? AtcEntry { get; set; }
 
 
         /// <summary>
@@ -98,23 +110,26 @@ namespace Net.Business.Entities.SAPBusinessOne.Drafts.Entities
         public decimal DocTotalSy { get; set; }
 
 
-        // 🔗 1 → N (ORDR → OCRD)
+        // 🔗 1 → N (ODRF → OCRD)
         public BusinessPartnersEntity? BusinessPartners { get; set; } = null;
 
 
-        // 🔗 1 → N (ORDR → OCRN)
+        // 🔗 1 → N (ODRF → OCRN)
         public CurrencyCodesEntity? CurrencyCodes { get; set; } = null;
 
 
-        // 🔗 1 → N (ORDR → OSLP)
+        // 🔗 1 → N (ODRF → OSLP)
         public SalesPersonsEntity? SalesPersons { get; set; } = null;
 
 
-        // 🔗 1 → N (ORDR → OCTG)
+        // 🔗 1 → N (ODRF → OCTG)
         public PaymentTermsTypesEntity? PaymentTermsTypes { get; set; } = null;
 
 
-        // 🔗 1 → N (ORDR → RDR1)
-        public ICollection<DraftsLinesEntity> Lines { get; set; } = new List<DraftsLinesEntity>();
+        // 🔗 1 → N (ODRF → ODRF)
+        public Attachments2Entity? Attachments2 { get; set; } = null;
+
+        // 🔗 1 → N (ODRF → DRF1)
+        public ICollection<DraftsLinesEntity> Lines { get; set; } = [];
     }
 }

@@ -170,7 +170,7 @@ namespace Net.Data.Web
                     resultadoTransaccion.IdRegistro = 0;
                     resultadoTransaccion.ResultadoCodigo = 0;
                     resultadoTransaccion.ResultadoDescripcion = "Se generó correctamente el archivo.s";
-                    resultadoTransaccion.data = file;
+                    resultadoTransaccion.Data = file;
                 }
             }
             catch (Exception ex)

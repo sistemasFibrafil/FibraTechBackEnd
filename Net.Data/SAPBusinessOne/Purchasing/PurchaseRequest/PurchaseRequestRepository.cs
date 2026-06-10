@@ -7,6 +7,7 @@ using Net.CrossCotting;
 using Net.Data.AppContext;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 using DocumentFormat.OpenXml.Packaging;
@@ -16,6 +17,7 @@ using Net.Connection.ConnectionSAPBusinessOne;
 using Net.Business.Entities.SAPBusinessOne.Purchasing.PurchaseRequest.Close;
 using Net.Business.Entities.SAPBusinessOne.Purchasing.PurchaseRequest.Create;
 using Net.Business.Entities.SAPBusinessOne.Purchasing.PurchaseRequest.Update;
+using Net.Business.Entities.SAPBusinessOne.Purchasing.PurchaseRequest.Validate;
 namespace Net.Data.SAPBusinessOne
 {
     public class PurchaseRequestRepository : RepositoryBase<PurchaseRequestEntity>, IPurchaseRequestRepository
@@ -73,6 +75,7 @@ namespace Net.Data.SAPBusinessOne
                     DocEntry = n.DocEntry,
                     DocNum = n.DocNum,
                     DocType = n.DocType,
+                    Canceled = n.CANCELED,
                     DocStatus = n.DocStatus,
                     DocDate = n.DocDate,
                     DocDueDate = n.DocDueDate,
@@ -84,7 +87,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -136,7 +139,7 @@ namespace Net.Data.SAPBusinessOne
                     Comments = n.Comments,
 
                     // 🔹 LÍNEAS EMBEBIDAS
-                    Lines = n.Lines.Select(s => new PurchaseRequest1QueryEntity
+                    Lines = n.Lines.Select(s => new PurchaseRequestLinesQueryEntity
                     {
                         DocEntry = s.DocEntry,
                         LineNum = s.LineNum,
@@ -155,15 +158,7 @@ namespace Net.Data.SAPBusinessOne
                         OcrCode = s.OcrCode,
                         WhsCode = s.WhsCode,
                         U_tipoOpT12 = s.U_tipoOpT12 ?? "",
-                        U_tipoOpT12Nam = s.OperationType != null ? s.OperationType.FullDescription : "",
-
                         U_FF_TIP_COM = s.U_FF_TIP_COM ?? "",
-                        U_FF_TIP_COM_NAM = _db.UserDefinedFields
-                                           .Where(c => c.TableID == "PRQ1" && c.AliasID == "FF_TIP_COM")
-                                           .SelectMany(c => c.Lines)
-                                           .Where(l => l.FldValue == (s.U_FF_TIP_COM ?? ""))
-                                           .Select(l => l.FullDescr)
-                                           .FirstOrDefault() ?? "",
                         UnitMsr = s.UnitMsr,
                         OnHand = _db.ItemWarehouseInfo
                                  .Where(w => w.ItemCode == s.Item.ItemCode && warehouse.Contains(w.WhsCode))
@@ -178,7 +173,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -195,6 +190,312 @@ namespace Net.Data.SAPBusinessOne
 
 
         #region <<< OPERACIONES >>>
+
+        public async Task<ResultadoTransaccionResponse<PurchaseRequestLinesQueryEntity>> SetValidateLinesItemsExcel(List<PurchaseRequestLinesItemsValidateEntity> value)
+        {
+            var resultTransaccion = new ResultadoTransaccionResponse<PurchaseRequestLinesQueryEntity>
+            {
+                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
+                NombreAplicacion = _aplicacionName
+            };
+
+            var lines = new List<PurchaseRequestLinesQueryEntity>();
+
+            try
+            {
+                value ??= [];
+
+                string[] warehouse = await _db.Warehouses
+                    .AsNoTracking()
+                    .Where(n => n.U_FIB_ALMLOG == "Y")
+                    .Select(n => n.WhsCode)
+                    .ToArrayAsync();
+
+                for (int i = 0; i < value.Count; i++)
+                {
+                    #region <<< VALIDACIONES >>>
+
+                    var line = value[i];
+                    int nroLinea = i + 1;
+
+                    if (!string.IsNullOrWhiteSpace(line.ItemCode))
+                    {
+                        _ = await _db.Items
+                            .AsNoTracking()
+                            .Where(x => x.ItemCode == line.ItemCode)
+                            .Select(x => x.ItemCode)
+                            .FirstOrDefaultAsync()
+                            ?? throw new Exception($"Línea {nroLinea}: El código de artículo '{line.ItemCode}' no existe.");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(line.LineVendor))
+                    {
+                        _ = await _db.BusinessPartners
+                            .AsNoTracking()
+                            .Where(x => x.CardCode == line.LineVendor)
+                            .Select(x => x.CardCode)
+                            .FirstOrDefaultAsync()
+                            ?? throw new Exception($"Línea {nroLinea}: El código de proveedor '{line.LineVendor}' no existe.");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(line.WhsCode))
+                    {
+                        _ = await _db.Warehouses
+                            .AsNoTracking()
+                            .Where(x => x.WhsCode == line.WhsCode)
+                            .Select(x => x.WhsCode)
+                            .FirstOrDefaultAsync()
+                            ?? throw new Exception($"Línea {nroLinea}: El código de almacén '{line.WhsCode}' no existe.");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(line.FormatCode))
+                    {
+                        _ = await _db.ChartOfAccounts
+                            .AsNoTracking()
+                            .Where(x => ((x.Segment_0 ?? "") + "-" + (x.Segment_1 ?? "") + "-" + (x.Segment_2 ?? "")) == line.FormatCode)
+                            .Select(x => x.AcctCode)
+                            .FirstOrDefaultAsync()
+                            ?? throw new Exception($"Línea {nroLinea}: La cuenta mayor '{line.FormatCode}' no existe.");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(line.OcrCode))
+                    {
+                        _ = await _db.CostCenters
+                            .AsNoTracking()
+                            .Where(x => x.OcrCode == line.OcrCode)
+                            .Select(x => x.OcrCode)
+                            .FirstOrDefaultAsync()
+                            ?? throw new Exception($"Línea {nroLinea}: El código de centro de costo '{line.OcrCode}' no existe.");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(line.U_tipoOpT12))
+                    {
+                        _ = await _db.OperationsTypes
+                            .AsNoTracking()
+                            .Where(x => x.Code == line.U_tipoOpT12)
+                            .Select(x => x.Code)
+                            .FirstOrDefaultAsync()
+                            ?? throw new Exception($"Línea {nroLinea}: El código de tipo de operación '{line.U_tipoOpT12}' no existe.");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(line.U_FF_TIP_COM))
+                    {
+                        _ = await (
+                            from p in _db.UserDefinedFields1.AsNoTracking()
+                            join c in _db.UserDefinedFields.AsNoTracking() on new { p.TableID, p.FieldID } equals new { c.TableID, c.FieldID }
+                            where c.TableID == "PRQ1" && c.AliasID == "FF_TIP_COM" && p.FldValue == line.U_FF_TIP_COM
+                            select p.FldValue
+                        ).FirstOrDefaultAsync()
+                        ?? throw new Exception($"Línea {nroLinea}: El código de tipo de compra '{line.U_FF_TIP_COM}' no existe.");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(line.UnitMsr))
+                    {
+                        _ = await _db.Items
+                            .AsNoTracking()
+                            .Where(x => x.BuyUnitMsr == line.UnitMsr)
+                            .Select(x => x.BuyUnitMsr)
+                            .FirstOrDefaultAsync()
+                            ?? throw new Exception($"Línea {nroLinea}: La unidad de medida '{line.UnitMsr}' no es válida.");
+                    }
+
+                    #endregion
+
+
+                    #region <<< OBTENER VALORES >>>
+
+                    var itemName = await _db.Items
+                        .AsNoTracking()
+                        .Where(x => x.ItemCode == line.ItemCode)
+                        .Select(x => x.ItemName)
+                        .FirstOrDefaultAsync();
+
+
+                    var chartOfAccounts = await _db.ChartOfAccounts
+                        .AsNoTracking()
+                        .Where(x => ((x.Segment_0 ?? "") + "-" + (x.Segment_1 ?? "") + "-" + (x.Segment_2 ?? "")) == line.FormatCode)
+                        .Select(x => new
+                        {
+                            x.AcctCode,
+                            x.AcctName
+                        })
+                        .FirstOrDefaultAsync();
+
+
+                    var onHand = await _db.ItemWarehouseInfo
+                        .AsNoTracking()
+                        .Where(w =>
+                            w.ItemCode == line.ItemCode &&
+                            warehouse.Contains(w.WhsCode))
+                        .SumAsync(w => (decimal?)w.OnHand) ?? 0;
+
+                    #endregion
+
+
+                    #region <<< AGREGAR A LA LISTA >>>
+
+                    var l = new PurchaseRequestLinesQueryEntity 
+                    {
+                        ItemCode = line.ItemCode,
+                        Dscription = itemName,
+                        LineVendor = line.LineVendor,
+                        PqtReqDate = line.PqtReqDate,
+                        AcctCode = chartOfAccounts.AcctCode,
+                        FormatCode = line.FormatCode,
+                        AcctName = chartOfAccounts.AcctName,
+                        OcrCode = line.OcrCode,
+                        WhsCode = line.WhsCode,
+                        U_tipoOpT12 = line.U_tipoOpT12,
+                        U_FF_TIP_COM = line.U_FF_TIP_COM,
+                        UnitMsr = line.UnitMsr,
+                        OnHand = onHand,
+                        Quantity = line.Quantity
+                    };
+
+                    lines.Add(l);
+
+                    #endregion
+                }
+
+                resultTransaccion.IdRegistro = 0;
+                resultTransaccion.ResultadoCodigo = 0;
+                resultTransaccion.ResultadoDescripcion = $"Registros Totales {value.Count}";
+                resultTransaccion.DataList = lines;
+            }
+            catch (Exception ex)
+            {
+                resultTransaccion.IdRegistro = -1;
+                resultTransaccion.ResultadoCodigo = -1;
+                resultTransaccion.ResultadoDescripcion = ex.Message;
+            }
+
+            return resultTransaccion;
+        }
+
+        public async Task<ResultadoTransaccionResponse<PurchaseRequestLinesQueryEntity>> SetValidateLinesServicsExcel(List<PurchaseRequestLinesServicesValidateEntity> value)
+        {
+            var resultTransaccion = new ResultadoTransaccionResponse<PurchaseRequestLinesQueryEntity>
+            {
+                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
+                NombreAplicacion = _aplicacionName
+            };
+
+            var lines = new List<PurchaseRequestLinesQueryEntity>();
+
+            try
+            {
+                value ??= [];
+
+                for (int i = 0; i < value.Count; i++)
+                {
+                    #region <<< VALIDACIONES >>>
+
+                    var line = value[i];
+                    int nroLinea = i + 1;
+
+                    if (!string.IsNullOrWhiteSpace(line.LineVendor))
+                    {
+                        _ = await _db.BusinessPartners
+                            .AsNoTracking()
+                            .Where(x => x.CardCode == line.LineVendor)
+                            .Select(x => x.CardCode)
+                            .FirstOrDefaultAsync()
+                            ?? throw new Exception($"Línea {nroLinea}: El código de proveedor '{line.LineVendor}' no existe.");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(line.FormatCode))
+                    {
+                        _ = await _db.ChartOfAccounts
+                            .AsNoTracking()
+                            .Where(x => ((x.Segment_0 ?? "") + "-" + (x.Segment_1 ?? "") + "-" + (x.Segment_2 ?? "")) == line.FormatCode)
+                            .Select(x => x.AcctCode)
+                            .FirstOrDefaultAsync()
+                            ?? throw new Exception($"Línea {nroLinea}: La cuenta mayor '{line.FormatCode}' no existe.");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(line.OcrCode))
+                    {
+                        _ = await _db.CostCenters
+                            .AsNoTracking()
+                            .Where(x => x.OcrCode == line.OcrCode)
+                            .Select(x => x.OcrCode)
+                            .FirstOrDefaultAsync()
+                            ?? throw new Exception($"Línea {nroLinea}: El código de centro de costo '{line.OcrCode}' no existe.");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(line.U_tipoOpT12))
+                    {
+                        _ = await _db.OperationsTypes
+                            .AsNoTracking()
+                            .Where(x => x.Code == line.U_tipoOpT12)
+                            .Select(x => x.Code)
+                            .FirstOrDefaultAsync()
+                            ?? throw new Exception($"Línea {nroLinea}: El código de tipo de operación '{line.U_tipoOpT12}' no existe.");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(line.U_FF_TIP_COM))
+                    {
+                        _ = await (
+                            from p in _db.UserDefinedFields1.AsNoTracking()
+                            join c in _db.UserDefinedFields.AsNoTracking() on new { p.TableID, p.FieldID } equals new { c.TableID, c.FieldID }
+                            where c.TableID == "PRQ1" && c.AliasID == "FF_TIP_COM" && p.FldValue == line.U_FF_TIP_COM
+                            select p.FldValue
+                        ).FirstOrDefaultAsync()
+                        ?? throw new Exception($"Línea {nroLinea}: El código de tipo de compra '{line.U_FF_TIP_COM}' no existe.");
+                    }
+
+                    #endregion
+
+
+                    #region <<< OBTENER VALORES >>>
+
+                    var chartOfAccounts = await _db.ChartOfAccounts
+                        .AsNoTracking()
+                        .Where(x => ((x.Segment_0 ?? "") + "-" + (x.Segment_1 ?? "") + "-" + (x.Segment_2 ?? "")) == line.FormatCode)
+                        .Select(x => new
+                        {
+                            x.AcctCode,
+                            x.AcctName
+                        })
+                        .FirstOrDefaultAsync();
+
+                    #endregion
+
+
+                    #region <<< AGREGAR A LA LISTA >>>
+
+                    var l = new PurchaseRequestLinesQueryEntity
+                    {
+                        Dscription = line.Dscription,
+                        LineVendor = line.LineVendor,
+                        PqtReqDate = line.PqtReqDate,
+                        AcctCode = chartOfAccounts.AcctCode,
+                        FormatCode = line.FormatCode,
+                        AcctName = chartOfAccounts.AcctName,
+                        OcrCode = line.OcrCode,
+                        U_tipoOpT12 = line.U_tipoOpT12,
+                        U_FF_TIP_COM = line.U_FF_TIP_COM,
+                    };
+
+                    lines.Add(l);
+
+                    #endregion
+                }
+
+                resultTransaccion.IdRegistro = 0;
+                resultTransaccion.ResultadoCodigo = 0;
+                resultTransaccion.ResultadoDescripcion = $"Registros Totales {value.Count}";
+                resultTransaccion.DataList = lines;
+            }
+            catch (Exception ex)
+            {
+                resultTransaccion.IdRegistro = -1;
+                resultTransaccion.ResultadoCodigo = -1;
+                resultTransaccion.ResultadoDescripcion = ex.Message;
+            }
+
+            return resultTransaccion;
+        }
 
         public async Task<ResultadoTransaccionResponse<PurchaseRequestEntity>> SetCreate(PurchaseRequestCreateEntity value)
         {
@@ -286,9 +587,9 @@ namespace Net.Data.SAPBusinessOne
 
                     #endregion
 
-                    var reg = purchaseRequest.Add();
 
-                    if (reg == 0)
+                    
+                    if (purchaseRequest.Add() == 0)
                     {
                         resultTransaccion.IdRegistro = 0;
                         resultTransaccion.ResultadoCodigo = 0;
@@ -443,9 +744,9 @@ namespace Net.Data.SAPBusinessOne
 
                     #endregion
 
-                    var reg = purchaseRequest.Update();
 
-                    if (reg == 0)
+
+                    if (purchaseRequest.Update() == 0)
                     {
                         resultTransaccion.IdRegistro = 0;
                         resultTransaccion.ResultadoCodigo = 0;
@@ -501,9 +802,9 @@ namespace Net.Data.SAPBusinessOne
 
                     purchaseRequest.UserFields.Fields.Item("U_UsrClose").Value = value.U_UsrClose;
 
-                    var regUpdate = purchaseRequest.Update();
+                    
 
-                    if (regUpdate == 0)
+                    if (purchaseRequest.Update() == 0)
                     {
                         var regClose = purchaseRequest.Close();
 
@@ -545,7 +846,7 @@ namespace Net.Data.SAPBusinessOne
 
         #region <<< EXPORTACIONES >>>
 
-        public Task<ResultadoTransaccionResponse<MemoryStream>> GetDownloadFormat()
+        public Task<ResultadoTransaccionResponse<MemoryStream>> GetDownloadItemsTemplate()
         {
             var ms = new MemoryStream();
             var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
@@ -565,7 +866,7 @@ namespace Net.Data.SAPBusinessOne
                     worksheetPart.Worksheet = new Worksheet();
 
                     Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
-                    Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Formato" };
+                    Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Plantilla" };
                     sheets.Append(sheet);
 
                     workbookPart.Workbook.Save();
@@ -575,18 +876,32 @@ namespace Net.Data.SAPBusinessOne
                     //Cabecera
                     Row row = new Row();
                     row.Append(
-                        ExportToExcel.ConstructCell("Código", CellValues.String),
-                        ExportToExcel.ConstructCell("Descripción", CellValues.String),
+                        ExportToExcel.ConstructCell("Codigo", CellValues.String),
                         ExportToExcel.ConstructCell("Proveedor", CellValues.String),
                         ExportToExcel.ConstructCell("Fecha necesaria", CellValues.String),
                         ExportToExcel.ConstructCell("Cuenta mayor", CellValues.String),
-                        ExportToExcel.ConstructCell("Nombre de la cuenta de mayor", CellValues.String),
                         ExportToExcel.ConstructCell("Centro de costo", CellValues.String),
-                        ExportToExcel.ConstructCell("Almacén", CellValues.String),
-                        ExportToExcel.ConstructCell("Tipo de operación", CellValues.String),
-                        ExportToExcel.ConstructCell("Tipo de compra", CellValues.String),
+                        ExportToExcel.ConstructCell("Almacen", CellValues.String),
+                        ExportToExcel.ConstructCell("Codigo tipo de operacion", CellValues.String),
+                        ExportToExcel.ConstructCell("Codigo tipo de compra", CellValues.String),
                         ExportToExcel.ConstructCell("UM", CellValues.String),
                         ExportToExcel.ConstructCell("Cantidad", CellValues.String)
+                    );
+                    sheetData.AppendChild(row);
+
+                    row = new Row();
+
+                    row.Append(
+                        ExportToExcel.ConstructCell("MIPP-HP550J", CellValues.String),
+                        ExportToExcel.ConstructCell("", CellValues.String),
+                        ExportToExcel.ConstructCell(DateTime.Now.ToString("yyyy-MM-dd"), CellValues.String),
+                        ExportToExcel.ConstructCell("251000-00-00", CellValues.String),
+                        ExportToExcel.ConstructCell("CH2-RAS", CellValues.String),
+                        ExportToExcel.ConstructCell("CH2-SD", CellValues.String),
+                        ExportToExcel.ConstructCell("02", CellValues.String),
+                        ExportToExcel.ConstructCell("1", CellValues.String),
+                        ExportToExcel.ConstructCell("KG", CellValues.String),
+                        ExportToExcel.ConstructCell("1", CellValues.Number)
                     );
                     sheetData.AppendChild(row);
 
@@ -597,7 +912,79 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
+            }
+            catch (Exception ex)
+            {
+                resultTransaccion.IdRegistro = -1;
+                resultTransaccion.ResultadoCodigo = -1;
+                resultTransaccion.ResultadoDescripcion = ex.Message.ToString();
+            }
+
+            return Task.FromResult(resultTransaccion);
+        }
+
+        public Task<ResultadoTransaccionResponse<MemoryStream>> GetDownloadServicesTemplate()
+        {
+            var ms = new MemoryStream();
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
+            {
+                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
+                NombreAplicacion = _aplicacionName
+            };
+
+            try
+            {
+                using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
+                {
+                    WorkbookPart workbookPart = document.AddWorkbookPart();
+                    workbookPart.Workbook = new Workbook();
+
+                    WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                    worksheetPart.Worksheet = new Worksheet();
+
+                    Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+                    Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Plantilla" };
+                    sheets.Append(sheet);
+
+                    workbookPart.Workbook.Save();
+
+                    SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+
+                    //Cabecera
+                    Row row = new Row();
+                    row.Append(
+                        ExportToExcel.ConstructCell("Descripcion", CellValues.String),
+                        ExportToExcel.ConstructCell("Proveedor", CellValues.String),
+                        ExportToExcel.ConstructCell("Fecha necesaria", CellValues.String),
+                        ExportToExcel.ConstructCell("Cuenta mayor", CellValues.String),
+                        ExportToExcel.ConstructCell("Centro de costo", CellValues.String),
+                        ExportToExcel.ConstructCell("Codigo tipo de operacion", CellValues.String),
+                        ExportToExcel.ConstructCell("Codigo tipo de compra", CellValues.String)
+                    );
+                    sheetData.AppendChild(row);
+
+                    row = new Row();
+
+                    row.Append(
+                        ExportToExcel.ConstructCell("1 LAPTOP LENOVO i5, 7GB DE RAM", CellValues.String),
+                        ExportToExcel.ConstructCell("", CellValues.String),
+                        ExportToExcel.ConstructCell(DateTime.Now.ToString("yyyy-MM-dd"), CellValues.String),
+                        ExportToExcel.ConstructCell("251000-00-00", CellValues.String),
+                        ExportToExcel.ConstructCell("CH2-RAS", CellValues.String),
+                        ExportToExcel.ConstructCell("02", CellValues.String),
+                        ExportToExcel.ConstructCell("1", CellValues.String)
+                    );
+                    sheetData.AppendChild(row);
+
+                    worksheetPart.Worksheet.Save();
+                    document.Close();
+                }
+
+                resultTransaccion.IdRegistro = 0;
+                resultTransaccion.ResultadoCodigo = 0;
+                resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {

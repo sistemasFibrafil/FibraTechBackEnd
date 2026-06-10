@@ -35,7 +35,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(objectGetList);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(objectGetList.DataList);
         }
 
         [HttpGet]
@@ -50,7 +50,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(objectGetList);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(objectGetList.DataList);
         }
 
         [HttpGet]
@@ -63,8 +63,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
             {
                 var objectGetAll = await _repository.FacturaVenta.GetVentaResumenExcelByFechaGrupo(value.ReturnValue());
 
-                objectGetAll.data.Seek(0, SeekOrigin.Begin);
-                var file = objectGetAll.data.ToArray();
+                objectGetAll.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectGetAll.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -86,7 +86,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(objectGetAll);
             }
 
-            return Ok(objectGetAll.dataList);
+            return Ok(objectGetAll.DataList);
         }
 
         [HttpGet]
@@ -99,8 +99,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
             {
                 var objectGetAll = await _repository.FacturaVenta.GetVentaByFilterExcel(value.ReturnValue());
 
-                objectGetAll.data.Seek(0, SeekOrigin.Begin);
-                var file = objectGetAll.data.ToArray();
+                objectGetAll.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectGetAll.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -122,7 +122,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(objectGetAll);
             }
 
-            return Ok(objectGetAll.dataList);
+            return Ok(objectGetAll.DataList);
         }
 
         [HttpGet]
@@ -135,8 +135,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
             {
                 var objectGetAll = await _repository.FacturaVenta.GetFacturaVentaByFilterExcel(value.ReturnValue());
 
-                objectGetAll.data.Seek(0, SeekOrigin.Begin);
-                var file = objectGetAll.data.ToArray();
+                objectGetAll.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectGetAll.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }

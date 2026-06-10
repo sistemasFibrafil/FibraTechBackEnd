@@ -4,12 +4,14 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.Purchasing;
 using Net.Business.DTO.SAPBusinessOne.Purchasing.PurchaseRequest.Close;
 using Net.Business.DTO.SAPBusinessOne.Purchasing.PurchaseRequest.Create;
 using Net.Business.DTO.SAPBusinessOne.Purchasing.PurchaseRequest.Update;
-using Net.BusinessLogic.Interfaces.SAPBusinessOne.Purchasing;
+using Net.Business.DTO.SAPBusinessOne.Purchasing.PurchaseRequest.Validate;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Purchasing
 {
     [ApiController]
@@ -41,7 +43,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Purchasing
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         
@@ -58,13 +60,43 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Purchasing
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         #endregion
 
 
         #region <<< OPERACIONES >>>
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> SetValidateLinesItemsExcel([FromBody] List<PurchaseRequestLinesItemsValidateRequestDto> dto)
+        {
+            var result = await _purchaseRequestService.SetValidateLinesItemsExcel(dto);
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result.DataList);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> SetValidateLinesServicesExcel([FromBody] List<PurchaseRequestLinesServicesValidateRequestDto> dto)
+        {
+            var result = await _purchaseRequestService.SetValidateLinesServicesExcel(dto);
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result.DataList);
+        }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -121,14 +153,35 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Purchasing
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetDownloadFormat()
+        public async Task<IActionResult> GetDownloadItemsTemplate()
         {
             try
             {
-                var objectGetFile = await _repository.PurchaseRequest.GetDownloadFormat();
+                var objectGetFile = await _repository.PurchaseRequest.GetDownloadItemsTemplate();
 
-                objectGetFile.data.Seek(0, SeekOrigin.Begin);
-                var file = objectGetFile.data.ToArray();
+                objectGetFile.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectGetFile.Data.ToArray();
+
+                return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> GetDownloadServicesTemplate()
+        {
+            try
+            {
+                var objectGetFile = await _repository.PurchaseRequest.GetDownloadServicesTemplate();
+
+                objectGetFile.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectGetFile.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }

@@ -85,7 +85,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
                 return BadRequest(objectGetAll);
             }
 
-            return Ok(objectGetAll.dataList);
+            return Ok(objectGetAll.DataList);
         }
 
         [HttpGet("{id}")]
@@ -100,7 +100,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
                 return BadRequest(objectGetAll);
             }
 
-            return Ok(objectGetAll.data);
+            return Ok(objectGetAll.Data);
         }
 
         [HttpGet]
@@ -115,7 +115,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
                 return BadRequest(objectGetAll);
             }
 
-            return Ok(objectGetAll.dataList);
+            return Ok(objectGetAll.DataList);
         }
 
         [HttpGet]
@@ -130,7 +130,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
                 return BadRequest(objectGetAll);
             }
 
-            return Ok(objectGetAll.dataList);
+            return Ok(objectGetAll.DataList);
         }
 
         [HttpGet]
@@ -145,7 +145,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
                 return BadRequest(objectGetAll);
             }
 
-            return Ok(objectGetAll.dataList);
+            return Ok(objectGetAll.DataList);
         }
 
         [HttpGet]
@@ -160,7 +160,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
                 return BadRequest(objectGetAll);
             }
 
-            return Ok(objectGetAll.dataList);
+            return Ok(objectGetAll.DataList);
         }
 
         [HttpPut]
@@ -200,7 +200,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
 
                 var nombreArchivo = string.Format("Lpn - {0} - {1}", id.ToString(), DateTime.Now.ToString("dd-MM-yyyy").ToString());
 
-                var pdf = File(objectGetById.data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
+                var pdf = File(objectGetById.Data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
 
                 return pdf;
             }
@@ -222,7 +222,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
 
                 var nombreArchivo = string.Format("Ean - {0} - {1}", ean, DateTime.Now.ToString("dd-MM-yyyy").ToString());
 
-                var pdf = File(objectGetById.data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
+                var pdf = File(objectGetById.Data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
 
                 return pdf;
             }
@@ -244,7 +244,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
                 return BadRequest(objectGetAll);
             }
 
-            return Ok(objectGetAll.dataList);
+            return Ok(objectGetAll.DataList);
         }
 
         [HttpGet]
@@ -257,8 +257,8 @@ namespace Net.Business.Services.Controllers.Web.Ventas
             {
                 var objectGetAll = await _repository.OrdenVentaSodimac.GetListOrdenVentaSodimacExcelByFechaNumero(value.ReturnValue());
 
-                objectGetAll.data.Seek(0, SeekOrigin.Begin);
-                var file = objectGetAll.data.ToArray();
+                objectGetAll.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectGetAll.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -280,7 +280,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
                 return BadRequest(objectGetAll);
             }
 
-            return Ok(objectGetAll.dataList);
+            return Ok(objectGetAll.DataList);
         }
 
         [HttpGet]
@@ -295,7 +295,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
 
                 var nombreArchivo = string.Format("Sodimac Selva - {0}", DateTime.Now.ToString("dd-MM-yyyy").ToString());
 
-                var pdf = File(objectGetById.data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
+                var pdf = File(objectGetById.Data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
 
                 return pdf;
             }

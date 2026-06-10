@@ -33,7 +33,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Banking
                 return BadRequest(objectGetList);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(objectGetList.DataList);
         }
 
         [HttpGet]
@@ -46,8 +46,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Banking
             {
                 var objectGetFile = await _repository.PagoRecibido.GetCobranzaCarteraVencidaByFilterExcel(value.ReturnValue());
 
-                objectGetFile.data.Seek(0, SeekOrigin.Begin);
-                var file = objectGetFile.data.ToArray();
+                objectGetFile.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectGetFile.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }

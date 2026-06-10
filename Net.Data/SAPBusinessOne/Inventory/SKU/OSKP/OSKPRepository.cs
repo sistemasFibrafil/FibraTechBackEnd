@@ -315,7 +315,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {lista.Count}";
-                resultTransaccion.dataList = _ma.Map<List<OSKPEntity>>(lista);
+                resultTransaccion.DataList = _ma.Map<List<OSKPEntity>>(lista);
             }
             catch (Exception ex)
             {
@@ -371,7 +371,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = _ma.Map<OSKPEntity>(data);
+                resultTransaccion.Data = _ma.Map<OSKPEntity>(data);
             }
             catch (Exception ex)
             {

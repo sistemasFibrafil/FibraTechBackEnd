@@ -9,7 +9,7 @@ using Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Filter;
 using Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Create;
 using Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Delete;
 using Net.Business.DTO.SAPBusinessOne.Inventory.Picking.Release;
-using Net.BusinessLogic.Mappers.SAPBusinessOne.Inventory.Picking.Find;
+using Net.Business.Logic.Mappers.SAPBusinessOne.Inventory.Picking.Find;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
 {
     [ApiController]
@@ -37,7 +37,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return NotFound(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
@@ -51,7 +51,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
             if (result.ResultadoCodigo == -1)
                 return NotFound(result);
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         
@@ -66,7 +66,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
             if (result.ResultadoCodigo == -1)
                 return NotFound(result);
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
@@ -81,7 +81,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return NotFound(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpPost]
@@ -97,7 +97,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         [HttpPost]
@@ -113,7 +113,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         [HttpPost]
@@ -129,7 +129,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         [HttpPost]
@@ -145,7 +145,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpPatch]
@@ -211,7 +211,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory
             }
 
             var nombreArchivo = $"Packing List - {DateTime.Now:dd-MM-yyyy}.pdf";
-            return File(result.data.ToArray(), "application/pdf", nombreArchivo);
+            return File(result.Data.ToArray(), "application/pdf", nombreArchivo);
         }
     }
 }

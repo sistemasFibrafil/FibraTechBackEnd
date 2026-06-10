@@ -76,7 +76,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU
                 return NotFound(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
@@ -91,7 +91,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU
                 return NotFound(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
     }
 }

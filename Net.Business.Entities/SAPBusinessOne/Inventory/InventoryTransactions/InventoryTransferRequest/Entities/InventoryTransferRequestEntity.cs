@@ -30,6 +30,6 @@ namespace Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.I
 
 
         // 🔗 1 → N (OWTQ → WTQ1)
-        public ICollection<InventoryTransferRequest1Entity> Lines { get; set; } = new List<InventoryTransferRequest1Entity>();
+        public ICollection<InventoryTransferRequestLinesEntity> Lines { get; set; } = new List<InventoryTransferRequestLinesEntity>();
     }
 }

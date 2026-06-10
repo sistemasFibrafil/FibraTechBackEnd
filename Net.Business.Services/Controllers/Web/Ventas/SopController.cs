@@ -35,7 +35,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
                 return BadRequest(objectGetAll);
             }
 
-            return Ok(objectGetAll.dataList);
+            return Ok(objectGetAll.DataList);
         }
 
         [HttpGet("{id}")]
@@ -51,7 +51,7 @@ namespace Net.Business.Services.Controllers.Web.Ventas
                 return BadRequest(response);
             }
 
-            return Ok(response.data);
+            return Ok(response.Data);
         }
 
         [HttpGet]
@@ -64,8 +64,8 @@ namespace Net.Business.Services.Controllers.Web.Ventas
             {
                 var objectGetFile = await _repository.Sop.GetSopExcelById(value.ReturnValue());
 
-                objectGetFile.data.Seek(0, SeekOrigin.Begin);
-                var file = objectGetFile.data.ToArray();
+                objectGetFile.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectGetFile.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }

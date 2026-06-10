@@ -1,12 +1,13 @@
 using System;
 using System.Linq;
-using Net.Connection;
-using Net.Data.AppContext;
-using Net.Business.Entities;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
+using Net.Business.Entities;
 using Net.Business.Entities.SAPBusinessOne;
+using Net.Connection;
+using Net.CrossCotting;
+using Net.Data.AppContext;
 
 namespace Net.Data.SAPBusinessOne
 {
@@ -23,9 +24,9 @@ namespace Net.Data.SAPBusinessOne
             _aplicacionName = GetType().Name;
         }
 
-        public async Task<ResultadoTransaccionEntity<PriceListEntity>> GetList()
+        public async Task<ResultadoTransaccionResponse<PriceListEntity>> GetList()
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<PriceListEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<PriceListEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -41,7 +42,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {

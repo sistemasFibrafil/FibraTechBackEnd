@@ -6,8 +6,9 @@ namespace Net.Business.Entities.SAPBusinessOne
     {
         public int DocEntry { get; set; }
         public int DocNum { get; set; }
-        public string ObjType { get; set; } = string.Empty;
-        public string DocStatus { get; set; } = string.Empty;
+        public string? ObjType { get; set; }
+        public string? CANCELED { get; set; }
+        public string? DocStatus { get; set; }
         public DateTime DocDate { get; set; }
         public DateTime DocDueDate { get; set; }
         public DateTime TaxDate { get; set; }
@@ -19,12 +20,12 @@ namespace Net.Business.Entities.SAPBusinessOne
         public short? Department { get; set; }
         public string? Notify { get; set; }
         public string? Email { get; set; }
-        public string DocType { get; set; } = string.Empty;
+        public string? DocType { get; set; }
         public int? OwnerCode { get; set; }
         public string? Comments { get; set; }
 
 
         // 🔗 1 → N (OPRQ → PRQ1)
-        public ICollection<PurchaseRequest1Entity> Lines { get; set; } = new List<PurchaseRequest1Entity>();
+        public ICollection<PurchaseRequestLinesEntity> Lines { get; set; } = [];
     }
 }

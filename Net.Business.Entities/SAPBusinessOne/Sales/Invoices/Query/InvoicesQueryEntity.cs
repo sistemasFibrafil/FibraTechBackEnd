@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.OperationsTypes.Entities;
 using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Entities;
 namespace Net.Business.Entities.SAPBusinessOne
 {
@@ -202,6 +203,6 @@ namespace Net.Business.Entities.SAPBusinessOne
 
 
         // 🔗 N → 1 (INV1 → TipoOperacion)
-        public OperationTypeEntity OperationType { get; set; } = null!;
+        public OperationsTypesEntity OperationType { get; set; } = null!;
     }
 }

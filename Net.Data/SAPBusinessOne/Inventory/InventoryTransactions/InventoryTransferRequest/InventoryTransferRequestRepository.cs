@@ -8,20 +8,24 @@ using Net.CrossCotting;
 using Net.Data.AppContext;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using DocumentFormat.OpenXml;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.Extensions.Configuration;
 using Net.Connection.ConnectionSAPBusinessOne;
 using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Query;
 using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Print;
 using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Query;
 using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Close;
-using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Update;
-using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Create;
 using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Filter;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Create;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Update;
 using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Entities;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Validate;
 namespace Net.Data.SAPBusinessOne
 {
     public class InventoryTransferRequestRepository : RepositoryBase<InventoryTransferRequestEntity>, IInventoryTransferRequestRepository
@@ -75,7 +79,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -134,7 +138,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -183,7 +187,7 @@ namespace Net.Data.SAPBusinessOne
                     Comments = n.Comments,
 
                     // 🔹 LÍNEAS EMBEBIDAS
-                    Lines = n.Lines.Select(s => new InventoryTransferRequest1QueryEntity
+                    Lines = n.Lines.Select(s => new InventoryTransferRequestLinesQueryEntity
                     {
                         DocEntry = s.DocEntry,
                         LineNum = s.LineNum,
@@ -212,7 +216,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -266,7 +270,7 @@ namespace Net.Data.SAPBusinessOne
                 var lines = await _db.InventoryTransferRequest1
                 .Include(s => s.OperationType)
                 .Where(x => x.DocEntry == docEntry)
-                .Select(s => new InventoryTransferRequest1QueryEntity
+                .Select(s => new InventoryTransferRequestLinesQueryEntity
                 {
                     DocEntry = s.DocEntry,
                     LineNum = s.LineNum,
@@ -296,7 +300,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -327,7 +331,7 @@ namespace Net.Data.SAPBusinessOne
                     from hea in _db.InventoryTransferRequest
                     join det in _db.InventoryTransferRequest1 on hea.DocEntry equals det.DocEntry
                     // LEFT JOIN
-                    from tip in _db.OperationType.Where(t => t.Code == det.U_tipoOpT12).DefaultIfEmpty()
+                    from tip in _db.OperationsTypes.Where(t => t.Code == det.U_tipoOpT12).DefaultIfEmpty()
                     where hea.DocStatus == "O" && det.LineStatus == "O"
                     select new PickingQueryEntity
                     {
@@ -356,7 +360,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -373,6 +377,135 @@ namespace Net.Data.SAPBusinessOne
 
         #region <<< OPERACIONES >>>
 
+        public async Task<ResultadoTransaccionResponse<InventoryTransferRequestLinesQueryEntity>> SetValidateLinesExcel(List<InventoryTransferRequestLinesValidateEntity> value)
+        {
+            var resultTransaccion = new ResultadoTransaccionResponse<InventoryTransferRequestLinesQueryEntity>
+            {
+                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
+                NombreAplicacion = _aplicacionName
+            };
+
+            var lines = new List<InventoryTransferRequestLinesQueryEntity>();
+
+            try
+            {
+                value ??= [];
+
+                for (int i = 0; i < value.Count; i++)
+                {
+                    #region <<< VALIDACIONES >>>
+
+                    var line = value[i];
+                    int nroLinea = i + 1;
+
+                    if (!string.IsNullOrWhiteSpace(line.ItemCode))
+                    {
+                        _ = await _db.Items
+                            .AsNoTracking()
+                            .Where(x => x.ItemCode == line.ItemCode)
+                            .Select(x => x.ItemCode)
+                            .FirstOrDefaultAsync()
+                            ?? throw new Exception($"Línea {nroLinea}: El código de artículo '{line.ItemCode}' no existe.");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(line.FromWhsCod))
+                    {
+                        _ = await _db.Warehouses
+                            .AsNoTracking()
+                            .Where(x => x.WhsCode == line.WhsCode)
+                            .Select(x => x.WhsCode)
+                            .FirstOrDefaultAsync()
+                            ?? throw new Exception($"Línea {nroLinea}: El código de almacén de origen '{line.FromWhsCod}' no existe.");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(line.WhsCode))
+                    {
+                        _ = await _db.Warehouses
+                            .AsNoTracking()
+                            .Where(x => x.WhsCode == line.WhsCode)
+                            .Select(x => x.WhsCode)
+                            .FirstOrDefaultAsync()
+                            ?? throw new Exception($"Línea {nroLinea}: El código de almacén de destino '{line.WhsCode}' no existe.");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(line.U_tipoOpT12))
+                    {
+                        _ = await _db.OperationsTypes
+                            .AsNoTracking()
+                            .Where(x => x.Code == line.U_tipoOpT12)
+                            .Select(x => x.Code)
+                            .FirstOrDefaultAsync()
+                            ?? throw new Exception($"Línea {nroLinea}: El código de tipo de operación '{line.U_tipoOpT12}' no existe.");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(line.UnitMsr))
+                    {
+                        _ = await _db.Items
+                            .AsNoTracking()
+                            .Where(x => x.InvntryUom == line.UnitMsr)
+                            .Select(x => x.InvntryUom)
+                            .FirstOrDefaultAsync()
+                            ?? throw new Exception($"Línea {nroLinea}: La unidad de medida '{line.UnitMsr}' no es válida.");
+                    }
+
+                    #endregion
+
+
+                    #region <<< OBTENER VALORES >>>
+
+                    var itemName = await _db.Items
+                        .AsNoTracking()
+                        .Where(x => x.ItemCode == line.ItemCode)
+                        .Select(x => x.ItemName)
+                        .FirstOrDefaultAsync();
+
+
+                    var operationTypeName = await _db.OperationsTypes
+                        .AsNoTracking()
+                        .Where(x => x.Code == line.U_tipoOpT12)
+                        .Select(x => x.U_descrp)
+                        .FirstOrDefaultAsync();
+
+                    #endregion
+
+
+                    #region <<< AGREGAR A LA LISTA >>>
+
+                    var l = new InventoryTransferRequestLinesQueryEntity
+                    {
+                        LineStatus = "O",
+                        ItemCode = line.ItemCode,
+                        Dscription = itemName,
+                        FromWhsCod = line.FromWhsCod,
+                        WhsCode = line.WhsCode,
+                        U_tipoOpT12 = line.U_tipoOpT12,
+                        U_tipoOpT12Nam = operationTypeName,
+                        UnitMsr = line.UnitMsr,
+                        Quantity = line.Quantity,
+                        OpenQty = line.Quantity,
+                        U_FIB_OpQtyPkg = line.Quantity,
+                        U_FIB_LinStPkg = "O"
+                    };
+
+                    lines.Add(l);
+
+                    #endregion
+                }
+
+                resultTransaccion.IdRegistro = 0;
+                resultTransaccion.ResultadoCodigo = 0;
+                resultTransaccion.ResultadoDescripcion = $"Registros Totales {value.Count}";
+                resultTransaccion.DataList = lines;
+            }
+            catch (Exception ex)
+            {
+                resultTransaccion.IdRegistro = -1;
+                resultTransaccion.ResultadoCodigo = -1;
+                resultTransaccion.ResultadoDescripcion = ex.Message;
+            }
+
+            return resultTransaccion;
+        }
         public async Task<ResultadoTransaccionResponse<InventoryTransferRequestEntity>> SetCreate(InventoryTransferRequestCreateEntity value)
         {
             var resultTransaccion = new ResultadoTransaccionResponse<InventoryTransferRequestEntity>
@@ -502,6 +635,15 @@ namespace Net.Data.SAPBusinessOne
                             // Se recorre las líneas de la solicitud de traslado para generar el picking
                             foreach (var line in value.PickingLines)
                             {
+                                bool exists = _db.Picking
+                                              .AsNoTracking()
+                                              .Any(x => x.U_CodeBar == line.U_CodeBar);
+
+                                if (exists)
+                                {
+                                    throw new Exception($"El código de barra '{line.U_CodeBar}' se encuentra registrado.");
+                                }
+
                                 for (int i = 0; i < inventoryTransferRequest.Lines.Count; i++)
                                 {
                                     // Se posiciona en la línea actual de la solicitud de traslado
@@ -737,7 +879,7 @@ namespace Net.Data.SAPBusinessOne
                         throw new Exception("No existe la solictud de traslado.");
                     }
 
-                    stockTransfer.UserFields.Fields.Item("U_UsrUpdate").Value = value.U_UsrUpdate;
+                    stockTransfer.UserFields.Fields.Item("U_UsrClose").Value = value.U_UsrClose;
 
                     var regUpdate = stockTransfer.Update();
 
@@ -781,9 +923,84 @@ namespace Net.Data.SAPBusinessOne
         #endregion
 
 
+        #region <<< EXPORTACIONES >>>
+
+        public Task<ResultadoTransaccionResponse<MemoryStream>> GetDownloadItemsTemplate()
+        {
+            var ms = new MemoryStream();
+            var resultTransaccion = new ResultadoTransaccionResponse<MemoryStream>
+            {
+                NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
+                NombreAplicacion = _aplicacionName
+            };
+
+            try
+            {
+                using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
+                {
+                    WorkbookPart workbookPart = document.AddWorkbookPart();
+                    workbookPart.Workbook = new Workbook();
+
+                    WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                    worksheetPart.Worksheet = new Worksheet();
+
+                    Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+                    Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Plantilla" };
+                    sheets.Append(sheet);
+
+                    workbookPart.Workbook.Save();
+
+                    SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+
+                    //Cabecera
+                    Row row = new Row();
+                    row.Append(
+                        ExportToExcel.ConstructCell("Codigo", CellValues.String),
+                        ExportToExcel.ConstructCell("De almacen", CellValues.String),
+                        ExportToExcel.ConstructCell("Almacen destino", CellValues.String),
+                        ExportToExcel.ConstructCell("Codigo tipo de operacion", CellValues.String),
+                        ExportToExcel.ConstructCell("UM", CellValues.String),
+                        ExportToExcel.ConstructCell("Cantidad", CellValues.String)
+                    );
+                    sheetData.AppendChild(row);
+
+                    row = new Row();
+
+                    row.Append(
+                        ExportToExcel.ConstructCell("MIPP-HP550J", CellValues.String),
+                        ExportToExcel.ConstructCell("CH2-ME", CellValues.String),
+                        ExportToExcel.ConstructCell("CH2-PT", CellValues.String),
+                        ExportToExcel.ConstructCell("11", CellValues.String),
+                        ExportToExcel.ConstructCell("KG", CellValues.String),
+                        ExportToExcel.ConstructCell("1", CellValues.Number)
+                    );
+                    sheetData.AppendChild(row);
+
+                    worksheetPart.Worksheet.Save();
+                    document.Close();
+                }
+
+                resultTransaccion.IdRegistro = 0;
+                resultTransaccion.ResultadoCodigo = 0;
+                resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
+                resultTransaccion.Data = ms;
+            }
+            catch (Exception ex)
+            {
+                resultTransaccion.IdRegistro = -1;
+                resultTransaccion.ResultadoCodigo = -1;
+                resultTransaccion.ResultadoDescripcion = ex.Message.ToString();
+            }
+
+            return Task.FromResult(resultTransaccion);
+        }
+
+        #endregion
+
+
         #region <<< IMPRESIONES >>>
 
-        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetFormatoPdfByDocEntry(int id)
+        public async Task<ResultadoTransaccionResponse<MemoryStream>> GetFormatoPdfByDocEntry(int docEntry)
         {
             var header = new InventoryTransferRequestPrintEntity();
             var linea = new List<InventoryTransferRequest1PrintEntity>();
@@ -803,7 +1020,7 @@ namespace Net.Data.SAPBusinessOne
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 0;
-                        cmd.Parameters.Add(new SqlParameter("@DocEntry", id));
+                        cmd.Parameters.Add(new SqlParameter("@DocEntry", docEntry));
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
@@ -882,7 +1099,7 @@ namespace Net.Data.SAPBusinessOne
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 0;
-                        cmd.Parameters.Add(new SqlParameter("@DocEntry", id));
+                        cmd.Parameters.Add(new SqlParameter("@DocEntry", docEntry));
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
@@ -1078,7 +1295,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = "Se generó correctamente el archivo.s";
-                    resultTransaccion.data = file;
+                    resultTransaccion.Data = file;
                 }
             }
             catch (Exception ex)

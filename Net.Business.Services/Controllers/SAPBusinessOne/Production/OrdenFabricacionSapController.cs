@@ -32,7 +32,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Production
                 return NotFound();
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(objectGetList.DataList);
         }
 
         [HttpGet()]
@@ -45,8 +45,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Production
             {
                 var objectFile = await _repository.OrdenFabricacion.GetOrdenFabricacionExcelBySede(value.ReturnValue());
 
-                objectFile.data.Seek(0, SeekOrigin.Begin);
-                var file = objectFile.data.ToArray();
+                objectFile.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectFile.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -68,7 +68,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Production
                 return NotFound();
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(objectGetList.DataList);
         }
 
         [HttpGet()]
@@ -81,8 +81,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Production
             {
                 var objectFile = await _repository.OrdenFabricacion.GetOrdenFabricacionGeneralExcelBySede(value.ReturnValue());
 
-                objectFile.data.Seek(0, SeekOrigin.Begin);
-                var file = objectFile.data.ToArray();
+                objectFile.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectFile.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }

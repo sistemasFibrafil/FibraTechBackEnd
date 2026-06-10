@@ -39,18 +39,18 @@ namespace Net.Data.SAPBusinessOne
             {
                 var list = await _db.PaymentTermsTypes
                 .AsNoTracking()
+                .OrderBy(n => n.PymntGroup)
                 .Select(n => new PaymentTermsTypesEntity
                 {
                     GroupNum = n.GroupNum,
                     PymntGroup = n.PymntGroup
-                }
-                )
+                })
                 .ToListAsync();
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -87,7 +87,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {

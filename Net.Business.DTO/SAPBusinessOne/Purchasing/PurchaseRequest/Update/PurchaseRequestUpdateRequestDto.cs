@@ -28,6 +28,6 @@ namespace Net.Business.DTO.SAPBusinessOne.Purchasing.PurchaseRequest.Update
         public string? Comments { get; set; }
 
         public int U_UsrUpdate { get; set; }
-        public List<PurchaseRequest1UpdateRequestDto> Lines { get; set; } = [];
+        public List<PurchaseRequestLinesUpdateRequestDto> Lines { get; set; } = [];
     }
 }

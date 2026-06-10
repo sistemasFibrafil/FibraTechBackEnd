@@ -5,6 +5,6 @@ namespace Net.Business.Entities.SAPBusinessOne
     {
         public bool IsEntrada { get; set; }
         public bool IsSalida { get; set; }
-        public List<ItemsCreateMassiveLinesEntity> Lines { get; set; } = new List<ItemsCreateMassiveLinesEntity>();
+        public List<ItemsCreateMassiveLinesEntity> Lines { get; set; } = [];
     }
 }

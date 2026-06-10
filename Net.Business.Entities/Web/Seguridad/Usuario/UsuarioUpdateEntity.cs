@@ -5,18 +5,19 @@
         public int IdUsuario { get; set; }
         public int IdPerfil { get; set; }
         public int IdUserSap { get; set; }
-        public string Nombre { get; set; }
-        public string ApellidoPaterno { get; set; }
-        public string ApellidoMaterno { get; set; }
-        public string NroDocumento { get; set; }
-        public string NroTelefono { get; set; }
-        public string Clave { get; set; }
-        public string Email { get; set; }
-        public string Imagen { get; set; }
-        public string Firma { get; set; }
+        public int SlpCode { get; set; }
+        public string? Nombre { get; set; }
+        public string? ApellidoPaterno { get; set; }
+        public string? ApellidoMaterno { get; set; }
+        public string? NroDocumento { get; set; }
+        public string? NroTelefono { get; set; }
+        public string? Clave { get; set; }
+        public string? Email { get; set; }
+        public string? Imagen { get; set; }
+        public string? Firma { get; set; }
         public bool? ThemeDark { get; set; }
-        public string ThemeColor { get; set; }
-        public string TypeMenu { get; set; }
+        public string? ThemeColor { get; set; }
+        public string? TypeMenu { get; set; }
         public bool Activo { get; set; }
     }
 }

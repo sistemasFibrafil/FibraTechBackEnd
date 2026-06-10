@@ -30,7 +30,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
                 return BadRequest(objectGetList);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(objectGetList.DataList);
         }
     }
 }

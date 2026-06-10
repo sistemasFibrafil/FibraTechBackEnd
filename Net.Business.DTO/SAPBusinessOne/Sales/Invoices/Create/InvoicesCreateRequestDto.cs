@@ -20,12 +20,6 @@ namespace Net.Business.DTO.SAPBusinessOne.Sales.Invoices.Create
 
 
         /// <summary>
-        /// Picking
-        /// </summary>
-        public string? U_FIB_IsPkg { get; set; }
-
-
-        /// <summary>
         /// SOCIO DE NEGOCIOS
         /// </summary>
         public string? CardCode { get; set; }
@@ -69,12 +63,6 @@ namespace Net.Business.DTO.SAPBusinessOne.Sales.Invoices.Create
         public double U_FIB_TFLETE { get; set; }
         public double U_FIB_IMPSEG { get; set; }
         public string? U_FIB_PUERTO { get; set; }
-
-
-        /// <summary>
-        /// OTROS
-        /// </summary>
-        public string? U_STR_TVENTA { get; set; }
 
 
         /// <summary>

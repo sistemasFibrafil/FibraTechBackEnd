@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Definitions.General
 {
-    [Route("api/[controller]/[action]")]
     [ApiController]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ApiExplorerSettings(GroupName = "ApiFibrafil")]
+    [Route("api/[controller]/[action]")]
     [Authorize(AuthenticationSchemes = "Bearer")]
+    [ApiExplorerSettings(GroupName = "ApiFibrafil")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class BranchesController : Controller
     {
         private readonly IRepositoryWrapper _repository;
@@ -30,7 +30,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.Defini
                 return NotFound(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
     }
 }

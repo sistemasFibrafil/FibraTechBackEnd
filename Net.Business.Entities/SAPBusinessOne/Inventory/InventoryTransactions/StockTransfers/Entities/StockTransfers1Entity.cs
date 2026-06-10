@@ -1,4 +1,6 @@
-﻿namespace Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Entities
+﻿using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.OperationsTypes.Entities;
+
+namespace Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Entities
 {
     public class StockTransfers1Entity
     {
@@ -23,6 +25,6 @@
 
 
         // 🔗 N → 1 (WTR1 → TipoOperacion)
-        public OperationTypeEntity? OperationType { get; set; } = null;
+        public OperationsTypesEntity? OperationType { get; set; } = null;
     }
 }

@@ -27,7 +27,7 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
                 return BadRequest(response.Result);
             }
 
-            return Ok(response.Result.data);
+            return Ok(response.Result.Data);
         }
 
         [HttpPost]
@@ -40,7 +40,7 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         /// <summary>

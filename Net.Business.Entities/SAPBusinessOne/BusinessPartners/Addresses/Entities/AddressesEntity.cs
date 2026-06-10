@@ -1,3 +1,5 @@
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.BusinessPartners.States;
+
 namespace Net.Business.Entities.SAPBusinessOne
 {
     public class AddressesEntity

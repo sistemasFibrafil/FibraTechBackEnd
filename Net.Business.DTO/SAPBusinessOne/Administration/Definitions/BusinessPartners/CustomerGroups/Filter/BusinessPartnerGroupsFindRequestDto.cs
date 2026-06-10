@@ -1,9 +1,10 @@
-﻿using Net.Business.Entities.SAPBusinessOne;
+﻿using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.BusinessPartners.BusinessPartnerGroups;
+
 namespace Net.Business.DTO.SAPBusinessOne
 {
     public class BusinessPartnerGroupsFindRequestDto
     {
-        public string GroupType { get; set; }
+        public string? GroupType { get; set; }
 
         public BusinessPartnerGroupsEntity ReturnValue()
         {

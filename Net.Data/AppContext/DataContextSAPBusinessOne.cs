@@ -1,15 +1,23 @@
 using Microsoft.EntityFrameworkCore;
 using Net.Business.Entities.SAPBusinessOne;
-using Net.Business.Entities.SAPBusinessOne.Drafts.Entities;
-using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Entities;
-using Net.Business.Entities.SAPBusinessOne.Common.Attachments2.Entities;
-using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Driver.Entities;
-using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Vehicle.Entities;
-using Net.Business.Entities.SAPBusinessOne.Approvals.ApprovalRequests.Entities;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.BusinessPartners.BusinessPartnerDivisions.Entities;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.BusinessPartners.BusinessPartnerGroups;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.BusinessPartners.BusinessPartnerGroupsUserTable;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.BusinessPartners.Countries;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.BusinessPartners.States;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.Departments;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.OperationsTypes.Entities;
 using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.General.Users.Entities;
-using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Entities;
-using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Entities;
 using Net.Business.Entities.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Entities;
+using Net.Business.Entities.SAPBusinessOne.Approvals.ApprovalRequests.Entities;
+using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Driver.Entities;
+using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Ubigeo.Entities;
+using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Vehicle.Entities;
+using Net.Business.Entities.SAPBusinessOne.Common.Attachments2.Entities;
+using Net.Business.Entities.SAPBusinessOne.Drafts.Entities;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.InventoryTransferRequest.Entities;
+using Net.Business.Entities.SAPBusinessOne.Inventory.InventoryTransactions.StockTransfers.Entities;
+using Net.Business.Entities.SAPBusinessOne.Inventory.Picking.Entities;
 namespace Net.Data.AppContext
 {
     public class DataContextSAPBusinessOne : DbContext
@@ -105,8 +113,8 @@ namespace Net.Data.AppContext
                 entity.ToTable("ADM1");
                 entity.HasKey(e => e.Code);
 
-                entity.HasOne(e => e.CountryEntity)
-                      .WithMany(e => e.AdminInfos1)
+                entity.HasOne(e => e.Countries)
+                      .WithMany(e => e.AdminInfosLines)
                       .HasForeignKey(e => e.Country);
             });
             // ========================================================================================================================================================
@@ -217,7 +225,7 @@ namespace Net.Data.AppContext
             // ========================================================================================================================================================
             // TIPO DE OPERACIÓN
             // ========================================================================================================================================================
-            modelBuilder.Entity<OperationTypeEntity>(e =>
+            modelBuilder.Entity<OperationsTypesEntity>(e =>
             {
                 e.ToTable("@OK1_T12");
                 e.HasKey(e => e.Code);
@@ -268,9 +276,17 @@ namespace Net.Data.AppContext
                 entity.HasKey(e => e.GroupCode);
             });
             // ========================================================================================================================================================
+            // GRUPOS DE SOCIOS DE NEGOCIOS - TABLA DE USUARIOS
+            // ========================================================================================================================================================
+            modelBuilder.Entity<BusinessPartnerGroupsUserTableEntity>(entity =>
+            {
+                entity.ToTable("@FIB_OCRG");
+                entity.HasKey(e => e.Code);
+            });
+            // ========================================================================================================================================================
             // PAISES
             // ========================================================================================================================================================
-            modelBuilder.Entity<CountryEntity>(entity =>
+            modelBuilder.Entity<CountriesEntity>(entity =>
             {
                 entity.ToTable("OCRY");
                 entity.HasKey(e => e.Code);
@@ -281,14 +297,6 @@ namespace Net.Data.AppContext
             modelBuilder.Entity<StatesEntity>(entity =>
             {
                 entity.ToTable("OCST");
-                entity.HasKey(e => e.Code);
-            });
-            // ========================================================================================================================================================
-            // UBIGEO
-            // ========================================================================================================================================================
-            modelBuilder.Entity<UbigeoEntity>(entity =>
-            {
-                entity.ToTable("@FIB_UBIGEO");
                 entity.HasKey(e => e.Code);
             });
             // ========================================================================================================================================================
@@ -305,7 +313,7 @@ namespace Net.Data.AppContext
             modelBuilder.Entity<BusinessPartnerSectorsEntity>(entity =>
             {
                 entity.ToTable("@FIB_SECTOR");
-                entity.HasKey(e => e.Codigo);
+                entity.HasKey(e => e.Code);
             });
 
 
@@ -505,6 +513,13 @@ namespace Net.Data.AppContext
                       .HasForeignKey(e => e.GroupNum)
                       .HasPrincipalKey(b => b.GroupNum);
 
+                // ORDR → OATC (N → 1)
+                entity.HasOne(e => e.Attachments2)
+                      .WithMany() // OATC no necesita colección
+                      .HasForeignKey(e => e.AtcEntry)
+                      .HasPrincipalKey(t => t.AbsEntry)
+                      .IsRequired(false); // LEFT JOIN
+
                 // 🔗 ODRF → RDR1
                 entity.HasMany(e => e.Lines)
                       .WithOne()
@@ -602,7 +617,7 @@ namespace Net.Data.AppContext
                       .IsRequired();
 
             });
-            modelBuilder.Entity<Orders1Entity>(entity =>
+            modelBuilder.Entity<OrdersLinesEntity>(entity =>
             {
                 entity.ToTable("RDR1");
 
@@ -816,7 +831,7 @@ namespace Net.Data.AppContext
                       .HasForeignKey(l => l.DocEntry)
                       .IsRequired();
             });
-            modelBuilder.Entity<PurchaseRequest1Entity>(entity =>
+            modelBuilder.Entity<PurchaseRequestLinesEntity>(entity =>
             {
                 entity.ToTable("PRQ1");
 
@@ -970,6 +985,14 @@ namespace Net.Data.AppContext
                 entity.ToTable("@BPP_CONDUC");
                 entity.HasKey(e => e.Code);
             });
+            // ========================================================================================================================================================
+            // UBIGEO
+            // ========================================================================================================================================================
+            modelBuilder.Entity<UbigeoEntity>(entity =>
+            {
+                entity.ToTable("@FIB_UBIGEO");
+                entity.HasKey(e => e.Code);
+            });
 
             #endregion
 
@@ -1070,7 +1093,7 @@ namespace Net.Data.AppContext
                       .HasForeignKey(l => l.DocEntry)
                       .IsRequired();
             });
-            modelBuilder.Entity<InventoryTransferRequest1Entity>(entity =>
+            modelBuilder.Entity<InventoryTransferRequestLinesEntity>(entity =>
             {
                 entity.ToTable("WTQ1");
 
@@ -1163,10 +1186,10 @@ namespace Net.Data.AppContext
             // ========================================================================================================================================================
             // DIVISION (@FIB_DIVI)
             // ========================================================================================================================================================
-            modelBuilder.Entity<DivisionEntity>(entity =>
+            modelBuilder.Entity<BusinessPartnerDivisionsEntity>(entity =>
             {
                 entity.ToTable("@FIB_DIVISION");
-                entity.HasKey(e => e.Codigo);
+                entity.HasKey(e => e.Code);
             });
 
 
@@ -1266,12 +1289,13 @@ namespace Net.Data.AppContext
         public DbSet<TipoLaminadoEntity> TipoLaminado { get; set; }
         public DbSet<LongitudAnchoEntity> LongitudAncho { get; set; }
         public DbSet<CurrencyCodesEntity> CurrencyCodes { get; set; }
-        public DbSet<OperationTypeEntity> OperationType { get; set; }
+        public DbSet<OperationsTypesEntity> OperationsTypes { get; set; }
         public DbSet<ColorImpresionEntity> ColorImpresion { get; set; }
         public DbSet<SubGrupoArticuloEntity> SubGrupoArticulo { get; set; }
         public DbSet<PaymentTermsTypesEntity> PaymentTermsTypes { get; set; }
         public DbSet<SubGrupoArticulo2SapEntity> SubGrupoArticulo2 { get; set; }
         public DbSet<BusinessPartnerGroupsEntity> BusinessPartnerGroups { get; set; }
+        public DbSet<BusinessPartnerGroupsUserTableEntity> BusinessPartnerGroupsUserTable { get; set; }
 
         #endregion
 
@@ -1328,7 +1352,7 @@ namespace Net.Data.AppContext
         /// VENTAS
         /// </summary>
         public DbSet<OrdersEntity> Orders { get; set; }
-        public DbSet<Orders1Entity> Orders1 { get; set; }
+        public DbSet<OrdersLinesEntity> Orders1 { get; set; }
         public DbSet<InvoicesEntity> Invoices { get; set; }
         public DbSet<Invoices1Entity> Invoices1 { get; set; }
         public DbSet<DeliveryNotesEntity> DeliveryNotes { get; set; }
@@ -1362,7 +1386,7 @@ namespace Net.Data.AppContext
         public DbSet<BusinessPartnersEntity> BusinessPartners { get; set; }
         public DbSet<ContactEmployeesEntity> ContactEmployees { get; set; }
         public DbSet<BusinessPartnersViewEntity> BusinessPartnersView { get; set; }
-        public DbSet<CountryEntity> Country { get; set; }
+        public DbSet<CountriesEntity> Countries { get; set; }
         public DbSet<StatesEntity> States { get; set; }
         public DbSet<UbigeoEntity> Ubigeo { get; set; }
 
@@ -1386,7 +1410,7 @@ namespace Net.Data.AppContext
         public DbSet<ItemsStockGeneralViewEntity> ItemsStockGeneralView { get; set; }
         public DbSet<TakeInventorySparePartsEntity> TakeInventorySpareParts { get; set; }
         public DbSet<InventoryTransferRequestEntity> InventoryTransferRequest { get; set; }
-        public DbSet<InventoryTransferRequest1Entity> InventoryTransferRequest1 { get; set; }
+        public DbSet<InventoryTransferRequestLinesEntity> InventoryTransferRequest1 { get; set; }
 
         #endregion
 
@@ -1417,7 +1441,7 @@ namespace Net.Data.AppContext
 
         #endregion
         public DbSet<PriceListEntity> PriceList { get; set; }
-        public DbSet<DivisionEntity> Division { get; set; }
+        public DbSet<BusinessPartnerDivisionsEntity> BusinessPartnerDivisions { get; set; }
         public DbSet<BusinessPartnerSectorsEntity> BusinessPartnerSectors { get; set; }
     }
 }

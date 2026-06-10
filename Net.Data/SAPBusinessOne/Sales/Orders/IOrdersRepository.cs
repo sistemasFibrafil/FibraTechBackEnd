@@ -3,6 +3,7 @@ using Net.CrossCotting;
 using Net.Business.Entities;
 using System.Threading.Tasks;
 using Net.Business.Entities.SAPBusinessOne;
+using Net.Business.Entities.SAPBusinessOne.Sales.Orders.Query;
 using Net.Business.Entities.SAPBusinessOne.Sales.Orders.Close;
 using Net.Business.Entities.SAPBusinessOne.Sales.Orders.Create;
 using Net.Business.Entities.SAPBusinessOne.Sales.Orders.Update;

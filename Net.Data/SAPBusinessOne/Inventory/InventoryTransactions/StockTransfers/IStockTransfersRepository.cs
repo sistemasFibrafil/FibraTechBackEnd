@@ -14,6 +14,6 @@ namespace Net.Data.SAPBusinessOne
         Task<ResultadoTransaccionResponse<TransferenciaStockQueryEntity>> GetByDocEntry(int docEntry);
         Task<ResultadoTransaccionResponse<StockTransfersEntity>> SetCreate(StockTransfersCreateEntity value);
         Task<ResultadoTransaccionResponse<StockTransfersEntity>> SetUpdate(StockTransfersUpdateEntity value);
-        Task<ResultadoTransaccionResponse<MemoryStream>> GetFormatoPdfByDocEntry(int id);
+        Task<ResultadoTransaccionResponse<MemoryStream>> GetFormatoPdfByDocEntry(int docEntry);
     }
 }

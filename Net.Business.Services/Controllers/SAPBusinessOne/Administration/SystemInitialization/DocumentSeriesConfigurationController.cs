@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
-using Net.BusinessLogic.Interfaces.SAPBusinessOne.Administration.SystemInitialization;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.Administration.SystemInitialization;
 using Net.Business.DTO.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Find;
 using Net.Business.DTO.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Create;
-using Net.BusinessLogic.Mappers.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Find;
+using Net.Business.Logic.Mappers.SAPBusinessOne.Administration.SystemInitialization.DocumentSeriesConfiguration.Find;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.SystemInitialization
 {
     [ApiController]
@@ -37,7 +37,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Administration.System
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         [HttpPost]

@@ -47,11 +47,9 @@ namespace Net.Data.SAPBusinessOne
                 {
                     FldValue = x.p.FldValue,
                     Descr = x.p.Descr,
-                    Dflt = x.c.Dflt,
-                    FullDescr =x.p.FullDescr
+                    Dflt = x.c.Dflt
 
                 })
-                .Where(n => !string.IsNullOrEmpty(n.Descr))
                 .OrderBy(n => n.FldValue)
                 .ToListAsync();
 
@@ -59,7 +57,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -104,8 +102,7 @@ namespace Net.Data.SAPBusinessOne
                 .Select(x => new UserDefinedFieldsQueryEntity
                 {
                     FldValue = x.p.FldValue,
-                    Descr = x.p.Descr,
-                    FullDescr = x.p.FullDescr
+                    Descr = x.p.Descr
                 })
                 .Where(n => !string.IsNullOrEmpty(n.Descr))
                 .OrderBy(n => n.FldValue)
@@ -115,7 +112,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {

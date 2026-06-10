@@ -23,6 +23,7 @@
         public string? U_FIB_LinStPkg { get; set; }
         public double U_FIB_OpQtyPkg { get; set; }
         public string? U_tipoOpT12 { get; set; }
+        public string? U_S_PartAranc1 { get; set; }
 
         public int Record { get; set; }
     }

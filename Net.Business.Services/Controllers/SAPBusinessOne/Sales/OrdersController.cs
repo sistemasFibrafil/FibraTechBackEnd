@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
-using Net.BusinessLogic.Interfaces.SAPBusinessOne.Sales;
+using Net.Business.Logic.Interfaces.SAPBusinessOne.Sales;
 using Net.Business.DTO.SAPBusinessOne.Sales.Orders.Close;
 using Net.Business.DTO.SAPBusinessOne.Sales.Orders.Create;
 using Net.Business.DTO.SAPBusinessOne.Sales.Orders.Update;
@@ -45,7 +45,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
@@ -60,7 +60,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet("{docEntry}")]
@@ -76,7 +76,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         [HttpGet("{docEntry}")]
@@ -92,7 +92,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         
@@ -108,7 +108,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(objectGetList);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(objectGetList.DataList);
         }
         
         [HttpGet]
@@ -121,8 +121,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
             {
                 var objectGetFile = await _repository.Orders.GetSeguimientoByFilterExcel(value.ReturnValue());
 
-                objectGetFile.data.Seek(0, SeekOrigin.Begin);
-                var file = objectGetFile.data.ToArray();
+                objectGetFile.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectGetFile.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -144,7 +144,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(objectGetList);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(objectGetList.DataList);
         }
 
         [HttpGet]
@@ -157,8 +157,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
             {
                 var objectGetFile = await _repository.Orders.GetSeguimientoDetalladoDireccionFiscalByFilterExcel(value.ReturnValue());
 
-                objectGetFile.data.Seek(0, SeekOrigin.Begin);
-                var file = objectGetFile.data.ToArray();
+                objectGetFile.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectGetFile.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -180,7 +180,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(objectGetList);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(objectGetList.DataList);
         }
 
         [HttpGet]
@@ -193,8 +193,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
             {
                 var objectGetFile = await _repository.Orders.GetSeguimientoDetalladoDireccionDespachoByFilterExcel(value.ReturnValue());
 
-                objectGetFile.data.Seek(0, SeekOrigin.Begin);
-                var file = objectGetFile.data.ToArray();
+                objectGetFile.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectGetFile.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -216,7 +216,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(objectGetList);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(objectGetList.DataList);
         }
 
         [HttpGet]
@@ -229,8 +229,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
             {
                 var objectGetFile = await _repository.Orders.GetOrdenVentaPendienteStockAlmacenProduccionExcelByFecha(value.ReturnValue());
 
-                objectGetFile.data.Seek(0, SeekOrigin.Begin);
-                var file = objectGetFile.data.ToArray();
+                objectGetFile.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectGetFile.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -252,7 +252,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(objectGetList);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(objectGetList.DataList);
         }
 
         [HttpGet]
@@ -265,8 +265,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
             {
                 var objectGetFile = await _repository.Orders.GetOrdenVentaProgramacionExcelByFecha(value.ReturnValue());
 
-                objectGetFile.data.Seek(0, SeekOrigin.Begin);
-                var file = objectGetFile.data.ToArray();
+                objectGetFile.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectGetFile.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -288,7 +288,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(objectGetList);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(objectGetList.DataList);
         }
 
         [HttpGet]
@@ -304,7 +304,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(objectGet);
             }
 
-            return Ok(objectGet.data);
+            return Ok(objectGet.Data);
         }
 
         [HttpGet]
@@ -319,7 +319,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
                 return BadRequest(objectGetList);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(objectGetList.DataList);
         }
 
         [HttpGet]
@@ -332,8 +332,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
             {
                 var objectGetFile = await _repository.Orders.GetListOrdenVentaPreliminarPendienteExcelByFecha(value.ReturnValue());
 
-                objectGetFile.data.Seek(0, SeekOrigin.Begin);
-                var file = objectGetFile.data.ToArray();
+                objectGetFile.Data.Seek(0, SeekOrigin.Begin);
+                var file = objectGetFile.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -418,11 +418,11 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
         [ProducesDefaultResponseType]
         public async Task<FileContentResult> GetPrintNationalDocEntry(int docEntry)
         {
-            var objectGetById = await _repository.Orders.GetPrintNationalDocEntry(docEntry);
+            var result = await _repository.Orders.GetPrintNationalDocEntry(docEntry);
 
             var nombreArchivo = string.Format("Orden de compra nacional - {0}", DateTime.Now.ToString("dd-MM-yyyy").ToString());
 
-            var pdf = File(objectGetById.data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
+            var pdf = File(result.Data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
 
             return pdf;
         }
@@ -433,11 +433,11 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
         [ProducesDefaultResponseType]
         public async Task<FileContentResult> GetPrintExportPlantaDocEntry(int docEntry)
         {
-            var objectGetById = await _repository.Orders.GetPrintExportPlantaDocEntry(docEntry);
+            var result = await _repository.Orders.GetPrintExportPlantaDocEntry(docEntry);
 
             var nombreArchivo = string.Format("Orden de compra exportacion - planta - {0}", DateTime.Now.ToString("dd-MM-yyyy").ToString());
 
-            var pdf = File(objectGetById.data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
+            var pdf = File(result.Data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
 
             return pdf;
         }
@@ -448,11 +448,11 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Sales
         [ProducesDefaultResponseType]
         public async Task<FileContentResult> GetPrintExportClienteDocEntry(int docEntry)
         {
-            var objectGetById = await _repository.Orders.GetPrintExportClienteDocEntry(docEntry);
+            var result = await _repository.Orders.GetPrintExportClienteDocEntry(docEntry);
 
             var nombreArchivo = string.Format("Orden de compra exportacion - cliente - {0}", DateTime.Now.ToString("dd-MM-yyyy").ToString());
 
-            var pdf = File(objectGetById.data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
+            var pdf = File(result.Data.GetBuffer(), "applicacion/pdf", nombreArchivo + ".pdf");
 
             return pdf;
         }

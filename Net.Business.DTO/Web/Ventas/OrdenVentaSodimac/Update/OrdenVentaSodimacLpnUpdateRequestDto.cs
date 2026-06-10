@@ -5,7 +5,7 @@ namespace Net.Business.DTO.Web
     public class OrdenVentaSodimacLpnUpdateRequestDto
     {
         public int Id { get; set; }
-        public string Numero { get; set; }
+        public string? Numero { get; set; }
         public List<OrdenVentaDetalleSodimacLpnUpdateRequestDto> Item { get; set; } = new List<OrdenVentaDetalleSodimacLpnUpdateRequestDto>();
 
         public OrdenVentaSodimacEntity ReturnValue()

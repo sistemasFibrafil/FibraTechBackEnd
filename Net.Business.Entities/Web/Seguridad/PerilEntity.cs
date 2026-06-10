@@ -14,7 +14,7 @@ namespace Net.Business.Entities.Web
         /// DescripcionPerfil
         /// </summary>
         [DBParameter(SqlDbType.NVarChar, 100, ActionType.Everything)]
-        public string DescripcionPerfil { get; set; }
+        public string? DescripcionPerfil { get; set; }
         /// <summary>
         /// FlgActivo
         /// </summary>
@@ -24,6 +24,6 @@ namespace Net.Business.Entities.Web
 
 
         // Navegación 1:N → Un perfil puede tener muchos usuarios
-        public ICollection<UsuarioEntity> Usuarios { get; set; }
+        public ICollection<UsuarioEntity>? Usuarios { get; set; } = null;
     }
 }

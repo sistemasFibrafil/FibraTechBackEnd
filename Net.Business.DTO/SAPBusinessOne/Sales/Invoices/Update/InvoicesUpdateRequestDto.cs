@@ -62,12 +62,6 @@ namespace Net.Business.DTO.SAPBusinessOne.Sales.Invoices.Update
 
 
         /// <summary>
-        /// OTROS
-        /// </summary>
-        public string? U_STR_TVENTA { get; set; }
-
-
-        /// <summary>
         /// SALES EMPLOYEE
         /// </summary>
         public int SlpCode { get; set; }

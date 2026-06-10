@@ -37,7 +37,7 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
                 return NotFound();
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
                 return NotFound();
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
                 return NotFound();
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
                 return BadRequest("Invalid model object");
             }
 
-            var result = await _repository.Usuario.Create(value.ReturnValue());
+            var result = await _repository.Usuario.SetCreate(value.ReturnValue());
 
             if (result.ResultadoCodigo == -1)
             {
@@ -137,7 +137,7 @@ namespace Net.Business.Services.Controllers.Web.Seguridad
                 return BadRequest(ModelState);
             }
 
-            var result = await _repository.Usuario.Update(value.ReturnValue());
+            var result = await _repository.Usuario.SetUpdate(value.ReturnValue());
 
             if (result.ResultadoCodigo == -1)
             {

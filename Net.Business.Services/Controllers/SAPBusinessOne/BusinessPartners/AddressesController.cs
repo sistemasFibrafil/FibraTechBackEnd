@@ -2,9 +2,9 @@ using Net.Data;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Net.Business.DTO.SAPBusinessOne;
 using Microsoft.AspNetCore.Authorization;
 using Net.Business.Entities.SAPBusinessOne;
+using Net.Business.DTO.SAPBusinessOne.BusinessPartners.Addresses.Filter;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners
 {
     [ApiController]
@@ -32,7 +32,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners
                 return BadRequest(objectGetList);
             }
 
-            return Ok(objectGetList.dataList);
+            return Ok(objectGetList.DataList);
         }
 
         [HttpGet]
@@ -47,7 +47,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.BusinessPartners
                 return BadRequest(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]

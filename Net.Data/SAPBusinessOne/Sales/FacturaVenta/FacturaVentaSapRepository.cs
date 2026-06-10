@@ -77,7 +77,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -150,7 +150,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                    resultTransaccion.data = response;
+                    resultTransaccion.Data = response;
                 }
             }
             catch (Exception ex)
@@ -175,12 +175,12 @@ namespace Net.Data.SAPBusinessOne
             try
             {
                 var objectGet = await GetListVentaResumenByFechaGrupo(value);
-                ms = GetArchivoVentaResumenExcelByFechaGrupo(objectGet.data);
+                ms = GetArchivoVentaResumenExcelByFechaGrupo(objectGet.Data);
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -347,7 +347,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -449,7 +449,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGet = await GetListVentaByFilter(value);
 
                     //Contenido
-                    foreach (var item in objectGet.dataList)
+                    foreach (var item in objectGet.DataList)
                     {
                         row = new Row();
                         row.Append(
@@ -517,7 +517,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {
@@ -563,7 +563,7 @@ namespace Net.Data.SAPBusinessOne
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -620,7 +620,7 @@ namespace Net.Data.SAPBusinessOne
                     var objectGet = await GetListFacturaVentaByFilter(value);
 
                     //Contenido
-                    foreach (var item in objectGet.dataList)
+                    foreach (var item in objectGet.DataList)
                     {
                         row = new Row();
                         row.Append(
@@ -644,7 +644,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {

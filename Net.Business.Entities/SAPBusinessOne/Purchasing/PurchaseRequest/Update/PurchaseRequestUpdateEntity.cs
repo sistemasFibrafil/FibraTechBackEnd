@@ -22,6 +22,6 @@ namespace Net.Business.Entities.SAPBusinessOne.Purchasing.PurchaseRequest.Update
         public string? Comments { get; set; }
 
         public int U_UsrUpdate { get; set; }
-        public List<PurchaseRequest1UpdateEntity> Lines { get; set; } = [];
+        public List<PurchaseRequestLinesUpdateEntity> Lines { get; set; } = [];
     }
 }

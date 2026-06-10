@@ -33,7 +33,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInvento
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpGet]
@@ -45,8 +45,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInvento
             {
                 var result = await _repository.TakeInventorySpareParts.GetExcelByFilter(value.ReturnValue());
 
-                result.data.Seek(0, SeekOrigin.Begin);
-                var file = result.data.ToArray();
+                result.Data.Seek(0, SeekOrigin.Begin);
+                var file = result.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
@@ -68,7 +68,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInvento
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpPost]
@@ -84,7 +84,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.TakeInvento
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         [HttpPut]

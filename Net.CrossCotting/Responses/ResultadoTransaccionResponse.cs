@@ -19,8 +19,8 @@ namespace Net.CrossCotting
         public string? ResultadoDescripcion { get; set; }
         public string? NombreMetodo { get; set; }
         public string? NombreAplicacion { get; set; }
-        public T? data { get; set; }
-        public IEnumerable<T>? dataList { get; set; }
+        public T? Data { get; set; }
+        public IEnumerable<T>? DataList { get; set; }
         public string NombreEstacion { get => System.Environment.MachineName; set => NombreEstacion = System.Environment.MachineName; }
     }
 }

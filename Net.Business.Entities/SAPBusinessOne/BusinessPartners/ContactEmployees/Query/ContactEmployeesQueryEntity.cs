@@ -13,5 +13,7 @@ namespace Net.Business.Entities.SAPBusinessOne
         public string? Cellolar { get; set; }
         public string? E_MailL { get; set; }
         public string? Position { get; set; }
+        public string? Default { get; set; }
+        public int Record { get; set; } = 2;
     }
 }

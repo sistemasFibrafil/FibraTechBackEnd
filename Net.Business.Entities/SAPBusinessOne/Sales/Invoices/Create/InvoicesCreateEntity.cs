@@ -18,12 +18,7 @@ namespace Net.Business.Entities.SAPBusinessOne.Sales.Invoices.Create
         public string? U_BPP_MDSD { get; set; }
         public string? U_BPP_MDCD { get; set; }
 
-        /// <summary>
-        /// Picking
-        /// </summary>
-        public string? U_FIB_IsPkg { get; set; }
-
-
+        
         /// <summary>
         /// SOCIO DE NEGOCIOS
         /// </summary>
@@ -68,12 +63,6 @@ namespace Net.Business.Entities.SAPBusinessOne.Sales.Invoices.Create
         public double U_FIB_TFLETE { get; set; }
         public double U_FIB_IMPSEG { get; set; }
         public string? U_FIB_PUERTO { get; set; }
-
-
-        /// <summary>
-        /// OTROS
-        /// </summary>
-        public string? U_STR_TVENTA { get; set; }
 
 
         /// <summary>

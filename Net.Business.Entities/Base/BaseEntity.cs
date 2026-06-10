@@ -8,7 +8,7 @@ namespace Net.Business.Entities
         public int? RegUsuario { get; set; }
 
         [DBParameter(SqlDbType.NVarChar, 15, ActionType.Everything)]
-        public string RegEstacion { get; set; }
+        public string? RegEstacion { get; set; }
     }
 }
 

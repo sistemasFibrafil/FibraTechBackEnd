@@ -237,7 +237,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {lista.Count}";
-                resultTransaccion.dataList = _am.Map<List<OSKCEntity>>(lista);
+                resultTransaccion.DataList = _am.Map<List<OSKCEntity>>(lista);
             }
             catch (Exception ex)
             {
@@ -275,7 +275,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = _am.Map<OSKCEntity>(data);
+                resultTransaccion.Data = _am.Map<OSKCEntity>(data);
             }
             catch (Exception ex)
             {
@@ -314,7 +314,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {lista.Count}";
-                resultTransaccion.dataList = _am.Map<List<OSKCEntity>>(lista);
+                resultTransaccion.DataList = _am.Map<List<OSKCEntity>>(lista);
             }
             catch (Exception ex)
             {
@@ -346,7 +346,7 @@ namespace Net.Data.SAPBusinessOne
                     return resultTransaccion;
                 }
 
-                var lista = result.dataList.ToList();
+                var lista = result.DataList.ToList();
 
                 using (var document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook, true))
                 {
@@ -469,7 +469,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultTransaccion.data = ms;
+                resultTransaccion.Data = ms;
             }
             catch (Exception ex)
             {

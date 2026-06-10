@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using Net.Business.DTO.SAPBusinessOne.Approvals.ApprovalRequests.Filter;
-using Net.BusinessLogic.Mappers.SAPBusinessOne.Approvals.ApprovalRequests.Filter;
+using Net.Business.Logic.Mappers.SAPBusinessOne.Approvals.ApprovalRequests.Filter;
 namespace Net.Business.Services.Controllers.SAPBusinessOne.Approvals
 {
     [ApiController]
@@ -33,7 +33,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Approvals
             if (result.ResultadoCodigo == -1)
                 return BadRequest(result);
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
     }
 }

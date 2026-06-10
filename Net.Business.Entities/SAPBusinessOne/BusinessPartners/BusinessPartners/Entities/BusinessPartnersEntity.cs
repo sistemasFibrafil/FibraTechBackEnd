@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.BusinessPartners.BusinessPartnerGroups;
+using Net.Business.Entities.SAPBusinessOne.Administration.Definitions.BusinessPartners.States;
 using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Driver.Entities;
 using Net.Business.Entities.SAPBusinessOne.BusinessPartners.Vehicle.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Net.Business.Entities.SAPBusinessOne
 {
     public class BusinessPartnersEntity
@@ -13,39 +13,43 @@ namespace Net.Business.Entities.SAPBusinessOne
         public string? CardName { get; set; }
         public string? CardType { get; set; }
         public short GroupCode { get; set; }
+        public string? Currency { get; set; }
+
         public string? U_BPP_BPTD { get; set; }
         public string? U_BPP_BPTP { get; set; }
-        public string? U_BPP_BPNO { get; set; }
-        public string? U_BPP_BPAP { get; set; }
-        public string? U_BPP_BPAM { get; set; }
-        public string? U_BPP_BPAT { get; set; }
         public string? U_FIB_Divi { get; set; }
         public string? U_FIB_Sector { get; set; }
 
-        [Column("U_FIB_EMAIL2")]
-        public string? U_FIB_Email2 { get; set; }
-
-        [Column("U_FIB_EMAIL3")]
-        public string? U_FIB_Email3 { get; set; }
-
-        public string? Notes { get; set; }
-        public string? ValidFor { get; set; }
-        public string? Currency { get; set; }
         public string? Phone1 { get; set; }
+        public string? Phone2 { get; set; }
         public string? Cellular { get; set; }
         public string? E_Mail { get; set; }
+        public string? ValidFor { get; set; }
         public int SlpCode { get; set; }
+        public string? Notes { get; set; }
+
         public string? CntctPrsn { get; set; }
+
         public string? BillToDef { get; set; }
         public string? Address { get; set; }
         public string? ShipToDef { get; set; }
         public string? MailAddres { get; set; }
-        public string? State2 { get; set; }
-        public string? MailCounty { get; set; }
-        public string? MailCity { get; set; }
+        
         public short GroupNum { get; set; }
         public short ListNum { get; set; }
         public decimal? CreditLine { get; set; }
+        public decimal? DebtLine { get; set; }
+
+        public string? U_BPP_BPAT { get; set; }
+        public string? U_FIB_EMAIL2 { get; set; }
+        public string? U_FIB_EMAIL3 { get; set; }
+        public string? U_BPP_BPNO { get; set; }
+        public string? U_BPP_BPAP { get; set; }
+        public string? U_BPP_BPAM { get; set; }
+
+        public string? State2 { get; set; }
+        public string? MailCounty { get; set; }
+        public string? MailCity { get; set; }
         public decimal? Balance { get; set; }
         public decimal? OrdersBal { get; set; }
 

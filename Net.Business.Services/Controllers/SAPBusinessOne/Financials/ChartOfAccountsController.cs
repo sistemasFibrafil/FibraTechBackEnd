@@ -31,7 +31,22 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Financials
                 return BadRequest(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetByFormatCode([FromQuery] string formatCode)
+        {
+            var result = await _repository.ChartOfAccounts.GetByFormatCode(formatCode);
+
+            if (result.ResultadoCodigo == -1)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result.Data);
         }
     }
 }

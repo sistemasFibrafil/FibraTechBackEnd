@@ -26,6 +26,6 @@ namespace Net.Business.DTO.SAPBusinessOne.Purchasing.PurchaseRequest.Create
         public string? Comments { get; set; }
 
         public int U_UsrCreate { get; set; }
-        public List<PurchaseRequest1CreateRequestDto> Lines { get; set; } = [];
+        public List<PurchaseRequestLinesCreateRequestDto> Lines { get; set; } = [];
     }
 }

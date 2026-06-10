@@ -1,4 +1,5 @@
 using System;
+using SAPbobsCOM;
 using System.Linq;
 using Net.Connection;
 using Net.CrossCotting;
@@ -7,9 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 using Net.Business.Entities.SAPBusinessOne;
-using SAPbobsCOM;
 using Net.Connection.ConnectionSAPBusinessOne;
-using Microsoft.Extensions.Configuration;
 namespace Net.Data.SAPBusinessOne
 {
     public class ContactEmployeesRepository : RepositoryBase<ContactEmployeesEntity>, IContactEmployeesRepository
@@ -25,8 +24,8 @@ namespace Net.Data.SAPBusinessOne
             : base(context)
         {
             _db = db;
-            _companyProviderSap = companyProviderSap;
             _aplicacionName = GetType().Name;
+            _companyProviderSap = companyProviderSap;
         }
 
 
@@ -73,7 +72,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
 
             }
             catch (Exception ex)
@@ -111,7 +110,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
 
             }
             catch (Exception ex)
@@ -123,14 +122,14 @@ namespace Net.Data.SAPBusinessOne
 
             return resultTransaccion;
         }
-        public async Task<ResultadoTransaccionEntity<ContactEmployeesQueryEntity>> GetByCode(ContactEmployeesFindEntity value)
+        public async Task<ResultadoTransaccionResponse<ContactEmployeesQueryEntity>> GetByCode(ContactEmployeesFindEntity value)
         {
             return await GetById(value);
         }
 
-        public async Task<ResultadoTransaccionEntity<ContactEmployeesQueryEntity>> GetByCardCode(string cardCode)
+        public async Task<ResultadoTransaccionResponse<ContactEmployeesQueryEntity>> GetByCardCode(string cardCode)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<ContactEmployeesQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<ContactEmployeesQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
@@ -154,7 +153,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = $"Registros Totales {list.Count}";
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
 
             }
             catch (Exception ex)
@@ -167,15 +166,15 @@ namespace Net.Data.SAPBusinessOne
             return resultTransaccion;
         }
 
-        public async Task<ResultadoTransaccionEntity<ContactEmployeesQueryEntity>> SetCreate(ContactEmployeesEntity value)
+        public async Task<ResultadoTransaccionResponse<ContactEmployeesQueryEntity>> SetCreate(ContactEmployeesEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<ContactEmployeesQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<ContactEmployeesQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
             };
 
-            BusinessPartners bp = null;
+            SAPbobsCOM.BusinessPartners bp = null;
 
             return await Task.Run(() =>
             {
@@ -230,15 +229,15 @@ namespace Net.Data.SAPBusinessOne
             });
         }
 
-        public async Task<ResultadoTransaccionEntity<ContactEmployeesQueryEntity>> SetUpdate(ContactEmployeesEntity value)
+        public async Task<ResultadoTransaccionResponse<ContactEmployeesQueryEntity>> SetUpdate(ContactEmployeesEntity value)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<ContactEmployeesQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<ContactEmployeesQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName
             };
 
-            BusinessPartners bp = null;
+            SAPbobsCOM.BusinessPartners bp = null;
 
             return await Task.Run(() =>
             {
@@ -307,9 +306,9 @@ namespace Net.Data.SAPBusinessOne
             });
         }
 
-        public async Task<ResultadoTransaccionEntity<ContactEmployeesQueryEntity>> SetDelete(int cntctCode)
+        public async Task<ResultadoTransaccionResponse<ContactEmployeesQueryEntity>> SetDelete(int cntctCode)
         {
-            var resultTransaccion = new ResultadoTransaccionEntity<ContactEmployeesQueryEntity>
+            var resultTransaccion = new ResultadoTransaccionResponse<ContactEmployeesQueryEntity>
             {
                 NombreMetodo = regex.Match(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name).Groups[1].Value,
                 NombreAplicacion = _aplicacionName

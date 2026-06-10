@@ -31,7 +31,7 @@ namespace Net.Business.Services.Controllers.Web.Gestion.Definiciones.General
                 return BadRequest(objectGetAll);
             }
 
-            return Ok(objectGetAll.dataList);
+            return Ok(objectGetAll.DataList);
         }
 
         [HttpGet]
@@ -46,7 +46,7 @@ namespace Net.Business.Services.Controllers.Web.Gestion.Definiciones.General
                 return BadRequest(objectGetAll);
             }
 
-            return Ok(objectGetAll.dataList);
+            return Ok(objectGetAll.DataList);
         }
 
         [HttpGet]
@@ -61,7 +61,7 @@ namespace Net.Business.Services.Controllers.Web.Gestion.Definiciones.General
                 return BadRequest(objectGetAll);
             }
 
-            return Ok(objectGetAll.dataList);
+            return Ok(objectGetAll.DataList);
         }
     }
 }

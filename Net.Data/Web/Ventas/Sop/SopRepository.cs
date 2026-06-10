@@ -82,7 +82,7 @@ namespace Net.Data.Web
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", response.Count);
-                    resultTransaccion.dataList = response;
+                    resultTransaccion.DataList = response;
                 }
             }
             catch (Exception ex)
@@ -137,7 +137,7 @@ namespace Net.Data.Web
                     resultTransaccion.IdRegistro = 0;
                     resultTransaccion.ResultadoCodigo = 0;
                     resultTransaccion.ResultadoDescripcion = "Datos obtenidos con éxito ..!";
-                    resultTransaccion.data = response;
+                    resultTransaccion.Data = response;
                 }
             }
             catch (Exception ex)
@@ -521,7 +521,7 @@ namespace Net.Data.Web
                     var objectGetList = await GetById(value.Id1 ?? 0);
 
                     //Contenido
-                    foreach (var item in objectGetList.data.Linea)
+                    foreach (var item in objectGetList.Data.Linea)
                     {
                         row = new Row();
                         row.Append(
@@ -554,7 +554,7 @@ namespace Net.Data.Web
                 resultadoTransaccion.IdRegistro = 0;
                 resultadoTransaccion.ResultadoCodigo = 0;
                 resultadoTransaccion.ResultadoDescripcion = "Archivo generado con éxito.";
-                resultadoTransaccion.data = ms;
+                resultadoTransaccion.Data = ms;
             }
             catch (Exception ex)
             {

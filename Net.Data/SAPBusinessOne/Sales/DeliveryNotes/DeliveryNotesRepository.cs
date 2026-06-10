@@ -109,24 +109,21 @@ namespace Net.Data.SAPBusinessOne
                     U_BPP_MDCD = n.U_BPP_MDCD,
 
                     U_FIB_FromPkg = n.U_FIB_FromPkg,
+                    U_FIB_EstadoSunat = n.U_FIB_ESTADOSUNAT,
 
                     CardCode = n.CardCode,
                     CardName = n.CardName,
                     GroupCode = n.BusinessPartners.GroupCode,
                     GroupName = n.BusinessPartners.BusinessPartnerGroups.GroupName,
-                    DocCur = n.DocCur,
 
-                    SlpName = n.SalesPersons != null ? n.SalesPersons.SlpName : "",
-
-                    DocTotal = n.DocTotal,
-                    DocTotalSy = n.DocTotalSy,
+                    SlpName = n.SalesPersons != null ? n.SalesPersons.SlpName : ""
                 })
                 .OrderByDescending(x => x.DocEntry).ToListAsync();
 
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = string.Format("Registros Totales {0}", list.Count);
-                resultTransaccion.dataList = list;
+                resultTransaccion.DataList = list;
             }
             catch (Exception ex)
             {
@@ -331,7 +328,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Dato obtenido con éxito.";
-                resultTransaccion.data = data;
+                resultTransaccion.Data = data;
             }
             catch (Exception ex)
             {
@@ -468,7 +465,6 @@ namespace Net.Data.SAPBusinessOne
                     // ===========================================================================================
                     // OTROS
                     // ===========================================================================================
-                    deliveryNotes.UserFields.Fields.Item("U_STR_TVENTA").Value = value.U_STR_TVENTA;
                     deliveryNotes.UserFields.Fields.Item("U_BPP_MDMT").Value = value.U_BPP_MDMT;
                     deliveryNotes.UserFields.Fields.Item("U_BPP_MDOM").Value = value.U_BPP_MDOM;
 
@@ -737,7 +733,6 @@ namespace Net.Data.SAPBusinessOne
                     // ===========================================================================================
                     // OTROS
                     // ===========================================================================================
-                    deliveryNotes.UserFields.Fields.Item("U_STR_TVENTA").Value = value.U_STR_TVENTA;
                     deliveryNotes.UserFields.Fields.Item("U_BPP_MDMT").Value = value.U_BPP_MDMT;
                     deliveryNotes.UserFields.Fields.Item("U_BPP_MDOM").Value = value.U_BPP_MDOM;
 
@@ -1034,7 +1029,7 @@ namespace Net.Data.SAPBusinessOne
                     County = a.AdminInfo1.County,
                     City = a.AdminInfo1.City,
 
-                    CountryName = a.AdminInfo1.CountryEntity.Name
+                    CountryName = a.AdminInfo1.Countries.Name
                 })
                 .FirstOrDefaultAsync();
 
@@ -1192,7 +1187,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Se generó correctamente el archivo.s";
-                resultTransaccion.data = file;
+                resultTransaccion.Data = file;
             }
             catch (Exception ex)
             {
@@ -1228,7 +1223,7 @@ namespace Net.Data.SAPBusinessOne
                     County = a.AdminInfo1.County,
                     City = a.AdminInfo1.City,
 
-                    CountryName = a.AdminInfo1.CountryEntity.Name,
+                    CountryName = a.AdminInfo1.Countries.Name,
 
                 })
                 .FirstOrDefaultAsync();
@@ -1385,7 +1380,7 @@ namespace Net.Data.SAPBusinessOne
                 resultTransaccion.IdRegistro = 0;
                 resultTransaccion.ResultadoCodigo = 0;
                 resultTransaccion.ResultadoDescripcion = "Se generó correctamente el archivo.s";
-                resultTransaccion.data = file;
+                resultTransaccion.Data = file;
             }
             catch (Exception ex)
             {

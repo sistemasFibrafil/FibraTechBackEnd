@@ -5,6 +5,6 @@
         public string? FldValue { get; set; }
         public string? Descr { get; set; }
         public string? Dflt { get; set; }
-        public string? FullDescr { get; set; }
+        public string? FullDescr => $"{FldValue} - {Descr}";
     }
 }

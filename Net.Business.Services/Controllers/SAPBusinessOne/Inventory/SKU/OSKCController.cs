@@ -105,7 +105,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU
             }
 
             // Lógica simplificada para devolver directamente los datos
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU
                 return NotFound(result);
             }
 
-            return Ok(result.data);
+            return Ok(result.Data);
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU
                 return NotFound(result);
             }
 
-            return Ok(result.dataList);
+            return Ok(result.DataList);
         }
 
         /// <summary>
@@ -167,8 +167,8 @@ namespace Net.Business.Services.Controllers.SAPBusinessOne.Inventory.SKU
                     return BadRequest(result);
                 }
 
-                result.data.Seek(0, SeekOrigin.Begin);
-                var file = result.data.ToArray();
+                result.Data.Seek(0, SeekOrigin.Begin);
+                var file = result.Data.ToArray();
 
                 return new FileContentResult(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }

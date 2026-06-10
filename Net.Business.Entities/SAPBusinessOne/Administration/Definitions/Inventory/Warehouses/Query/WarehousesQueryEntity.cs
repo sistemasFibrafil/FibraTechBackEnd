@@ -2,10 +2,9 @@
 {
     public class WarehousesQueryEntity
     {
-        public string WhsCode { get; set; }
-        public string WhsName { get; set; }
-        public string FullDescr { get; set; }
-        public string Inactive { get; set; }
+        public string WhsCode { get; set; } = string.Empty;
+        public string? WhsName { get; set; }
+        public string? Inactive { get; set; }
         /// <summary>
         /// Stock disponible en el almacén
         /// </summary>
@@ -22,5 +21,6 @@
         /// Stock disponible considerando comprometido y en orden de compra
         /// </summary>
         public decimal Available { get; set; }
+        public string? FullDescr => $"{WhsCode} - {WhsName}";
     }
 }
