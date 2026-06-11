@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiFibrafil")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+93750e53170d76cf1728abaaceb58d8668876a5b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a8a8d9c1fb0b272404503fd0ae3eda440464234c")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApiFibrafil")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApiFibrafil")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

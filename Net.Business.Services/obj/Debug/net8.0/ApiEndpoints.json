@@ -11435,11 +11435,6 @@
           "text/json"
         ],
         "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
       }
     ]
   },

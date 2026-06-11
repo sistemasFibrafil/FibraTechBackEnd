@@ -41,6 +41,7 @@ namespace Net.Business.Entities.SAPBusinessOne
         public string fecha_de_emision { get; set; }
         public string fecha_de_vencimiento { get; set; }
         public string fecha_de_inicio_de_traslado { get; set; }
+        public string fecha_de_entrega_al_transportista { get; set; }
         public string moneda { get; set; }
         public dynamic tipo_de_cambio { get; set; }
         public double porcentaje_de_igv { get; set; }

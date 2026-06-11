@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Fil\\Web\\BackEnd\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0B99A372-705B-44E3-8548-E0EB2700DC71}|Net.Business.Services\\Net.Business.Services.csproj|d:\\fil\\web\\backend\\net.business.services\\controllers\\sapbusinessone\\administration\\exchangeratescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B99A372-705B-44E3-8548-E0EB2700DC71}|Net.Business.Services\\Net.Business.Services.csproj|solutionrelative:net.business.services\\controllers\\sapbusinessone\\administration\\exchangeratescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B99A372-705B-44E3-8548-E0EB2700DC71}|Net.Business.Services\\Net.Business.Services.csproj|d:\\fil\\web\\backend\\net.business.services\\controllers\\sapbusinessone\\administration\\definitions\\financials\\taxgroupscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B99A372-705B-44E3-8548-E0EB2700DC71}|Net.Business.Services\\Net.Business.Services.csproj|solutionrelative:net.business.services\\controllers\\sapbusinessone\\administration\\definitions\\financials\\taxgroupscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,6 +35,32 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ExchangeRatesController.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\Controllers\\SAPBusinessOne\\Administration\\ExchangeRatesController.cs",
+              "RelativeDocumentMoniker": "Net.Business.Services\\Controllers\\SAPBusinessOne\\Administration\\ExchangeRatesController.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\Controllers\\SAPBusinessOne\\Administration\\ExchangeRatesController.cs",
+              "RelativeToolTip": "Net.Business.Services\\Controllers\\SAPBusinessOne\\Administration\\ExchangeRatesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T14:43:43.887Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TaxGroupsController.cs",
+              "DocumentMoniker": "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\Controllers\\SAPBusinessOne\\Administration\\Definitions\\Financials\\TaxGroupsController.cs",
+              "RelativeDocumentMoniker": "Net.Business.Services\\Controllers\\SAPBusinessOne\\Administration\\Definitions\\Financials\\TaxGroupsController.cs",
+              "ToolTip": "D:\\Fil\\Web\\BackEnd\\Net.Business.Services\\Controllers\\SAPBusinessOne\\Administration\\Definitions\\Financials\\TaxGroupsController.cs",
+              "RelativeToolTip": "Net.Business.Services\\Controllers\\SAPBusinessOne\\Administration\\Definitions\\Financials\\TaxGroupsController.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T14:43:36.844Z",
+              "EditorCaption": ""
             }
           ]
         }

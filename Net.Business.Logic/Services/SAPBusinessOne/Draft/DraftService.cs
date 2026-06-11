@@ -32,7 +32,7 @@ namespace Net.Business.Logic.Services.SAPBusinessOne.Draft
         private readonly IValidator<DraftsCreateRequestDto> _validatorCreate = validatorCreate;
         private readonly IValidator<DraftsUpdateRequestDto> _validatorUpdate = validatorUpdate;
         private readonly IValidator<DraftsCreateToDocumentRequestDto> _validatorCreateToDocument = validatorCreateToDocument;
-
+        
 
         public async Task<ResultadoTransaccionResponse<object>> SetCreate(DraftsCreateRequestDto dto, IList<IFormFile> files)
         {
@@ -45,71 +45,195 @@ namespace Net.Business.Logic.Services.SAPBusinessOne.Draft
 
             try
             {
-                // 🔹 Inicializar Attachments
                 dto.Attachments2 ??= new Attachments2CreateRequestDto();
 
-                // 🔹 SIEMPRE setear SourcePath para SAP
-                if (dto.Attachments2.Lines != null)
+                var hasLines = dto.Attachments2.Lines != null &&
+                               dto.Attachments2.Lines.Any();
+
+                var fileDict = files?
+                    .ToDictionary(
+                        f => Path.GetFileName(f.FileName),
+                        StringComparer.OrdinalIgnoreCase
+                    )
+                    ?? new Dictionary<string, IFormFile>();
+
+                if (hasLines)
                 {
                     foreach (var line in dto.Attachments2.Lines)
                     {
-                        line.SrcPath = requestFolder;
-                    }
-                }
-
-                // 🔹 GUARDAR ARCHIVOS EN TEMP
-                if (files != null && files.Any() && dto.Attachments2.Lines != null)
-                {
-                    for (int i = 0; i < files.Count; i++)
-                    {
-                        if (i >= dto.Attachments2.Lines.Count)
-                            break;
-
-                        var f = files[i];
-                        var line = dto.Attachments2.Lines[i];
-
-                        var expectedName = $"{line.FileName}.{line.FileExt}";
-                        var incomingName = Path.GetFileName(f.FileName);
-
-                        // 🔹 Validar nombre
-                        if (!string.Equals(incomingName, expectedName, StringComparison.OrdinalIgnoreCase))
-                            continue;
-
-                        // 🔹 Validar ruta destino
-                        if (string.IsNullOrWhiteSpace(line.TrgtPath) || !Directory.Exists(line.TrgtPath))
+                        if (string.IsNullOrWhiteSpace(line.FileName) ||
+                            string.IsNullOrWhiteSpace(line.FileExt) ||
+                            string.IsNullOrWhiteSpace(line.TrgtPath))
                         {
-                            return ResponseHelper.Error<object>($"Ruta no existe: {line.TrgtPath}");
+                            continue;
                         }
 
-                        // 🔐 Validar permisos
+                        var fileExt = line.FileExt.Trim().TrimStart('.');
+                        var originalFileName = line.FileName.Trim();
+                        var originalExpectedName = $"{originalFileName}.{fileExt}";
+
+                        var originalTargetPath = Path.Combine(
+                            line.TrgtPath,
+                            originalExpectedName
+                        );
+
+                        var existsInRequest = fileDict.TryGetValue(
+                            originalExpectedName,
+                            out var file
+                        );
+
+                        var existsInTarget = File.Exists(originalTargetPath);
+
+                        // =========================================================
+                        // CASO 0 / CASO 4:
+                        // No existe en files y tampoco existe en TrgtPath.
+                        // No se muestra error y continúa el proceso.
+                        // =========================================================
+                        if (!existsInRequest && !existsInTarget)
+                        {
+                            continue;
+                        }
+
+                        // =========================================================
+                        // Validar ruta destino.
+                        // Solo se valida si realmente hay archivo para procesar.
+                        // =========================================================
+                        if (!Directory.Exists(line.TrgtPath))
+                        {
+                            return ResponseHelper.Error<object>(
+                                $"Ruta no existe: {line.TrgtPath}");
+                        }
+
+                        // =========================================================
+                        // Validar permisos en TrgtPath.
+                        // Necesario porque luego se moverá el archivo final ahí.
+                        // =========================================================
                         try
                         {
-                            var testFile = Path.Combine(line.TrgtPath, $"test_{Guid.NewGuid()}.tmp");
+                            var testFile = Path.Combine(
+                                line.TrgtPath,
+                                $"test_{Guid.NewGuid()}.tmp"
+                            );
+
                             File.WriteAllText(testFile, "test");
                             File.Delete(testFile);
                         }
                         catch
                         {
-                            return ResponseHelper.Error<object>($"Sin permisos en: {line.TrgtPath}");
+                            return ResponseHelper.Error<object>(
+                                $"Sin permisos en: {line.TrgtPath}");
                         }
 
-                        // 🔹 Guardar archivo en TEMP
-                        var tempPath = await _fileService.SaveFileAsync(f, requestFolder, expectedName);
-
-                        // 🔥 Validar existencia real (evita error SAP)
-                        var fullTempPath = Path.Combine(requestFolder, expectedName);
-                        if (!File.Exists(fullTempPath))
+                        // =========================================================
+                        // Validar permisos en requestFolder.
+                        // Necesario porque SAP tomará los archivos desde esta ruta.
+                        // =========================================================
+                        try
                         {
-                            return ResponseHelper.Error<object>($"No se pudo guardar el archivo en TEMP: {expectedName}");
+                            var testFile = Path.Combine(
+                                requestFolder,
+                                $"test_{Guid.NewGuid()}.tmp"
+                            );
+
+                            File.WriteAllText(testFile, "test");
+                            File.Delete(testFile);
+                        }
+                        catch
+                        {
+                            return ResponseHelper.Error<object>(
+                                $"Sin permisos en carpeta temporal: {requestFolder}");
                         }
 
-                        var finalPath = Path.Combine(line.TrgtPath, expectedName);
+                        string finalFileName = originalFileName;
+                        string finalExpectedName = originalExpectedName;
+                        string tempPath;
+
+                        // =========================================================
+                        // CASO 1:
+                        // Existe en dto.Attachments2.Lines,
+                        // existe en files y existe en TrgtPath.
+                        //
+                        // Acción:
+                        // - Renombrar.
+                        // - Copiar desde files a requestFolder.
+                        // - Actualizar line.FileName.
+                        // =========================================================
+                        if (existsInRequest && existsInTarget)
+                        {
+                            var suffix = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+                            finalFileName = $"{originalFileName}_{suffix}";
+                            finalExpectedName = $"{finalFileName}.{fileExt}";
+
+                            tempPath = await _fileService.SaveFileAsync(
+                                file!,
+                                requestFolder,
+                                finalExpectedName
+                            );
+
+                            line.FileName = finalFileName;
+                        }
+                        // =========================================================
+                        // CASO 2:
+                        // Existe en dto.Attachments2.Lines,
+                        // NO existe en files, pero SÍ existe en TrgtPath.
+                        //
+                        // Acción:
+                        // - Copiar desde TrgtPath a requestFolder.
+                        // - Renombrar.
+                        // - Actualizar line.FileName.
+                        // =========================================================
+                        else if (!existsInRequest && existsInTarget)
+                        {
+                            var suffix = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+                            finalFileName = $"{originalFileName}_{suffix}";
+                            finalExpectedName = $"{finalFileName}.{fileExt}";
+
+                            tempPath = Path.Combine(
+                                requestFolder,
+                                finalExpectedName
+                            );
+
+                            File.Copy(
+                                originalTargetPath,
+                                tempPath,
+                                true
+                            );
+
+                            line.FileName = finalFileName;
+                        }
+                        // =========================================================
+                        // CASO 3:
+                        // Existe en dto.Attachments2.Lines,
+                        // existe en files y NO existe en TrgtPath.
+                        //
+                        // Acción:
+                        // - Copiar desde files a requestFolder.
+                        // - No renombrar.
+                        // - No cambiar line.FileName.
+                        // =========================================================
+                        else
+                        {
+                            tempPath = await _fileService.SaveFileAsync(
+                                file!,
+                                requestFolder,
+                                finalExpectedName
+                            );
+                        }
+
+                        line.FileExt = fileExt;
+                        line.SrcPath = requestFolder;
+
+                        var finalPath = Path.Combine(
+                            line.TrgtPath,
+                            finalExpectedName
+                        );
 
                         tempFiles.Add((tempPath, finalPath));
                     }
                 }
 
-                // 🔹 VALIDACIÓN DTO
                 var validation = await _validatorCreate.ValidateAsync(dto);
 
                 if (!validation.IsValid)
@@ -119,31 +243,28 @@ namespace Net.Business.Logic.Services.SAPBusinessOne.Draft
                     );
                 }
 
-                // 🔹 REPOSITORY (SAP)
                 var entity = DraftsCreateMapper.ToEntity(dto);
                 var result = await _repository.Drafts.SetCreate(entity);
 
                 if (result.ResultadoCodigo == -1)
                 {
-                    _fileService.DeleteDirectory(requestFolder);
                     return ResponseHelper.From(result);
                 }
 
-                // 🔹 MOVER ARCHIVOS A DESTINO FINAL
                 foreach (var (tempPath, finalPath) in tempFiles)
                 {
                     _fileService.MoveFile(tempPath, finalPath);
                 }
 
-                // 🔹 LIMPIAR TEMP
-                _fileService.DeleteDirectory(requestFolder);
-
                 return ResponseHelper.Success<object>("OK");
             }
             catch (Exception ex)
             {
-                _fileService.DeleteDirectory(requestFolder);
                 return ResponseHelper.Error<object>(ex.Message);
+            }
+            finally
+            {
+                _fileService.DeleteDirectory(requestFolder);
             }
         }
 
